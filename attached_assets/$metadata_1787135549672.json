@@ -1,0 +1,20 @@
+{
+  "tokenSetOrder": [
+    "coreDimensions",
+    "commonSet",
+    "typographySet",
+    "projects/first",
+    "projects/second",
+    "themes/light",
+    "components/buttons",
+    "components/fields",
+    "components/radios",
+    "components/checkboxes",
+    "components/toggles",
+    "components/paginations",
+    "components/badges",
+    "components/dropdowns",
+    "components/tooltips",
+    "components/tags"
+  ]
+}

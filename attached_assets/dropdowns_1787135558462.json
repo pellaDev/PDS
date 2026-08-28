@@ -1,0 +1,130 @@
+{
+  "pella": {
+    "comp": {
+      "dropdown": {
+        "brand": {
+          "default": {
+            "container": {
+              "$type": "composition",
+              "$value": {
+                "fill": "{pella.ref.color.comp.dropdown.brand.container}",
+                "spacing": "{pella.sys.spacing.s}",
+                "itemSpacing": "{pella.sys.coreDimensions.zero}"
+              }
+            },
+            "label": {
+              "$type": "composition",
+              "$value": {
+                "fill": "{pella.ref.color.comp.dropdown.brand.onContainer}",
+                "typography": "{pella.comp.typography.dropDownLabel}",
+                "spacing": "{pella.comp.dropdown.spacing.labelOnlySpacing}"
+              }
+            }
+          },
+          "hover": {
+            "container": {
+              "$type": "composition",
+              "$value": {
+                "fill": "{pella.ref.color.comp.dropdown.brand.hover.container}",
+                "spacing": "{pella.sys.spacing.s}",
+                "itemSpacing": "{pella.sys.coreDimensions.zero}"
+              }
+            },
+            "label": {
+              "$type": "composition",
+              "$value": {
+                "fill": "{pella.ref.color.comp.dropdown.brand.hover.onContainer}",
+                "typography": "{pella.comp.typography.dropDownLabel}",
+                "spacing": "{pella.comp.dropdown.spacing.labelOnlySpacing}"
+              }
+            }
+          },
+          "focus": {
+            "container": {
+              "$type": "composition",
+              "$value": {
+                "fill": "{pella.ref.color.comp.dropdown.brand.focus.container}",
+                "spacing": "{pella.sys.spacing.s}",
+                "itemSpacing": "{pella.sys.coreDimensions.zero}"
+              }
+            },
+            "label": {
+              "$type": "composition",
+              "$value": {
+                "fill": "{pella.ref.color.comp.dropdown.brand.hover.onContainer}",
+                "typography": "{pella.comp.typography.dropDownLabel}",
+                "spacing": "{pella.comp.dropdown.spacing.labelOnlySpacing}"
+              }
+            }
+          },
+          "active": {
+            "container": {
+              "$type": "composition",
+              "$value": {
+                "fill": "{pella.ref.color.comp.dropdown.brand.active.container}",
+                "spacing": "{pella.sys.spacing.s}",
+                "itemSpacing": "{pella.sys.coreDimensions.zero}"
+              }
+            },
+            "label": {
+              "$type": "composition",
+              "$value": {
+                "fill": "{pella.ref.color.comp.dropdown.brand.hover.onContainer}",
+                "typography": "{pella.comp.typography.dropDownLabel}",
+                "spacing": "{pella.comp.dropdown.spacing.labelOnlySpacing}"
+              }
+            }
+          },
+          "disabled": {
+            "container": {
+              "$type": "composition",
+              "$value": {
+                "fill": "{pella.ref.color.comp.dropdown.brand.disabled.container}",
+                "spacing": "{pella.sys.spacing.s}",
+                "itemSpacing": "{pella.sys.coreDimensions.zero}"
+              }
+            },
+            "label": {
+              "$type": "composition",
+              "$value": {
+                "fill": "{pella.ref.color.comp.dropdown.brand.hover.onContainer}",
+                "typography": "{pella.comp.typography.dropDownLabel}",
+                "spacing": "{pella.comp.dropdown.spacing.labelOnlySpacing}"
+              }
+            }
+          },
+          "error": {
+            "container": {
+              "$type": "composition",
+              "$value": {
+                "fill": "{pella.ref.color.comp.dropdown.brand.error.container}",
+                "spacing": "{pella.sys.spacing.s}",
+                "itemSpacing": "{pella.sys.coreDimensions.zero}"
+              }
+            },
+            "label": {
+              "$type": "composition",
+              "$value": {
+                "fill": "{pella.ref.color.comp.dropdown.brand.hover.onContainer}",
+                "typography": "{pella.comp.typography.dropDownLabel}",
+                "spacing": "{pella.comp.dropdown.spacing.labelOnlySpacing}"
+              }
+            }
+          }
+        },
+        "spacing": {
+          "labelOnlySpacing": {
+            "$type": "spacing",
+            "$value": "{pella.sys.coreDimensions.zero} {pella.sys.coreDimensions.zero} {pella.sys.coreDimensions.zero} {pella.sys.coreDimensions.zero}"
+          }
+        }
+      },
+      "typography": {
+        "dropDownLabel": {
+          "$type": "typography",
+          "$value": "{pella.ref.typography.body2}"
+        }
+      }
+    }
+  }
+}

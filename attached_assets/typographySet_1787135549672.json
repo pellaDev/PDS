@@ -1,0 +1,241 @@
+{
+  "pella": {
+    "sys": {
+      "fontSize": {
+        "0": {
+          "$type": "fontSizes",
+          "$value": "{pella.sys.coreDimensions.s}"
+        },
+        "1": {
+          "$type": "fontSizes",
+          "$value": "{pella.sys.coreDimensions.mmmm}"
+        },
+        "2": {
+          "$type": "fontSizes",
+          "$value": "{pella.sys.coreDimensions.mm}"
+        },
+        "3": {
+          "$type": "fontSizes",
+          "$value": "{pella.sys.coreDimensions.llll}"
+        },
+        "4": {
+          "$type": "fontSizes",
+          "$value": "{pella.sys.coreDimensions.lll}"
+        },
+        "5": {
+          "$type": "fontSizes",
+          "$value": "{pella.sys.coreDimensions.xl}"
+        },
+        "6": {
+          "$type": "fontSizes",
+          "$value": "{pella.sys.coreDimensions.xxxl}"
+        }
+      },
+      "lineHeight": {
+        "0": {
+          "$type": "lineHeights",
+          "$value": "{pella.sys.coreDimensions.xxxxl}",
+          "$description": "112"
+        },
+        "1": {
+          "$type": "lineHeights",
+          "$value": "{pella.sys.coreDimensions.xxl}",
+          "$description": "72"
+        },
+        "2": {
+          "$type": "lineHeights",
+          "$value": "{pella.sys.coreDimensions.ll}",
+          "$description": "48"
+        },
+        "3": {
+          "$type": "lineHeights",
+          "$value": "{pella.sys.coreDimensions.lll}",
+          "$description": "40"
+        },
+        "4": {
+          "$type": "lineHeights",
+          "$value": "{pella.sys.coreDimensions.llll}",
+          "$description": "32"
+        },
+        "5": {
+          "$type": "lineHeights",
+          "$value": "{pella.sys.coreDimensions.mm}",
+          "$description": "24"
+        },
+        "6": {
+          "$type": "lineHeights",
+          "$value": "{pella.sys.coreDimensions.mmmm}",
+          "$description": "16"
+        },
+        "7": {
+          "$type": "lineHeights",
+          "$value": "{pella.sys.coreDimensions.ss}",
+          "$description": "8"
+        }
+      },
+      "paragraphSpacing": {
+        "0": {
+          "$type": "paragraphSpacing",
+          "$value": "{pella.sys.coreDimensions.zero}"
+        },
+        "1": {
+          "$type": "paragraphSpacing",
+          "$value": "{pella.sys.coreDimensions.sss}"
+        }
+      },
+      "fontFamilies": {
+        "roboto": {
+          "$type": "fontFamilies",
+          "$value": "Roboto"
+        }
+      },
+      "fontWeights": {
+        "roboto-0": {
+          "$type": "fontWeights",
+          "$value": "300"
+        }
+      },
+      "letterSpacing": {
+        "0": {
+          "$type": "letterSpacing",
+          "$value": "0.25px",
+          "$description": "it doesnt support rem yet"
+        }
+      },
+      "textCase": {
+        "none": {
+          "$type": "textCase",
+          "$value": "none"
+        }
+      },
+      "textDecoration": {
+        "none": {
+          "$type": "textDecoration",
+          "$value": "none"
+        }
+      },
+      "paragraphIndent": {
+        "0": {
+          "$type": "dimension",
+          "$value": "{pella.sys.coreDimensions.zero}"
+        }
+      }
+    },
+    "ref": {
+      "typography": {
+        "h1": {
+          "$type": "typography",
+          "$value": {
+            "fontFamily": "{pella.sys.fontFamilies.roboto}",
+            "fontWeight": "{pella.sys.fontWeights.roboto-0}",
+            "fontSize": "{pella.sys.fontSize.6}",
+            "lineHeight": "{pella.sys.lineHeight.0}",
+            "letterSpacing": "{pella.sys.letterSpacing.0}",
+            "paragraphSpacing": "{pella.sys.paragraphSpacing.0}",
+            "paragraphIndent": "{pella.sys.paragraphIndent.0}",
+            "textDecoration": "{pella.sys.textDecoration.none}",
+            "textCase": "{pella.sys.textCase.none}"
+          }
+        },
+        "h2": {
+          "$type": "typography",
+          "$value": {
+            "fontFamily": "{pella.sys.fontFamilies.roboto}",
+            "fontWeight": "{pella.sys.fontWeights.roboto-0}",
+            "fontSize": "{pella.sys.fontSize.5}",
+            "lineHeight": "{pella.sys.lineHeight.1}",
+            "letterSpacing": "{pella.sys.letterSpacing.0}",
+            "paragraphSpacing": "{pella.sys.paragraphSpacing.0}",
+            "paragraphIndent": "{pella.sys.paragraphIndent.0}",
+            "textDecoration": "{pella.sys.textDecoration.none}",
+            "textCase": "{pella.sys.textCase.none}"
+          }
+        },
+        "h3": {
+          "$type": "typography",
+          "$value": {
+            "fontFamily": "{pella.sys.fontFamilies.roboto}",
+            "fontWeight": "{pella.sys.fontWeights.roboto-0}",
+            "fontSize": "{pella.sys.fontSize.4}",
+            "lineHeight": "{pella.sys.lineHeight.2}",
+            "letterSpacing": "{pella.sys.letterSpacing.0}",
+            "paragraphSpacing": "{pella.sys.paragraphSpacing.0}",
+            "paragraphIndent": "{pella.sys.paragraphIndent.0}",
+            "textDecoration": "{pella.sys.textDecoration.none}",
+            "textCase": "{pella.sys.textCase.none}"
+          }
+        },
+        "subtitle1": {
+          "$type": "typography",
+          "$value": {
+            "fontFamily": "{pella.sys.fontFamilies.roboto}",
+            "fontWeight": "{pella.sys.fontWeights.roboto-0}",
+            "fontSize": "{pella.sys.fontSize.3}",
+            "lineHeight": "{pella.sys.lineHeight.3}",
+            "letterSpacing": "{pella.sys.letterSpacing.0}",
+            "paragraphSpacing": "{pella.sys.paragraphSpacing.1}",
+            "paragraphIndent": "{pella.sys.paragraphIndent.0}",
+            "textDecoration": "{pella.sys.textDecoration.none}",
+            "textCase": "{pella.sys.textCase.none}"
+          }
+        },
+        "body1": {
+          "$type": "typography",
+          "$value": {
+            "fontFamily": "{pella.sys.fontFamilies.roboto}",
+            "fontWeight": "{pella.sys.fontWeights.roboto-0}",
+            "fontSize": "{pella.sys.fontSize.2}",
+            "lineHeight": "{pella.sys.lineHeight.4}",
+            "letterSpacing": "{pella.sys.letterSpacing.0}",
+            "paragraphSpacing": "{pella.sys.paragraphSpacing.1}",
+            "paragraphIndent": "{pella.sys.paragraphIndent.0}",
+            "textDecoration": "{pella.sys.textDecoration.none}",
+            "textCase": "{pella.sys.textCase.none}"
+          }
+        },
+        "body2": {
+          "$type": "typography",
+          "$value": {
+            "fontFamily": "{pella.sys.fontFamilies.roboto}",
+            "fontWeight": "{pella.sys.fontWeights.roboto-0}",
+            "fontSize": "{pella.sys.fontSize.1}",
+            "lineHeight": "{pella.sys.lineHeight.5}",
+            "letterSpacing": "{pella.sys.letterSpacing.0}",
+            "paragraphSpacing": "{pella.sys.paragraphSpacing.1}",
+            "paragraphIndent": "{pella.sys.paragraphIndent.0}",
+            "textDecoration": "{pella.sys.textDecoration.none}",
+            "textCase": "{pella.sys.textCase.none}"
+          }
+        },
+        "button": {
+          "$type": "typography",
+          "$value": {
+            "fontFamily": "{pella.sys.fontFamilies.roboto}",
+            "fontWeight": "{pella.sys.fontWeights.roboto-0}",
+            "fontSize": "{pella.sys.fontSize.1}",
+            "lineHeight": "{pella.sys.lineHeight.5}",
+            "letterSpacing": "{pella.sys.letterSpacing.0}",
+            "paragraphSpacing": "{pella.sys.paragraphSpacing.1}",
+            "paragraphIndent": "{pella.sys.paragraphIndent.0}",
+            "textDecoration": "{pella.sys.textDecoration.none}",
+            "textCase": "{pella.sys.textCase.none}"
+          }
+        },
+        "caption": {
+          "$type": "typography",
+          "$value": {
+            "fontFamily": "{pella.sys.fontFamilies.roboto}",
+            "fontWeight": "{pella.sys.fontWeights.roboto-0}",
+            "fontSize": "{pella.sys.fontSize.0}",
+            "lineHeight": "{pella.sys.lineHeight.6}",
+            "letterSpacing": "{pella.sys.letterSpacing.0}",
+            "paragraphSpacing": "{pella.sys.paragraphSpacing.1}",
+            "paragraphIndent": "{pella.sys.paragraphIndent.0}",
+            "textDecoration": "{pella.sys.textDecoration.none}",
+            "textCase": "{pella.sys.textCase.none}"
+          }
+        }
+      }
+    }
+  }
+}

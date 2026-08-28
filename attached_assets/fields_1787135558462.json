@@ -1,0 +1,874 @@
+{
+  "pella": {
+    "comp": {
+      "field": {
+        "small": {
+          "brand": {
+            "default": {
+              "container": {
+                "$type": "composition",
+                "$value": {
+                  "fill": "{pella.ref.color.comp.fields.small.brand.container}",
+                  "spacing": "{pella.sys.spacing.s}",
+                  "borderRadius": "{pella.sys.coreDimensions.sss}"
+                }
+              },
+              "input": {
+                "$type": "composition",
+                "$value": {
+                  "spacing": "{pella.comp.spacing.field.small.inputSpacing}",
+                  "fill": "{pella.ref.color.comp.fields.small.brand.onContainer}",
+                  "typography": "{pella.comp.typography.fieldInput}"
+                }
+              },
+              "label": {
+                "$type": "composition",
+                "$value": {
+                  "fill": "{pella.ref.color.comp.fields.small.brand.onContainer}",
+                  "spacing": "{pella.comp.spacing.field.small.labelOnlySpacing}",
+                  "typography": "{pella.comp.typography.fieldLabel}"
+                }
+              }
+            },
+            "hover": {
+              "container": {
+                "$type": "composition",
+                "$value": {
+                  "fill": "{pella.ref.color.comp.fields.small.brand.hover.container}",
+                  "spacing": "{pella.sys.spacing.s}",
+                  "borderRadius": "{pella.sys.coreDimensions.sss}",
+                  "borderWidth": "{pella.sys.coreDimensions.ssss}",
+                  "borderColor": "{pella.ref.color.comp.fields.small.brand.hover.outline}"
+                }
+              },
+              "input": {
+                "$type": "composition",
+                "$value": {
+                  "spacing": "{pella.comp.spacing.field.small.inputSpacing}",
+                  "fill": "{pella.ref.color.comp.fields.small.brand.hover.onContainer}",
+                  "typography": "{pella.comp.typography.fieldInput}"
+                }
+              },
+              "label": {
+                "$type": "composition",
+                "$value": {
+                  "fill": "{pella.ref.color.comp.fields.small.brand.hover.onContainer}",
+                  "spacing": "{pella.comp.spacing.field.small.labelOnlySpacing}",
+                  "typography": "{pella.comp.typography.fieldLabel}"
+                }
+              }
+            },
+            "focus": {
+              "container": {
+                "$type": "composition",
+                "$value": {
+                  "fill": "{pella.ref.color.comp.fields.small.brand.focus.container}",
+                  "spacing": "{pella.sys.spacing.s}",
+                  "borderRadius": "{pella.sys.coreDimensions.sss}",
+                  "borderWidth": "{pella.sys.coreDimensions.ssss}",
+                  "borderColor": "{pella.ref.color.comp.fields.small.brand.focus.outline}"
+                }
+              },
+              "input": {
+                "$type": "composition",
+                "$value": {
+                  "spacing": "{pella.comp.spacing.field.small.inputSpacing}",
+                  "fill": "{pella.ref.color.comp.fields.small.brand.focus.onContainer}",
+                  "typography": "{pella.comp.typography.fieldInput}"
+                }
+              },
+              "label": {
+                "$type": "composition",
+                "$value": {
+                  "fill": "{pella.ref.color.comp.fields.small.brand.focus.onContainer}",
+                  "spacing": "{pella.comp.spacing.field.small.labelOnlySpacing}",
+                  "typography": "{pella.comp.typography.fieldLabel}"
+                }
+              }
+            },
+            "active": {
+              "container": {
+                "$type": "composition",
+                "$value": {
+                  "fill": "{pella.ref.color.comp.fields.small.brand.active.container}",
+                  "spacing": "{pella.sys.spacing.s}",
+                  "borderRadius": "{pella.sys.coreDimensions.sss}",
+                  "borderWidth": "{pella.sys.coreDimensions.ssss}",
+                  "borderColor": "{pella.ref.color.comp.fields.small.brand.active.outline}"
+                }
+              },
+              "input": {
+                "$type": "composition",
+                "$value": {
+                  "spacing": "{pella.comp.spacing.field.small.inputSpacing}",
+                  "fill": "{pella.ref.color.comp.fields.small.brand.active.onContainer}",
+                  "typography": "{pella.comp.typography.fieldInput}"
+                }
+              },
+              "label": {
+                "$type": "composition",
+                "$value": {
+                  "fill": "{pella.ref.color.comp.fields.small.brand.active.onContainer}",
+                  "spacing": "{pella.comp.spacing.field.small.labelOnlySpacing}",
+                  "typography": "{pella.comp.typography.fieldLabel}"
+                }
+              }
+            },
+            "disabled": {
+              "container": {
+                "$type": "composition",
+                "$value": {
+                  "fill": "{pella.ref.color.comp.fields.small.brand.disabled.container}",
+                  "spacing": "{pella.sys.spacing.s}",
+                  "borderRadius": "{pella.sys.coreDimensions.sss}",
+                  "opacity": "{pella.sys.opacity.disabled}"
+                }
+              },
+              "input": {
+                "$type": "composition",
+                "$value": {
+                  "spacing": "{pella.comp.spacing.field.small.inputSpacing}",
+                  "fill": "{pella.ref.color.comp.fields.small.brand.disabled.onContainer}",
+                  "typography": "{pella.comp.typography.fieldInput}"
+                }
+              },
+              "label": {
+                "$type": "composition",
+                "$value": {
+                  "fill": "{pella.ref.color.comp.fields.small.brand.disabled.onContainer}",
+                  "spacing": "{pella.comp.spacing.field.small.labelOnlySpacing}",
+                  "typography": "{pella.comp.typography.fieldLabel}"
+                }
+              }
+            },
+            "error": {
+              "container": {
+                "$type": "composition",
+                "$value": {
+                  "fill": "{pella.ref.color.comp.fields.small.brand.error.container}",
+                  "spacing": "{pella.sys.spacing.s}",
+                  "borderRadius": "{pella.sys.coreDimensions.sss}",
+                  "borderWidth": "{pella.sys.coreDimensions.ssss}",
+                  "borderColor": "{pella.ref.color.comp.fields.small.brand.error.outline}"
+                }
+              },
+              "input": {
+                "$type": "composition",
+                "$value": {
+                  "spacing": "{pella.comp.spacing.field.small.inputSpacing}",
+                  "fill": "{pella.ref.color.comp.fields.small.brand.error.onContainer}",
+                  "typography": "{pella.comp.typography.fieldInput}"
+                }
+              },
+              "label": {
+                "$type": "composition",
+                "$value": {
+                  "fill": "{pella.ref.color.comp.fields.small.brand.error.onContainer}",
+                  "spacing": "{pella.comp.spacing.field.small.labelOnlySpacing}",
+                  "typography": "{pella.comp.typography.fieldLabel}"
+                }
+              }
+            }
+          }
+        },
+        "large": {
+          "brand": {
+            "default": {
+              "container": {
+                "$type": "composition",
+                "$value": {
+                  "fill": "{pella.ref.color.comp.fields.large.brand.container}",
+                  "spacing": "{pella.sys.spacing.ll}",
+                  "borderRadius": "{pella.sys.coreDimensions.sss}"
+                }
+              },
+              "input": {
+                "$type": "composition",
+                "$value": {
+                  "spacing": "{pella.comp.spacing.field.large.inputSpacing}",
+                  "fill": "{pella.ref.color.comp.fields.large.brand.onContainer}",
+                  "typography": "{pella.comp.typography.fieldInput}"
+                }
+              },
+              "label": {
+                "$type": "composition",
+                "$value": {
+                  "fill": "{pella.ref.color.comp.fields.large.brand.onContainer}",
+                  "spacing": "{pella.comp.spacing.field.large.labelOnlySpacing}",
+                  "typography": "{pella.comp.typography.fieldLabel}"
+                }
+              }
+            },
+            "hover": {
+              "container": {
+                "$type": "composition",
+                "$value": {
+                  "fill": "{pella.ref.color.comp.fields.large.brand.hover.container}",
+                  "spacing": "{pella.sys.spacing.ll}",
+                  "borderRadius": "{pella.sys.coreDimensions.sss}",
+                  "borderWidth": "{pella.sys.coreDimensions.ssss}",
+                  "borderColor": "{pella.ref.color.comp.fields.large.brand.hover.outline}"
+                }
+              },
+              "input": {
+                "$type": "composition",
+                "$value": {
+                  "spacing": "{pella.comp.spacing.field.large.inputSpacing}",
+                  "fill": "{pella.ref.color.comp.fields.large.brand.hover.onContainer}",
+                  "typography": "{pella.comp.typography.fieldInput}"
+                }
+              },
+              "label": {
+                "$type": "composition",
+                "$value": {
+                  "fill": "{pella.ref.color.comp.fields.large.brand.hover.onContainer}",
+                  "spacing": "{pella.comp.spacing.field.large.labelOnlySpacing}",
+                  "typography": "{pella.comp.typography.fieldLabel}"
+                }
+              }
+            },
+            "focus": {
+              "container": {
+                "$type": "composition",
+                "$value": {
+                  "fill": "{pella.ref.color.comp.fields.large.brand.focus.container}",
+                  "spacing": "{pella.sys.spacing.ll}",
+                  "borderRadius": "{pella.sys.coreDimensions.sss}",
+                  "borderWidth": "{pella.sys.coreDimensions.ssss}",
+                  "borderColor": "{pella.ref.color.comp.fields.large.brand.focus.outline}"
+                }
+              },
+              "input": {
+                "$type": "composition",
+                "$value": {
+                  "spacing": "{pella.comp.spacing.field.large.inputSpacing}",
+                  "fill": "{pella.ref.color.comp.fields.large.brand.focus.onContainer}",
+                  "typography": "{pella.comp.typography.fieldInput}"
+                }
+              },
+              "label": {
+                "$type": "composition",
+                "$value": {
+                  "fill": "{pella.ref.color.comp.fields.large.brand.focus.onContainer}",
+                  "spacing": "{pella.comp.spacing.field.large.labelOnlySpacing}",
+                  "typography": "{pella.comp.typography.fieldLabel}"
+                }
+              }
+            },
+            "active": {
+              "container": {
+                "$type": "composition",
+                "$value": {
+                  "fill": "{pella.ref.color.comp.fields.large.brand.active.container}",
+                  "spacing": "{pella.sys.spacing.ll}",
+                  "borderRadius": "{pella.sys.coreDimensions.sss}",
+                  "borderWidth": "{pella.sys.coreDimensions.ssss}",
+                  "borderColor": "{pella.ref.color.comp.fields.large.brand.active.outline}"
+                }
+              },
+              "input": {
+                "$type": "composition",
+                "$value": {
+                  "spacing": "{pella.comp.spacing.field.large.inputSpacing}",
+                  "fill": "{pella.ref.color.comp.fields.large.brand.active.onContainer}",
+                  "typography": "{pella.comp.typography.fieldInput}"
+                }
+              },
+              "label": {
+                "$type": "composition",
+                "$value": {
+                  "fill": "{pella.ref.color.comp.fields.large.brand.active.onContainer}",
+                  "spacing": "{pella.comp.spacing.field.large.labelOnlySpacing}",
+                  "typography": "{pella.comp.typography.fieldLabel}"
+                }
+              }
+            },
+            "disabled": {
+              "container": {
+                "$type": "composition",
+                "$value": {
+                  "fill": "{pella.ref.color.comp.fields.large.brand.disabled.container}",
+                  "spacing": "{pella.sys.spacing.ll}",
+                  "borderRadius": "{pella.sys.coreDimensions.sss}",
+                  "opacity": "{pella.sys.opacity.disabled}"
+                }
+              },
+              "input": {
+                "$type": "composition",
+                "$value": {
+                  "spacing": "{pella.comp.spacing.field.large.inputSpacing}",
+                  "fill": "{pella.ref.color.comp.fields.large.brand.disabled.onContainer}",
+                  "typography": "{pella.comp.typography.fieldInput}"
+                }
+              },
+              "label": {
+                "$type": "composition",
+                "$value": {
+                  "fill": "{pella.ref.color.comp.fields.large.brand.disabled.onContainer}",
+                  "spacing": "{pella.comp.spacing.field.large.labelOnlySpacing}",
+                  "typography": "{pella.comp.typography.fieldLabel}"
+                }
+              }
+            },
+            "error": {
+              "container": {
+                "$type": "composition",
+                "$value": {
+                  "fill": "{pella.ref.color.comp.fields.large.brand.error.container}",
+                  "spacing": "{pella.sys.spacing.ll}",
+                  "borderRadius": "{pella.sys.coreDimensions.sss}",
+                  "borderWidth": "{pella.sys.coreDimensions.ssss}",
+                  "borderColor": "{pella.ref.color.comp.fields.large.brand.error.outline}"
+                }
+              },
+              "input": {
+                "$type": "composition",
+                "$value": {
+                  "spacing": "{pella.comp.spacing.field.large.inputSpacing}",
+                  "fill": "{pella.ref.color.comp.fields.large.brand.error.onContainer}",
+                  "typography": "{pella.comp.typography.fieldInput}"
+                }
+              },
+              "label": {
+                "$type": "composition",
+                "$value": {
+                  "fill": "{pella.ref.color.comp.fields.large.brand.error.onContainer}",
+                  "spacing": "{pella.comp.spacing.field.large.labelOnlySpacing}",
+                  "typography": "{pella.comp.typography.fieldLabel}"
+                }
+              }
+            }
+          }
+        },
+        "smallBorder": {
+          "brand": {
+            "default": {
+              "container": {
+                "$type": "composition",
+                "$value": {
+                  "fill": "{pella.ref.color.comp.fields.smallBorder.brand.container}",
+                  "spacing": "{pella.sys.spacing.s}",
+                  "borderRadius": "{pella.sys.coreDimensions.sss}",
+                  "borderWidth": "{pella.sys.coreDimensions.ssss}",
+                  "borderColor": "{pella.ref.color.comp.fields.smallBorder.brand.outline}"
+                }
+              },
+              "input": {
+                "$type": "composition",
+                "$value": {
+                  "spacing": "{pella.comp.spacing.field.smallBorder.inputSpacing}",
+                  "fill": "{pella.ref.color.comp.fields.smallBorder.brand.onContainer}",
+                  "typography": "{pella.comp.typography.fieldInput}"
+                }
+              },
+              "label": {
+                "$type": "composition",
+                "$value": {
+                  "spacing": "{pella.comp.spacing.field.smallBorder.labelOnlySpacing}",
+                  "fill": "{pella.ref.color.comp.fields.smallBorder.brand.onContainer}",
+                  "typography": "{pella.comp.typography.fieldLabel}"
+                }
+              }
+            },
+            "hover": {
+              "container": {
+                "$type": "composition",
+                "$value": {
+                  "fill": "{pella.ref.color.comp.fields.smallBorder.brand.hover.container}",
+                  "spacing": "{pella.sys.spacing.s}",
+                  "borderRadius": "{pella.sys.coreDimensions.sss}",
+                  "borderWidth": "{pella.sys.coreDimensions.ssss}",
+                  "borderColor": "{pella.ref.color.comp.fields.smallBorder.brand.hover.outline}"
+                }
+              },
+              "input": {
+                "$type": "composition",
+                "$value": {
+                  "spacing": "{pella.comp.spacing.field.smallBorder.inputSpacing}",
+                  "fill": "{pella.ref.color.comp.fields.smallBorder.brand.hover.onContainer}",
+                  "typography": "{pella.comp.typography.fieldInput}"
+                }
+              },
+              "label": {
+                "$type": "composition",
+                "$value": {
+                  "spacing": "{pella.comp.spacing.field.smallBorder.labelOnlySpacing}",
+                  "fill": "{pella.ref.color.comp.fields.smallBorder.brand.hover.onContainer}",
+                  "typography": "{pella.comp.typography.fieldLabel}"
+                }
+              }
+            },
+            "focus": {
+              "container": {
+                "$type": "composition",
+                "$value": {
+                  "fill": "{pella.ref.color.comp.fields.smallBorder.brand.focus.container}",
+                  "spacing": "{pella.sys.spacing.s}",
+                  "borderRadius": "{pella.sys.coreDimensions.sss}",
+                  "borderWidth": "{pella.sys.coreDimensions.ssss}",
+                  "borderColor": "{pella.ref.color.comp.fields.smallBorder.brand.focus.outline}"
+                }
+              },
+              "input": {
+                "$type": "composition",
+                "$value": {
+                  "spacing": "{pella.comp.spacing.field.smallBorder.inputSpacing}",
+                  "fill": "{pella.ref.color.comp.fields.smallBorder.brand.focus.onContainer}",
+                  "typography": "{pella.comp.typography.fieldInput}"
+                }
+              },
+              "labelContainer": {
+                "$type": "composition",
+                "$value": {
+                  "fill": "{pella.ref.color.comp.fields.smallBorder.brand.focus.label.container}",
+                  "paddingBottom": "{pella.sys.coreDimensions.mm}",
+                  "borderRadius": "{pella.sys.coreDimensions.sss}"
+                }
+              },
+              "label": {
+                "$type": "composition",
+                "$value": {
+                  "spacing": "{pella.comp.spacing.field.smallBorder.labelSpacing}",
+                  "fill": "{pella.ref.color.comp.fields.smallBorder.brand.focus.onContainer}",
+                  "typography": "{pella.comp.typography.fieldSmallLabel}"
+                }
+              }
+            },
+            "active": {
+              "container": {
+                "$type": "composition",
+                "$value": {
+                  "fill": "{pella.ref.color.comp.fields.smallBorder.brand.active.container}",
+                  "spacing": "{pella.sys.spacing.s}",
+                  "borderRadius": "{pella.sys.coreDimensions.sss}",
+                  "borderWidth": "{pella.sys.coreDimensions.ssss}",
+                  "borderColor": "{pella.ref.color.comp.fields.smallBorder.brand.active.outline}"
+                }
+              },
+              "input": {
+                "$type": "composition",
+                "$value": {
+                  "spacing": "{pella.comp.spacing.field.smallBorder.inputSpacing}",
+                  "fill": "{pella.ref.color.comp.fields.smallBorder.brand.active.onContainer}",
+                  "typography": "{pella.comp.typography.fieldInput}"
+                }
+              },
+              "labelContainer": {
+                "$type": "composition",
+                "$value": {
+                  "fill": "{pella.ref.color.comp.fields.smallBorder.brand.active.label.container}",
+                  "paddingBottom": "{pella.sys.coreDimensions.mm}",
+                  "borderRadius": "{pella.sys.coreDimensions.sss}"
+                }
+              },
+              "label": {
+                "$type": "composition",
+                "$value": {
+                  "spacing": "{pella.comp.spacing.field.smallBorder.labelSpacing}",
+                  "fill": "{pella.ref.color.comp.fields.smallBorder.brand.active.onContainer}",
+                  "typography": "{pella.comp.typography.fieldSmallLabel}"
+                }
+              }
+            },
+            "disabled": {
+              "container": {
+                "$type": "composition",
+                "$value": {
+                  "fill": "{pella.ref.color.comp.fields.smallBorder.brand.disabled.container}",
+                  "spacing": "{pella.sys.spacing.s}",
+                  "borderRadius": "{pella.sys.coreDimensions.sss}",
+                  "borderWidth": "{pella.sys.coreDimensions.ssss}",
+                  "borderColor": "{pella.ref.color.comp.fields.smallBorder.brand.disabled.outline}",
+                  "opacity": "{pella.sys.opacity.disabled}"
+                }
+              },
+              "input": {
+                "$type": "composition",
+                "$value": {
+                  "spacing": "{pella.comp.spacing.field.smallBorder.inputSpacing}",
+                  "fill": "{pella.ref.color.comp.fields.smallBorder.brand.disabled.onContainer}",
+                  "typography": "{pella.comp.typography.fieldInput}"
+                }
+              },
+              "labelContainer": {
+                "$type": "composition",
+                "$value": {
+                  "fill": "{pella.ref.color.comp.fields.smallBorder.brand.disabled.label.container}",
+                  "paddingBottom": "{pella.sys.coreDimensions.mm}",
+                  "borderRadius": "{pella.sys.coreDimensions.sss}"
+                }
+              },
+              "label": {
+                "$type": "composition",
+                "$value": {
+                  "spacing": "{pella.comp.spacing.field.smallBorder.labelSpacing}",
+                  "fill": "{pella.ref.color.comp.fields.smallBorder.brand.disabled.onContainer}",
+                  "typography": "{pella.comp.typography.fieldSmallLabel}"
+                }
+              }
+            },
+            "error": {
+              "container": {
+                "$type": "composition",
+                "$value": {
+                  "fill": "{pella.ref.color.comp.fields.smallBorder.brand.error.container}",
+                  "spacing": "{pella.sys.spacing.s}",
+                  "borderRadius": "{pella.sys.coreDimensions.sss}",
+                  "borderWidth": "{pella.sys.coreDimensions.ssss}",
+                  "borderColor": "{pella.ref.color.comp.fields.smallBorder.brand.error.outline}"
+                }
+              },
+              "input": {
+                "$type": "composition",
+                "$value": {
+                  "spacing": "{pella.comp.spacing.field.smallBorder.inputSpacing}",
+                  "fill": "{pella.ref.color.comp.fields.smallBorder.brand.error.onContainer}",
+                  "typography": "{pella.comp.typography.fieldInput}"
+                }
+              },
+              "labelContainer": {
+                "$type": "composition",
+                "$value": {
+                  "fill": "{pella.ref.color.comp.fields.smallBorder.brand.error.label.container}",
+                  "paddingBottom": "{pella.sys.coreDimensions.mm}",
+                  "borderRadius": "{pella.sys.coreDimensions.sss}"
+                }
+              },
+              "label": {
+                "$type": "composition",
+                "$value": {
+                  "spacing": "{pella.comp.spacing.field.smallBorder.labelSpacing}",
+                  "fill": "{pella.ref.color.comp.fields.smallBorder.brand.error.onContainer}",
+                  "typography": "{pella.comp.typography.fieldSmallLabel}"
+                }
+              }
+            }
+          }
+        },
+        "largeBorder": {
+          "brand": {
+            "default": {
+              "container": {
+                "$type": "composition",
+                "$value": {
+                  "fill": "{pella.ref.color.comp.fields.largeBorder.brand.container}",
+                  "spacing": "{pella.sys.spacing.ll}",
+                  "borderRadius": "{pella.sys.coreDimensions.sss}",
+                  "borderWidth": "{pella.sys.coreDimensions.ssss}",
+                  "borderColor": "{pella.ref.color.comp.fields.largeBorder.brand.outline}"
+                }
+              },
+              "input": {
+                "$type": "composition",
+                "$value": {
+                  "spacing": "{pella.comp.spacing.field.largeBorder.inputSpacing}",
+                  "fill": "{pella.ref.color.comp.fields.largeBorder.brand.onContainer}",
+                  "typography": "{pella.comp.typography.fieldInput}"
+                }
+              },
+              "label": {
+                "$type": "composition",
+                "$value": {
+                  "spacing": "{pella.comp.spacing.field.smallBorder.labelOnlySpacing}",
+                  "fill": "{pella.ref.color.comp.fields.smallBorder.brand.onContainer}",
+                  "typography": "{pella.comp.typography.fieldLabel}"
+                }
+              }
+            },
+            "hover": {
+              "container": {
+                "$type": "composition",
+                "$value": {
+                  "fill": "{pella.ref.color.comp.fields.largeBorder.brand.hover.container}",
+                  "spacing": "{pella.sys.spacing.ll}",
+                  "borderRadius": "{pella.sys.coreDimensions.sss}",
+                  "borderWidth": "{pella.sys.coreDimensions.ssss}",
+                  "borderColor": "{pella.ref.color.comp.fields.largeBorder.brand.hover.outline}"
+                }
+              },
+              "input": {
+                "$type": "composition",
+                "$value": {
+                  "spacing": "{pella.comp.spacing.field.largeBorder.inputSpacing}",
+                  "fill": "{pella.ref.color.comp.fields.largeBorder.brand.hover.onContainer}",
+                  "typography": "{pella.comp.typography.fieldInput}"
+                }
+              },
+              "label": {
+                "$type": "composition",
+                "$value": {
+                  "spacing": "{pella.comp.spacing.field.smallBorder.labelOnlySpacing}",
+                  "fill": "{pella.ref.color.comp.fields.smallBorder.brand.hover.onContainer}",
+                  "typography": "{pella.comp.typography.fieldLabel}"
+                }
+              }
+            },
+            "focus": {
+              "container": {
+                "$type": "composition",
+                "$value": {
+                  "fill": "{pella.ref.color.comp.fields.largeBorder.brand.focus.container}",
+                  "spacing": "{pella.sys.spacing.ll}",
+                  "borderRadius": "{pella.sys.coreDimensions.sss}",
+                  "borderWidth": "{pella.sys.coreDimensions.ssss}",
+                  "borderColor": "{pella.ref.color.comp.fields.largeBorder.brand.focus.outline}"
+                }
+              },
+              "input": {
+                "$type": "composition",
+                "$value": {
+                  "spacing": "{pella.comp.spacing.field.largeBorder.inputSpacing}",
+                  "fill": "{pella.ref.color.comp.fields.largeBorder.brand.focus.onContainer}",
+                  "typography": "{pella.comp.typography.fieldInput}"
+                }
+              },
+              "labelContainer": {
+                "$type": "composition",
+                "$value": {
+                  "fill": "{pella.ref.color.comp.fields.largeBorder.brand.focus.label.container}",
+                  "paddingBottom": "{pella.sys.coreDimensions.llll}",
+                  "borderRadius": "{pella.sys.coreDimensions.sss}"
+                }
+              },
+              "label": {
+                "$type": "composition",
+                "$value": {
+                  "spacing": "{pella.comp.spacing.field.largeBorder.labelSpacing}",
+                  "fill": "{pella.ref.color.comp.fields.largeBorder.brand.focus.onContainer}",
+                  "typography": "{pella.comp.typography.fieldSmallLabel}"
+                }
+              }
+            },
+            "active": {
+              "container": {
+                "$type": "composition",
+                "$value": {
+                  "fill": "{pella.ref.color.comp.fields.largeBorder.brand.active.container}",
+                  "spacing": "{pella.sys.spacing.ll}",
+                  "borderRadius": "{pella.sys.coreDimensions.sss}",
+                  "borderWidth": "{pella.sys.coreDimensions.ssss}",
+                  "borderColor": "{pella.ref.color.comp.fields.largeBorder.brand.active.outline}"
+                }
+              },
+              "input": {
+                "$type": "composition",
+                "$value": {
+                  "spacing": "{pella.comp.spacing.field.largeBorder.inputSpacing}",
+                  "fill": "{pella.ref.color.comp.fields.largeBorder.brand.active.onContainer}",
+                  "typography": "{pella.comp.typography.fieldInput}"
+                }
+              },
+              "labelContainer": {
+                "$type": "composition",
+                "$value": {
+                  "fill": "{pella.ref.color.comp.fields.largeBorder.brand.active.label.container}",
+                  "paddingBottom": "{pella.sys.coreDimensions.llll}",
+                  "borderRadius": "{pella.sys.coreDimensions.sss}"
+                }
+              },
+              "label": {
+                "$type": "composition",
+                "$value": {
+                  "spacing": "{pella.comp.spacing.field.largeBorder.labelSpacing}",
+                  "fill": "{pella.ref.color.comp.fields.largeBorder.brand.active.onContainer}",
+                  "typography": "{pella.comp.typography.fieldSmallLabel}"
+                }
+              }
+            },
+            "disabled": {
+              "container": {
+                "$type": "composition",
+                "$value": {
+                  "fill": "{pella.ref.color.comp.fields.largeBorder.brand.disabled.container}",
+                  "spacing": "{pella.sys.spacing.ll}",
+                  "borderRadius": "{pella.sys.coreDimensions.sss}",
+                  "borderWidth": "{pella.sys.coreDimensions.ssss}",
+                  "borderColor": "{pella.ref.color.comp.fields.largeBorder.brand.disabled.outline}",
+                  "opacity": "{pella.sys.opacity.disabled}"
+                }
+              },
+              "input": {
+                "$type": "composition",
+                "$value": {
+                  "spacing": "{pella.comp.spacing.field.largeBorder.inputSpacing}",
+                  "fill": "{pella.ref.color.comp.fields.largeBorder.brand.disabled.onContainer}",
+                  "typography": "{pella.comp.typography.fieldInput}"
+                }
+              },
+              "labelContainer": {
+                "$type": "composition",
+                "$value": {
+                  "fill": "{pella.ref.color.comp.fields.largeBorder.brand.disabled.label.container}",
+                  "paddingBottom": "{pella.sys.coreDimensions.llll}",
+                  "borderRadius": "{pella.sys.coreDimensions.sss}"
+                }
+              },
+              "label": {
+                "$type": "composition",
+                "$value": {
+                  "spacing": "{pella.comp.spacing.field.largeBorder.labelSpacing}",
+                  "fill": "{pella.ref.color.comp.fields.largeBorder.brand.disabled.onContainer}",
+                  "typography": "{pella.comp.typography.fieldSmallLabel}"
+                }
+              }
+            },
+            "error": {
+              "container": {
+                "$type": "composition",
+                "$value": {
+                  "fill": "{pella.ref.color.comp.fields.largeBorder.brand.error.container}",
+                  "spacing": "{pella.sys.spacing.ll}",
+                  "borderRadius": "{pella.sys.coreDimensions.sss}",
+                  "borderWidth": "{pella.sys.coreDimensions.ssss}",
+                  "borderColor": "{pella.ref.color.comp.fields.largeBorder.brand.error.outline}"
+                }
+              },
+              "input": {
+                "$type": "composition",
+                "$value": {
+                  "spacing": "{pella.comp.spacing.field.largeBorder.inputSpacing}",
+                  "fill": "{pella.ref.color.comp.fields.largeBorder.brand.error.onContainer}",
+                  "typography": "{pella.comp.typography.fieldInput}"
+                }
+              },
+              "labelContainer": {
+                "$type": "composition",
+                "$value": {
+                  "fill": "{pella.ref.color.comp.fields.largeBorder.brand.error.label.container}",
+                  "paddingBottom": "{pella.sys.coreDimensions.llll}",
+                  "borderRadius": "{pella.sys.coreDimensions.sss}"
+                }
+              },
+              "label": {
+                "$type": "composition",
+                "$value": {
+                  "spacing": "{pella.comp.spacing.field.largeBorder.labelSpacing}",
+                  "fill": "{pella.ref.color.comp.fields.largeBorder.brand.error.onContainer}",
+                  "typography": "{pella.comp.typography.fieldSmallLabel}"
+                }
+              }
+            }
+          }
+        }
+      },
+      "sizing": {
+        "fontScale": {
+          "$type": "sizing",
+          "$value": "0.66"
+        }
+      },
+      "spacing": {
+        "field": {
+          "small": {
+            "inputSpacing": {
+              "$type": "spacing",
+              "$value": "{pella.sys.coreDimensions.zero} {pella.sys.coreDimensions.zero} {pella.sys.coreDimensions.zero} {pella.sys.coreDimensions.zero}"
+            },
+            "labelSpacing": {
+              "$type": "spacing",
+              "$value": "{pella.sys.coreDimensions.zero} {pella.sys.coreDimensions.sss} {pella.sys.coreDimensions.llll} {pella.sys.coreDimensions.sss}"
+            },
+            "labelOnlySpacing": {
+              "$type": "spacing",
+              "$value": "{pella.sys.coreDimensions.zero} {pella.sys.coreDimensions.zero} {pella.sys.coreDimensions.zero} {pella.sys.coreDimensions.zero}"
+            }
+          },
+          "large": {
+            "inputSpacing": {
+              "$type": "spacing",
+              "$value": "{pella.sys.coreDimensions.zero} {pella.sys.coreDimensions.zero} {pella.sys.coreDimensions.zero} {pella.sys.coreDimensions.zero}"
+            },
+            "labelSpacing": {
+              "$type": "spacing",
+              "$value": "{pella.sys.coreDimensions.zero} {pella.sys.coreDimensions.sss} {pella.sys.coreDimensions.llll} {pella.sys.coreDimensions.sss}"
+            },
+            "labelOnlySpacing": {
+              "$type": "spacing",
+              "$value": "{pella.sys.coreDimensions.zero} {pella.sys.coreDimensions.zero} {pella.sys.coreDimensions.zero} {pella.sys.coreDimensions.zero}"
+            }
+          },
+          "largeBorder": {
+            "inputSpacing": {
+              "$type": "spacing",
+              "$value": "{pella.sys.coreDimensions.zero} {pella.sys.coreDimensions.zero} {pella.sys.coreDimensions.zero} {pella.sys.coreDimensions.zero}"
+            },
+            "labelSpacing": {
+              "$type": "spacing",
+              "$value": "{pella.sys.coreDimensions.zero} {pella.sys.coreDimensions.sss} {pella.sys.coreDimensions.llll} {pella.sys.coreDimensions.sss}"
+            },
+            "labelOnlySpacing": {
+              "$type": "spacing",
+              "$value": "{pella.sys.coreDimensions.zero} {pella.sys.coreDimensions.zero} {pella.sys.coreDimensions.zero} {pella.sys.coreDimensions.zero}"
+            }
+          },
+          "hintInside": {
+            "inputSpacing": {
+              "$type": "spacing",
+              "$value": "{pella.sys.coreDimensions.mmmm} {pella.sys.coreDimensions.zero} {pella.sys.coreDimensions.zero}"
+            },
+            "labelSpacing": {
+              "$type": "spacing",
+              "$value": "{pella.sys.coreDimensions.zero} {pella.sys.coreDimensions.zero} {pella.sys.coreDimensions.zero} {pella.sys.coreDimensions.zero}"
+            },
+            "labelOnlySpacing": {
+              "$type": "spacing",
+              "$value": "{pella.sys.coreDimensions.ss} {pella.sys.coreDimensions.zero} {pella.sys.coreDimensions.ss} {pella.sys.coreDimensions.zero}"
+            }
+          },
+          "hintInsideAlt": {
+            "inputSpacing": {
+              "$type": "spacing",
+              "$value": "{pella.sys.coreDimensions.mmmm} {pella.sys.coreDimensions.zero} {pella.sys.coreDimensions.zero}"
+            },
+            "labelSpacing": {
+              "$type": "spacing",
+              "$value": "{pella.sys.coreDimensions.zero} {pella.sys.coreDimensions.zero} {pella.sys.coreDimensions.zero} {pella.sys.coreDimensions.zero}"
+            },
+            "labelOnlySpacing": {
+              "$type": "spacing",
+              "$value": "{pella.sys.coreDimensions.zero} {pella.sys.coreDimensions.zero} {pella.sys.coreDimensions.mm} {pella.sys.coreDimensions.zero}"
+            }
+          },
+          "smallBorder": {
+            "inputSpacing": {
+              "$type": "spacing",
+              "$value": "{pella.sys.coreDimensions.zero} {pella.sys.coreDimensions.zero} {pella.sys.coreDimensions.zero} {pella.sys.coreDimensions.zero}"
+            },
+            "labelSpacing": {
+              "$type": "spacing",
+              "$value": "{pella.sys.coreDimensions.zero} {pella.sys.coreDimensions.sss} {pella.sys.coreDimensions.mm} {pella.sys.coreDimensions.sss}"
+            },
+            "labelOnlySpacing": {
+              "$type": "spacing",
+              "$value": "{pella.sys.coreDimensions.zero} {pella.sys.coreDimensions.zero} {pella.sys.coreDimensions.zero} {pella.sys.coreDimensions.zero}"
+            }
+          }
+        }
+      },
+      "typography": {
+        "fieldSmallLabel": {
+          "$type": "typography",
+          "$value": {
+            "fontFamily": "{pella.sys.fontFamilies.roboto}",
+            "fontWeight": "{pella.sys.fontWeights.roboto-0}",
+            "fontSize": "{pella.sys.fontSize.1} * {pella.comp.sizing.fontScale}",
+            "lineHeight": "{pella.sys.lineHeight.5} * {pella.comp.sizing.fontScale}",
+            "letterSpacing": "{pella.sys.letterSpacing.0} * {pella.comp.sizing.fontScale}",
+            "paragraphSpacing": "{pella.sys.paragraphSpacing.1} * {pella.comp.sizing.fontScale}",
+            "paragraphIndent": "{pella.sys.paragraphIndent.0}",
+            "textDecoration": "{pella.sys.textDecoration.none}",
+            "textCase": "{pella.sys.textCase.none}"
+          }
+        },
+        "fieldInput": {
+          "$type": "typography",
+          "$value": "{pella.ref.typography.body2}"
+        },
+        "fieldLabel": {
+          "$type": "typography",
+          "$value": "{pella.ref.typography.body2}"
+        }
+      }
+    }
+  }
+}

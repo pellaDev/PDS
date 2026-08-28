@@ -1,0 +1,503 @@
+{
+  "pella": {
+    "comp": {
+      "pagination": {
+        "simple": {
+          "brand": {
+            "previous": {
+              "default": {
+                "icon": {
+                  "$type": "composition",
+                  "$value": {
+                    "fill": "{pella.sys.color.custom.light}"
+                  }
+                },
+                "container": {
+                  "$type": "composition",
+                  "$value": {
+                    "fill": "{pella.sys.color.graySoft}",
+                    "borderRadius": "{pella.sys.coreDimensions.mmmm} {pella.sys.coreDimensions.zero} {pella.sys.coreDimensions.zero} {pella.sys.coreDimensions.mmmm}",
+                    "spacing": "{pella.sys.spacing.ss}"
+                  }
+                }
+              },
+              "hover": {
+                "icon": {
+                  "$type": "composition",
+                  "$value": {
+                    "fill": "{pella.sys.color.graySoft}"
+                  }
+                },
+                "container": {
+                  "$type": "composition",
+                  "$value": {
+                    "fill": "{pella.ref.color.custom.light.lighter}",
+                    "borderRadius": "{pella.sys.coreDimensions.mmmm} {pella.sys.coreDimensions.zero} {pella.sys.coreDimensions.zero} {pella.sys.coreDimensions.mmmm}",
+                    "spacing": "{pella.sys.spacing.ss}"
+                  }
+                }
+              },
+              "focus": {
+                "icon": {
+                  "$type": "composition",
+                  "$value": {
+                    "fill": "{pella.sys.color.graySoft}"
+                  }
+                },
+                "container": {
+                  "$type": "composition",
+                  "$value": {
+                    "fill": "{pella.ref.color.custom.light.darker}",
+                    "borderRadius": "{pella.sys.coreDimensions.mmmm} {pella.sys.coreDimensions.zero} {pella.sys.coreDimensions.zero} {pella.sys.coreDimensions.mmmm}",
+                    "spacing": "{pella.sys.spacing.ss}"
+                  }
+                }
+              },
+              "active": {
+                "icon": {
+                  "$type": "composition",
+                  "$value": {
+                    "fill": "{pella.sys.color.graySoft}"
+                  }
+                },
+                "container": {
+                  "$type": "composition",
+                  "$value": {
+                    "fill": "{pella.ref.color.custom.light.darker}",
+                    "borderRadius": "{pella.sys.coreDimensions.mmmm} {pella.sys.coreDimensions.zero} {pella.sys.coreDimensions.zero} {pella.sys.coreDimensions.mmmm}",
+                    "spacing": "{pella.sys.spacing.ss}"
+                  }
+                }
+              },
+              "disabled": {
+                "icon": {
+                  "$type": "composition",
+                  "$value": {
+                    "fill": "{pella.sys.color.gray}"
+                  }
+                },
+                "container": {
+                  "$type": "composition",
+                  "$value": {
+                    "fill": "{pella.sys.color.white}",
+                    "borderRadius": "{pella.sys.coreDimensions.mmmm} {pella.sys.coreDimensions.zero} {pella.sys.coreDimensions.zero} {pella.sys.coreDimensions.mmmm}",
+                    "spacing": "{pella.sys.spacing.ss}",
+                    "opacity": "{pella.sys.opacity.disabled}"
+                  }
+                }
+              }
+            },
+            "odd": {
+              "default": {
+                "label": {
+                  "$type": "composition",
+                  "$value": {
+                    "typography": "{pella.ref.typography.button}",
+                    "fill": "{pella.sys.color.custom.light}"
+                  }
+                },
+                "container": {
+                  "$type": "composition",
+                  "$value": {
+                    "fill": "{pella.sys.color.white}",
+                    "spacing": "{pella.sys.spacing.ss}"
+                  }
+                }
+              },
+              "hover": {
+                "label": {
+                  "$type": "composition",
+                  "$value": {
+                    "typography": "{pella.ref.typography.button}",
+                    "fill": "{pella.sys.color.graySoft}"
+                  }
+                },
+                "container": {
+                  "$type": "composition",
+                  "$value": {
+                    "fill": "{pella.ref.color.custom.light.lighter}",
+                    "spacing": "{pella.sys.spacing.ss}"
+                  }
+                }
+              },
+              "focus": {
+                "label": {
+                  "$type": "composition",
+                  "$value": {
+                    "typography": "{pella.ref.typography.button}",
+                    "fill": "{pella.sys.color.graySoft}"
+                  }
+                },
+                "container": {
+                  "$type": "composition",
+                  "$value": {
+                    "fill": "{pella.ref.color.custom.light.darker}",
+                    "spacing": "{pella.sys.spacing.ss}"
+                  }
+                }
+              },
+              "active": {
+                "label": {
+                  "$type": "composition",
+                  "$value": {
+                    "typography": "{pella.ref.typography.button}",
+                    "fill": "{pella.sys.color.graySoft}"
+                  }
+                },
+                "container": {
+                  "$type": "composition",
+                  "$value": {
+                    "fill": "{pella.ref.color.custom.light.darker}",
+                    "spacing": "{pella.sys.spacing.ss}"
+                  }
+                }
+              },
+              "selected": {
+                "label": {
+                  "$type": "composition",
+                  "$value": {
+                    "fill": "{pella.sys.color.graySoft}",
+                    "typography": "{pella.ref.typography.button}",
+                    "fontWeights": "Regular"
+                  }
+                },
+                "container": {
+                  "$type": "composition",
+                  "$value": {
+                    "fill": "{pella.sys.color.custom.light}",
+                    "spacing": "{pella.sys.spacing.ss}"
+                  }
+                }
+              },
+              "disabled": {
+                "label": {
+                  "$type": "composition",
+                  "$value": {
+                    "fill": "{pella.sys.color.gray}",
+                    "typography": "{pella.ref.typography.button}"
+                  }
+                },
+                "container": {
+                  "$type": "composition",
+                  "$value": {
+                    "fill": "{pella.sys.color.white}",
+                    "spacing": "{pella.sys.spacing.ss}",
+                    "opacity": "{pella.sys.opacity.disabled}"
+                  }
+                }
+              }
+            },
+            "even": {
+              "default": {
+                "label": {
+                  "$type": "composition",
+                  "$value": {
+                    "typography": "{pella.ref.typography.button}",
+                    "fill": "{pella.sys.color.custom.light}"
+                  }
+                },
+                "container": {
+                  "$type": "composition",
+                  "$value": {
+                    "fill": "{pella.sys.color.graySoft}",
+                    "spacing": "{pella.sys.spacing.ss}"
+                  }
+                }
+              },
+              "hover": {
+                "label": {
+                  "$type": "composition",
+                  "$value": {
+                    "typography": "{pella.ref.typography.button}",
+                    "fill": "{pella.sys.color.graySoft}"
+                  }
+                },
+                "container": {
+                  "$type": "composition",
+                  "$value": {
+                    "fill": "{pella.ref.color.custom.light.lighter}",
+                    "spacing": "{pella.sys.spacing.ss}"
+                  }
+                }
+              },
+              "focus": {
+                "label": {
+                  "$type": "composition",
+                  "$value": {
+                    "typography": "{pella.ref.typography.button}",
+                    "fill": "{pella.sys.color.graySoft}"
+                  }
+                },
+                "container": {
+                  "$type": "composition",
+                  "$value": {
+                    "fill": "{pella.ref.color.custom.light.darker}",
+                    "spacing": "{pella.sys.spacing.ss}"
+                  }
+                }
+              },
+              "active": {
+                "label": {
+                  "$type": "composition",
+                  "$value": {
+                    "typography": "{pella.ref.typography.button}",
+                    "fill": "{pella.sys.color.graySoft}"
+                  }
+                },
+                "container": {
+                  "$type": "composition",
+                  "$value": {
+                    "fill": "{pella.ref.color.custom.light.darker}",
+                    "spacing": "{pella.sys.spacing.ss}"
+                  }
+                }
+              },
+              "selected": {
+                "label": {
+                  "$type": "composition",
+                  "$value": {
+                    "fill": "{pella.sys.color.graySoft}",
+                    "typography": "{pella.ref.typography.button}",
+                    "fontWeights": "Regular"
+                  }
+                },
+                "container": {
+                  "$type": "composition",
+                  "$value": {
+                    "fill": "{pella.sys.color.custom.light}",
+                    "spacing": "{pella.sys.spacing.ss}"
+                  }
+                }
+              },
+              "disabled": {
+                "label": {
+                  "$type": "composition",
+                  "$value": {
+                    "fill": "{pella.sys.color.gray}",
+                    "typography": "{pella.ref.typography.button}"
+                  }
+                },
+                "container": {
+                  "$type": "composition",
+                  "$value": {
+                    "fill": "{pella.sys.color.white}",
+                    "spacing": "{pella.sys.spacing.ss}",
+                    "opacity": "{pella.sys.opacity.disabled}"
+                  }
+                }
+              }
+            },
+            "ellipsis": {
+              "default": {
+                "label": {
+                  "$type": "composition",
+                  "$value": {
+                    "typography": "{pella.ref.typography.button}",
+                    "fill": "{pella.sys.color.custom.light}"
+                  }
+                },
+                "container": {
+                  "$type": "composition",
+                  "$value": {
+                    "fill": "{pella.sys.color.graySoft}",
+                    "spacing": "{pella.sys.spacing.ss}"
+                  }
+                }
+              },
+              "hover": {
+                "label": {
+                  "$type": "composition",
+                  "$value": {
+                    "typography": "{pella.ref.typography.button}",
+                    "fill": "{pella.sys.color.custom.light}"
+                  }
+                },
+                "container": {
+                  "$type": "composition",
+                  "$value": {
+                    "fill": "{pella.sys.color.graySoft}",
+                    "spacing": "{pella.sys.spacing.ss}",
+                    "border": "{pella.sys.border}",
+                    "borderColor": "{pella.ref.color.custom.light.lighter}"
+                  }
+                }
+              },
+              "focus": {
+                "label": {
+                  "$type": "composition",
+                  "$value": {
+                    "typography": "{pella.ref.typography.button}",
+                    "fill": "{pella.sys.color.blackSoft}"
+                  }
+                },
+                "container": {
+                  "$type": "composition",
+                  "$value": {
+                    "fill": "{pella.sys.color.graySoft}",
+                    "spacing": "{pella.sys.spacing.ss}",
+                    "border": "{pella.sys.border}",
+                    "borderColor": "{pella.ref.color.custom.light.darker}"
+                  }
+                }
+              },
+              "active": {
+                "label": {
+                  "$type": "composition",
+                  "$value": {
+                    "typography": "{pella.ref.typography.button}",
+                    "fill": "{pella.sys.color.blackSoft}"
+                  }
+                },
+                "container": {
+                  "$type": "composition",
+                  "$value": {
+                    "fill": "{pella.sys.color.graySoft}",
+                    "spacing": "{pella.sys.spacing.ss}",
+                    "border": "{pella.sys.border}",
+                    "borderColor": "{pella.ref.color.custom.light.darker}"
+                  }
+                }
+              },
+              "selected": {
+                "label": {
+                  "$type": "composition",
+                  "$value": {
+                    "fill": "{pella.sys.color.blackSoft}",
+                    "typography": "{pella.ref.typography.button}"
+                  }
+                },
+                "container": {
+                  "$type": "composition",
+                  "$value": {
+                    "fill": "{pella.sys.color.graySoft}",
+                    "spacing": "{pella.sys.spacing.ss}",
+                    "border": "{pella.sys.border}",
+                    "borderColor": "{pella.sys.color.custom.light}"
+                  }
+                }
+              },
+              "disabled": {
+                "label": {
+                  "$type": "composition",
+                  "$value": {
+                    "fill": "{pella.sys.color.gray}",
+                    "typography": "{pella.ref.typography.button}"
+                  }
+                },
+                "container": {
+                  "$type": "composition",
+                  "$value": {
+                    "fill": "{pella.sys.color.graySoft}",
+                    "spacing": "{pella.sys.spacing.ss}",
+                    "opacity": "{pella.sys.opacity.disabled}"
+                  }
+                }
+              },
+              "error": {
+                "label": {
+                  "$type": "composition",
+                  "$value": {
+                    "fill": "{pella.sys.color.blackSoft}",
+                    "typography": "{pella.ref.typography.button}"
+                  }
+                },
+                "container": {
+                  "$type": "composition",
+                  "$value": {
+                    "fill": "{pella.sys.color.graySoft}",
+                    "spacing": "{pella.sys.spacing.ss}",
+                    "border": "{pella.sys.border}",
+                    "borderColor": "{pella.sys.color.red}"
+                  }
+                }
+              }
+            },
+            "next": {
+              "default": {
+                "icon": {
+                  "$type": "composition",
+                  "$value": {
+                    "fill": "{pella.sys.color.custom.light}"
+                  }
+                },
+                "container": {
+                  "$type": "composition",
+                  "$value": {
+                    "fill": "{pella.sys.color.graySoft}",
+                    "borderRadius": "{pella.sys.coreDimensions.zero} {pella.sys.coreDimensions.mmmm} {pella.sys.coreDimensions.mmmm} {pella.sys.coreDimensions.zero}",
+                    "spacing": "{pella.sys.spacing.ss}"
+                  }
+                }
+              },
+              "hover": {
+                "icon": {
+                  "$type": "composition",
+                  "$value": {
+                    "fill": "{pella.sys.color.graySoft}"
+                  }
+                },
+                "container": {
+                  "$type": "composition",
+                  "$value": {
+                    "fill": "{pella.ref.color.custom.light.lighter}",
+                    "borderRadius": "{pella.sys.coreDimensions.zero} {pella.sys.coreDimensions.mmmm} {pella.sys.coreDimensions.mmmm} {pella.sys.coreDimensions.zero}",
+                    "spacing": "{pella.sys.spacing.ss}"
+                  }
+                }
+              },
+              "focus": {
+                "icon": {
+                  "$type": "composition",
+                  "$value": {
+                    "fill": "{pella.sys.color.graySoft}"
+                  }
+                },
+                "container": {
+                  "$type": "composition",
+                  "$value": {
+                    "fill": "{pella.ref.color.custom.light.darker}",
+                    "borderRadius": "{pella.sys.coreDimensions.zero} {pella.sys.coreDimensions.mmmm} {pella.sys.coreDimensions.mmmm} {pella.sys.coreDimensions.zero}",
+                    "spacing": "{pella.sys.spacing.ss}"
+                  }
+                }
+              },
+              "active": {
+                "icon": {
+                  "$type": "composition",
+                  "$value": {
+                    "fill": "{pella.sys.color.graySoft}"
+                  }
+                },
+                "container": {
+                  "$type": "composition",
+                  "$value": {
+                    "fill": "{pella.ref.color.custom.light.darker}",
+                    "borderRadius": "{pella.sys.coreDimensions.zero} {pella.sys.coreDimensions.mmmm} {pella.sys.coreDimensions.mmmm} {pella.sys.coreDimensions.zero}",
+                    "spacing": "{pella.sys.spacing.ss}"
+                  }
+                }
+              },
+              "disabled": {
+                "icon": {
+                  "$type": "composition",
+                  "$value": {
+                    "fill": "{pella.sys.color.gray}"
+                  }
+                },
+                "container": {
+                  "$type": "composition",
+                  "$value": {
+                    "fill": "{pella.sys.color.white}",
+                    "borderRadius": "{pella.sys.coreDimensions.zero} {pella.sys.coreDimensions.mmmm} {pella.sys.coreDimensions.mmmm} {pella.sys.coreDimensions.zero}",
+                    "spacing": "{pella.sys.spacing.ss}",
+                    "opacity": "{pella.sys.opacity.disabled}"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

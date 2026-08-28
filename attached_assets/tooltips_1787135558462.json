@@ -1,0 +1,67 @@
+{
+  "pella": {
+    "comp": {
+      "tooltip": {
+        "brand": {
+          "default": {
+            "container": {
+              "$type": "composition",
+              "$value": {
+                "fill": "{pella.ref.color.comp.tooltip.custom.container}",
+                "spacing": "{pella.comp.tooltip.spacing.labelSpacing}",
+                "borderRadius": "{pella.sys.coreDimensions.sss}"
+              }
+            },
+            "label": {
+              "$type": "composition",
+              "$value": {
+                "typography": "{pella.ref.typography.caption}",
+                "fill": "{pella.ref.color.comp.tooltip.custom.onContainer}"
+              }
+            }
+          },
+          "alert": {
+            "container": {
+              "$type": "composition",
+              "$value": {
+                "fill": "{pella.ref.color.comp.tooltip.custom.alert.container}",
+                "spacing": "{pella.comp.tooltip.spacing.labelSpacing}",
+                "borderRadius": "{pella.sys.coreDimensions.sss}"
+              }
+            },
+            "label": {
+              "$type": "composition",
+              "$value": {
+                "typography": "{pella.ref.typography.caption}",
+                "fill": "{pella.ref.color.comp.tooltip.custom.alert.onContainer}"
+              }
+            }
+          },
+          "error": {
+            "container": {
+              "$type": "composition",
+              "$value": {
+                "fill": "{pella.ref.color.comp.tooltip.custom.error.container}",
+                "spacing": "{pella.comp.tooltip.spacing.labelSpacing}",
+                "borderRadius": "{pella.sys.coreDimensions.sss}"
+              }
+            },
+            "label": {
+              "$type": "composition",
+              "$value": {
+                "typography": "{pella.ref.typography.caption}",
+                "fill": "{pella.ref.color.comp.tooltip.custom.error.onContainer}"
+              }
+            }
+          }
+        },
+        "spacing": {
+          "labelSpacing": {
+            "$type": "spacing",
+            "$value": "{pella.sys.spacing.regularmini}"
+          }
+        }
+      }
+    }
+  }
+}

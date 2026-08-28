@@ -1,0 +1,151 @@
+{
+  "pella": {
+    "sys": {
+      "color": {
+        "red": {
+          "$type": "color",
+          "$value": "#ee1f25",
+          "$description": "error"
+        },
+        "yellow": {
+          "$type": "color",
+          "$value": "#cfec14",
+          "$description": "alert"
+        },
+        "green": {
+          "$type": "color",
+          "$value": "#218a38",
+          "$description": "success"
+        },
+        "white": {
+          "$type": "color",
+          "$value": "#F9F9F9"
+        },
+        "graySoft": {
+          "$type": "color",
+          "$value": "#E4E3E3"
+        },
+        "gray": {
+          "$type": "color",
+          "$value": "#919191"
+        },
+        "blackSoft": {
+          "$type": "color",
+          "$value": "#383838"
+        },
+        "black": {
+          "$type": "color",
+          "$value": "#1B1B1B"
+        },
+        "custom": {
+          "light": {
+            "$type": "color",
+            "$value": "#204384"
+          },
+          "dark": {
+            "$type": "color",
+            "$value": "#152c57"
+          }
+        }
+      }
+    },
+    "ref": {
+      "color": {
+        "custom": {
+          "light": {
+            "lighter": {
+              "$extensions": {
+                "studio.tokens": {
+                  "modify": {
+                    "type": "lighten",
+                    "value": "0.32",
+                    "space": "srgb"
+                  }
+                }
+              },
+              "$type": "color",
+              "$value": "{pella.sys.color.custom.light}",
+              "$description": "32% lighter"
+            },
+            "darker": {
+              "$extensions": {
+                "studio.tokens": {
+                  "modify": {
+                    "type": "darken",
+                    "value": "0.32",
+                    "space": "srgb"
+                  }
+                }
+              },
+              "$type": "color",
+              "$value": "{pella.sys.color.custom.light}",
+              "$description": "32% darker "
+            }
+          },
+          "dark": {
+            "lighter": {
+              "$extensions": {
+                "studio.tokens": {
+                  "modify": {
+                    "type": "lighten",
+                    "value": "0.32",
+                    "space": "srgb"
+                  }
+                }
+              },
+              "$type": "color",
+              "$value": "{pella.sys.color.custom.dark}",
+              "$description": "32% lighter"
+            },
+            "darker": {
+              "$extensions": {
+                "studio.tokens": {
+                  "modify": {
+                    "type": "darken",
+                    "value": "0.32",
+                    "space": "srgb"
+                  }
+                }
+              },
+              "$type": "color",
+              "$value": "{pella.sys.color.custom.dark}",
+              "$description": "32% darker "
+            }
+          }
+        },
+        "blackSoft": {
+          "lighter": {
+            "$extensions": {
+              "studio.tokens": {
+                "modify": {
+                  "type": "lighten",
+                  "value": "0.32",
+                  "space": "srgb"
+                }
+              }
+            },
+            "$type": "color",
+            "$value": "{pella.sys.color.blackSoft}",
+            "$description": "blackSoft 32% lighter (fix it by code because it is a pro feature)"
+          }
+        },
+        "white": {
+          "darker": {
+            "$extensions": {
+              "studio.tokens": {
+                "modify": {
+                  "type": "darken",
+                  "value": "0.32",
+                  "space": "srgb"
+                }
+              }
+            },
+            "$type": "color",
+            "$value": "{pella.sys.color.white}",
+            "$description": "white 32% darker (fix it by code because it is a pro feature)"
+          }
+        }
+      }
+    }
+  }
+}
