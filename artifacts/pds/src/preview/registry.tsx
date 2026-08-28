@@ -210,7 +210,7 @@ export const NAV_GROUPS: NavGroup[] = [
       {
         id: 'color-roles',
         name: 'Color roles',
-        description: 'Brand, semantic, text, background, and border colors.',
+        description: 'Global colors for both themes - brand primaries, traffic lights, gray scales, hover-layer variants.',
         Page: ColorsPage,
       },
     ],

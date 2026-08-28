@@ -26,7 +26,7 @@ pnpm install               # pnpm is mandatory — a preinstall guard rejects np
 PORT=5173 pnpm --filter @workspace/pds run dev
 ```
 
-Notes for special environments: if your `$HOME` is read-only (agent sandboxes, locked-down machines), point the pnpm store elsewhere: `pnpm install --store-dir /tmp/pds-store`. Node v22 + pnpm 10 are the verified runtime pair on HYPERION.
+Notes for special environments: if your `$HOME` is read-only (agent sandboxes, locked-down machines), point the pnpm store elsewhere: `pnpm install --store-dir /tmp/pds-store`. Node v22 + pnpm 10 are the verified runtime pair.
 
 ## 3. Token pipeline — single source of truth
 

@@ -94,10 +94,63 @@ function NavigationItems({
   );
 }
 
+/* ---- primary color override (per theme, persisted in localStorage) ---- */
+
+const DEFAULT_PRIMARY = { light: '219 61% 32.2%', dark: '218 47.7% 61%' };
+type ThemeName = keyof typeof DEFAULT_PRIMARY;
+
+function hexToHsl(hex: string): string {
+  const value = hex.replace('#', '');
+  const r = parseInt(value.slice(0, 2), 16) / 255;
+  const g = parseInt(value.slice(2, 4), 16) / 255;
+  const b = parseInt(value.slice(4, 6), 16) / 255;
+  const max = Math.max(r, g, b);
+  const min = Math.min(r, g, b);
+  const l = (max + min) / 2;
+  if (max === min) return `0 0% ${(l * 100).toFixed(1)}%`;
+  const d = max - min;
+  const s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+  let h: number;
+  if (max === r) h = ((g - b) / d + (g < b ? 6 : 0)) * 60;
+  else if (max === g) h = ((b - r) / d + 2) * 60;
+  else h = ((r - g) / d + 4) * 60;
+  return `${h.toFixed(1)} ${(s * 100).toFixed(1)}% ${(l * 100).toFixed(1)}%`;
+}
+
+function hslToHex(h: number, s: number, l: number): string {
+  const c = (1 - Math.abs(2 * l - 1)) * s;
+  const x = c * (1 - Math.abs(((h / 60) % 2) - 1));
+  const m = l - c / 2;
+  let rgb: [number, number, number] = [0, 0, 0];
+  if (h < 60) rgb = [c, x, 0];
+  else if (h < 120) rgb = [x, c, 0];
+  else if (h < 180) rgb = [0, c, x];
+  else if (h < 240) rgb = [0, x, c];
+  else if (h < 300) rgb = [x, 0, c];
+  else rgb = [c, 0, x];
+  return '#' + rgb.map((v) => Math.round((v + m) * 255).toString(16).padStart(2, '0')).join('');
+}
+
+function parseTriple(triple: string): [number, number, number] {
+  const parts = triple.split(/s+/);
+  return [parseFloat(parts[0]), parseFloat(parts[1]) / 100, parseFloat(parts[2]) / 100];
+}
+
+function loadStoredPrimary(): typeof DEFAULT_PRIMARY {
+  try {
+    const raw = window.localStorage.getItem('pds-primary');
+    if (!raw) return DEFAULT_PRIMARY;
+    const parsed = JSON.parse(raw);
+    if (typeof parsed?.light === 'string' && typeof parsed?.dark === 'string') return parsed;
+  } catch { /* fall through to defaults */ }
+  return DEFAULT_PRIMARY;
+}
+
 export function DesignSystemBrowser() {
   const [selectedId, select] = useSelectedId();
   const [query, setQuery] = useState('');
   const [dark, setDark] = useState(false);
+  const [primary, setPrimary] = useState(loadStoredPrimary);
   const mobileNav = useRef<HTMLDetailsElement>(null);
   const mobileNavSummary = useRef<HTMLElement>(null);
   const normalizedQuery = query.trim().toLowerCase();
@@ -114,6 +167,25 @@ export function DesignSystemBrowser() {
     document.documentElement.classList.toggle('dark', dark);
     window.localStorage.setItem('pds-theme', dark ? 'dark' : 'light');
   }, [dark]);
+
+  /* Apply the active theme primary override as an inline custom property.
+     Inline --primary wins over both :root and .dark declarations, so each
+     theme keeps its own value (persisted under the pds-primary key). */
+  useEffect(() => {
+    const active = dark ? primary.dark : primary.light;
+    document.documentElement.style.setProperty('--primary', active);
+  }, [dark, primary]);
+
+  useEffect(() => {
+    window.localStorage.setItem('pds-primary', JSON.stringify(primary));
+  }, [primary]);
+
+  const setThemePrimary = (theme: ThemeName) => (event: React.ChangeEvent<HTMLInputElement>) => {
+    setPrimary((prev) => ({ ...prev, [theme]: hexToHsl(event.target.value) }));
+  };
+
+  const activeTheme: ThemeName = dark ? 'dark' : 'light';
+  const [activeH, activeS, activeL] = parseTriple(primary[activeTheme]);
 
   const filteredGroups = useMemo(
     () =>
@@ -136,6 +208,9 @@ export function DesignSystemBrowser() {
     group.entries.some((entry) => entry.id === active.id),
   );
   const ActivePage = active.Page;
+  const activeHex = hslToHex(activeH, activeS, activeL);
+  const pickerAria = 'Set ' + activeTheme + ' theme primary color';
+  const pickerTitle = 'Pick the ' + activeTheme + ' theme primary color';
 
   useEffect(() => {
     window.scrollTo({ top: 0 });
@@ -158,6 +233,32 @@ export function DesignSystemBrowser() {
         <div className="border-b px-5 py-5">
           <p className="text-sm font-semibold">{DESIGN_SYSTEM.title}</p>
           <p className="mt-1 text-xs text-muted-foreground">Browse the system</p>
+
+          {/* Primary color override for the active theme (light and dark kept separate) */}
+          <div className="mt-4">
+            <p className="mb-1 text-[11px] font-medium uppercase tracking-wide text-muted-foreground">
+              {activeTheme} primary
+            </p>
+            <div className="flex items-center justify-between gap-2 rounded-md border bg-background px-2.5 py-1.5 transition-colors hover:bg-muted/50">
+              <label className="flex cursor-pointer items-center" title={pickerTitle}>
+                <input
+                  type="color"
+                  value={activeHex}
+                  onChange={setThemePrimary(activeTheme)}
+                  aria-label={pickerAria}
+                  className="size-6 cursor-pointer rounded border bg-transparent p-0"
+                />
+                <span className="ml-2 font-mono text-xs uppercase">{activeHex}</span>
+              </label>
+              <button
+                type="button"
+                onClick={() => setPrimary((prev) => ({ ...prev, [activeTheme]: DEFAULT_PRIMARY[activeTheme] }))}
+                className="text-xs text-muted-foreground underline-offset-2 hover:underline"
+              >
+                Reset
+              </button>
+            </div>
+          </div>
         </div>
         <div className="p-4 pb-2">
           <Input
@@ -203,7 +304,7 @@ export function DesignSystemBrowser() {
               variant="outline"
               size="sm"
               onClick={() => setDark((value) => !value)}
-              aria-label={dark ? 'Attiva tema chiaro' : 'Attiva tema scuro'}
+              aria-label={dark ? 'Switch to light theme' : 'Switch to dark theme'}
             >
               {dark ? <Sun className="size-4" /> : <Moon className="size-4" />}
               {dark ? 'Light' : 'Dark'}
