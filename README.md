@@ -1,138 +1,137 @@
 # PDS — Pella Design System
 
-Il design system di Michele Pella, in un unico workspace pnpm con due facce deliberate:
+The design system of Michele Pella, shipped as one pnpm workspace with two deliberate faces:
 
-1. **Showcase WebUI** — una preview standalone (53 demo live) servita su porta locale;
-   è costruita dai *stessi* file `src/components/ui/*` che la documenta: ciò che vedi
-   nel browser **è** il design system, non un mock.
-2. **Pacchetto installabile** — `@workspace/pds`: token generati da `tokens.json`,
-   stylesheet e componenti importabili per sottopercorso da altri prodotti.
+1. **Showcase WebUI** — a standalone preview (53 live demos) served on a local port;
+   it is built from the *same* `src/components/ui/*` files it documents: what you see
+   in the browser **is** the design system, not a mock of it.
+2. **Installable package** — `@workspace/pds`: tokens generated from `tokens.json`,
+   stylesheet and components importable by subpath from other products.
 
 ## Quick start (showcase)
 
 ```bash
-./start.sh                 # → http://localhost:5173/  (installa le dipendenze al primo avvio)
-PDS_PORT=8080 ./start.sh   # porta alternativa via variabile d'ambiente
+./start.sh                 # -> http://localhost:5173/  (installs dependencies on first run)
+PDS_PORT=8080 ./start.sh   # alternative port via environment variable
 ```
 
-Manuale, dalla root: `pnpm install && PORT=5173 pnpm --filter @workspace/pds run dev`.
-Ambienti con `$HOME` in sola lettura (sandbox): `pnpm install --store-dir /tmp/pds-store`.
+Manual, from the root: `pnpm install && PORT=5173 pnpm --filter @workspace/pds run dev`.
+Environments with a read-only `$HOME` (sandboxes): `pnpm install --store-dir /tmp/pds-store`.
 
-## Dove si trova la documentazione
+## Where the documentation lives
 
-- [`DESIGN_SYSTEM.md`](DESIGN_SYSTEM.md) — **base di orientazione unificata**: pipeline dei token,
-  indice dei gruppi componenti con deep link, mappa del repo, invarianti di manutenzione.
-- Guide per gruppo componente (local-only, escluse da git): `artifacts/pds/docs/components/*.md` —
-  una tabella per famiglia: componente → fonte → demo live.
-- Docs del pacchetto (leggere sul posto, non copiare): `consuming-web.md`, `consuming-expo.md`,
-  `migrating-web.md`, `migrating-expo.md`, `github-consumption.md` in `artifacts/pds/docs/`.
+- [`DESIGN_SYSTEM.md`](DESIGN_SYSTEM.md) — **unified orientation base**: token pipeline,
+  component group index with deep links, repo map, maintenance invariants.
+- Per-group component guides (local-only, excluded from git): `artifacts/pds/docs/components/*.md` —
+  one table per family: component -> source -> live demo.
+- Package docs (read in place, do not copy): `consuming-web.md`, `consuming-expo.md`,
+  `migrating-web.md`, `migrating-expo.md`, `github-consumption.md` under `artifacts/pds/docs/`.
 
-> **Policy (decisione di prodotto):** documentazione working/mantenimento separata dal codice —
-> `artifacts/pds/docs/` e `CLEAN_BASE.md` restano fuori da git; su git viaggiano README,
-> `DESIGN_SYSTEM.md`, `start.sh` e sorgente.
+> **Policy (product decision):** working/maintenance documentation is kept separate from code —
+> `artifacts/pds/docs/` and `CLEAN_BASE.md` stay out of git; what ships on git is the README,
+> `DESIGN_SYSTEM.md`, `start.sh` and source.
 
-## Usare PDS come design system
+## Using PDS as a design system
 
 ```ts
-import { Button } from "@workspace/pds/components/ui/button";  // qualsiasi componente ui/*
-import { tokens, type Tokens } from "@workspace/pds/tokens";   // valori generati + tipi
-// stylesheet: export "./styles.css" (porta @source ./components per il consumer Tailwind v4)
+import { Button } from "@workspace/pds/components/ui/button";  // any ui/* component
+import { tokens, type Tokens } from "@workspace/pds/tokens";   // generated values + types
+// stylesheet: export "./styles.css" (carries @source ./components for the consumer's Tailwind v4)
 ```
 
-Distribuzione attuale: git (clone/link — `private: true`; per pubblicare su npm servirebbero quel flag e un campo `files`). Dettaglio in `artifacts/pds/docs/github-consumption.md`.
+Current distribution model: git (clone/link — the package is `private: true`; npm-registry publishing would require flipping that flag and adding a "files" field). Details in `artifacts/pds/docs/github-consumption.md`.
 
 ## Stack
 
-| Layer | Tecnologia |
+| Layer | Technology |
 |---|---|
-| Runtime | Node v22.22.2 (verificato su HYPERION), pnpm 10, TypeScript ~5.9.3, Vite 7.3, React 19.1, Tailwind v4 — il package manager **deve essere pnpm**: lo script `preinstall` rifiuta npm/yarn |
-| Linguaggio | TypeScript ~5.9 (`tsconfig.base.json`, project references su `lib/*`) |
-| UI | Vite 7 · React 19 · Tailwind CSS v4 (plugin vite) · class-variance-authority · Radix primitives |
-| Token | `tokens.json` → `artifacts/pds/scripts/build-tokens.mjs` → `src/generated/tokens.tsx` + `src/index.css` |
-| API (pattern layer) | OpenAPI spec (`lib/api-spec/openapi.yaml`) → Orval codegen → client React Query + Zod schemas; Drizzle ORM come template vuoto (`lib/db`) |
+| Runtime | Node v22.22.2 (verified on HYPERION), pnpm 10, TypeScript ~5.9.3, Vite 7.3, React 19.1, Tailwind v4 — the package manager **must be pnpm**: the `preinstall` script rejects npm/yarn |
+| Language | TypeScript ~5.9 (`tsconfig.base.json`, project references over `lib/*`) |
+| UI | Vite 7 · React 19 · Tailwind CSS v4 (vite plugin) · class-variance-authority · Radix primitives |
+| Tokens | `tokens.json` -> `artifacts/pds/scripts/build-tokens.mjs` -> `src/generated/tokens.tsx` + `src/index.css` |
+| API (pattern layer) | OpenAPI spec (`lib/api-spec/openapi.yaml`) -> Orval codegen -> React Query client + Zod schemas; Drizzle ORM as an empty template (`lib/db`) |
 
-## Comandi
+## Commands
 
-Tutti da eseguire dalla root del workspace, a meno di indicazione diversa.
+All run from the workspace root unless stated otherwise.
 
-| Comando | Descrizione |
+| Command | Description |
 |---|---|
-| `./start.sh` | Quick start showcase: install (se serve) + dev server su :5173 (`PDS_PORT` per override) |
-| `pnpm install` | Installa le dipendenze (rigenera il lockfile se i manifest sono cambiati) |
-| `pnpm run typecheck` | Typecheck completo: project references `lib/*` + ogni pacchetto con script dedicato |
-| `pnpm run build` | Typecheck + build di tutti i pacchetti che espongono un build |
-| `pnpm --filter @workspace/pds run dev` | Preview site dei componenti (Vite, host 0.0.0.0) |
-| `pnpm --filter @workspace/pds run tokens` | Rigenera token CSS/TS da `tokens.json` (serve anche pre-build/pre-typecheck) |
-| `pnpm --filter @workspace/api-spec run codegen` | Regenera client React + Zod schemas dall'OpenAPI spec via Orval |
-| `pnpm --filter @workspace/db run push` | Push schema Drizzle in locale — richiede variabile d'ambiente `DATABASE_URL` (Postgres) |
+| `./start.sh` | Showcase quick start: install (if needed) + dev server on :5173 (`PDS_PORT` to override) |
+| `pnpm install` | Install dependencies (regenerates the lockfile if manifests changed) |
+| `pnpm run typecheck` | Full typecheck: project references over `lib/*` + every package with its own script |
+| `pnpm run build` | Typecheck + build of all packages exposing a build |
+| `pnpm --filter @workspace/pds run dev` | Component preview site (Vite, host 0.0.0.0) |
+| `pnpm --filter @workspace/pds run tokens` | Regenerate CSS/TS tokens from `tokens.json` (also runs as prebuild/pretypecheck hook) |
+| `pnpm --filter @workspace/api-spec run codegen` | Regenerate React client + Zod schemas from the OpenAPI spec via Orval |
+| `pnpm --filter @workspace/db run push` | Push Drizzle schema locally — requires the `DATABASE_URL` env var (Postgres) |
 
-Note operative:
-- Il preview di pds **non richiede** le variabili `PORT`/`BASE_PATH`: se non definite usa porta 5173 e base `/`. Entrambe restano opzionali per chi deve fare override (`start.sh` inietta solo `PORT`).
-- I file generati da Orval (`lib/api-client-react/src/generated/**`, `lib/api-zod/src/generated/**`)
-  vanno **commit**: un consumer GitHub deve poter installare il progetto senza rigenerare nulla.
+Operational notes:
+- The pds preview **does not require** the `PORT`/`BASE_PATH` variables: when undefined it defaults to port 5173 and base "/". Both remain optional overrides (`start.sh` injects only `PORT`).
+- Files generated by Orval (`lib/api-client-react/src/generated/**`, `lib/api-zod/src/generated/**`)
+  are **committed**: a GitHub consumer must be able to install the project without regenerating anything.
 
-## Mappa della struttura
+## Structure map
 
 ```
 Design-System-Complete/
-├── start.sh                # launcher one-shot: install + showcase server (start da qualsiasi cwd)
-├── DESIGN_SYSTEM.md        # base di orientazione unificata del design system
+├── start.sh                # one-shot launcher: install + showcase server (run from any cwd)
+├── DESIGN_SYSTEM.md        # unified orientation base for the design system
 ├── artifacts/
-│   └── pds/                  # @workspace/pds — IL design system: componenti, token, preview Vite
-│       ├── tokens.json       # ← single source of truth dei token visivi (DTCG)
+│   └── pds/                  # @workspace/pds — THE design system: components, tokens, Vite preview
+│       ├── tokens.json       # <- single source of truth for visual tokens (DTCG)
 │       ├── scripts/build-tokens.mjs
-│       ├── vite.config.ts    # plugin react + tailwind + watcher token (no dipendenze da piattaforma)
-│       ├── docs/             # working docs del pacchetto — local-only, escluse da git
+│       ├── vite.config.ts    # react + tailwind plugins + token watcher (no platform dependencies)
+│       ├── docs/             # package working docs — local-only, excluded from git
 │       └── src/              # components/ui/*, hooks/, lib/utils, generated/tokens.tsx, index.css
-├── lib/                      # layer di pattern standalone, nessuna dipendenza reciproca con pds
+├── lib/                      # standalone pattern layers, no cross-dependency with pds
 │   ├── api-spec/             # openapi.yaml + orval.config.ts (codegen)
-│   ├── api-client-react/     # client React Query generato da Orval (+ custom-fetch mutator)
-│   ├── api-zod/              # Zod schemas generati da Orval
-│   └── db/                   # template Drizzle ORM vuoto (drizzle.config.ts, schema/)
-├── attached_assets/          # export originali dei token — provenienza storica di tokens.json, NON toccare
-├── pnpm-workspace.yaml       # catalog + security guardrail (vedi sotto)
-└── tsconfig.base.json / tsconfig.json   # config TS condivisa + project references su lib/*
+│   ├── api-client-react/     # React Query client generated by Orval (+ custom-fetch mutator)
+│   ├── api-zod/              # Zod schemas generated by Orval
+│   └── db/                   # empty Drizzle ORM template (drizzle.config.ts, schema/)
+├── attached_assets/          # original token exports — historical provenance of tokens.json, do not touch
+├── pnpm-workspace.yaml       # catalog + security guardrail (see below)
+└── tsconfig.base.json / tsconfig.json   # shared TS config + project references over lib/*
 ```
 
-(`CLEAN_BASE.md`, record del processo di sanificazione workspace, è sul disco ma escluso da git per policy docs.)
+(`CLEAN_BASE.md`, the workspace sanitization process record, is on disk but excluded from git by docs policy.)
 
-## Decisioni architetturali
+## Architectural decisions
 
-1. **Token = single source of truth.** Ogni modifica visiva parte da `tokens.json`; CSS e tipi sono
-   generati, mai editati a mano (zero drift tra documenti).
-2. **Tailwind v4 + CVA preservati** — è l'architettura visiva del design system, non un artefatto della
-   piattaforma: mantenuti integralmente durante la pulizia.
-3. **`lib/*` separabile da `artifacts/pds`:** i layer API (spec → client → zod) e il DB template sono
-   indipendenti dalla UI; chi consuma solo i componenti non trae dipendenze inutili.
-4. **Supply-chain guardrail attivo:** `minimumReleaseAge: 1440` in `pnpm-workspace.yaml` impone che ogni
-   versione npm sia pubblicata da ≥24h prima dell'installazione (difesa contro attacchi supply-chain).
-   **Non rimuoverlo.** Gli override funzionali residui (pin `esbuild: 0.27.3`, alias tsx per drizzle-kit)
-   sono documentati nel file stesso.
-5. **Showcase-first (decisione prodotto):** la preview è il design system che si usa da sé — doc e
-   implementazione non possono divergere; ogni nuovo componente richiede story + voce in `registry.tsx` nello stesso change.
+1. **Tokens = single source of truth.** Every visual change starts in `tokens.json`; CSS and types are
+   generated, never hand-edited (zero drift between documents).
+2. **Tailwind v4 + CVA preserved** — the visual architecture of the design system itself, not a platform
+   artifact: kept intact during the cleanup.
+3. **`lib/*` separable from `artifacts/pds`:** the API layers (spec -> client -> zod) and the DB template are
+   independent of the UI; consumers who only want the components pull no unnecessary dependencies.
+4. **Supply-chain guardrail active:** `minimumReleaseAge: 1440` in `pnpm-workspace.yaml` requires every npm
+   version to have been published >=24h before installation (defense against supply-chain attacks).
+   **Do not remove it.** The remaining functional overrides (`esbuild: 0.27.3` pin, tsx alias for drizzle-kit)
+   are documented in the file itself.
+5. **Showcase-first (product decision):** the preview is the design system using itself — docs and
+   implementation cannot diverge; every new component requires its story + `registry.tsx` entry in the same change.
 
 ## Gotchas
 
-- **pnpm è obbligatorio** — lo script `preinstall` della root fallisce con npm/yarn di proposito.
-- Il lockfile va rigenerato (**solo**) dopo modifiche ai manifest; non committare mai
-  `dist/`, `.tsbuildinfo`, `node_modules` (già gitignorati).
-- recharts 2.15.4 stampa un warning deprecation all'install: preesistente, cosmetico, non bloccante.
-- Le note storiche nei documenti spieganono *perché* certe scelte esistono (es. commit dei file
-  generati): sono contesto deliberato, non spazzatura residua.
+- **pnpm is mandatory** — the root `preinstall` script fails on npm/yarn by design.
+- The lockfile is regenerated (**only**) after manifest changes; never commit
+  `dist/`, `.tsbuildinfo`, `node_modules` (already gitignored).
+- recharts 2.15.4 prints a deprecation warning at install time: pre-existing, cosmetic, non-blocking.
+- Historical notes in the docs explain *why* certain choices exist (e.g. committing generated files):
+  they are deliberate context, not leftover junk.
 
 ---
 
-## Dev status / TODO — istruzioni di ripresa a zero contesto
+## Dev status / TODO — zero-context resume instructions
 
-**Stato attuale:** sanificazione workspace completata (2026-08-27) + pacchetto showcase-first applicato:
-`start.sh` one-shot launcher; policy docs separati da git (`.gitignore`: `artifacts/pds/docs/`,
-`CLEAN_BASE.md`; i file sono sul disco, non nell'index); `DESIGN_SYSTEM.md` base di orientazione + 8 guide per gruppo in `artifacts/pds/docs/components/` (local-only). Working tree **non committato**: contiene ancora le modifiche WIP preesistenti del maintainer su alcuni componenti (`badge, button, calendar, chart, checkbox, field, radio-group, switch`) — non mescolarle in un commit senza revisione.
+**Current state:** workspace sanitization complete (2026-08-27) + showcase-first packaging applied:
+`start.sh` one-shot launcher; docs policy separating working docs from git (`.gitignore`: `artifacts/pds/docs/`,
+`CLEAN_BASE.md`; files on disk, not in the index); unified orientation base in `DESIGN_SYSTEM.md` + 8 per-group guides under `artifacts/pds/docs/components/` (local-only). The **v1.0.0 baseline is committed and pushed** as a single commit (`b4c22d2`) to `AIdevelopmentPit/pellaDS`; the maintainer's pre-existing WIP changes on some components (`badge, button, calendar, chart, checkbox, field, radio-group, switch`) are deliberately part of that baseline.
 
 TODO:
-- [ ] Commit finale della pulizia (decidere se separare il cleanup dalle WIP components; la policy docs è già applicata sull'index)
-- [ ] Decidere sorte di `attached_assets/` a lungo termine (provenienza token; oggi tenuta come riferimento)
-- [ ] Demo pages mancanti per `icon.tsx`, `label.tsx`, `toaster.tsx` (gap noto, documentato in DESIGN_SYSTEM.md §4)
+- [ ] Decide the long-term fate of `attached_assets/` (token provenance; kept as reference today)
+- [ ] Missing demo pages for `icon.tsx`, `label.tsx`, `toaster.tsx` (known gap, documented in DESIGN_SYSTEM.md §4)
 
-Per riprendere da zero: leggere questa README + `DESIGN_SYSTEM.md`, poi `./start.sh`.
-Se l'ambiente ha $HOME read-only aggiungere `--store-dir /tmp/pds-store` a ogni `pnpm install`.
-Verifica verde attesa: `pnpm run typecheck` (zero error) e `pnpm --filter @workspace/pds run build` (~4.5s).
+To resume from zero: read this README + `DESIGN_SYSTEM.md`, then `./start.sh`.
+If the environment has a read-only $HOME, add `--store-dir /tmp/pds-store` to every `pnpm install`.
+Expected green verification: `pnpm run typecheck` (zero errors) and `pnpm --filter @workspace/pds run build` (~4.5s).
