@@ -12,10 +12,10 @@ import {
 
 export function SheetDemo() {
   return (
-    <div className="rounded-xl border bg-card p-6">
+    <div className="p-6">
       <Sheet>
         <SheetTrigger asChild>
-          <Button variant="outline">Open settings</Button>
+          <Button size="small">Open settings</Button>
         </SheetTrigger>
         <SheetContent side="right">
           <SheetHeader>

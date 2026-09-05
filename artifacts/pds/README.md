@@ -44,6 +44,7 @@ the imports. The public subpath exports are:
 <package>              portable generated tokens
 <package>/tokens       portable generated tokens
 <package>/styles.css   generated web theme
+<package>/config       runtime configuration (install flags + live theming)
 <package>/components/* reusable UI components
 <package>/lib/*        shared utilities
 <package>/hooks/*      shared hooks
@@ -51,6 +52,41 @@ the imports. The public subpath exports are:
 
 Import the theme before rendering PDS components. Do not copy component source
 or token values into the consuming application.
+
+## Theming at install time and live
+
+An installation of PDS exposes three options through `<package>/config`. All are optional —
+an app that installs without flags gets the design system defaults (fill fields, Roboto,
+exported brand colors):
+
+| Option | Values | Default |
+| --- | --- | --- |
+| Brand colors | `lightBrand` / `darkBrand` — hex, one per theme | exported brand primaries |
+| Field style | `fieldStyle` — `"fill"` (filled graySoft container) or `"outline"` (surface with brand border) | `"fill"` |
+| Font | `font` — a self-hosted typeface from the generated tokens (`tokens.fontOptions`) | `roboto` |
+
+```tsx
+import "@workspace/pds/styles.css";
+import { configurePds, setPdsConfig, usePdsConfig } from "@workspace/pds/config";
+
+// Install step (optional) — pin what this installation ships with. Call once at bootstrap.
+configurePds({ lightBrand: "#0B5FFF", darkBrand: "#7AB8FF", font: "inter" });
+
+// Live, from anywhere in the app (e.g. its themes menu). Persists and applies immediately.
+setPdsConfig({ fieldStyle: "outline" });
+
+function ThemesMenu() {
+  const { font, fieldStyle } = usePdsConfig(); // re-renders on any change
+  return <p>{font} / {fieldStyle}</p>;
+}
+```
+
+Brand and font choices are applied as inline custom properties on `<html>`
+(`--pds-brand-light`, `--pds-brand-dark`, `--pds-font-sans`), so every consumer of the
+generated theme follows live, in both themes, without a reload. Values persist to
+`localStorage` under `pds-config`; install flags act as the base layer under any persisted
+user choice. Field style sets the *default* tone of the field family (Field, Input,
+Textarea, InputGroup) — an explicit `tone` prop always wins over the setting.
 
 ## Updating from GitHub
 

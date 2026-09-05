@@ -8,11 +8,11 @@ import {
 
 export function CollapsibleDemo() {
   return (
-    <Collapsible className="max-w-md space-y-2 rounded-xl border bg-card p-6">
+    <Collapsible className="max-w-md space-y-2 p-6">
       <div className="flex items-center justify-between gap-4">
         <p className="text-sm font-medium">3 linked repositories</p>
         <CollapsibleTrigger asChild>
-          <Button variant="ghost" size="icon" aria-label="Toggle repositories">
+          <Button variant="link" size="icon" aria-label="Toggle repositories">
             <ChevronsUpDown />
           </Button>
         </CollapsibleTrigger>

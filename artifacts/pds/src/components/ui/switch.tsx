@@ -1,27 +1,29 @@
 import * as React from "react"
-import * as SwitchPrimitives from "@radix-ui/react-switch"
+import "./switch.css"
 
-import { cn } from "../../lib/utils"
+export interface SwitchProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "type"> {
+  /** Optional row label rendered beside the switch (label node of the token family, body2). */
+  label?: string
+}
 
-const Switch = React.forwardRef<
-  React.ElementRef<typeof SwitchPrimitives.Root>,
-  React.ComponentPropsWithoutRef<typeof SwitchPrimitives.Root>
->(({ className, ...props }, ref) => (
-  <SwitchPrimitives.Root
-    className={cn(
-      "peer inline-flex h-5 w-9 shrink-0 cursor-pointer items-center rounded-full bg-background shadow-sm transition-[background-color,transform,box-shadow] hover-elevate hover:ring-2 hover:ring-primary/20 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-primary data-[state=checked]:hover:bg-primary/90 data-[state=unchecked]:bg-background",
-      className
-    )}
-    {...props}
-    ref={ref}
-  >
-    <SwitchPrimitives.Thumb
-      className={cn(
-        "pointer-events-none block size-4 rounded-full bg-foreground shadow-lg ring-0 transition-transform data-[state=checked]:bg-primary-foreground data-[state=checked]:translate-x-4 data-[state=unchecked]:translate-x-0"
-      )}
-    />
-  </SwitchPrimitives.Root>
-))
-Switch.displayName = SwitchPrimitives.Root.displayName
+/** Pella Toggle - tokens/components/toggles.json. Native checkbox drives every state in pure CSS; no JS state needed. */
+export const Switch = React.forwardRef<HTMLInputElement, SwitchProps>(function Switch(
+  { label, disabled, ...props },
+  ref,
+) {
+  return (
+    <label data-disabled={disabled || undefined} style={{ display: "inline-flex" }}>
+      <span className="pds-toggle">
+        <input ref={ref} type="checkbox" disabled={disabled} {...props} />
+        <span className="pds-toggle__switch" aria-hidden>
+          <span className="pds-toggle__thumb" />
+        </span>
+        {label ? (
+          <span style={{ display: "inline-flex", alignItems: "center" }}>{label}</span>
+        ) : null}
+      </span>
+    </label>
+  )
+})
 
-export { Switch }
+Switch.displayName = "Pella Switch"

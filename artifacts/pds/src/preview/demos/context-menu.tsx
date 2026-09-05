@@ -21,7 +21,7 @@ export function ContextMenuDemo() {
 
   return (
     <ContextMenu>
-      <ContextMenuTrigger className="flex h-40 max-w-lg items-center justify-center rounded-xl border border-dashed bg-card text-sm text-muted-foreground">
+      <ContextMenuTrigger className="flex h-40 max-w-lg items-center justify-center rounded-xl border border-dashed text-sm text-muted-foreground">
         Right-click this area
       </ContextMenuTrigger>
       <ContextMenuContent className="w-56">

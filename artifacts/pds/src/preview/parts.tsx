@@ -1,4 +1,15 @@
-import type { ReactNode } from 'react';
+import { createContext, useContext, type ReactNode } from 'react';
+
+/** Which background surface a page is currently rendered on. `mode` mirrors the global Light/Dark toggle; `surface` marks the base vs alternate column of the dual pair; `part` distinguishes the top dual pair ('dual') from the full-width single column below it ('single' -- split-layout pages only). */
+export type SurfaceSlot = { mode: 'light' | 'dark'; surface: 'base' | 'alternate'; part: 'dual' | 'single' };
+
+export const SurfaceThemeContext = createContext<SurfaceSlot>({ mode: 'light', surface: 'base', part: 'dual' });
+
+/** Render children only on the base (left) background surface -- for blocks that should appear once, not repeated on the alternate background. */
+export function BaseSurfaceOnly({ children }: { children: ReactNode }) {
+  const slot = useContext(SurfaceThemeContext);
+  return slot.surface === 'base' ? <>{children}</> : null;
+}
 
 export function Row({
   label,

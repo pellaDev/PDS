@@ -1,8 +1,19 @@
 import { Suspense, useEffect, useMemo, useRef, useState } from 'react';
+
+/* The two background surfaces of each theme (hex + label text color) -- imported sets keep this in lockstep with Color roles. */
+type SurfaceBox = { bg: string; text: string };
+
+const SURFACE_SETS: Record<'light' | 'dark', readonly SurfaceBox[]> = { light: LIGHT_SET.boxes, dark: DARK_SET.boxes };
 import { Moon, Sun } from 'lucide-react';
 import { Input } from '../components/ui/input';
 import { Button } from '../components/ui/button';
 import { ScrollArea } from '../components/ui/scroll-area';
+
+/* Background surfaces per theme -- single source of truth is the same data Color roles displays (LIGHT_SET/DARK_SET boxes): light = F9F9F9 + E4E3E3, dark = 1B1B1B + 383838. Every section renders twice, once on each background, so components are always visible against both surfaces of the active theme. */
+import { DARK_SET, LIGHT_SET } from './foundations';
+
+import { SurfaceThemeContext } from './parts';
+
 import {
   ALL_ENTRIES,
   DESIGN_SYSTEM,
@@ -10,6 +21,10 @@ import {
   OVERVIEW_ENTRY,
   type NavGroup,
 } from './registry';
+
+import logoAnimatedUrl from './assets/logoAnimated.svg';
+import { PAGE_INTROS } from "./intros";
+import { PDS_DEFAULTS, PDS_FONTS, PDS_FONT_IDS, setPdsConfig, usePdsConfig } from '../config';
 
 function readHashId(): string {
   const id = new URLSearchParams(window.location.hash.slice(1)).get('page');
@@ -94,63 +109,16 @@ function NavigationItems({
   );
 }
 
-/* ---- primary color override (per theme, persisted in localStorage) ---- */
-
-const DEFAULT_PRIMARY = { light: '219 61% 32.2%', dark: '218 47.7% 61%' };
-type ThemeName = keyof typeof DEFAULT_PRIMARY;
-
-function hexToHsl(hex: string): string {
-  const value = hex.replace('#', '');
-  const r = parseInt(value.slice(0, 2), 16) / 255;
-  const g = parseInt(value.slice(2, 4), 16) / 255;
-  const b = parseInt(value.slice(4, 6), 16) / 255;
-  const max = Math.max(r, g, b);
-  const min = Math.min(r, g, b);
-  const l = (max + min) / 2;
-  if (max === min) return `0 0% ${(l * 100).toFixed(1)}%`;
-  const d = max - min;
-  const s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
-  let h: number;
-  if (max === r) h = ((g - b) / d + (g < b ? 6 : 0)) * 60;
-  else if (max === g) h = ((b - r) / d + 2) * 60;
-  else h = ((r - g) / d + 4) * 60;
-  return `${h.toFixed(1)} ${(s * 100).toFixed(1)}% ${(l * 100).toFixed(1)}%`;
-}
-
-function hslToHex(h: number, s: number, l: number): string {
-  const c = (1 - Math.abs(2 * l - 1)) * s;
-  const x = c * (1 - Math.abs(((h / 60) % 2) - 1));
-  const m = l - c / 2;
-  let rgb: [number, number, number] = [0, 0, 0];
-  if (h < 60) rgb = [c, x, 0];
-  else if (h < 120) rgb = [x, c, 0];
-  else if (h < 180) rgb = [0, c, x];
-  else if (h < 240) rgb = [0, x, c];
-  else if (h < 300) rgb = [x, 0, c];
-  else rgb = [c, 0, x];
-  return '#' + rgb.map((v) => Math.round((v + m) * 255).toString(16).padStart(2, '0')).join('');
-}
-
-function parseTriple(triple: string): [number, number, number] {
-  const parts = triple.split(/s+/);
-  return [parseFloat(parts[0]), parseFloat(parts[1]) / 100, parseFloat(parts[2]) / 100];
-}
-
-function loadStoredPrimary(): typeof DEFAULT_PRIMARY {
-  try {
-    const raw = window.localStorage.getItem('pds-primary');
-    if (!raw) return DEFAULT_PRIMARY;
-    const parsed = JSON.parse(raw);
-    if (typeof parsed?.light === 'string' && typeof parsed?.dark === 'string') return parsed;
-  } catch { /* fall through to defaults */ }
-  return DEFAULT_PRIMARY;
-}
+type ThemeName = 'light' | 'dark';
 
 export function DesignSystemBrowser() {
   const [selectedId, select] = useSelectedId();
   const [query, setQuery] = useState('');
   const [dark, setDark] = useState(false);
-  const [primary, setPrimary] = useState(loadStoredPrimary);
+  /* The three installation options (pds/config): brand colors per theme, default field
+     style, UI typeface. This sidebar is the live "themes menu" a consuming app would build
+     on top of the same API; every change persists and survives reloads. */
+  const cfg = usePdsConfig();
   const mobileNav = useRef<HTMLDetailsElement>(null);
   const mobileNavSummary = useRef<HTMLElement>(null);
   const normalizedQuery = query.trim().toLowerCase();
@@ -168,24 +136,19 @@ export function DesignSystemBrowser() {
     window.localStorage.setItem('pds-theme', dark ? 'dark' : 'light');
   }, [dark]);
 
-  /* Apply the active theme primary override as an inline custom property.
-     Inline --primary wins over both :root and .dark declarations, so each
-     theme keeps its own value (persisted under the pds-primary key). */
-  useEffect(() => {
-    const active = dark ? primary.dark : primary.light;
-    document.documentElement.style.setProperty('--primary', active);
-  }, [dark, primary]);
+  /* Brand + font live on the pds/config store: it writes the inline brand/font custom
+     properties on <html> and persists them, so nothing else to apply here. */
+  const activeTheme: ThemeName = dark ? 'dark' : 'light';
 
-  useEffect(() => {
-    window.localStorage.setItem('pds-primary', JSON.stringify(primary));
-  }, [primary]);
-
-  const setThemePrimary = (theme: ThemeName) => (event: React.ChangeEvent<HTMLInputElement>) => {
-    setPrimary((prev) => ({ ...prev, [theme]: hexToHsl(event.target.value) }));
+  const setBrandFor = (theme: ThemeName, hex: string) => {
+    if (theme === 'dark') setPdsConfig({ darkBrand: hex });
+    else setPdsConfig({ lightBrand: hex });
   };
 
-  const activeTheme: ThemeName = dark ? 'dark' : 'light';
-  const [activeH, activeS, activeL] = parseTriple(primary[activeTheme]);
+  const cycleFont = () => {
+    const next = PDS_FONT_IDS[(PDS_FONT_IDS.indexOf(cfg.font) + 1) % PDS_FONT_IDS.length];
+    setPdsConfig({ font: next });
+  };
 
   const filteredGroups = useMemo(
     () =>
@@ -208,7 +171,21 @@ export function DesignSystemBrowser() {
     group.entries.some((entry) => entry.id === active.id),
   );
   const ActivePage = active.Page;
-  const activeHex = hslToHex(activeH, activeS, activeL);
+  const surfaceMode: 'light' | 'dark' = dark ? 'dark' : 'light';
+  const renderSurface = (slot: { surface: 'base' | 'alternate'; part: 'dual' | 'single' }) => (
+    <SurfaceThemeContext.Provider value={{ mode: surfaceMode, surface: slot.surface, part: slot.part }}>
+      <Suspense
+        fallback={
+          <div role="status" className="rounded-lg border p-4 text-sm text-muted-foreground">
+            Loading preview…
+          </div>
+        }
+      >
+        <ActivePage />
+      </Suspense>
+    </SurfaceThemeContext.Provider>
+  );
+  const activeHex = (activeTheme === 'dark' ? cfg.darkBrand : cfg.lightBrand).toLowerCase();
   const pickerAria = 'Set ' + activeTheme + ' theme primary color';
   const pickerTitle = 'Pick the ' + activeTheme + ' theme primary color';
 
@@ -229,22 +206,24 @@ export function DesignSystemBrowser() {
 
   return (
     <div className="min-h-screen bg-background text-foreground md:grid md:grid-cols-[260px_minmax(0,1fr)]">
-      <aside className="border-b bg-muted/20 md:sticky md:top-0 md:flex md:h-screen md:flex-col md:border-b-0 md:border-r">
+      {/* Sidebar surface = page background (bg-background): keeps both field tones visibly distinct in the search box below. */}
+      <aside className="border-b bg-background md:sticky md:top-0 md:flex md:h-screen md:flex-col md:border-b-0 md:border-r">
         <div className="border-b px-5 py-5">
-          <p className="text-sm font-semibold">{DESIGN_SYSTEM.title}</p>
-          <p className="mt-1 text-xs text-muted-foreground">Browse the system</p>
+          <div className="flex items-center gap-3">
+            {/* Animated brand mark (SMIL) -- the workspace logoAnimated.svg, mirrored into assets. */}
+            <img src={logoAnimatedUrl} alt="" aria-hidden="true" className="h-8 w-auto shrink-0" />
+            <p className="text-sm font-semibold leading-tight">{DESIGN_SYSTEM.title}</p>
+          </div>
+          <p className="mt-2 text-xs text-muted-foreground">Version {DESIGN_SYSTEM.version}</p>
 
           {/* Primary color override for the active theme (light and dark kept separate) */}
           <div className="mt-4">
-            <p className="mb-1 text-[11px] font-medium uppercase tracking-wide text-muted-foreground">
-              {activeTheme} primary
-            </p>
-            <div className="flex items-center justify-between gap-2 rounded-md border bg-background px-2.5 py-1.5 transition-colors hover:bg-muted/50">
+            <div className="flex items-center justify-between gap-2 rounded-md border bg-background px-2.5 py-1.5 transition-colors hover:bg-secondary">
               <label className="flex cursor-pointer items-center" title={pickerTitle}>
                 <input
                   type="color"
                   value={activeHex}
-                  onChange={setThemePrimary(activeTheme)}
+                  onChange={(event) => setBrandFor(activeTheme, event.target.value)}
                   aria-label={pickerAria}
                   className="size-6 cursor-pointer rounded border bg-transparent p-0"
                 />
@@ -252,12 +231,39 @@ export function DesignSystemBrowser() {
               </label>
               <button
                 type="button"
-                onClick={() => setPrimary((prev) => ({ ...prev, [activeTheme]: DEFAULT_PRIMARY[activeTheme] }))}
+                onClick={() => setBrandFor(activeTheme, activeTheme === 'dark' ? PDS_DEFAULTS.darkBrand : PDS_DEFAULTS.lightBrand)}
                 className="text-xs text-muted-foreground underline-offset-2 hover:underline"
               >
                 Reset
               </button>
             </div>
+            <p className="mt-2 text-[11px] leading-relaxed text-muted-foreground">
+              You can select your custom Brand primary color for the current Theme. Check the contrast check in Color roles section for validate contrasts
+            </p>
+
+            {/* Installation options (pds/config): default field style + UI typeface, changeable live. */}
+            <div className="mt-3 flex items-center gap-1 rounded-md border bg-background p-0.5" role="group" aria-label="Default field style">
+              {(['fill', 'outline'] as const).map((style) => (
+                <button
+                  key={style}
+                  type="button"
+                  onClick={() => setPdsConfig({ fieldStyle: style })}
+                  aria-pressed={cfg.fieldStyle === style}
+                  className={'flex-1 rounded px-2 py-1 text-xs capitalize transition-colors ' + (cfg.fieldStyle === style ? 'bg-primary text-primary-foreground' : 'text-muted-foreground hover:text-foreground')}
+                >
+                  {style}
+                </button>
+              ))}
+            </div>
+            <button
+              type="button"
+              onClick={cycleFont}
+              title="Cycle the UI typeface (pds/config font option)"
+              className="mt-2 w-full rounded-md border bg-background px-2.5 py-1.5 text-left text-xs transition-colors hover:bg-secondary"
+            >
+              <span className="text-muted-foreground">Font </span>
+              <span className="font-medium">{PDS_FONTS[cfg.font]}</span>
+            </button>
           </div>
         </div>
         <div className="p-4 pb-2">
@@ -301,8 +307,7 @@ export function DesignSystemBrowser() {
         <div className="mx-auto max-w-5xl">
           <div className="mb-4 flex justify-end">
             <Button
-              variant="outline"
-              size="sm"
+              size="small"
               onClick={() => setDark((value) => !value)}
               aria-label={dark ? 'Switch to light theme' : 'Switch to dark theme'}
             >
@@ -310,7 +315,7 @@ export function DesignSystemBrowser() {
               {dark ? 'Light' : 'Dark'}
             </Button>
           </div>
-          <header className="border-b pb-8">
+          <header>
             {active.id === OVERVIEW_ENTRY.id ? (
               <>
                 <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">
@@ -329,25 +334,51 @@ export function DesignSystemBrowser() {
                 <p className="mt-2 max-w-2xl text-sm text-muted-foreground">
                   {active.description}
                 </p>
+                {(() => {
+                  const intro = PAGE_INTROS[active.id];
+                  if (!intro) return null;
+                  return (
+                    <div className="mt-3 max-w-2xl space-y-2 text-sm leading-relaxed text-muted-foreground">
+                      {intro.split("\n\n").map((paragraph, index) => (
+                        <p key={index}>{paragraph}</p>
+                      ))}
+                    </div>
+                  );
+                })()}
               </>
             )}
           </header>
 
-          <div className="pt-8">
-            <Suspense
-              fallback={
-                <div
-                  role="status"
-                  className="rounded-xl border bg-card p-6 text-sm text-muted-foreground"
+
+          {/* Dual-background layout -- the active page renders once per background surface of the CURRENT theme (LIGHT_SET/DARK_SET boxes). Split-layout pages additionally render a full-width single column below the pair, holding the sections that don't need the alternate background. */}
+          <div className="space-y-5 pt-8">
+            <div className="grid items-start gap-5 lg:grid-cols-2">
+              {SURFACE_SETS[dark ? 'dark' : 'light'].map((box, index) => (
+                <section
+                  key={box.bg}
+                  data-pds-surface={index === 0 ? 'base' : 'alternate'}
+                  aria-label={(index === 0 ? 'Background' : 'Alternative background') + ' surface ' + box.bg}
+                  className={(index === 0 ? 'bg-background' : 'bg-secondary') + " rounded-xl border p-4"}
                 >
-                  Loading preview…
-                </div>
-              }
-            >
-              <ActivePage />
-            </Suspense>
+                  {active.id === 'color-roles' && (
+                    <p className={(index === 0 ? 'text-foreground' : 'text-secondary-foreground') + " mb-3 font-mono text-[10px] uppercase tracking-wide"}>
+                      {index === 0 ? 'Background' : 'Alternative background'} — {box.bg}
+                    </p>
+                  )}
+                  {renderSurface({ surface: index === 0 ? 'base' : 'alternate', part: 'dual' })}
+                </section>
+              ))}
+            </div>
+            {active.splitLayout && (
+              <section
+                aria-label="Single column"
+                className="rounded-xl border bg-background p-4"
+              >
+                {renderSurface({ surface: 'base', part: 'single' })}
+              </section>
+            )}
           </div>
-        </div>
+          </div>
       </main>
     </div>
   );

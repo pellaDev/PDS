@@ -20,7 +20,7 @@ export function MenubarDemo() {
   const [zoom, setZoom] = useState('100');
 
   return (
-    <div className="max-w-lg rounded-xl border bg-card p-6">
+    <div className="max-w-lg p-6">
       <Menubar>
         <MenubarMenu>
           <MenubarTrigger>File</MenubarTrigger>

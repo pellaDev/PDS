@@ -11,6 +11,58 @@
  * runs in the design system's own preview or inside a consuming app/sandbox. */
 @source "./components";
 
+/* Self-hosted typefaces (injected at build time from tokens.json). */
+/* Self-hosted typeface set -- the original system fonts, served from /fonts. */
+
+@font-face {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 300;
+  src: url("/fonts/roboto-latin-300-normal.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 300;
+  src: url("/fonts/inter-latin-300-normal.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  src: url("/fonts/inter-latin-400-normal.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 500;
+  src: url("/fonts/inter-latin-500-normal.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Space Grotesk";
+  font-style: normal;
+  font-weight: 300;
+  src: url("/fonts/space-grotesk-latin-300-normal.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Space Grotesk";
+  font-style: normal;
+  font-weight: 400;
+  src: url("/fonts/space-grotesk-latin-400-normal.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Space Grotesk";
+  font-style: normal;
+  font-weight: 500;
+  src: url("/fonts/space-grotesk-latin-500-normal.woff2") format("woff2");
+}
+
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
@@ -18,6 +70,7 @@
   --color-foreground: hsl(var(--foreground));
   --color-border: hsl(var(--border));
   --color-input: hsl(var(--input));
+  --color-separator: hsl(var(--separator));
   --color-ring: hsl(var(--ring));
 
   --color-card: hsl(var(--card));
@@ -47,6 +100,7 @@
   --color-destructive: hsl(var(--destructive));
   --color-destructive-foreground: hsl(var(--destructive-foreground));
   --color-success: hsl(var(--success));
+  --color-success-foreground: hsl(var(--success-foreground));
   --color-destructive-border: var(--destructive-border);
 
   --color-chart-1: hsl(var(--chart-1));
@@ -54,6 +108,15 @@
   --color-chart-3: hsl(var(--chart-3));
   --color-chart-4: hsl(var(--chart-4));
   --color-chart-5: hsl(var(--chart-5));
+
+  /* Original neutral scale steps (first.json) -- theme-fixed light anchors, see tokens.json. */
+  --color-white: hsl(var(--white));
+  --color-gray-soft: hsl(var(--gray-soft));
+  --color-gray: hsl(var(--gray));
+  --color-black-soft: hsl(var(--black-soft));
+
+  /* Modal backdrop (overlay.scrim) exposed as a color utility: bg-scrim. */
+  --color-scrim: var(--overlay-scrim);
 
   --color-sidebar: hsl(var(--sidebar));
   --color-sidebar-foreground: hsl(var(--sidebar-foreground));
@@ -97,10 +160,100 @@
   --text-9xl: 8rem;
   --text-9xl--line-height: 1;
 
-  --radius-sm: calc(var(--radius) - 4px);
-  --radius-md: calc(var(--radius) - 2px);
+  --radius-sm: 0.25rem;
+  --radius-md: 0.5rem;
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
+}
+
+/* ===================================================================== */
+/* CORE SCALE -- generated from tokens.json, theme-independent.          */
+/* Edit tokens.json to change these values; never this file directly.    */
+:root {
+  /* Typography: the original system is Roboto Light (300) only, tracked +0.25px */
+  --font-weight-base: 300;
+  --letter-spacing-base: 0.25px;
+  --type-h1-size: 6rem; /* 96/112 -- display heading. */
+  --type-h1-lh: 7rem;
+  --type-h2-size: 4rem; /* 64/72 -- section heading. */
+  --type-h2-lh: 4.5rem;
+  --type-h3-size: 2.5rem; /* 40/48 -- sub-heading. */
+  --type-h3-lh: 3rem;
+  --type-subtitle1-size: 2rem; /* 32/40 -- lead text. */
+  --type-subtitle1-lh: 2.5rem;
+  --type-body1-size: 1.5rem; /* 24/32 -- large body. */
+  --type-body1-lh: 2rem;
+  --type-body2-size: 1rem; /* 16/24 -- standard body; also the label type of fields, buttons and dropdowns. */
+  --type-body2-lh: 1.5rem;
+  --type-button-size: 1rem; /* Metrics identical to body2; kept as its own name so button type can be overridden independently, exactly as in the original. */
+  --type-button-lh: 1.5rem;
+  --type-caption-size: 0.75rem; /* 12/16 -- captions and badge labels. */
+  --type-caption-lh: 1rem;
+  --dim-negative: -0.25rem; /* -4px */
+  --dim-zero: 0rem; /* 0px */
+  --dim-sssss: 0.125rem; /* 2px */
+  --dim-ssss: 0.1rem; /* 1.6px -- the original border weight */
+  --dim-sss: 0.25rem; /* 4px */
+  --dim-ss: 0.5rem; /* 8px */
+  --dim-s: 0.75rem; /* 12px -- standard button radius */
+  --dim-mmmm: 1rem; /* 16px -- radio/checkbox size, field label scale step */
+  --dim-mmm: 1.25rem; /* 20px */
+  --dim-mm: 1.5rem; /* 24px -- button minimums / medium padding step */
+  --dim-m: 1.75rem; /* 28px */
+  --dim-llll: 2rem; /* 32px -- toggle track width */
+  --dim-lll: 2.5rem; /* 40px -- button minimums / large padding step */
+  --dim-ll: 3rem; /* 48px */
+  --dim-l: 3.5rem; /* 56px */
+  --dim-xl: 4rem; /* 64px */
+  --dim-xxl: 4.5rem; /* 72px */
+  --dim-xxxl: 6rem; /* 96px */
+  --dim-xxxxl: 7rem; /* 112px */
+  --border-width: 0.1rem; /* original border weight (coreDimensions.ssss) */
+  --space-regular: 0.5rem; /* 8px */
+  --space-regularMini: 0.25rem; /* 4px -- mini button and tooltip spacing */
+  --space-textAndIcon: 0 0.25rem; /* 0 4px */
+  --space-paddingLeft: 0 0 0 0.25rem; /* 0 0 0 4px */
+  --space-ss: 0.25rem 0.5rem; /* 4 8 -- small button padding pair */
+  --space-s: 0.25rem 0.75rem; /* 4 12 -- special/specialized padding pair */
+  --space-mm: 0.25rem 1rem; /* 4 16 -- medium button padding pair */
+  --space-m: 0.75rem 0.75rem; /* 12 12 */
+  --space-ll: 0.5rem 0.75rem; /* 8 12 -- large button padding pair */
+  --space-l: 0.5rem 1.5rem; /* 8 24 */
+  --opacity-disabled: 0.32; /* original global disabled opacity */
+  --overlay-lighter: rgba(255, 255, 255, 0.32); /* White at 32% -- hover state (original 'brand lighter' variants). */
+  --overlay-darker: rgba(0, 0, 0, 0.32); /* Black at 32% -- focus/active states (original 'brand darker' variants). */
+  --overlay-scrim: rgba(0, 0, 0, 0.8); /* Modal backdrop layer (dialog, drawer, sheet, alert-dialog): black at 80%. Theme-independent, like the state washes. */
+  --shadow-button: 0rem 0.25rem 0.5rem rgba(0, 0, 0, 0.08); /* Default button elevation: 0 4 8. */
+  --shadow-menuLeft: -0.25rem 0rem 0.5rem rgba(0, 0, 0, 0.08); /* Left-side menu edge: -4 0 8. */
+  --shadow-menuRight: 0.25rem 0rem 0.5rem rgba(0, 0, 0, 0.08); /* Right-side menu edge: 4 0 8. */
+  --shadow-dropDown: 0rem 0.1rem 0.1rem rgba(0, 0, 0, 0.32); /* Popup/dropdown: 0 1.6 1.6 (32% black) -- the original's own description string. */
+  --shadow-trigger: 0rem 0rem 0rem 0.5rem rgba(0, 0, 0, 0.08); /* Soft 8% halo ring (toggle/trigger focus). */
+  --shadow-dots: inset 0rem 0rem 0.25rem rgba(0, 0, 0, 0.32); /* Inset 32% blur for dot/indicator surfaces. */
+}
+
+/* SHOWCASE STATE OVERLAYS
+ * Soft alpha tints of the live semantic colors, used by the Radix-ported
+ * components (slider, progress, skeleton, alert, navigation-menu, item, toast,
+ * sidebar, input-group, kbd, chart, calendar). The original Pella export has no
+ * role for these states -- no component export covers them and its only opacity
+ * constant is sys.opacity.disabled -- so every strength below is a DOCUMENTED
+ * ASSUMPTION: the exact alpha the showcase already renders, now computed from
+ * the live theme colors (oklab blend, identical to how Tailwind compiles /N
+ * modifiers) so a brand-picker change re-tints each state. No static hex. */
+:root {
+  --state-track-idle: color-mix(in oklab, var(--color-primary) 20%, transparent);        /* slider + progress idle track */
+  --state-skeleton: color-mix(in oklab, var(--color-primary) 10%, transparent);         /* skeleton loading surface */
+  --state-thumb-border: color-mix(in oklab, var(--color-primary) 50%, transparent);     /* slider thumb border */
+  --state-accent-wash: color-mix(in oklab, var(--color-accent) 50%, transparent);       /* nav-menu open bg, item link hover */
+  --state-ring-soft: color-mix(in oklab, var(--color-ring) 50%, transparent);           /* item + calendar focus ring */
+  --state-error-border: color-mix(in oklab, var(--color-destructive) 50%, transparent); /* alert destructive border (light; dark keeps full) */
+  --state-toast-border: color-mix(in oklab, var(--color-muted) 40%, transparent);       /* toast action border in destructive toast */
+  --state-toast-hover: color-mix(in oklab, var(--color-destructive) 30%, transparent);  /* same, on hover */
+  --state-icon-soft: color-mix(in oklab, var(--color-foreground) 50%, transparent);     /* toast close icon at rest */
+  --state-icon-error: color-mix(in oklab, var(--color-destructive-foreground) 60%, transparent); /* toast close in destructive toast */
+  --state-ring-error-soft: color-mix(in oklab, var(--color-destructive-foreground) 40%, transparent); /* toast close focus ring */
+  --state-sidebar-label: color-mix(in oklab, var(--color-sidebar-foreground) 70%, transparent); /* sidebar group label / collapse button */
+  --state-border-soft: color-mix(in oklab, var(--color-border) 50%, transparent);      /* chart tooltip card border + recharts grid line */
 }
 
 /* LIGHT MODE */
@@ -108,30 +261,41 @@
   --button-outline: rgba(0,0,0, .10);
   --badge-outline: rgba(0,0,0, .05);
 
+  /* Theme-split state overlays (see SHOWCASE STATE OVERLAYS above) */
+  --state-kbd-on-tooltip: color-mix(in oklab, var(--color-background) 20%, transparent);  /* kbd inside tooltip content */
+
   /* Automatic computation of border around primary / danger buttons */
   --opaque-button-border-intensity: -8; /* In terms of percentages */
 
-  /* Backgrounds applied on top of other backgrounds when hovered/active */
-  --elevate-1: rgba(0,0,0, .03);
-  --elevate-2: rgba(0,0,0, .08);
+  /* Backgrounds applied on top of other backgrounds when hovered/active.
+   * Canonical state overlays from the original system: hover = lighter variant
+   * (white wash), pressed/selected = darker variant (black wash), both at the
+   * system constant 32% -- see tokens.json -> overlay. */
+  --elevate-1: var(--overlay-lighter);
+  --elevate-2: var(--overlay-darker);
 
   --background: 0 0% 97.6%;
   --foreground: 0 0% 10.6%;
   --border: 0 1.8% 89.2%;
-  --card: 0 0% 100%;
+  --separator: 219 61% 32.2%;
+  --card: 0 0% 97.6%;
   --card-foreground: 0 0% 10.6%;
-  --sidebar: 0 0% 100%;
+  --sidebar: 0 0% 97.6%;
   --sidebar-foreground: 0 0% 22%;
   --sidebar-border: 0 1.8% 89.2%;
   --sidebar-primary: 219 61% 32.2%;
-  --sidebar-primary-foreground: 0 0% 100%;
+  --sidebar-primary-foreground: 0 0% 97.6%;
   --sidebar-accent: 68 85% 50.2%;
   --sidebar-accent-foreground: 0 0% 10.6%;
   --sidebar-ring: 219 61% 32.2%;
-  --popover: 0 0% 100%;
+  --popover: 0 0% 97.6%;
   --popover-foreground: 0 0% 10.6%;
-  --primary: 219 61% 32.2%;
-  --primary-foreground: 0 0% 100%;
+  /* Install-time brand default (tokens.json). configurePds/setPdsConfig override the
+     --pds-brand-light / --pds-brand-dark pair inline on <html>; every --primary consumer
+     (buttons, focus rings, brand lines) then follows live in its own theme. */
+  --pds-brand-light: 219 61% 32.2%;
+  --primary: var(--pds-brand-light);
+  --primary-foreground: 0 0% 97.6%;
   --secondary: 0 1.8% 89.2%;
   --secondary-foreground: 0 0% 10.6%;
   --muted: 0 1.8% 89.2%;
@@ -139,8 +303,9 @@
   --accent: 68 85% 50.2%;
   --accent-foreground: 0 0% 10.6%;
   --destructive: 358 85.9% 52.7%;
-  --destructive-foreground: 0 0% 100%;
+  --destructive-foreground: 0 0% 97.6%;
   --success: 133 61.4% 33.5%;
+  --success-foreground: 0 0% 97.6%;
   --input: 0 1.8% 89.2%;
   --ring: 219 61% 32.2%;
   --chart-1: 219 61% 32.2%;
@@ -148,8 +313,16 @@
   --chart-3: 68 85% 50.2%;
   --chart-4: 358 85.9% 52.7%;
   --chart-5: 0 0% 56.9%;
+  --white: 0 0% 97.6%;
+  --gray-soft: 0 1.8% 89.2%;
+  --gray: 0 0% 56.9%;
+  --black-soft: 0 0% 22%;
 
-  --app-font-sans: Roboto, Arial, sans-serif;
+  /* Install-time font default (tokens.json fontFamily.sans). configurePds/setPdsConfig
+     override --pds-font-sans inline on <html> to switch the UI typeface live; the whole
+     font-sans chain (utilities, body) resolves through it. */
+  --pds-font-sans: Roboto, Arial, sans-serif;
+  --app-font-sans: var(--pds-font-sans);
   --app-font-serif: Georgia, serif;
   --app-font-mono: Menlo, monospace;
   --radius: 0.75rem;
@@ -179,14 +352,18 @@
   --button-outline: rgba(255,255,255, .10);
   --badge-outline: rgba(255,255,255, .05);
 
+  /* Theme-split state overlays (see SHOWCASE STATE OVERLAYS above) */
+  --state-kbd-on-tooltip: color-mix(in oklab, var(--color-background) 10%, transparent);  /* kbd inside tooltip content */
+
   --opaque-button-border-intensity: 9;  /* In terms of percentages */
 
-  --elevate-1: rgba(255,255,255, .04);
-  --elevate-2: rgba(255,255,255, .09);
+  --elevate-1: var(--overlay-lighter);
+  --elevate-2: var(--overlay-darker);
 
   --background: 0 0% 10.6%;
   --foreground: 0 0% 97.6%;
   --border: 0 0% 22%;
+  --separator: 218 47.7% 61%;
   --card: 0 0% 22%;
   --card-foreground: 0 0% 97.6%;
   --sidebar: 0 0% 10.6%;
@@ -199,7 +376,8 @@
   --sidebar-ring: 68 85% 50.2%;
   --popover: 0 0% 22%;
   --popover-foreground: 0 0% 97.6%;
-  --primary: 218 47.7% 61%;
+  --pds-brand-dark: 218 47.7% 61%;
+  --primary: var(--pds-brand-dark);
   --primary-foreground: 0 0% 10.6%;
   --secondary: 0 0% 22%;
   --secondary-foreground: 0 0% 97.6%;
@@ -208,15 +386,20 @@
   --accent: 68 85% 50.2%;
   --accent-foreground: 0 0% 10.6%;
   --destructive: 358 85.9% 52.7%;
-  --destructive-foreground: 0 0% 100%;
+  --destructive-foreground: 0 0% 97.6%;
   --success: 130 39.6% 53.9%;
+  --success-foreground: 0 0% 10.6%;
   --input: 0 0% 22%;
   --ring: 68 85% 50.2%;
   --chart-1: 218 47.7% 61%;
   --chart-2: 130 39.6% 53.9%;
   --chart-3: 68 85% 50.2%;
   --chart-4: 358 100% 71%;
-  --chart-5: 0 0% 74.1%;
+  --chart-5: 0 0% 56.9%;
+  --white: 0 0% 97.6%;
+  --gray-soft: 0 1.8% 89.2%;
+  --gray: 0 0% 56.9%;
+  --black-soft: 0 0% 22%;
 
   --sidebar-primary-border: hsl(var(--sidebar-primary));
   --sidebar-primary-border: hsl(from hsl(var(--sidebar-primary)) h s calc(l + var(--opaque-button-border-intensity)) / alpha);
@@ -235,6 +418,22 @@
 
   --card-border: hsl(var(--card));
   --popover-border: hsl(var(--popover));
+}
+
+/* BRAND-LINES BINDING
+ * In both exported themes the separator value equals the theme primary (light
+ * 219 61% 32.2%, dark 218 47.7% 61%), so the separator is semantically the brand
+ * line. The export defines --border as a static neutral gray (light #E4E3E3,
+ * dark 0 0% 22%); the showcase extends the same language to it: every structural
+ * line -- container borders, sidebar dividers, separators -- tracks the live
+ * brand primary set by the picker, so all lines shift together with the brand.
+ * The aliases point at HSL triples because utilities compile to
+ * hsl(var(--separator)) / hsl(var(--border)), not resolved colors. Must stay
+ * after both theme blocks above so they win in light and dark alike. */
+:root,
+.dark {
+  --separator: var(--primary);
+  --border: var(--separator);
 }
 
 @layer base {

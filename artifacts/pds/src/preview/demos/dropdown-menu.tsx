@@ -22,10 +22,10 @@ export function DropdownMenuDemo() {
   const [theme, setTheme] = useState('system');
 
   return (
-    <div className="rounded-xl border bg-card p-6">
+    <div className="p-6">
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <Button variant="outline">Open menu</Button>
+          <Button size="small">Open menu</Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent className="w-56">
           <DropdownMenuLabel>Workspace</DropdownMenuLabel>

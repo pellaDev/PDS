@@ -1,0 +1,39 @@
+/* Pella Tooltip — state layer derived from tokens/components/tooltips.json (brand family, 3 variants). */
+.pds-tooltip {
+  position: relative;
+  display: inline-flex;
+}
+.pds-tooltip__bubble {
+  --_fill: var(--color-primary); /* default.container = custom.light to live brand (light anchor #204384) */
+  visibility: hidden;
+  opacity: 0;
+  position: absolute;
+  bottom: calc(100% + var(--dim-sss)); /* offset sss=4px, no token in export - documented interpretation */
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 60;
+  pointer-events: none;
+  white-space: nowrap;
+  background-color: var(--_fill);
+  color: var(--color-gray-soft); /* default.onContainer = graySoft */
+  font-family: "Roboto", "Arial", sans-serif;
+  font-weight: 300;
+  font-size: v12px;
+  line-height: 16px;
+  padding: var(--dim-sss) var(--dim-ss); /* labelSpacing ref dangling in export - sss/ss interpretation, documented */
+  border-radius: var(--dim-sss); /* borderRadius sss = 4px per export */
+  transition: opacity 120ms ease;
+}
+.pds-tooltip__bubble[data-variant="alert"] {
+  --_fill: #cfec14; /* alert.container = semantic.alert to sys.color.yellow (traffic-light step, theme-fixed) */
+  color: var(--color-black-soft); /* alert.onContainer = blackSoft */
+}
+.pds-tooltip__bubble[data-variant="error"] {
+  --_fill: #ee1f25; /* error.container = semantic.error to sys.color.red (traffic-light step, theme-fixed) */
+  color: var(--color-gray-soft); /* error.onContainer = graySoft per export (low contrast is faithful to the token set) */
+}
+.pds-tooltip:hover .pds-tooltip__bubble,
+.pds-tooltip:focus-within .pds-tooltip__bubble {
+  visibility: visible;
+  opacity: 1;
+}

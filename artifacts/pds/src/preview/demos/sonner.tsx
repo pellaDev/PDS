@@ -5,11 +5,11 @@ import { Row } from '../parts';
 
 export function SonnerDemo() {
   return (
-    <div className="rounded-xl border bg-card p-6">
+    <div className="p-6">
       <Row label="Notifications">
         <Button onClick={() => toast.success('Project published')}>Success</Button>
         <Button
-          variant="outline"
+          variant="link"
           onClick={() =>
             toast('Invitation sent', {
               description: 'alex@example.com can now join the workspace.',

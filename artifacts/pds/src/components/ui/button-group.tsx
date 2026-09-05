@@ -49,7 +49,9 @@ function ButtonGroupText({
   return (
     <Comp
       className={cn(
-        "bg-muted shadow-xs flex items-center gap-2 rounded-md border px-4 text-sm font-medium [&_svg:not([class*='size-'])]:size-4 [&_svg]:pointer-events-none",
+        // attached label cell: fill-tone container (graySoft), flat (field-fill canon),
+        // Roboto 300 @ mmmm per pella.ref.typography.button (typographySet refs)
+        "bg-secondary flex items-center gap-2 rounded-md px-4 font-light [font-size:var(--type-body2-size)] [line-height:var(--type-body2-lh)] [&_svg:not([class*='size-'])]:size-4 [&_svg]:pointer-events-none",
         className
       )}
       {...props}
@@ -67,7 +69,8 @@ function ButtonGroupSeparator({
       data-slot="button-group-separator"
       orientation={orientation}
       className={cn(
-        "bg-input relative !m-0 self-stretch data-[orientation=vertical]:h-auto",
+        // separator color follows Separator's own token (--color-separator)
+        "bg-separator relative !m-0 self-stretch data-[orientation=vertical]:h-auto",
         className
       )}
       {...props}

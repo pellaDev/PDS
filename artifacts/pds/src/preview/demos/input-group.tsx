@@ -12,7 +12,7 @@ import { Stack } from '../parts';
 
 export function InputGroupDemo() {
   return (
-    <div className="max-w-lg space-y-6 rounded-xl border bg-card p-6">
+    <div className="max-w-lg space-y-6 p-6">
       <Stack label="Inline addons">
         <InputGroup>
           <InputGroupAddon>

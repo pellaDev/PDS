@@ -1,0 +1,38 @@
+/* Pella Toggle button - state layer. No composition export exists for this control
+   (tokens/components/toggles.json covers only the switch); values below are documented
+   assumptions on the DS canon: typography = pella.ref.typography.button (Roboto 300 @ mmmm
+   = 16px, tokens/typographySet.json), fill container = graySoft, brand washes +32%/-32%
+   from the live --primary at runtime (same recipe as field.css / switch.css), disabled =
+   sys.opacity.disabled. */
+.pds-toggle-btn {
+  /* custom.light lighter (+32%) / darker (-32%) - runtime canon, tracks the brand picker */
+  --_wash-lighter: color-mix(in srgb, var(--color-primary) calc(100% - 32%), #fff);
+  --_wash-darker: color-mix(in srgb, var(--color-primary) calc(100% - 32%), #000);
+  font-family: "Roboto", "Arial", sans-serif; /* typographySet ref (export) */
+  font-weight: 300;                          /* pella.ref.typography.button = Roboto 300 (export) */
+  font-size: var(--type-body2-size);         /* button typography size ref mmmm = 16px (export) */
+  line-height: var(--type-body2-lh);
+  color: var(--color-foreground);
+}
+.pds-toggle-btn:disabled { opacity: var(--opacity-disabled); cursor: not-allowed; }
+
+/* ghost variant: transparent at rest, graySoft wash on hover, pressed = graySoft + brand */
+.pds-toggle-btn--ghost:hover:not(:disabled) { background-color: var(--color-secondary); }
+.pds-toggle-btn--ghost[data-state=on]:not(:disabled) {
+  background-color: var(--color-secondary); /* fill tone container = graySoft (fields.json canon) */
+  color: var(--color-primary);             /* brand icon/label as the "pressed" affordance */
+}
+
+/* outline variant: brand border always on, ssss weight (field-outline canon) */
+.pds-toggle-btn--outline {
+  border-width: var(--dim-ssss); /* coreDimensions.ssss = 1.6px, "always present in this family" */
+  border-style: solid;
+  border-color: var(--color-primary);
+  background-color: var(--color-background);
+}
+.pds-toggle-btn--outline:hover:not(:disabled) { border-color: var(--_wash-lighter); }
+.pds-toggle-btn--outline[data-state=on]:not(:disabled) {
+  border-color: var(--_wash-darker);
+  background-color: var(--color-secondary);
+  color: var(--color-primary);
+}

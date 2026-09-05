@@ -8,7 +8,7 @@ import { Stack } from '../parts';
 
 export function InputOtpDemo() {
   return (
-    <div className="max-w-sm rounded-xl border bg-card p-6">
+    <div className="max-w-sm p-6">
       <Stack label="Six digit code">
         <InputOTP maxLength={6} defaultValue="123">
           <InputOTPGroup>

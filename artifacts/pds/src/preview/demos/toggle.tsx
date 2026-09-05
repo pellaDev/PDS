@@ -4,7 +4,7 @@ import { Row } from '../parts';
 
 export function ToggleDemo() {
   return (
-    <div className="space-y-6 rounded-xl border bg-card p-6">
+    <div className="space-y-6 p-6">
       <Row label="Variants">
         <Toggle aria-label="Toggle bold" defaultPressed>
           <Bold />

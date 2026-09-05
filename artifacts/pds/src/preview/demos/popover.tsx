@@ -1,6 +1,5 @@
 import { Button } from '../../components/ui/button';
-import { Input } from '../../components/ui/input';
-import { Label } from '../../components/ui/label';
+import { Field } from '../../components/ui/field';
 import {
   Popover,
   PopoverContent,
@@ -9,10 +8,10 @@ import {
 
 export function PopoverDemo() {
   return (
-    <div className="rounded-xl border bg-card p-6">
+    <div className="p-6">
       <Popover>
         <PopoverTrigger asChild>
-          <Button variant="outline">Set dimensions</Button>
+          <Button size="small">Set dimensions</Button>
         </PopoverTrigger>
         <PopoverContent className="space-y-3">
           <div>
@@ -21,10 +20,7 @@ export function PopoverDemo() {
               Set a fixed width for the panel.
             </p>
           </div>
-          <div className="grid grid-cols-3 items-center gap-3">
-            <Label htmlFor="popover-width">Width</Label>
-            <Input id="popover-width" defaultValue="320" className="col-span-2" />
-          </div>
+          <Field size="sm" tone="outline" label="Width" defaultValue="320" />
         </PopoverContent>
       </Popover>
     </div>

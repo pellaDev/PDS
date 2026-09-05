@@ -12,6 +12,7 @@
  *                             platform, so web + mobile share one source.
  */
 import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
+import { groupEntries, hexToRgba, boxShadowCss, buildCoreTokens, buildFontFaces } from "./core-tokens.mjs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -160,7 +161,11 @@ function buildCss(tokens) {
     resolveValue(tokens.typography.fontFamily.mono, tokens),
   );
   replacements.__DS_RADIUS__ = resolveValue(tokens.radius.base, tokens);
+  replacements.__DS_RADIUS_SM__ = resolveValue(tokens.radius.sm, tokens);
+  replacements.__DS_RADIUS_MD__ = resolveValue(tokens.radius.md, tokens);
   replacements.__DS_SPACING__ = resolveValue(tokens.spacing.base, tokens);
+  replacements.__DS_CORE_TOKENS__ = buildCoreTokens(tokens);
+  replacements.__DS_FONT_FACES__ = buildFontFaces(tokens);
 
   for (const [token, value] of Object.entries(replacements)) {
     css = css.split(token).join(value);
@@ -186,8 +191,26 @@ function buildTs(tokens) {
       serif: resolveValue(tokens.typography.fontFamily.serif, tokens),
       mono: resolveValue(tokens.typography.fontFamily.mono, tokens),
     },
+    fontOptions: Object.fromEntries(
+      groupEntries(tokens.typography.fontOptions || {}).map(([name, node]) => [name, resolveValue(node, tokens)]),
+    ),
     radius: resolveValue(tokens.radius.base, tokens),
+    radiusSm: resolveValue(tokens.radius.sm, tokens),
+    radiusMd: resolveValue(tokens.radius.md, tokens),
     spacing: resolveValue(tokens.spacing.base, tokens),
+    typographyStyles: Object.fromEntries(groupEntries(tokens.typography.styles).map(([name, node]) => [name, resolveValue(node, tokens)])),
+    fontSizes: Object.fromEntries(groupEntries(tokens.typography.fontSizes || {}).map(([name, node]) => [name, resolveValue(node, tokens)])),
+    lineHeights: Object.fromEntries(groupEntries(tokens.typography.lineHeights || {}).map(([name, node]) => [name, resolveValue(node, tokens)])),
+    dimensions: Object.fromEntries(groupEntries(tokens.dimensions).map(([name, node]) => [name, resolveValue(node, tokens)])),
+    spacingPresets: Object.fromEntries(groupEntries(tokens.spacing.presets || {}).map(([name, node]) => [name, resolveValue(node, tokens)])),
+    borderWidth: resolveValue(tokens.border.width, tokens),
+    opacityDisabled: resolveValue(tokens.opacity.disabled, tokens),
+    overlays: {
+      lighter: hexToRgba(resolveValue(tokens.overlay.lighter, tokens)),
+      darker: hexToRgba(resolveValue(tokens.overlay.darker, tokens)),
+    scrim: hexToRgba(resolveValue(tokens.overlay.scrim, tokens)),
+    },
+    shadows: Object.fromEntries(groupEntries(tokens.shadows).map(([name, node]) => [name, boxShadowCss(node.$value)])),
   };
   return `/* GENERATED FROM tokens.json -- DO NOT EDIT. Run scripts/build-tokens.mjs. */
 // Portable design tokens (colors as hex). Web consumes the theme via

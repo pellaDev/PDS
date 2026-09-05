@@ -7,7 +7,7 @@ import {
 
 export function HoverCardDemo() {
   return (
-    <div className="rounded-xl border bg-card p-6">
+    <div className="p-6">
       <HoverCard>
         <HoverCardTrigger asChild>
           <a

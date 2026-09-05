@@ -7,7 +7,7 @@ export function CalendarDemo() {
   );
 
   return (
-    <div className="w-fit rounded-xl border bg-card p-4">
+    <div className="w-fit p-4">
       <Calendar
         mode="single"
         defaultMonth={new Date(2026, 6, 1)}

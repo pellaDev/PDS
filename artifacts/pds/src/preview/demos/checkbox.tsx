@@ -1,24 +1,20 @@
 import { Checkbox } from '../../components/ui/checkbox';
-import { Label } from '../../components/ui/label';
-import { Stack } from '../parts';
+import { BaseSurfaceOnly, Row } from '../parts';
 
 export function CheckboxDemo() {
   return (
-    <div className="max-w-sm rounded-xl border bg-card p-6">
-      <Stack label="States">
-        <div className="flex items-center gap-2">
-          <Checkbox id="checkbox-terms" defaultChecked />
-          <Label htmlFor="checkbox-terms">Accept terms</Label>
-        </div>
-        <div className="flex items-center gap-2">
-          <Checkbox id="checkbox-updates" />
-          <Label htmlFor="checkbox-updates">Product updates</Label>
-        </div>
-        <div className="flex items-center gap-2">
-          <Checkbox id="checkbox-disabled" disabled />
-          <Label htmlFor="checkbox-disabled">Unavailable</Label>
-        </div>
-      </Stack>
+    <div className="space-y-6 p-6 text-card-foreground">
+      <BaseSurfaceOnly>
+        <p className="text-sm text-muted-foreground">
+          Disabled: the whole row (control + label) drops to opacity 0.32 per sys.opacity.disabled; checked + disabled keeps the brand fill under the same fade.
+        </p>
+      </BaseSurfaceOnly>
+      <Row label="States">
+        <Checkbox defaultChecked label="Checked" />
+        <Checkbox label="Unchecked" />
+        <Checkbox disabled defaultChecked label="Checked, disabled" />
+        <Checkbox disabled label="Unchecked, disabled" />
+      </Row>
     </div>
   );
 }

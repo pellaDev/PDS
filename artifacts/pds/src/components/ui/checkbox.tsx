@@ -1,27 +1,41 @@
-import * as React from "react"
-import * as CheckboxPrimitive from "@radix-ui/react-checkbox"
-import { cn } from "../../lib/utils"
-import { Icon } from "./icon"
+import * as React from "react";
+import { cn } from "../../lib/utils";
+import "./checkbox.css";
 
-const Checkbox = React.forwardRef<
-  React.ElementRef<typeof CheckboxPrimitive.Root>,
-  React.ComponentPropsWithoutRef<typeof CheckboxPrimitive.Root>
->(({ className, ...props }, ref) => (
-  <CheckboxPrimitive.Root
-    ref={ref}
-    className={cn(
-       "grid place-content-center peer size-4 shrink-0 rounded-sm bg-background text-muted-foreground transition-[background-color,transform,box-shadow] hover-elevate active:scale-95 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground data-[state=checked]:hover:bg-primary/90 data-[state=checked]:active:bg-primary/80",
-      className
-    )}
-    {...props}
-  >
-    <CheckboxPrimitive.Indicator
-      className={cn("grid place-content-center text-current")}
+export interface CheckboxProps
+  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "size"> {
+  /** Visible text next to the control — every state in the export carries a label child. */
+  label: string;
+}
+
+/**
+ * Pella checkbox control — ported from tokens/components/checkboxes.json (brand family).
+ * The check glyph is inline SVG colored graySoft per icon.onContainer in the export.
+ */
+const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
+  ({ className, label, disabled, ...props }, ref) => (
+    <label
+      className={cn("pds-checkbox", className)}
+      {...(disabled ? { "data-disabled": true } : {})}
     >
-       <Icon name="check" className="size-3" strokeWidth={3} />
-    </CheckboxPrimitive.Indicator>
-  </CheckboxPrimitive.Root>
-))
-Checkbox.displayName = CheckboxPrimitive.Root.displayName
+      <input type="checkbox" ref={ref} disabled={disabled} {...props} />
+      <span className="pds-checkbox__icon" aria-hidden>
+        <svg viewBox="0 0 16 16" width="16" height="16">
+          <path
+            d="M3.4 8.6l3 3L12.6 5"
+            fill="none"
+            stroke="currentColor" /* icon.onContainer graySoft — carried by the .pds-checkbox__icon color token */
+            strokeWidth="1.9"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
+      </span>
+      <span>{label}</span>
+    </label>
+  ),
+);
 
-export { Checkbox }
+Checkbox.displayName = "Checkbox";
+
+export { Checkbox };

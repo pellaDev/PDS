@@ -1,0 +1,58 @@
+/* Pella Select - state layer derived from tokens/components/dropdowns.json (brand family, 6 states).
+   container.$value = fill + spacing sys.spacing.s ("4-12" pair to padding-block sss / inline s); NO borderRadius and
+   NO borderWidth leaves exist in the export, so a square-cornered borderless filled box is faithful. Label typography
+   ref pella.comp.typography.dropDownLabel is dangling (undefined everywhere in tokens/) - body2 fallback documented. */
+.pds-select {
+  --_wash-lighter: color-mix(in srgb, var(--color-primary) calc(100% - 32%), #fff); /* custom.light lighter (+32%) runtime canon */
+  --_wash-darker: color-mix(in srgb, var(--color-primary) calc(100% - 32%), #000); /* custom.light darker (-32%) runtime canon */
+  position: relative;
+  display: inline-block;
+}
+.pds-select select {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 100%;
+  margin: 0;
+  box-sizing: border-box;
+  background-color: var(--color-gray-soft); /* default.container = graySoft (theme-fixed scale step) */
+  color: var(--color-black-soft); /* default.onContainer = blackSoft */
+  font-family: "Roboto", "Arial", sans-serif;
+  font-weight: 300;
+  font-size: var(--type-body2-size);
+  line-height: var(--type-body2-lh);
+  padding: var(--dim-sss) calc(var(--dim-s) + var(--dim-mmmm)) var(--dim-sss) var(--dim-s); /* s = "4-12" pair; right room for chevron */
+  border-radius: 0; /* no borderRadius leaf in export - faithful square corners */
+  cursor: pointer;
+}
+/* hover to .lighter wash, label flips to graySoft per palette (brand-family fill means light text) */
+.pds-select select:hover:not(:disabled),
+.pds-select select:focus-visible:not(:disabled):not([data-error]),
+.pds-select select:active:not(:disabled) {
+  background-color: var(--_wash-lighter); /* hover.container = custom.light lighter */
+}
+/* focus/active deepen to .darker (focus and active share the darker fill in the export; no ring token exists for this family) */
+.pds-select select:focus-visible:not(:disabled),
+.pds-select select:active:not(:disabled) {
+  background-color: var(--_wash-darker); /* focus/active.container = custom.light darker */
+}
+/* disabled to container blackSoft + label gray (explicit export values) plus the system row opacity, matching every
+   other non-button control in this design system (P6 coherence). */
+.pds-select select:disabled {
+  background-color: var(--color-black-soft); /* disabled.container = blackSoft per export */
+  color: var(--color-gray); /* disabled.onContainer = gray */
+  opacity: var(--opacity-disabled);
+  cursor: not-allowed;
+}
+/* error to full red fill with light label, exactly as the token family defines (documented in deviation report) */
+.pds-select select[data-error] {
+  background-color: #ee1f25; /* error.container = semantic.error - sys.color.red */
+  color: var(--color-gray-soft); /* error.onContainer = graySoft per export */
+}
+/* chevron affordance - no icon leaf exists in the export; minimal currentColor glyph, documented addition */
+.pds-select__icon {
+  position: absolute;
+  right: var(--dim-s);
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+}

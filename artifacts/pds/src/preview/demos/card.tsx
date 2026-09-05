@@ -28,7 +28,7 @@ export function CardDemo() {
         </div>
       </CardContent>
       <CardFooter>
-        <Button variant="outline">View report</Button>
+        <Button size="small">View report</Button>
       </CardFooter>
     </Card>
   );

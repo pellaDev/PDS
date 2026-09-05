@@ -6,7 +6,7 @@ import { Row } from '../parts';
 
 export function ToastDemo() {
   return (
-    <div className="rounded-xl border bg-card p-6">
+    <div className="p-6">
       <Row label="Notifications">
         <Button
           onClick={() =>

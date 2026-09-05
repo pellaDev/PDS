@@ -11,6 +11,9 @@
  * runs in the design system's own preview or inside a consuming app/sandbox. */
 @source "./components";
 
+/* Self-hosted typefaces (injected at build time from tokens.json). */
+__DS_FONT_FACES__
+
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
@@ -18,6 +21,7 @@
   --color-foreground: hsl(var(--foreground));
   --color-border: hsl(var(--border));
   --color-input: hsl(var(--input));
+  --color-separator: hsl(var(--separator));
   --color-ring: hsl(var(--ring));
 
   --color-card: hsl(var(--card));
@@ -47,6 +51,7 @@
   --color-destructive: hsl(var(--destructive));
   --color-destructive-foreground: hsl(var(--destructive-foreground));
   --color-success: hsl(var(--success));
+  --color-success-foreground: hsl(var(--success-foreground));
   --color-destructive-border: var(--destructive-border);
 
   --color-chart-1: hsl(var(--chart-1));
@@ -54,6 +59,15 @@
   --color-chart-3: hsl(var(--chart-3));
   --color-chart-4: hsl(var(--chart-4));
   --color-chart-5: hsl(var(--chart-5));
+
+  /* Original neutral scale steps (first.json) -- theme-fixed light anchors, see tokens.json. */
+  --color-white: hsl(var(--white));
+  --color-gray-soft: hsl(var(--gray-soft));
+  --color-gray: hsl(var(--gray));
+  --color-black-soft: hsl(var(--black-soft));
+
+  /* Modal backdrop (overlay.scrim) exposed as a color utility: bg-scrim. */
+  --color-scrim: var(--overlay-scrim);
 
   --color-sidebar: hsl(var(--sidebar));
   --color-sidebar-foreground: hsl(var(--sidebar-foreground));
@@ -97,10 +111,37 @@
   --text-9xl: 8rem;
   --text-9xl--line-height: 1;
 
-  --radius-sm: calc(var(--radius) - 4px);
-  --radius-md: calc(var(--radius) - 2px);
+  --radius-sm: __DS_RADIUS_SM__;
+  --radius-md: __DS_RADIUS_MD__;
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
+}
+
+__DS_CORE_TOKENS__
+
+/* SHOWCASE STATE OVERLAYS
+ * Soft alpha tints of the live semantic colors, used by the Radix-ported
+ * components (slider, progress, skeleton, alert, navigation-menu, item, toast,
+ * sidebar, input-group, kbd, chart, calendar). The original Pella export has no
+ * role for these states -- no component export covers them and its only opacity
+ * constant is sys.opacity.disabled -- so every strength below is a DOCUMENTED
+ * ASSUMPTION: the exact alpha the showcase already renders, now computed from
+ * the live theme colors (oklab blend, identical to how Tailwind compiles /N
+ * modifiers) so a brand-picker change re-tints each state. No static hex. */
+:root {
+  --state-track-idle: color-mix(in oklab, var(--color-primary) 20%, transparent);        /* slider + progress idle track */
+  --state-skeleton: color-mix(in oklab, var(--color-primary) 10%, transparent);         /* skeleton loading surface */
+  --state-thumb-border: color-mix(in oklab, var(--color-primary) 50%, transparent);     /* slider thumb border */
+  --state-accent-wash: color-mix(in oklab, var(--color-accent) 50%, transparent);       /* nav-menu open bg, item link hover */
+  --state-ring-soft: color-mix(in oklab, var(--color-ring) 50%, transparent);           /* item + calendar focus ring */
+  --state-error-border: color-mix(in oklab, var(--color-destructive) 50%, transparent); /* alert destructive border (light; dark keeps full) */
+  --state-toast-border: color-mix(in oklab, var(--color-muted) 40%, transparent);       /* toast action border in destructive toast */
+  --state-toast-hover: color-mix(in oklab, var(--color-destructive) 30%, transparent);  /* same, on hover */
+  --state-icon-soft: color-mix(in oklab, var(--color-foreground) 50%, transparent);     /* toast close icon at rest */
+  --state-icon-error: color-mix(in oklab, var(--color-destructive-foreground) 60%, transparent); /* toast close in destructive toast */
+  --state-ring-error-soft: color-mix(in oklab, var(--color-destructive-foreground) 40%, transparent); /* toast close focus ring */
+  --state-sidebar-label: color-mix(in oklab, var(--color-sidebar-foreground) 70%, transparent); /* sidebar group label / collapse button */
+  --state-border-soft: color-mix(in oklab, var(--color-border) 50%, transparent);      /* chart tooltip card border + recharts grid line */
 }
 
 /* LIGHT MODE */
@@ -108,16 +149,23 @@
   --button-outline: rgba(0,0,0, .10);
   --badge-outline: rgba(0,0,0, .05);
 
+  /* Theme-split state overlays (see SHOWCASE STATE OVERLAYS above) */
+  --state-kbd-on-tooltip: color-mix(in oklab, var(--color-background) 20%, transparent);  /* kbd inside tooltip content */
+
   /* Automatic computation of border around primary / danger buttons */
   --opaque-button-border-intensity: -8; /* In terms of percentages */
 
-  /* Backgrounds applied on top of other backgrounds when hovered/active */
-  --elevate-1: rgba(0,0,0, .03);
-  --elevate-2: rgba(0,0,0, .08);
+  /* Backgrounds applied on top of other backgrounds when hovered/active.
+   * Canonical state overlays from the original system: hover = lighter variant
+   * (white wash), pressed/selected = darker variant (black wash), both at the
+   * system constant 32% -- see tokens.json -> overlay. */
+  --elevate-1: var(--overlay-lighter);
+  --elevate-2: var(--overlay-darker);
 
   --background: __DS_LIGHT_BACKGROUND__;
   --foreground: __DS_LIGHT_FOREGROUND__;
   --border: __DS_LIGHT_BORDER__;
+  --separator: __DS_LIGHT_SEPARATOR__;
   --card: __DS_LIGHT_CARD__;
   --card-foreground: __DS_LIGHT_CARDFOREGROUND__;
   --sidebar: __DS_LIGHT_SIDEBAR__;
@@ -130,7 +178,11 @@
   --sidebar-ring: __DS_LIGHT_SIDEBARRING__;
   --popover: __DS_LIGHT_POPOVER__;
   --popover-foreground: __DS_LIGHT_POPOVERFOREGROUND__;
-  --primary: __DS_LIGHT_PRIMARY__;
+  /* Install-time brand default (tokens.json). configurePds/setPdsConfig override the
+     --pds-brand-light / --pds-brand-dark pair inline on <html>; every --primary consumer
+     (buttons, focus rings, brand lines) then follows live in its own theme. */
+  --pds-brand-light: __DS_LIGHT_PRIMARY__;
+  --primary: var(--pds-brand-light);
   --primary-foreground: __DS_LIGHT_PRIMARYFOREGROUND__;
   --secondary: __DS_LIGHT_SECONDARY__;
   --secondary-foreground: __DS_LIGHT_SECONDARYFOREGROUND__;
@@ -141,6 +193,7 @@
   --destructive: __DS_LIGHT_DESTRUCTIVE__;
   --destructive-foreground: __DS_LIGHT_DESTRUCTIVEFOREGROUND__;
   --success: __DS_LIGHT_SUCCESS__;
+  --success-foreground: __DS_LIGHT_SUCCESSFOREGROUND__;
   --input: __DS_LIGHT_INPUT__;
   --ring: __DS_LIGHT_RING__;
   --chart-1: __DS_LIGHT_CHART1__;
@@ -148,8 +201,16 @@
   --chart-3: __DS_LIGHT_CHART3__;
   --chart-4: __DS_LIGHT_CHART4__;
   --chart-5: __DS_LIGHT_CHART5__;
+  --white: __DS_LIGHT_WHITE__;
+  --gray-soft: __DS_LIGHT_GRAYSOFT__;
+  --gray: __DS_LIGHT_GRAY__;
+  --black-soft: __DS_LIGHT_BLACKSOFT__;
 
-  --app-font-sans: __DS_FONT_SANS__;
+  /* Install-time font default (tokens.json fontFamily.sans). configurePds/setPdsConfig
+     override --pds-font-sans inline on <html> to switch the UI typeface live; the whole
+     font-sans chain (utilities, body) resolves through it. */
+  --pds-font-sans: __DS_FONT_SANS__;
+  --app-font-sans: var(--pds-font-sans);
   --app-font-serif: __DS_FONT_SERIF__;
   --app-font-mono: __DS_FONT_MONO__;
   --radius: __DS_RADIUS__;
@@ -179,14 +240,18 @@
   --button-outline: rgba(255,255,255, .10);
   --badge-outline: rgba(255,255,255, .05);
 
+  /* Theme-split state overlays (see SHOWCASE STATE OVERLAYS above) */
+  --state-kbd-on-tooltip: color-mix(in oklab, var(--color-background) 10%, transparent);  /* kbd inside tooltip content */
+
   --opaque-button-border-intensity: 9;  /* In terms of percentages */
 
-  --elevate-1: rgba(255,255,255, .04);
-  --elevate-2: rgba(255,255,255, .09);
+  --elevate-1: var(--overlay-lighter);
+  --elevate-2: var(--overlay-darker);
 
   --background: __DS_DARK_BACKGROUND__;
   --foreground: __DS_DARK_FOREGROUND__;
   --border: __DS_DARK_BORDER__;
+  --separator: __DS_DARK_SEPARATOR__;
   --card: __DS_DARK_CARD__;
   --card-foreground: __DS_DARK_CARDFOREGROUND__;
   --sidebar: __DS_DARK_SIDEBAR__;
@@ -199,7 +264,8 @@
   --sidebar-ring: __DS_DARK_SIDEBARRING__;
   --popover: __DS_DARK_POPOVER__;
   --popover-foreground: __DS_DARK_POPOVERFOREGROUND__;
-  --primary: __DS_DARK_PRIMARY__;
+  --pds-brand-dark: __DS_DARK_PRIMARY__;
+  --primary: var(--pds-brand-dark);
   --primary-foreground: __DS_DARK_PRIMARYFOREGROUND__;
   --secondary: __DS_DARK_SECONDARY__;
   --secondary-foreground: __DS_DARK_SECONDARYFOREGROUND__;
@@ -210,6 +276,7 @@
   --destructive: __DS_DARK_DESTRUCTIVE__;
   --destructive-foreground: __DS_DARK_DESTRUCTIVEFOREGROUND__;
   --success: __DS_DARK_SUCCESS__;
+  --success-foreground: __DS_DARK_SUCCESSFOREGROUND__;
   --input: __DS_DARK_INPUT__;
   --ring: __DS_DARK_RING__;
   --chart-1: __DS_DARK_CHART1__;
@@ -217,6 +284,10 @@
   --chart-3: __DS_DARK_CHART3__;
   --chart-4: __DS_DARK_CHART4__;
   --chart-5: __DS_DARK_CHART5__;
+  --white: __DS_DARK_WHITE__;
+  --gray-soft: __DS_DARK_GRAYSOFT__;
+  --gray: __DS_DARK_GRAY__;
+  --black-soft: __DS_DARK_BLACKSOFT__;
 
   --sidebar-primary-border: hsl(var(--sidebar-primary));
   --sidebar-primary-border: hsl(from hsl(var(--sidebar-primary)) h s calc(l + var(--opaque-button-border-intensity)) / alpha);
@@ -235,6 +306,22 @@
 
   --card-border: hsl(var(--card));
   --popover-border: hsl(var(--popover));
+}
+
+/* BRAND-LINES BINDING
+ * In both exported themes the separator value equals the theme primary (light
+ * 219 61% 32.2%, dark 218 47.7% 61%), so the separator is semantically the brand
+ * line. The export defines --border as a static neutral gray (light #E4E3E3,
+ * dark 0 0% 22%); the showcase extends the same language to it: every structural
+ * line -- container borders, sidebar dividers, separators -- tracks the live
+ * brand primary set by the picker, so all lines shift together with the brand.
+ * The aliases point at HSL triples because utilities compile to
+ * hsl(var(--separator)) / hsl(var(--border)), not resolved colors. Must stay
+ * after both theme blocks above so they win in light and dark alike. */
+:root,
+.dark {
+  --separator: var(--primary);
+  --border: var(--separator);
 }
 
 @layer base {

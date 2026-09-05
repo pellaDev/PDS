@@ -1,0 +1,174 @@
+/* Pella DS — Field state layer (component-scoped).
+ * Source of truth for values: tokens/components/fields.json (compositions pella.comp.field.*),
+ * themes/light.json (resolved colors) and commonSet/typographySet scales.
+ * Brand-derived outlines are COMPUTED at runtime from the live --primary with the system's
+ * canonical 32% overlay strength (hover = lighter toward white, focus/active = darker toward
+ * black): same mechanism family as the button border derivations in theme-template.css, so a
+ * picker change on <html> re-tints every state. No static brand hex here by design ("nel
+ * design system finale sono valori calcolati ... automaticamente"). Non-brand fixed colors from
+ * first.json are hardcoded with comments: they are theme-fixed palette steps, not brand. */
+
+.pds-field {
+  position: relative;
+  display: block;
+  --_bw: var(--dim-ssss); /* bordered-state thickness = coreDimensions.ssss (1.6px) */
+  --_hover-o: color-mix(in srgb, var(--color-primary) calc(100% - 32%), white);
+  --_focus-o: color-mix(in srgb, var(--color-primary) calc(100% - 32%), black);
+}
+
+.pds-field__input {
+  width: 100%;
+  height: var(--field-h);
+  padding-block: var(--dim-sss); /* sys.spacing.s = "4-12" (vertical-horizontal) */
+  padding-inline: var(--dim-s);
+  background: transparent;
+  border: none;
+  outline: none;
+  font-family: inherit;
+  font-weight: inherit;
+  font-size: var(--type-body2-size); /* comp.typography.fieldInput = ref body2 (16/24) */
+  line-height: var(--type-body2-lh);
+  color: inherit;
+}
+
+.pds-field__label {
+  position: absolute;
+  left: var(--dim-s); /* aligned with input text start */
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: var(--type-body2-size); /* comp.typography.fieldLabel = ref body2, unscaled */
+  line-height: var(--type-body2-lh);
+  letter-spacing: 0.25px; /* sys.letterSpacing.0 */
+  pointer-events: none;
+  white-space: nowrap;
+  transition: transform 120ms ease, top 120ms ease, background-color 120ms ease;
+}
+
+/* ---- TONE fill — pella.comp.field.{small,large}.brand (6 states) ----
+   The composition holds label and input INSIDE the container (the exported labelOnlySpacing /
+   inputSpacing are zero), so the container's own padding sys.spacing.s = "4 12" frames them.
+   Label typography = body2, same as the input; it never moves -- it fades out while the field
+   is focused or filled (same trigger as the outline float). */
+.pds-field--fill {
+  display: block;
+  height: var(--field-h); /* same geometry as outline: sm 40px (--dim-lll) / lg 56px (--dim-l) -- see note at the bottom */
+  border-radius: var(--dim-sss); /* coreDimensions.sss (4px) */
+  background: var(--color-secondary); /* graySoft container: light #E4E3E3 exact; dark elevated surface */
+  color: var(--color-muted-foreground); /* onContainer: light #383838 / dark #E4E3E3 */
+  padding-block: var(--dim-sss); /* sys.spacing.s vertical = 4px */
+  padding-inline: var(--dim-s);  /* horizontal = 12px */
+  border: var(--_bw) solid transparent; /* default state exports no borderWidth -> invisible */
+}
+.pds-field--fill:hover:not([data-disabled]) { border-color: var(--_hover-o); }    /* hover.outline = lighter(+32%) of brand */
+.pds-field--fill:focus-within:not([data-disabled]) { border-color: var(--_focus-o); } /* focus+active.outline = darker(-32%) */
+
+/* fill label rides the input exactly like outline's resting label: absolute, vertically
+   centered (base rule above), body2 -- it owns NO space of its own, so when the field is
+   focused or filled it fades out in place and nothing is left behind; the input keeps the full
+   inner height and typed text stays vertically centered on its own line-height. */
+.pds-field--fill .pds-field__label {
+  transition: opacity 120ms ease; /* no movement in this tone -- only the fade animates */
+}
+.pds-field--fill :is(.pds-field__input:focus, .pds-field__input:not(:placeholder-shown)) ~ .pds-field__label {
+  opacity: 0;
+}
+.pds-field--fill .pds-field__input {
+  height: 100%; /* full inner height of the container */
+  padding: 0; /* the container carries sys.spacing.s */
+}
+
+/* ---- TONE outline — pella.comp.field.{smallBorder,largeBorder}.brand (6 states) ---- */
+.pds-field--outline {
+  height: var(--field-h); /* same outer box as fill (user-fiat parity): the brand border sits INSIDE */
+  border-radius: var(--dim-sss);
+  background: var(--color-background); /* surface role: light #F9F9F9 exact; dark the page base */
+  color: var(--color-muted-foreground); /* onContainer: light #383838 / dark #E4E3E3 */
+  border: var(--_bw) solid var(--color-primary); /* default outline = brand, live; width ssss ALWAYS present in this family */
+}
+/* the inner control fills the content box (height minus borders) so the outer box stays exactly --field-h */
+.pds-field--outline > .pds-field__input { height: 100%; }
+.pds-field--outline:hover:not([data-disabled]) { border-color: var(--_hover-o); }
+.pds-field--outline:focus-within:not([data-disabled]) { border-color: var(--_focus-o); }
+
+/* outline label at rest = body2 INSIDE the box, vertically centered (base rule above). The
+   caption scaling (fieldSmallLabel = body2 x fontScale 0.66) applies ONLY while the label is
+   floated -- focused or filled -- where it rides the border line (shifted up by half the border
+   so it straddles the band) as a surface chip = exported label.container. */
+.pds-field--outline :is(.pds-field__input:focus, .pds-field__input:not(:placeholder-shown)) ~ .pds-field__label {
+  top: calc(-1 * var(--_bw) / 2);
+  transform: translateY(-50%);
+  background: var(--color-background);
+  padding-inline: var(--dim-sss);
+  font-size: calc(var(--type-body2-size) * 0.66);
+  line-height: calc(var(--type-body2-lh) * 0.66);
+}
+
+/* ---- STATE disabled — composition adds opacity = sys.opacity.disabled ---- */
+.pds-field[data-disabled],
+.pds-field:disabled { opacity: var(--opacity-disabled); }
+.pds-field--fill[data-disabled],
+.pds-field--fill:disabled { background: var(--color-gray); color: var(--color-white); border-color: transparent; }  /* container=gray, onContainer=white (theme-fixed scale steps) */
+.pds-field--outline[data-disabled],
+.pds-field--outline:disabled { color: var(--color-gray); border-color: var(--color-gray); background: var(--color-background); } /* gray = theme-fixed intermediate scale step */
+
+/* ---- STATE error — composition adds the red semantic outline (fixed system color) ---- */
+.pds-field--fill.pds-field--error:not([data-disabled]) { border-color: var(--color-destructive); } /* container stays graySoft, text onContainer */
+.pds-field--outline.pds-field--error:not([data-disabled]) { border-color: var(--color-destructive); color: var(--color-foreground); } /* error.onContainer = ink black (light) / bright (dark) */
+
+/* size geometry assumption (documented): Figma frame heights are not exported tokens, and both
+   tones reference identical container spacing/type per size -> one shared --field-h per size:
+   sm 40px (--dim-lll) / lg 56px (--dim-l), applied to BOTH outline and fill so the two tones
+   always match. In both tones the label is absolutely centered over the full-height input, so
+   resting label and typed text share the same vertical center. */
+/* ---- BARE CONTAINERS — Input / Textarea primitives as their own .pds-field container ----
+   Same tone/state system as Field, but the form element IS the container (no label wrapper),
+   so it carries the field typography directly: form elements don't inherit font. The tone
+   rules above already apply to any .pds-field element; only the attribute aliases below add
+   the bare :disabled / [aria-invalid] triggers. */
+input.pds-field,
+textarea.pds-field {
+  display: block;
+  width: 100%;
+  font-family: inherit; /* app base is Roboto (generated index.css); form elements don't inherit */
+  font-size: var(--type-body2-size);   /* comp.typography.fieldInput = body2 (16/24) */
+  line-height: var(--type-body2-lh);
+}
+textarea.pds-field { height: auto; min-height: var(--field-h); }
+
+/* Placeholder = the resting label of the DS field composition: full-strength inherit, not a
+   muted afterthought. */
+input.pds-field::placeholder,
+textarea.pds-field::placeholder { color: inherit; }
+
+/* Multi-line control inside a .pds-field container (Input group with textarea). */
+textarea.pds-field__input { height: auto; min-height: var(--field-h); }
+
+/* ---- Input group — the wrapper div IS a .pds-field container (it wears the tone classes), so
+   it inherits every tone/state rule above, including hover/focus washes via :focus-within.
+   It carries no padding of its own: inner controls keep their base 4/12 framing in BOTH tones,
+   which is pixel-identical to a standalone field's container padding. */
+.pds-field-group { padding: 0; }
+.pds-field--fill.pds-field-group > .pds-field__input {
+  height: 100%;
+  padding-block: var(--dim-sss);
+  padding-inline: var(--dim-s);
+}
+.pds-field--outline.pds-field-group > .pds-field__input { height: 100%; }
+
+/* ---- aria-invalid — same DS error composition as the pds-field--error state prop, driven by
+   the ARIA attribute alone so bare Input/Textarea and groups light up without JS state. ---- */
+.pds-field--fill[aria-invalid='true']:not([data-disabled]):not(:disabled) { border-color: var(--color-destructive); }
+.pds-field--outline[aria-invalid='true']:not([data-disabled]):not(:disabled) { border-color: var(--color-destructive); color: var(--color-foreground); }
+/* group container: an invalid control directly inside */
+.pds-field:has(> [aria-invalid='true']):not([data-disabled]) { border-color: var(--color-destructive); }
+
+/* ---- STYLE-GUIDE SURFACE SWAP — presentation only, scoped to the dual-background panels in
+   DesignSystemBrowser (each panel <section> carries data-pds-surface). On the ALTERNATE panel the
+   two tones' interiors are mirrored so a fill field always contrasts its host and an outline field
+   always reads as a cutout of it:
+     base panel      -> fill = secondary (graySoft), outline = background   (the tokens' defaults)
+     alternate panel -> fill = background,                        outline = secondary
+   Disabled/error keep their own theme-fixed backgrounds (excluded below). This never ships to the
+   consuming app — it only exists so both tones stay legible on both guide surfaces at once. */
+[data-pds-surface='alternate'] .pds-field--outline:not([data-disabled]):not(:disabled) { background: var(--color-secondary); }
+[data-pds-surface='alternate'] .pds-field--fill:not([data-disabled]):not(:disabled) { background: var(--color-background); }

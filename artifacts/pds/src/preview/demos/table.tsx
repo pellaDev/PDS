@@ -11,7 +11,7 @@ import {
 
 export function TableDemo() {
   return (
-    <div className="max-w-2xl rounded-xl border bg-card p-4">
+    <div className="max-w-2xl p-4">
       <Table>
         <TableCaption>Recent project usage.</TableCaption>
         <TableHeader>

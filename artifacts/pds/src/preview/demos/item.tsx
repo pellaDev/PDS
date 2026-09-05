@@ -15,7 +15,7 @@ import {
 
 export function ItemDemo() {
   return (
-    <ItemGroup className="max-w-xl rounded-xl border bg-card p-2">
+    <ItemGroup className="max-w-xl p-2">
       <Item variant="muted">
         <ItemHeader>
           <span className="text-xs text-muted-foreground">Updated today</span>
@@ -31,7 +31,7 @@ export function ItemDemo() {
           </ItemDescription>
         </ItemContent>
         <ItemActions>
-          <Button variant="ghost" size="icon" aria-label="More actions">
+          <Button variant="link" size="icon" aria-label="More actions">
             <MoreHorizontal />
           </Button>
         </ItemActions>

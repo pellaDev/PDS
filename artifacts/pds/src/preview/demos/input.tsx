@@ -3,7 +3,7 @@ import { Stack } from '../parts';
 
 export function InputDemo() {
   return (
-    <div className="max-w-md space-y-6 rounded-xl border bg-card p-6">
+    <div className="max-w-md space-y-6 p-6">
       <Stack label="Types">
         <Input placeholder="Name" />
         <Input type="email" placeholder="name@example.com" />

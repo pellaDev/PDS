@@ -6,10 +6,10 @@ import {
 
 export function ResizableDemo() {
   return (
-    <div className="h-64 max-w-2xl overflow-hidden rounded-xl border bg-card">
+    <div className="h-64 max-w-2xl overflow-hidden">
       <ResizablePanelGroup direction="horizontal">
         <ResizablePanel defaultSize={35} minSize={20}>
-          <div className="flex h-full items-center justify-center bg-muted/40 text-sm">
+          <div className="flex h-full items-center justify-center bg-muted text-sm">
             Navigation
           </div>
         </ResizablePanel>
@@ -21,7 +21,7 @@ export function ResizableDemo() {
             </ResizablePanel>
             <ResizableHandle withHandle />
             <ResizablePanel defaultSize={35}>
-              <div className="flex h-full items-center justify-center bg-muted/40 text-sm">
+              <div className="flex h-full items-center justify-center bg-muted text-sm">
                 Console
               </div>
             </ResizablePanel>

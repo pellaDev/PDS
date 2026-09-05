@@ -1,51 +1,22 @@
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectLabel,
-  SelectSeparator,
-  SelectTrigger,
-  SelectValue,
-} from '../../components/ui/select';
-import { Stack } from '../parts';
+import { Select } from '../../components/ui/select';
+import { Row } from '../parts';
+
+const options = ['Brand primary', 'Surface white', 'Ink black', 'Gray soft'];
 
 export function SelectDemo() {
   return (
-    <div className="max-w-sm space-y-6 rounded-xl border bg-card p-6 text-card-foreground">
-      <Stack label="Grouped">
-        <Select>
-          <SelectTrigger>
-            <SelectValue placeholder="Select a fruit" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectGroup>
-              <SelectLabel>Fruits</SelectLabel>
-              <SelectItem value="apple">Apple</SelectItem>
-              <SelectItem value="banana">Banana</SelectItem>
-              <SelectItem value="blueberry">Blueberry</SelectItem>
-            </SelectGroup>
-            <SelectSeparator />
-            <SelectGroup>
-              <SelectLabel>Vegetables</SelectLabel>
-              <SelectItem value="carrot">Carrot</SelectItem>
-              <SelectItem value="spinach" disabled>
-                Spinach (out of stock)
-              </SelectItem>
-            </SelectGroup>
-          </SelectContent>
-        </Select>
-      </Stack>
-      <Stack label="Disabled">
-        <Select disabled>
-          <SelectTrigger>
-            <SelectValue placeholder="Disabled" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="one">One</SelectItem>
-          </SelectContent>
-        </Select>
-      </Stack>
+    <div className="p-6">
+      <div className="space-y-5">
+        <Row label="Default (hover / focus washes are runtime 32% mixes of the live brand)">
+          <div className="w-full max-w-xs"><Select options={options} defaultValue="Brand primary" /></div>
+        </Row>
+        <Row label="Disabled (blackSoft fill, gray label, row opacity 0.32)">
+          <div className="w-full max-w-xs"><Select options={options} disabled value="Surface white" /></div>
+        </Row>
+        <Row label="Error (full red semantic fill per export)">
+          <div className="w-full max-w-xs"><Select options={options} error defaultValue="Ink black" /></div>
+        </Row>
+      </div>
     </div>
   );
 }

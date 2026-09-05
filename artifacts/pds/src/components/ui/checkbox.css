@@ -1,0 +1,87 @@
+/* Pella Checkbox control — state layer derived from tokens/components/checkboxes.json (brand family),
+   colors resolved via themes/light.json + projects/first.json palette anchors,
+   geometry from pella.sys.coreDimensions. Companion of radio.css; both families share the
+   sys.disabled=0.32 container-opacity rule and the runtime ±32% brand wash canon. */
+.pds-checkbox {
+  --_halo: 0 0 0 var(--dim-ss) rgba(0, 0, 0, 0.08); /* sys.shadow.trigger (spread ss), active states only */
+  position: relative; /* anchors the check glyph over the input box */
+  display: inline-flex;
+  align-items: center;
+  gap: var(--dim-sss); /* container.itemSpacing sss=4px between control and label */
+  cursor: pointer;
+  user-select: none;
+  font-family: "Roboto", "Arial", sans-serif;
+  font-weight: 300;
+  font-size: var(--type-body2-size);
+  line-height: var(--type-body2-lh); /* label = body2 per export */
+  color: var(--color-black-soft); /* onContainer blackSoft (theme-fixed scale step, not brand) */
+}
+/* sys.disabled = container opacity 0.32 applied to the whole row, per export */
+.pds-checkbox[data-disabled] {
+  opacity: var(--opacity-disabled);
+  cursor: not-allowed;
+}
+.pds-checkbox input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  margin: 0;
+  flex: none;
+  width: var(--dim-mmmm); /* sizing mmmm = 16px */
+  height: var(--dim-mmmm);
+  box-sizing: border-box;
+  position: relative;
+  border-radius: var(--dim-sss); /* borderRadius sss = 4px, square-ish per export */
+  background: var(--color-white); /* checkbox.container white (theme-fixed scale step) */
+  border: var(--dim-ssss) solid var(--color-black-soft); /* borderWidth ssss = 1.6px, default outline blackSoft */
+  transition: border-color 120ms ease, background-color 120ms ease, box-shadow 120ms ease;
+}
+/* unchecked state outlines — custom.light ±32% computed at runtime from the live brand color */
+.pds-checkbox input[type="checkbox"]:not(:checked):hover:not(:disabled) { /* hover → .lighter (+32%) */
+  border-color: color-mix(in srgb, var(--color-primary) calc(100% - 32%), #fff);
+}
+.pds-checkbox input[type="checkbox"]:focus-visible:not(:disabled),
+.pds-checkbox input[type="checkbox"]:active:not(:disabled) { /* focus/active → .darker (−32%) */
+  border-color: color-mix(in srgb, var(--color-primary) calc(100% - 32%), #000);
+}
+.pds-checkbox input[type="checkbox"]:active:not(:disabled) {
+  box-shadow: var(--_halo); /* active adds boxShadow sys.shadow.trigger */
+}
+/* checked: borderWidth none in the export — keep the 1.6px width transparent (no layout shift,
+   visually identical to "none") and paint the container with the brand family itself */
+.pds-checkbox input[type="checkbox"]:checked {
+  border-color: transparent;
+  background: var(--color-primary); /* checkedDefault container = custom.light, live brand var */
+}
+.pds-checkbox input[type="checkbox"]:checked:hover:not(:disabled) { /* checked hover → .lighter fill */
+  background: color-mix(in srgb, var(--color-primary) calc(100% - 32%), #fff);
+}
+.pds-checkbox input[type="checkbox"]:checked:focus-visible:not(:disabled),
+.pds-checkbox input[type="checkbox"]:checked:active:not(:disabled) { /* focus/active → .darker fill */
+  background: color-mix(in srgb, var(--color-primary) calc(100% - 32%), #000);
+}
+.pds-checkbox input[type="checkbox"]:checked:active:not(:disabled) {
+  box-shadow: var(--_halo);
+}
+/* check glyph — icon.onContainer = graySoft (light anchor, system gray; the export fixes it per-state) */
+/* check glyph overlays the input box exactly (absolute, centered) instead of sitting beside it in the flex row */
+.pds-checkbox__icon {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: var(--dim-mmmm);
+  height: var(--dim-mmmm);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-gray-soft); /* graySoft glyph fill (theme-fixed scale step) */
+}
+.pds-checkbox input[type="checkbox"]:checked ~ .pds-checkbox__icon {
+  display: flex;
+}
+/* disabled (unchecked): borderWidth none + container gray; row opacity already applied above.
+   checked+disabled keeps the live brand fill, faded by the 0.32 row opacity — per export. */
+.pds-checkbox input[type="checkbox"]:not(:checked):disabled {
+  border-color: transparent;
+  background: var(--color-gray); /* checkbox.container gray (theme-fixed scale step) */
+}

@@ -3,7 +3,7 @@ import { Stack } from '../parts';
 
 export function SliderDemo() {
   return (
-    <div className="max-w-md space-y-6 rounded-xl border bg-card p-6">
+    <div className="max-w-md space-y-6 p-6">
       <Stack label="Value">
         <Slider defaultValue={[40]} max={100} step={1} />
       </Stack>

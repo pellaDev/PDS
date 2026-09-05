@@ -1,0 +1,62 @@
+/* Pella Radio control — state layer derived from tokens/components/radios.json (brand family),
+   colors resolved via themes/light.json + projects/first.json palette anchors,
+   geometry from pella.sys.coreDimensions. Never edit generated files by hand; this is the
+   component-scoped layer for one token family only. */
+.pds-radio {
+  --_halo: 0 0 0 var(--dim-ss) rgba(0, 0, 0, 0.08); /* sys.shadow.trigger (spread ss = state halo), active states only */
+  display: inline-flex;
+  align-items: center;
+  gap: var(--dim-sss); /* container.itemSpacing sss=4px between control and label */
+  cursor: pointer;
+  user-select: none;
+  font-family: "Roboto", "Arial", sans-serif;
+  font-weight: 300;
+  font-size: var(--type-body2-size);
+  line-height: var(--type-body2-lh); /* label = body2 per export */
+  color: var(--color-black-soft); /* onContainer blackSoft (theme-fixed scale step, not brand) */
+}
+/* sys.disabled = container opacity 0.32 applied to the whole row (control + label), per export */
+.pds-radio[data-disabled] {
+  opacity: var(--opacity-disabled);
+  cursor: not-allowed;
+}
+.pds-radio input[type="radio"] {
+  appearance: none;
+  -webkit-appearance: none;
+  margin: 0;
+  flex: none;
+  width: var(--dim-mmmm); /* sizing mmmm = 16px */
+  height: var(--dim-mmmm);
+  box-sizing: border-box;
+  /* borderRadius ref {l} = 56px clamps to a full circle — faithful port of the export value */
+  border-radius: var(--dim-l);
+  background: var(--color-white); /* radio.container white (theme-fixed scale step) */
+  border: var(--dim-ssss) solid var(--color-black-soft); /* borderWidth ssss = 1.6px, default outline blackSoft */
+  transition: border-color 120ms ease, background-color 120ms ease, box-shadow 120ms ease;
+}
+/* unselected state outlines — custom.light ±32% computed at runtime from the live brand color */
+.pds-radio input[type="radio"]:not(:checked):hover:not(:disabled) { /* hover → .lighter (+32%) */
+  border-color: color-mix(in srgb, var(--color-primary) calc(100% - 32%), #fff);
+}
+.pds-radio input[type="radio"]:focus-visible:not(:disabled),
+.pds-radio input[type="radio"]:active:not(:disabled) { /* focus/active → .darker (−32%) */
+  border-color: color-mix(in srgb, var(--color-primary) calc(100% - 32%), #000);
+}
+.pds-radio input[type="radio"]:active:not(:disabled) {
+  box-shadow: var(--_halo); /* active adds boxShadow sys.shadow.trigger */
+}
+/* selected = checked: ring widens to sss, center hole graySoft, outline brand family */
+.pds-radio input[type="radio"]:checked {
+  border-width: var(--dim-sss); /* borderWidth sss per export (4px) */
+  background: var(--color-gray-soft); /* radio.container graySoft — the visible dot center */
+  border-color: var(--color-primary); /* selectedDefault outline = custom.light, live brand var */
+}
+.pds-radio input[type="radio"]:checked:hover:not(:disabled) { /* selectedHover → .lighter */
+  border-color: color-mix(in srgb, var(--color-primary) calc(100% - 32%), #fff);
+}
+/* disabled (unselected): borderWidth none + container gray; row opacity already applied above.
+   checked+disabled keeps the sss ring and live brand outline, faded by the 0.32 row opacity — per export. */
+.pds-radio input[type="radio"]:not(:checked):disabled {
+  border-width: 0;
+  background: var(--color-gray); /* radio.container gray (theme-fixed scale step) */
+}

@@ -8,7 +8,7 @@ import { Stack } from '../parts';
 
 export function AlertDemo() {
   return (
-    <div className="max-w-xl rounded-xl border bg-card p-6">
+    <div className="max-w-xl p-6">
       <Stack label="Variants">
         <Alert>
           <CheckCircle2 />

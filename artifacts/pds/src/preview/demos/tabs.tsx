@@ -7,7 +7,7 @@ import {
 
 export function TabsDemo() {
   return (
-    <div className="max-w-lg rounded-xl border bg-card p-6">
+    <div className="max-w-lg p-6">
       <Tabs defaultValue="overview">
         <TabsList>
           <TabsTrigger value="overview">Overview</TabsTrigger>

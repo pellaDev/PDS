@@ -11,7 +11,7 @@ import {
 
 export function NavigationMenuDemo() {
   return (
-    <div className="min-h-48 max-w-2xl rounded-xl border bg-card p-6">
+    <div className="min-h-48 max-w-2xl p-6">
       <NavigationMenu>
         <NavigationMenuList>
           <NavigationMenuItem>

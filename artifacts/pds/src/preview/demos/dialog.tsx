@@ -12,7 +12,7 @@ import {
 
 export function DialogDemo() {
   return (
-    <div className="rounded-xl border bg-card p-6">
+    <div className="p-6">
       <Dialog>
         <DialogTrigger asChild>
           <Button>Edit profile</Button>
@@ -24,12 +24,12 @@ export function DialogDemo() {
               Update the details shown to your teammates.
             </DialogDescription>
           </DialogHeader>
-          <div className="rounded-md border bg-muted/40 p-4 text-sm">
+          <div className="rounded-md border bg-muted p-4 text-sm">
             Profile settings appear here.
           </div>
           <DialogFooter>
             <DialogClose asChild>
-              <Button variant="outline">Cancel</Button>
+              <Button variant="link">Cancel</Button>
             </DialogClose>
             <DialogClose asChild>
               <Button>Save changes</Button>

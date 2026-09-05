@@ -4,7 +4,7 @@ import { Row } from '../parts';
 
 export function KbdDemo() {
   return (
-    <div className="rounded-xl border bg-card p-6">
+    <div className="p-6">
       <Row label="Keyboard shortcuts">
         <Kbd>Esc</Kbd>
         <KbdGroup>

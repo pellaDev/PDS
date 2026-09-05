@@ -9,17 +9,17 @@ import { Row } from '../parts';
 
 export function ButtonGroupDemo() {
   return (
-    <div className="space-y-6 rounded-xl border bg-card p-6">
+    <div className="space-y-6 p-6">
       <Row label="Grouped actions">
         <ButtonGroup>
-          <Button variant="outline" size="icon" aria-label="Bold">
+          <Button variant="link" size="icon" aria-label="Bold">
             <Bold />
           </Button>
           <ButtonGroupSeparator />
-          <Button variant="outline" size="icon" aria-label="Italic">
+          <Button variant="link" size="icon" aria-label="Italic">
             <Italic />
           </Button>
-          <Button variant="outline" size="icon" aria-label="Underline">
+          <Button variant="link" size="icon" aria-label="Underline">
             <Underline />
           </Button>
         </ButtonGroup>
@@ -27,7 +27,7 @@ export function ButtonGroupDemo() {
       <Row label="Attached label">
         <ButtonGroup>
           <ButtonGroupText>https://</ButtonGroupText>
-          <Button variant="outline">Copy link</Button>
+          <Button size="small" variant="link">Copy link</Button>
         </ButtonGroup>
       </Row>
     </div>

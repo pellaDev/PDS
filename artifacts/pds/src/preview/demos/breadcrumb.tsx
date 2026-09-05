@@ -10,7 +10,7 @@ import {
 
 export function BreadcrumbDemo() {
   return (
-    <div className="rounded-xl border bg-card p-6">
+    <div className="p-6">
       <Breadcrumb>
         <BreadcrumbList>
           <BreadcrumbItem>

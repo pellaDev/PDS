@@ -1,0 +1,110 @@
+/* Pella Toggle - state layer derived from tokens/components/toggles.json (brand family, off + on sides). */
+.pds-toggle {
+  --_wash-lighter: color-mix(in srgb, var(--color-primary) calc(100% - 32%), #fff); /* custom.light lighter (+32%) runtime canon */
+  --_wash-darker: color-mix(in srgb, var(--color-primary) calc(100% - 32%), #000); /* custom.light darker (-32%) runtime canon */
+  display: inline-flex;
+  align-items: center;
+  gap: var(--dim-sss); /* container.itemSpacing = sss between switch and label per export */
+  cursor: pointer;
+  user-select: none;
+  font-family: "Roboto", "Arial", sans-serif;
+  font-weight: 300;
+  font-size: var(--type-body2-size);
+  line-height: var(--type-body2-lh); /* label = body2 per export */
+  color: var(--color-black-soft); /* onContainer blackSoft across interactive states */
+}
+/* sys.disabled opacity - explicit leaf in the off-side disabled container of the export (on side documented as coherent extension) */
+.pds-toggle[data-disabled] {
+  opacity: var(--opacity-disabled);
+  cursor: not-allowed;
+}
+.pds-toggle input[type="checkbox"] {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+  clip-path: inset(50%);
+  overflow: hidden;
+}
+.pds-toggle__switch {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start; /* OFF rest side */
+  box-sizing: border-box;
+  width: var(--dim-llll); /* sizing.switch = llll = 32px per export */
+  height: var(--dim-mmmm); /* derived track height (on-knob 12 + 2 x ssss spacing) - documented interpretation */
+  border-radius: var(--dim-llll); /* pill, borderRadius ref llll clamps to full radius */
+  border: var(--dim-ssss) solid var(--color-black-soft); /* OFF default outline = blackSoft per export */
+  background-color: transparent; /* no fill leaf on the off side - only the outline exists in the tokens */
+  padding-left: var(--dim-sss); /* spacing.switchOff = sss positions knob at left edge */
+  transition: border-color 120ms ease, background-color 120ms ease, box-shadow 120ms ease;
+}
+.pds-toggle__thumb {
+  width: var(--dim-ss); /* sizing.triggerOff = ss = 8px per export */
+  height: var(--dim-ss);
+  border-radius: var(--dim-l); /* trigger borderRadius ref l clamps to full circle - faithful port */
+  background-color: var(--color-black-soft); /* OFF default trigger.container = blackSoft per export */
+  transition: width 120ms ease, height 120ms ease, margin 120ms ease, background-color 120ms ease, box-shadow 120ms ease;
+}
+/* hover (off) to outline + knob both .lighter per palette */
+.pds-toggle:hover:not([data-disabled]) input[type="checkbox"]:not(:checked):not(:disabled) ~ .pds-toggle__switch {
+  border-color: var(--_wash-lighter); /* hover.switch.outline = custom.light lighter */
+}
+.pds-toggle:hover:not([data-disabled]) input[type="checkbox"]:not(:checked):not(:disabled) ~ .pds-toggle__switch > .pds-toggle__thumb {
+  background-color: var(--_wash-lighter); /* hover.trigger.container = custom.light lighter */
+}
+/* focus/active (off) to .darker; active adds sys.shadow.trigger halo on the knob (boxShadow leaf present in export) */
+.pds-toggle input[type="checkbox"]:focus-visible:not(:checked):not(:disabled) ~ .pds-toggle__switch {
+  border-color: var(--_wash-darker); /* focus.switch.outline = custom.light darker */
+}
+.pds-toggle input[type="checkbox"]:focus-visible:not(:checked):not(:disabled) ~ .pds-toggle__switch > .pds-toggle__thumb,
+.pds-toggle input[type="checkbox"]:active:not(:checked):not(:disabled) ~ .pds-toggle__switch > .pds-toggle__thumb {
+  background-color: var(--_wash-darker); /* focus/active trigger.container = custom.light darker */
+}
+.pds-toggle input[type="checkbox"]:active:not(:checked):not(:disabled) ~ .pds-toggle__switch > .pds-toggle__thumb {
+  box-shadow: 0 0 0 var(--dim-ss) rgba(0, 0, 0, 0.08); /* sys.shadow.trigger (spread ss), active only per export */
+}
+/* ON side - checked states; track becomes solid brand fill with NO border leaf so transparent border keeps geometry stable */
+.pds-toggle input[type="checkbox"]:checked:not(:disabled) ~ .pds-toggle__switch {
+  background-color: var(--color-primary); /* toggleDefault.switch.container = custom.light, live brand (light anchor #204384) */
+  border-color: transparent;
+  justify-content: flex-end; /* ON rest side */
+  padding-left: 0;
+  padding-right: var(--dim-sssss); /* spacing.switchOn positions knob at right edge per export */
+}
+.pds-toggle input[type="checkbox"]:checked:not(:disabled) ~ .pds-toggle__switch > .pds-toggle__thumb {
+  width: var(--dim-s); /* sizing.triggerOn = s (12px on-knob) per export */
+  height: var(--dim-s);
+  background-color: var(--color-gray-soft); /* ON trigger.container = graySoft across all on-side states in the palette */
+}
+/* ON + disabled: knob stays on the ON side (right), brand fill under the 0.32 row fade -- no hover/focus (those rules all require :not(:disabled)) */
+.pds-toggle input[type="checkbox"]:checked:disabled ~ .pds-toggle__switch {
+  background-color: var(--color-primary);
+  border-color: transparent;
+  justify-content: flex-end;
+  padding-left: 0;
+  padding-right: var(--dim-sssss);
+}
+.pds-toggle input[type="checkbox"]:checked:disabled ~ .pds-toggle__switch > .pds-toggle__thumb {
+  width: var(--dim-s);
+  height: var(--dim-s);
+  background-color: var(--color-gray-soft); /* graySoft on-side trigger, same as enabled ON */
+}
+/* hover/focus/active while ON to track washes, knob stays graySoft per toggleHover/Focus/Active palettes */
+.pds-toggle:hover:not([data-disabled]) input[type="checkbox"]:checked ~ .pds-toggle__switch {
+  background-color: var(--_wash-lighter); /* toggleHover.switch.container = custom.light lighter */
+}
+.pds-toggle input[type="checkbox"]:focus-visible:checked:not(:disabled) ~ .pds-toggle__switch,
+.pds-toggle input[type="checkbox"]:active:checked:not(:disabled) ~ .pds-toggle__switch {
+  background-color: var(--_wash-darker); /* toggleFocus/Active.switch.container = custom.light darker */
+}
+/* disabled - off side has the explicit gray palette in export; on side keeps brand fill faded by row opacity (documented) */
+.pds-toggle[data-disabled] .pds-toggle__switch {
+  border-color: var(--color-gray); /* disabled.switch.outline = gray per export */
+}
+.pds-toggle[data-disabled] input[type="checkbox"]:not(:checked):disabled ~ .pds-toggle__switch > .pds-toggle__thumb,
+.pds-toggle[data-disabled] input[type="checkbox"]:not(:checked) ~ .pds-toggle__switch > .pds-toggle__thumb {
+  background-color: var(--color-gray); /* disabled.trigger.container = gray per export */
+}

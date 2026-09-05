@@ -1,15 +1,14 @@
 import { useForm } from 'react-hook-form';
 import { Button } from '../../components/ui/button';
+import { Field } from '../../components/ui/field';
 import {
   Form,
   FormControl,
   FormDescription,
   FormField,
   FormItem,
-  FormLabel,
   FormMessage,
 } from '../../components/ui/form';
-import { Input } from '../../components/ui/input';
 
 type ProfileForm = {
   username: string;
@@ -21,7 +20,7 @@ export function FormDemo() {
   });
 
   return (
-    <div className="max-w-md rounded-xl border bg-card p-6">
+    <div className="max-w-md p-6">
       <Form {...form}>
         <form
           className="space-y-4"
@@ -33,9 +32,9 @@ export function FormDemo() {
             rules={{ required: 'Enter a username.' }}
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Username</FormLabel>
+                {/* Field carries its own floating label; FormControl's Slot forwards id/aria onto the inner input */}
                 <FormControl>
-                  <Input placeholder="alex" {...field} />
+                  <Field label="Username" size="sm" tone="outline" {...field} />
                 </FormControl>
                 <FormDescription>Your public display name.</FormDescription>
                 <FormMessage />

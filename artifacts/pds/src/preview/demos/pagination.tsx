@@ -1,37 +1,23 @@
-import {
-  Pagination,
-  PaginationContent,
-  PaginationEllipsis,
-  PaginationItem,
-  PaginationLink,
-  PaginationNext,
-  PaginationPrevious,
-} from '../../components/ui/pagination';
+import { Pagination } from '../../components/ui/pagination';
+import { Row } from '../parts';
 
 export function PaginationDemo() {
   return (
-    <div className="rounded-xl border bg-card p-6">
-      <Pagination>
-        <PaginationContent>
-          <PaginationItem>
-            <PaginationPrevious href="#page=pagination" />
-          </PaginationItem>
-          <PaginationItem>
-            <PaginationLink href="#page=pagination">1</PaginationLink>
-          </PaginationItem>
-          <PaginationItem>
-            <PaginationLink href="#page=pagination" isActive>
-              2
-            </PaginationLink>
-          </PaginationItem>
-          <PaginationItem>
-            <PaginationEllipsis />
-          </PaginationItem>
-          <PaginationItem>
-            <PaginationNext href="#page=pagination" />
-          </PaginationItem>
-        </PaginationContent>
-      </Pagination>
+    <div className="p-6">
+      <div className="space-y-5">
+        <Row label="Page 3 of 10 (windowing with ellipsis)">
+          <Pagination total={10} current={3} />
+        </Row>
+        <Row label="Page 24 of 60 - long range, gaps collapse to ellipses">
+          <Pagination total={60} current={24} />
+        </Row>
+        <Row label="First / last page (boundary arrows disabled)">
+          <div className="flex flex-wrap gap-8 items-center">
+            <Pagination total={7} current={1} />
+            <Pagination total={7} current={7} />
+          </div>
+        </Row>
+      </div>
     </div>
   );
 }

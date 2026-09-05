@@ -4,6 +4,8 @@ import {
   FontsPage,
   LayoutPage,
   OverviewPage,
+  ShadowsPage,
+  TagsPage,
 } from './foundations';
 
 function lazyPage(load: () => Promise<ComponentType>) {
@@ -116,8 +118,8 @@ const PopoverDemo = lazyPage(() =>
 const ProgressDemo = lazyPage(() =>
   import('./demos/progress').then(({ ProgressDemo }) => ProgressDemo),
 );
-const RadioGroupDemo = lazyPage(() =>
-  import('./demos/radio-group').then(({ RadioGroupDemo }) => RadioGroupDemo),
+const RadioDemo = lazyPage(() =>
+  import('./demos/radio').then(({ RadioDemo }) => RadioDemo),
 );
 const ResizableDemo = lazyPage(() =>
   import('./demos/resizable').then(({ ResizableDemo }) => ResizableDemo),
@@ -182,6 +184,8 @@ export type PreviewEntry = {
   name: string;
   description: string;
   Page: ComponentType;
+  // When true, the page renders its dual-background sections in the top pair and the rest in a full-width single column below it.
+  splitLayout?: boolean;
 };
 
 export type NavGroup = {
@@ -191,6 +195,8 @@ export type NavGroup = {
 
 export const DESIGN_SYSTEM = {
   title: 'PDS — Pella Design System',
+  // Current design system version -- mirrors the git tag on branch pds-gh.
+  version: 'v1.0.0',
   description:
     'Il linguaggio visivo React di Pella: fondazioni, componenti accessibili e pattern pronti per prodotti coerenti.',
 } as const;
@@ -202,7 +208,8 @@ export const OVERVIEW_ENTRY: PreviewEntry = {
   Page: OverviewPage,
 };
 
-export const NAV_GROUPS: NavGroup[] = [
+// Definition order only -- the exported NAV_GROUPS below sorts every group's entries alphabetically.
+const RAW_NAV_GROUPS: NavGroup[] = [
   { name: 'Brand', entries: [] },
   {
     name: 'Colors',
@@ -223,6 +230,7 @@ export const NAV_GROUPS: NavGroup[] = [
         name: 'Type scale',
         description: 'Font families, headings, body text, labels, and captions.',
         Page: FontsPage,
+        splitLayout: true,
       },
     ],
   },
@@ -230,10 +238,30 @@ export const NAV_GROUPS: NavGroup[] = [
     name: 'Layout',
     entries: [
       {
+        id: 'shadows',
+        name: 'Shadows',
+        description: 'The six original elevation recipes plus the modal scrim layer.',
+        Page: ShadowsPage,
+        splitLayout: true,
+      },
+      {
         id: 'spacing-radius',
         name: 'Spacing and radius',
         description: 'The spacing rhythm and corner treatments used by the system.',
         Page: LayoutPage,
+        splitLayout: true,
+      },
+    ],
+  },
+  {
+    name: 'Tags',
+    entries: [
+      {
+        id: 'tag',
+        name: 'Tags',
+        description: 'Pill markers with one solid fill per state, straight from the original tags.json composition.',
+        Page: TagsPage,
+        splitLayout: true,
       },
     ],
   },
@@ -296,19 +324,19 @@ export const NAV_GROUPS: NavGroup[] = [
       {
         id: 'checkbox',
         name: 'Checkbox',
-        description: 'Checked, unchecked, and disabled options.',
+        description: 'Pella checkbox from checkboxes.json — brand-family fill states with graySoft glyph.',
         Page: CheckboxDemo,
       },
       {
-        id: 'radio-group',
-        name: 'Radio group',
-        description: 'Exclusive choices with labels and disabled states.',
-        Page: RadioGroupDemo,
+        id: 'radio',
+        name: 'Radio',
+        description: 'Pella radio control from radios.json — selected ring with runtime ±32% state outlines.',
+        Page: RadioDemo,
       },
       {
         id: 'select',
         name: 'Select',
-        description: 'Selection controls, grouped options, and disabled states.',
+        description: 'Dropdown trigger from dropdowns.json - filled square box with runtime-computed 32% state washes of the live brand.',
         Page: SelectDemo,
       },
       {
@@ -320,7 +348,7 @@ export const NAV_GROUPS: NavGroup[] = [
       {
         id: 'switch',
         name: 'Switch',
-        description: 'Binary preference controls and states.',
+        description: 'Toggle switch from toggles.json - outlined off track to solid live-brand on fill with token-set knob geometry.',
         Page: SwitchDemo,
       },
       {
@@ -332,7 +360,7 @@ export const NAV_GROUPS: NavGroup[] = [
       {
         id: 'field',
         name: 'Field',
-        description: 'Labels, descriptions, errors, and grouped fields.',
+        description: 'Floating-label inputs from fields.json - fill/border x small/large, runtime-computed ±32% state outlines.',
         Page: FieldDemo,
       },
       {
@@ -385,7 +413,7 @@ export const NAV_GROUPS: NavGroup[] = [
       {
         id: 'tooltip',
         name: 'Tooltip',
-        description: 'Brief labels for focused or hovered controls.',
+        description: 'Tooltip bubbles from tooltips.json - brand / alert / error fills at caption type, CSS-only reveal.',
         Page: TooltipDemo,
       },
       {
@@ -432,7 +460,7 @@ export const NAV_GROUPS: NavGroup[] = [
       {
         id: 'pagination',
         name: 'Pagination',
-        description: 'Previous, next, page, and overflow controls.',
+        description: 'Pagination cells from paginations.json - odd/even resting fills with capped previous/next corners per export.',
         Page: PaginationDemo,
       },
       {
@@ -461,7 +489,7 @@ export const NAV_GROUPS: NavGroup[] = [
       {
         id: 'badge',
         name: 'Badge',
-        description: 'Compact status and category labels.',
+        description: 'Simple markers and numbered pills from badges.json (caption label, live brand fills).',
         Page: BadgeDemo,
       },
       {
@@ -599,6 +627,12 @@ export const NAV_GROUPS: NavGroup[] = [
   { name: 'Motion', entries: [] },
   { name: 'Applied examples', entries: [] },
 ];
+
+// Sidebar order: entries are always shown alphabetically within every category.
+export const NAV_GROUPS: NavGroup[] = RAW_NAV_GROUPS.map((group) => ({
+  ...group,
+  entries: [...group.entries].sort((a, b) => a.name.localeCompare(b.name)),
+}));
 
 export const ALL_ENTRIES: PreviewEntry[] = [
   OVERVIEW_ENTRY,

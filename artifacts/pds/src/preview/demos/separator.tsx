@@ -2,7 +2,7 @@ import { Separator } from '../../components/ui/separator';
 
 export function SeparatorDemo() {
   return (
-    <div className="max-w-md rounded-xl border bg-card p-6">
+    <div className="max-w-md p-6">
       <div>
         <p className="font-medium">Design system</p>
         <p className="text-sm text-muted-foreground">Reusable interface foundations.</p>

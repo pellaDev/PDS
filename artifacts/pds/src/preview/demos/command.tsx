@@ -12,7 +12,7 @@ import {
 
 export function CommandDemo() {
   return (
-    <div className="max-w-md overflow-hidden rounded-xl border bg-card shadow-sm">
+    <div className="max-w-md overflow-hidden">
       <Command>
         <CommandInput placeholder="Type a command" />
         <CommandList>

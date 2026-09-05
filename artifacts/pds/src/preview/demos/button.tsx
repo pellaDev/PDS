@@ -1,38 +1,76 @@
-import { ArrowRight, Loader2, Mail } from 'lucide-react';
+import { ArrowRight, Bell, Loader2, Mail, Pencil, Sparkles } from 'lucide-react';
+
 import { Button } from '../../components/ui/button';
+import { Tooltip } from '../../components/ui/tooltip';
 import { Row } from '../parts';
 
 export function ButtonDemo() {
   return (
-    <div className="space-y-6 rounded-xl border bg-card p-6 text-card-foreground">
-      <Row label="Variants">
-        <Button>Default</Button>
-        <Button variant="secondary">Secondary</Button>
-        <Button variant="outline">Outline</Button>
-        <Button variant="ghost">Ghost</Button>
-        <Button variant="link">Link</Button>
-        <Button variant="destructive">Destructive</Button>
+    <div className="space-y-6 p-6 text-card-foreground">
+      <Row label="Mini — icon only, with tooltip">
+        <Tooltip content="Edit">
+          <Button size="mini" aria-label="Edit">
+            <Pencil />
+          </Button>
+        </Tooltip>
       </Row>
-      <Row label="Sizes">
-        <Button size="sm">Small</Button>
-        <Button size="default">Default</Button>
-        <Button size="lg">Large</Button>
-        <Button size="icon" aria-label="Mail">
+      <Row label="Small — icon only, with tooltip">
+        <Tooltip content="Send mail">
+          <Button size="icon" aria-label="Send mail">
+            <Mail />
+          </Button>
+        </Tooltip>
+        <Tooltip content="New item — large icon">
+          <Button size="icon" className="[&_svg]:size-6" aria-label="New item">
+            <Sparkles />
+          </Button>
+        </Tooltip>
+      </Row>
+      <Row label="Small — label, optional icon on the left or right">
+        <Button size="small">Label</Button>
+        <Button size="small">
           <Mail />
+          Label
+        </Button>
+        <Button size="small">
+          Label
+          <ArrowRight />
         </Button>
       </Row>
-      <Row label="With icon">
-        <Button>
-          <Mail /> Email
+      <Row label="Large — label, optional icon on the left or right">
+        <Button size="large">Label</Button>
+        <Button size="large">
+          <Mail />
+          Label
         </Button>
-        <Button variant="secondary">
-          Continue <ArrowRight />
+        <Button size="large">
+          Label
+          <ArrowRight />
+        </Button>
+      </Row>
+      <Row label="Special — square, icon over label">
+        <Button size="special">
+          <Sparkles />
+          Save
+        </Button>
+        <Button size="special">
+          <Bell />
+          Alerts
         </Button>
       </Row>
       <Row label="States">
-        <Button disabled>Disabled</Button>
-        <Button disabled>
-          <Loader2 className="animate-spin" /> Loading
+        <Button size="small" disabled>
+          Disabled
+        </Button>
+        <Button size="small" disabled>
+          <Loader2 className="animate-spin" />
+          Loading
+        </Button>
+        <Button size="small" variant="link">
+          Link
+        </Button>
+        <Button size="small" variant="destructive">
+          Destructive
         </Button>
       </Row>
     </div>

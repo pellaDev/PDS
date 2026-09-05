@@ -7,11 +7,13 @@
     ".": "./src/generated/tokens.tsx",
     "./tokens": "./src/generated/tokens.tsx",
     "./styles.css": "./src/index.css",
+    "./config": "./src/config.tsx",
     "./components/*": "./src/components/*.tsx",
     "./lib/*": "./src/lib/*.tsx",
     "./hooks/*": "./src/hooks/*.tsx"
   },
   "imports": {
+    "#config": "./src/config.tsx",
     "#components/*": "./src/components/*.tsx",
     "#lib/*": "./src/lib/*.tsx",
     "#hooks/*": "./src/hooks/*.tsx"

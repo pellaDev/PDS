@@ -12,10 +12,10 @@ import {
 
 export function DrawerDemo() {
   return (
-    <div className="rounded-xl border bg-card p-6">
+    <div className="p-6">
       <Drawer>
         <DrawerTrigger asChild>
-          <Button variant="outline">Open activity</Button>
+          <Button size="small">Open activity</Button>
         </DrawerTrigger>
         <DrawerContent>
           <div className="mx-auto w-full max-w-md">

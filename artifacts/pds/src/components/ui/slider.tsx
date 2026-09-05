@@ -34,13 +34,13 @@ const Slider = React.forwardRef<
     >
       {children ?? (
         <>
-          <SliderPrimitive.Track className="relative h-1.5 w-full grow overflow-hidden rounded-full bg-primary/20 group-data-[disabled]/slider:bg-muted">
+          <SliderPrimitive.Track className="relative h-1.5 w-full grow overflow-hidden rounded-full bg-(--state-track-idle) group-data-[disabled]/slider:bg-muted">
             <SliderPrimitive.Range className="absolute h-full bg-primary group-data-[disabled]/slider:bg-muted-foreground" />
           </SliderPrimitive.Track>
           {Array.from({ length: thumbCount }, (_, i) => (
             <SliderPrimitive.Thumb
               key={i}
-              className="block size-4 rounded-full border border-primary/50 bg-background shadow transition-colors hover:border-primary focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring data-[disabled]:pointer-events-none data-[disabled]:border-muted-foreground data-[disabled]:bg-muted"
+              className="block size-4 rounded-full border border-(--state-thumb-border) bg-background shadow transition-colors hover:border-primary focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring data-[disabled]:pointer-events-none data-[disabled]:border-muted-foreground data-[disabled]:bg-muted"
             />
           ))}
         </>

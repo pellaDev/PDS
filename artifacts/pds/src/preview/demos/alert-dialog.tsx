@@ -13,7 +13,7 @@ import { Button } from '../../components/ui/button';
 
 export function AlertDialogDemo() {
   return (
-    <div className="rounded-xl border bg-card p-6">
+    <div className="p-6">
       <AlertDialog>
         <AlertDialogTrigger asChild>
           <Button variant="destructive">Delete project</Button>
