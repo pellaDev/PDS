@@ -1,6 +1,17 @@
 <div align="center">
-  <noscript><a href="https://liberapay.com/pellaDev/donate"><img alt="Donate using Liberapay" target="_blank" src="https://liberapay.com/assets/widgets/donate.svg"></a></noscript>
-</h1>
+  <noscript>
+    <a
+      href="https://liberapay.com/pellaDev/donate"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      <img
+        src="https://liberapay.com/assets/widgets/donate.svg"
+        alt="Donate using Liberapay"
+      >
+    </a>
+  </noscript>
+</div>
 
 <h1 align="center">
   PDS | Pella Design System
