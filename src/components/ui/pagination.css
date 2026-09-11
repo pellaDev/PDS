@@ -1,0 +1,45 @@
+.pds-pg {
+  display: inline-flex;
+  align-items: stretch; 
+}
+.pds-pg__cell {
+  appearance: none;
+  -webkit-appearance: none;
+  margin: 0;
+  border: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  padding: var(--dim-sss) var(--dim-ss); 
+  font-family: var(--pds-font-sans);
+  font-weight: 300;
+  font-size: var(--type-button-size);
+  line-height: var(--type-button-lh); 
+  cursor: pointer;
+}
+
+.pds-pg__cell--odd { background-color: var(--color-white); color: var(--color-primary); } 
+.pds-pg__cell--even { background-color: var(--color-gray-soft); color: var(--color-primary); } 
+
+.pds-pg__cell--prev { border-radius: var(--dim-mmmm) 0 0 var(--dim-mmmm); background-color: var(--color-gray-soft); color: var(--color-primary); } 
+.pds-pg__cell--next { border-radius: 0 var(--dim-mmmm) var(--dim-mmmm) 0; background-color: var(--color-gray-soft); color: var(--color-primary); } 
+
+.pds-pg__ellipsis { background-color: var(--color-gray-soft); color: var(--color-primary); cursor: default; }
+
+.pds-pg__cell--prev:hover:not(:disabled), .pds-pg__cell--next:hover:not(:disabled),
+.pds-pg__cell--odd:hover:not([aria-current]):not(:disabled), .pds-pg__cell--even:hover:not([aria-current]):not(:disabled) {
+  background-color: color-mix(in srgb, var(--color-primary) calc(100% - 32%), #fff); 
+}
+.pds-pg__cell--prev:focus-visible:not(:disabled), .pds-pg__cell--next:focus-visible:not(:disabled),
+.pds-pg__cell--odd:focus-visible:not([aria-current]):not(:disabled), .pds-pg__cell--even:focus-visible:not([aria-current]):not(:disabled) {
+  background-color: color-mix(in srgb, var(--color-primary) calc(100% - 32%), #000); 
+}
+
+.pds-pg__cell--prev:hover:not(:disabled), .pds-pg__cell--next:hover:not(:disabled),
+.pds-pg__cell--odd:hover:not([aria-current]):not(:disabled), .pds-pg__cell--even:hover:not([aria-current]):not(:disabled) { color: var(--color-gray-soft); } 
+
+.pds-pg__cell[aria-current="page"] { background-color: var(--color-primary); color: var(--color-gray-soft); font-weight: 400; } 
+
+.pds-pg__cell--odd:disabled, .pds-pg__cell--even:disabled { background-color: var(--color-white); color: var(--color-gray); opacity: var(--opacity-disabled); } 
+.pds-pg__cell--prev:disabled, .pds-pg__cell--next:disabled { background-color: var(--color-white); color: var(--color-gray); opacity: var(--opacity-disabled); cursor: not-allowed; }

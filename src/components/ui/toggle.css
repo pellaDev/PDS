@@ -1,0 +1,17 @@
+.pds-toggle-btn {
+  font-family: var(--pds-font-sans); 
+  font-weight: 300;
+  font-size: var(--type-body2-size);
+  line-height: var(--type-body2-lh);
+  color: var(--color-foreground);
+}
+
+.pds-toggle-btn:disabled { opacity: var(--opacity-disabled); }
+
+.pds-toggle-btn--ghost:hover:not(:disabled) { background-color: var(--color-secondary); }
+.pds-toggle-btn--ghost[data-state=on]:not(:disabled) {
+  background-color: var(--color-secondary); 
+  color: var(--color-primary);             
+}
+
+[data-pds-surface='alternate'] .pds-toggle-btn--ghost[data-state=on]:not(:disabled) { background-color: var(--color-background); }
