@@ -1,5 +1,5 @@
 <div align="center">
-  <noscript><a href="https://liberapay.com/pellaDev/donate"><img alt="Donate using Liberapay" src="https://liberapay.com/assets/widgets/donate.svg"></a></noscript>
+  <noscript><a href="https://liberapay.com/pellaDev/donate"><img alt="Donate using Liberapay" target="_blank" src="https://liberapay.com/assets/widgets/donate.svg"></a></noscript>
 </h1>
 
 <h1 align="center">
