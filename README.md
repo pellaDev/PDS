@@ -1,6 +1,18 @@
-# PDS — Pella Design System
+<h1 align="center">
+  <noscript><a href="https://liberapay.com/pellaDev/donate"><img alt="Donate using Liberapay" src="https://liberapay.com/assets/widgets/donate.svg"></a></noscript>
+</h1>
 
+<div align="center">
+# PDS — Pella Design System
+</div>
+
+<div align="center">
+<img src=".artifacts/pds/public/favicon.svg" width="124" alt="Pella Design System animated logo"/>
+</div>
+
+<div align="center">
 React design system: tokens, components, and a live showcase.
+</div>
 
 ## Install
 
