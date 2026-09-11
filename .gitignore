@@ -1,3 +1,4 @@
 node_modules/
 dist/
 .tsbuildinfo
+.ssh_dsh_config

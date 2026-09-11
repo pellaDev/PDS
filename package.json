@@ -4,25 +4,24 @@
   "license": "MIT",
   "type": "module",
   "exports": {
-    ".": "./src/generated/tokens.tsx",
-    "./tokens": "./src/generated/tokens.tsx",
-    "./styles.css": "./src/index.css",
-    "./config": "./src/config.tsx",
-    "./components/*": "./src/components/*.tsx",
-    "./lib/*": "./src/lib/*.tsx",
-    "./hooks/*": "./src/hooks/*.tsx"
+    ".": "./dist/generated/tokens.js",
+    "./tokens": "./dist/generated/tokens.js",
+    "./styles.css": "./dist/styles.css",
+    "./config": "./dist/config.js",
+    "./components/*": "./dist/components/*.js",
+    "./lib/*": "./dist/lib/*.js",
+    "./hooks/*": "./dist/hooks/*.js"
   },
-  "imports": {
-    "#config": "./src/config.tsx",
-    "#components/*": "./src/components/*.tsx",
-    "#lib/*": "./src/lib/*.tsx",
-    "#hooks/*": "./src/hooks/*.tsx"
-  },
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "tokens": "node scripts/build-tokens.mjs",
     "dev": "vite --config vite.config.ts --host 0.0.0.0",
     "prebuild": "node scripts/build-tokens.mjs",
     "build": "vite build --config vite.config.ts",
+    "build:release": "node scripts/build-release.mjs",
+    "prepare": "node scripts/build-release.mjs",
     "serve": "vite preview --config vite.config.ts --host 0.0.0.0",
     "pretypecheck": "node scripts/build-tokens.mjs",
     "typecheck": "tsc -p tsconfig.json --noEmit"
@@ -33,7 +32,6 @@
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",
-    "@tailwindcss/typography": "^0.5.15",
     "@radix-ui/react-accordion": "^1.2.12",
     "@radix-ui/react-alert-dialog": "^1.1.15",
     "@radix-ui/react-aspect-ratio": "^1.1.8",
@@ -61,6 +59,7 @@
     "@radix-ui/react-toggle": "^1.1.10",
     "@radix-ui/react-toggle-group": "^1.1.11",
     "@radix-ui/react-tooltip": "^1.2.8",
+    "@tailwindcss/typography": "^0.5.15",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "cmdk": "^1.1.1",
@@ -81,14 +80,17 @@
     "zod": "^3.25.76"
   },
   "devDependencies": {
+    "@tailwindcss/cli": "^4.3.3",
     "@tailwindcss/vite": "^4.1.14",
     "@types/node": "^25.3.3",
     "@types/react": "^19.2.0",
     "@types/react-dom": "^19.2.0",
     "@vitejs/plugin-react": "^5.0.4",
+    "esbuild": "^0.28.2",
     "react": "19.1.0",
     "react-dom": "19.1.0",
     "tailwindcss": "^4.1.14",
+    "tsup": "^8.5.1",
     "vite": "^7.3.0"
   }
 }
