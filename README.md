@@ -6,7 +6,7 @@
 
 <h1 align="center">
   PDS | Pella Design System
-</div>
+</h1>
 
 <div align="center">
   <img src="src/preview/assets/logoAnimated.svg" width="124" alt="Pella Design System animated logo"/>

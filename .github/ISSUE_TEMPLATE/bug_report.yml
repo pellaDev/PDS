@@ -1,0 +1,51 @@
+name: Bug Report
+about: Report a bug or unexpected behavior in PDS
+title: "[Bug] "
+labels: ["bug"]
+assignees: []
+
+body:
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: What happened? What did you expect?
+      placeholder: I expected X but got Y...
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Reproduction Steps
+      description: Minimal steps to reproduce the issue
+      placeholder: |
+        1. Install PDS v...
+        2. Import component...
+        3. ...
+    validations:
+      required: true
+
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: PDS version, React version, browser/OS
+      placeholder: |
+        PDS: v1.x.x
+        React: 19.x
+        Browser: Chrome 126 / macOS 15
+    validations:
+      required: true
+
+  - type: dropdown
+    id: severity
+    attributes:
+      label: Severity
+      options:
+        - blocker
+        - major
+        - minor
+        - cosmetic
+    validations:
+      required: true
