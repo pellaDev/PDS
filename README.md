@@ -3,7 +3,7 @@
 </h1>
 
 <h1 align="center">
-  PDS — Pella Design System
+  PDS | Pella Design System
 </div>
 
 <div align="center">
