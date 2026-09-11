@@ -7,7 +7,7 @@
 </div>
 
 <div align="center">
-<img src=".artifacts/pds/public/favicon.svg" width="124" alt="Pella Design System animated logo"/>
+<img src=".src/preview/assets/logoAnimated.svg" width="124" alt="Pella Design System animated logo"/>
 </div>
 
 <div align="center">
