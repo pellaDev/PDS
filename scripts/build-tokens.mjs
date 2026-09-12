@@ -168,7 +168,7 @@ export function buildTokens() {
   writeFileSync(faviconOut, buildFavicon(tokens));
 }
 
-if (import.meta.url === `file:
+if (process.argv[1] === fileURLToPath(import.meta.url)) {
   buildTokens();
   process.stdout.write(
     "Generated src/index.css, src/generated/tokens.tsx, and public/favicon.svg\n",
