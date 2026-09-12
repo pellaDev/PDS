@@ -22,6 +22,8 @@ React design system: tokens, components, and a live showcase.
 pnpm add "https://github.com/pellaDev/PDS#main"
 ```
 
+That's it. No config, no Vite plugin, no postcss setup — the CSS is pre-compiled and ships with the package.
+
 Pin a version:
 
 ```bash
@@ -58,8 +60,10 @@ setPdsConfig({ fieldStyle: "outline" });
 ## Showcase (local preview)
 
 ```bash
-./start.sh          # -> http://localhost:5173/
-PDS_PORT=8080 ./start.sh
+git clone git@github-secondary:pellaDev/PDS.git
+cd PDS
+pnpm install
+pnpm dev          # -> http://localhost:5173/
 ```
 
 ## Exports
