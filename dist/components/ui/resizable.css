@@ -1,0 +1,36 @@
+[data-pds-fieldstyle='fill'] .pds-resizable-handle { background-color: transparent; }
+[data-pds-fieldstyle='fill'] .pds-resizable-handle::before {
+  content: ""; position: absolute; left: 50%; top: 0; bottom: 0; width: 1px;
+  transform: translateX(-50%); background-image: none; pointer-events: none;
+}
+[data-pds-fieldstyle='fill'] .pds-resizable-handle:hover::before,
+[data-pds-fieldstyle='fill'] .pds-resizable-handle:focus-visible::before,
+[data-pds-fieldstyle='fill'] .pds-resizable-handle:active::before {
+  background-image: var(--pds-separator-image-h);
+}
+
+[data-pds-fieldstyle='outline'] .pds-resizable-handle { background-color: transparent; }
+[data-pds-fieldstyle='outline'] .pds-resizable-handle::before {
+  content: ""; position: absolute; left: 50%; top: 0; bottom: 0; width: 1px;
+  transform: translateX(-50%); background-color: var(--color-separator); pointer-events: none;
+}
+[data-pds-fieldstyle='outline'] .pds-resizable-handle:hover::before,
+[data-pds-fieldstyle='outline'] .pds-resizable-handle:focus-visible::before,
+[data-pds-fieldstyle='outline'] .pds-resizable-handle:active::before {
+  width: 2px;
+}
+
+[data-pds-fieldstyle='fill'] .pds-resizable-handle[data-panel-group-direction='vertical']::before,
+[data-pds-fieldstyle='outline'] .pds-resizable-handle[data-panel-group-direction='vertical']::before {
+  left: 0; right: 0; top: 50%; bottom: auto; width: auto; height: 1px; transform: translateY(-50%);
+}
+[data-pds-fieldstyle='fill'] .pds-resizable-handle[data-panel-group-direction='vertical']:hover::before,
+[data-pds-fieldstyle='fill'] .pds-resizable-handle[data-panel-group-direction='vertical']:focus-visible::before,
+[data-pds-fieldstyle='fill'] .pds-resizable-handle[data-panel-group-direction='vertical']:active::before {
+  background-image: var(--pds-separator-image-v);
+}
+[data-pds-fieldstyle='outline'] .pds-resizable-handle[data-panel-group-direction='vertical']:hover::before,
+[data-pds-fieldstyle='outline'] .pds-resizable-handle[data-panel-group-direction='vertical']:focus-visible::before,
+[data-pds-fieldstyle='outline'] .pds-resizable-handle[data-panel-group-direction='vertical']:active::before {
+  width: auto; height: 2px;
+}

@@ -1,0 +1,595 @@
+import { jsx, jsxs } from "react/jsx-runtime";
+import { useContext, useState } from "react";
+import { Pencil, Sparkles, Check, X } from "lucide-react";
+import { SurfaceThemeContext } from "./parts";
+import { Button } from "../components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle
+} from "../components/ui/card";
+import { Field } from "../components/ui/field";
+import { Label } from "../components/ui/label";
+import { Switch } from "../components/ui/switch";
+import { Checkbox } from "../components/ui/checkbox";
+import { Radio } from "../components/ui/radio";
+import { Slider } from "../components/ui/slider";
+import { tokens } from "../generated/tokens";
+import { Tag, TagToggle } from "../components/ui/tag";
+import { hslTripleToHex, useLiveVar, contrastRatio, inkOn } from "./liveColor";
+import { ChevronLeft, MoreHorizontal, Search, Bell, Wifi, ShieldCheck, ChevronRight, Signal, BatteryFull, FileText } from "lucide-react";
+import { Item, ItemActions, ItemContent, ItemDescription, ItemGroup, ItemMedia, ItemSeparator, ItemTitle } from "../components/ui/item";
+import { Avatar, AvatarFallback } from "../components/ui/avatar";
+import { ToggleGroup, ToggleGroupItem } from "../components/ui/toggle-group";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "../components/ui/tabs";
+function OverviewPage() {
+  const slot = useContext(SurfaceThemeContext);
+  const primarySetCard = slot.surface === "base";
+  const switchId = "overview-notify-" + slot.surface;
+  const visId = "overview-vis-" + slot.surface;
+  return /* @__PURE__ */ jsxs("div", { className: "space-y-4", children: [
+    /* @__PURE__ */ jsxs("div", { className: "flex flex-wrap items-center gap-3", children: [
+      /* @__PURE__ */ jsx(Button, { size: "mini", children: /* @__PURE__ */ jsx(Pencil, {}) }),
+      /* @__PURE__ */ jsx(Button, { size: "small", children: "Small" }),
+      /* @__PURE__ */ jsxs(Button, { size: "special", children: [
+        /* @__PURE__ */ jsx(Sparkles, {}),
+        "Special"
+      ] }),
+      /* @__PURE__ */ jsx(Button, { variant: "link", children: "Link" })
+    ] }),
+    /* @__PURE__ */ jsxs(Card, { className: primarySetCard ? "bg-background text-foreground shadow-none" : "bg-secondary text-secondary-foreground shadow-none", children: [
+      /* @__PURE__ */ jsxs(CardHeader, { children: [
+        /* @__PURE__ */ jsx(CardTitle, { className: "text-xs font-medium uppercase tracking-wide text-muted-foreground", children: "DESKTOP" }),
+        /* @__PURE__ */ jsx(CardDescription, { children: primarySetCard ? "Primary-set composition on the base surface." : "Alternative-set composition on the alternate surface." })
+      ] }),
+      /* @__PURE__ */ jsxs(CardContent, { className: "space-y-4", children: [
+        /* @__PURE__ */ jsx(Field, { size: "sm", label: "Workspace name", className: "w-full max-w-60" }),
+        /* @__PURE__ */ jsxs("div", { className: "flex flex-wrap items-center gap-2", children: [
+          /* @__PURE__ */ jsx(Tag, { variant: "default", children: "Team" }),
+          /* @__PURE__ */ jsx(Tag, { variant: "ready", children: "Active" }),
+          /* @__PURE__ */ jsx(Tag, { variant: "disabled", children: "Archived" })
+        ] }),
+        /* @__PURE__ */ jsxs("div", { className: "flex flex-col gap-2", children: [
+          /* @__PURE__ */ jsx(Checkbox, { label: "Public workspace" }),
+          /* @__PURE__ */ jsx(Checkbox, { defaultChecked: true, label: "Enable analytics" })
+        ] }),
+        /* @__PURE__ */ jsxs("div", { className: "flex flex-col gap-2", children: [
+          /* @__PURE__ */ jsx(Radio, { name: visId, defaultChecked: true, label: "Private", value: "private" }),
+          /* @__PURE__ */ jsx(Radio, { name: visId, label: "Internal", value: "internal" })
+        ] }),
+        /* @__PURE__ */ jsxs("div", { className: "space-y-1.5", children: [
+          /* @__PURE__ */ jsx(Label, { children: "Max members" }),
+          /* @__PURE__ */ jsx(Slider, { defaultValue: [50], max: 200, step: 10 })
+        ] }),
+        /* @__PURE__ */ jsxs("div", { className: "flex items-center gap-2", children: [
+          /* @__PURE__ */ jsx(Switch, { defaultChecked: true, id: switchId }),
+          /* @__PURE__ */ jsx(Label, { htmlFor: switchId, children: "Email notifications" })
+        ] }),
+        /* @__PURE__ */ jsxs(Tabs, { defaultValue: "a", className: "w-full", children: [
+          /* @__PURE__ */ jsxs(TabsList, { children: [
+            /* @__PURE__ */ jsx(TabsTrigger, { value: "a", children: "General" }),
+            /* @__PURE__ */ jsx(TabsTrigger, { value: "b", children: "Members" })
+          ] }),
+          /* @__PURE__ */ jsx(TabsContent, { value: "a", children: /* @__PURE__ */ jsx("p", { className: "text-sm text-muted-foreground", children: "General settings placeholder." }) }),
+          /* @__PURE__ */ jsx(TabsContent, { value: "b", children: /* @__PURE__ */ jsx("p", { className: "text-sm text-muted-foreground", children: "Members list placeholder." }) })
+        ] }),
+        /* @__PURE__ */ jsx("div", { className: "overflow-hidden rounded-lg border", children: /* @__PURE__ */ jsxs(ItemGroup, { children: [
+          /* @__PURE__ */ jsxs(Item, { size: "sm", className: "relative", children: [
+            /* @__PURE__ */ jsx(ItemMedia, { variant: "icon", children: /* @__PURE__ */ jsx(FileText, {}) }),
+            /* @__PURE__ */ jsxs(ItemContent, { children: [
+              /* @__PURE__ */ jsx(ItemTitle, { children: "Product brief" }),
+              /* @__PURE__ */ jsx(ItemDescription, { children: "Goals, customer context, launch requirements." })
+            ] }),
+            /* @__PURE__ */ jsx(ItemActions, { children: /* @__PURE__ */ jsx(Tag, { variant: "ready", children: "Draft" }) }),
+            /* @__PURE__ */ jsxs("span", { className: "pointer-events-none absolute inset-y-0 right-0 flex items-center gap-1 rounded-r-md bg-[color-mix(in_srgb,var(--pds-surface-bg)_82%,transparent)] px-3 opacity-0 backdrop-blur-[1px] transition-opacity group-hover/item:pointer-events-auto group-hover/item:opacity-100", children: [
+              /* @__PURE__ */ jsx(Button, { size: "mini", "aria-label": "Edit", children: /* @__PURE__ */ jsx(Pencil, {}) }),
+              /* @__PURE__ */ jsx(Button, { size: "mini", "aria-label": "More actions", children: /* @__PURE__ */ jsx(MoreHorizontal, {}) })
+            ] })
+          ] }),
+          /* @__PURE__ */ jsx(ItemSeparator, {}),
+          /* @__PURE__ */ jsxs(Item, { size: "sm", className: "relative", children: [
+            /* @__PURE__ */ jsx(ItemMedia, { variant: "icon", children: /* @__PURE__ */ jsx(Bell, {}) }),
+            /* @__PURE__ */ jsx(ItemContent, { children: /* @__PURE__ */ jsx(ItemTitle, { children: "Notifications" }) }),
+            /* @__PURE__ */ jsx(ItemActions, { children: /* @__PURE__ */ jsx(Tag, { children: "3 new" }) }),
+            /* @__PURE__ */ jsx("span", { className: "pointer-events-none absolute inset-y-0 right-0 flex items-center gap-1 rounded-r-md bg-[color-mix(in_srgb,var(--pds-surface-bg)_82%,transparent)] px-3 opacity-0 backdrop-blur-[1px] transition-opacity group-hover/item:pointer-events-auto group-hover/item:opacity-100", children: /* @__PURE__ */ jsx(Button, { size: "mini", "aria-label": "More actions", children: /* @__PURE__ */ jsx(MoreHorizontal, {}) }) })
+          ] })
+        ] }) })
+      ] }),
+      /* @__PURE__ */ jsxs(CardFooter, { className: "gap-2", children: [
+        /* @__PURE__ */ jsx(Button, { children: "Save" }),
+        /* @__PURE__ */ jsx(Button, { variant: "link", children: "Cancel" })
+      ] })
+    ] }),
+    /* @__PURE__ */ jsxs("div", { className: "space-y-2 rounded-lg p-3", children: [
+      /* @__PURE__ */ jsx("div", { className: "text-xs font-medium uppercase tracking-wide text-muted-foreground", children: "Mobile" }),
+      /* @__PURE__ */ jsxs(
+        "div",
+        {
+          "data-pds-surface": primarySetCard ? "base" : "alternate",
+          className: "mx-auto w-full max-w-[280px] overflow-hidden rounded-[2rem] border " + (primarySetCard ? "bg-background" : "bg-secondary") + " shadow-sm",
+          children: [
+            /* @__PURE__ */ jsxs("div", { className: "flex items-center justify-between px-5 py-2 text-[11px] font-semibold", children: [
+              /* @__PURE__ */ jsx("span", { children: "9:41" }),
+              /* @__PURE__ */ jsxs("span", { className: "flex items-center gap-1 text-muted-foreground", children: [
+                /* @__PURE__ */ jsx(Signal, { className: "size-3" }),
+                /* @__PURE__ */ jsx(Wifi, { className: "size-3.5" }),
+                /* @__PURE__ */ jsx(BatteryFull, { className: "size-4" })
+              ] })
+            ] }),
+            /* @__PURE__ */ jsxs("div", { className: "space-y-3 px-3 pb-4", children: [
+              /* @__PURE__ */ jsxs("div", { className: "flex items-center gap-2 pt-1", children: [
+                /* @__PURE__ */ jsx(Button, { variant: "link", size: "icon", "aria-label": "Back", children: /* @__PURE__ */ jsx(ChevronLeft, {}) }),
+                /* @__PURE__ */ jsx("span", { className: "flex-1 text-base font-semibold leading-none", children: "Settings" }),
+                /* @__PURE__ */ jsx(Button, { variant: "link", size: "icon", "aria-label": "More options", children: /* @__PURE__ */ jsx(MoreHorizontal, {}) })
+              ] }),
+              /* @__PURE__ */ jsx(Field, { size: "lg", label: "Search", trailingIcon: /* @__PURE__ */ jsx(Search, { className: "size-4" }) }),
+              /* @__PURE__ */ jsxs(ToggleGroup, { type: "single", defaultValue: "today", className: "w-full justify-between", children: [
+                /* @__PURE__ */ jsx(ToggleGroupItem, { value: "today", className: "flex-1", children: "Today" }),
+                /* @__PURE__ */ jsx(ToggleGroupItem, { value: "week", className: "flex-1", children: "Week" }),
+                /* @__PURE__ */ jsx(ToggleGroupItem, { value: "month", className: "flex-1", children: "Month" })
+              ] }),
+              /* @__PURE__ */ jsx("div", { className: "overflow-hidden rounded-xl border", children: /* @__PURE__ */ jsxs(ItemGroup, { children: [
+                /* @__PURE__ */ jsxs(Item, { size: "sm", children: [
+                  /* @__PURE__ */ jsx(ItemMedia, { children: /* @__PURE__ */ jsx(Avatar, { className: "size-8", children: /* @__PURE__ */ jsx(AvatarFallback, { className: "text-xs", children: "PS" }) }) }),
+                  /* @__PURE__ */ jsxs(ItemContent, { children: [
+                    /* @__PURE__ */ jsx(ItemTitle, { children: "Account" }),
+                    /* @__PURE__ */ jsx(ItemDescription, { children: "Profile & security" })
+                  ] })
+                ] }),
+                /* @__PURE__ */ jsx(ItemSeparator, {}),
+                /* @__PURE__ */ jsxs(Item, { size: "sm", children: [
+                  /* @__PURE__ */ jsx(ItemMedia, { variant: "icon", children: /* @__PURE__ */ jsx(Bell, {}) }),
+                  /* @__PURE__ */ jsx(ItemContent, { children: /* @__PURE__ */ jsx(ItemTitle, { children: "Notifications" }) }),
+                  /* @__PURE__ */ jsx(ItemActions, { children: /* @__PURE__ */ jsx(Tag, { variant: "ready", children: "On" }) })
+                ] }),
+                /* @__PURE__ */ jsx(ItemSeparator, {}),
+                /* @__PURE__ */ jsxs(Item, { size: "sm", children: [
+                  /* @__PURE__ */ jsx(ItemMedia, { variant: "icon", children: /* @__PURE__ */ jsx(Wifi, {}) }),
+                  /* @__PURE__ */ jsx(ItemContent, { children: /* @__PURE__ */ jsx(ItemTitle, { children: "Wi-Fi" }) }),
+                  /* @__PURE__ */ jsx(ItemActions, { children: /* @__PURE__ */ jsx(Switch, { defaultChecked: true, "aria-label": "Wi-Fi" }) })
+                ] }),
+                /* @__PURE__ */ jsx(ItemSeparator, {}),
+                /* @__PURE__ */ jsxs(Item, { size: "sm", children: [
+                  /* @__PURE__ */ jsx(ItemMedia, { variant: "icon", children: /* @__PURE__ */ jsx(ShieldCheck, {}) }),
+                  /* @__PURE__ */ jsx(ItemContent, { children: /* @__PURE__ */ jsx(ItemTitle, { children: "Privacy" }) }),
+                  /* @__PURE__ */ jsx(ItemActions, { children: /* @__PURE__ */ jsx(Button, { variant: "link", size: "mini", "aria-label": "Open privacy", children: /* @__PURE__ */ jsx(ChevronRight, {}) }) })
+                ] })
+              ] }) }),
+              /* @__PURE__ */ jsx("div", { className: "space-y-1", children: /* @__PURE__ */ jsxs(Tabs, { defaultValue: "general", className: "w-full", children: [
+                /* @__PURE__ */ jsxs(TabsList, { size: "mobile", children: [
+                  /* @__PURE__ */ jsx(TabsTrigger, { size: "mobile", value: "general", children: "General" }),
+                  /* @__PURE__ */ jsx(TabsTrigger, { size: "mobile", value: "privacy", children: "Privacy" })
+                ] }),
+                /* @__PURE__ */ jsx(TabsContent, { value: "general", className: "rounded-md border p-3 text-xs leading-relaxed", children: "Profile, appearance and app preferences." }),
+                /* @__PURE__ */ jsx(TabsContent, { value: "privacy", className: "rounded-md border p-3 text-xs leading-relaxed", children: "Permissions, data and account safety." })
+              ] }) }),
+              /* @__PURE__ */ jsxs("div", { className: "space-y-1 px-0.5", children: [
+                /* @__PURE__ */ jsx(Label, { className: "text-xs text-muted-foreground", children: "Brightness" }),
+                /* @__PURE__ */ jsx(Slider, { defaultValue: [70], max: 100, step: 5 })
+              ] }),
+              /* @__PURE__ */ jsx(Button, { size: "large", className: "w-full", children: "Continue" })
+            ] })
+          ]
+        }
+      )
+    ] })
+  ] });
+}
+const HOVER_LAYER_ALPHA_LABEL = "32%";
+function blendHex(hex, towardWhite) {
+  const n = parseInt(hex.slice(1), 16);
+  const channels = [n >> 16 & 255, n >> 8 & 255, n & 255];
+  return "#" + channels.map((c) => Math.round(c * 0.68 + (towardWhite ? 255 : 0) * 0.32).toString(16).padStart(2, "0")).join("").toUpperCase();
+}
+const LIGHT_SET = {
+  label: "Light",
+  boxes: [
+    { bg: "#F9F9F9", text: "#1B1B1B" },
+    { bg: "#E4E3E3", text: "#1B1B1B" }
+  ],
+  groups: [
+    { label: "Brand", colors: [{ name: "Primary", hex: "#204384", cssVar: "primary", hint: "brand primary - live from --primary" }] },
+    { label: "Traffic lights", colors: [
+      { name: "Red", hex: "#EE1F25", hint: "error / destructive" },
+      { name: "Yellow", hex: "#CFEC14", hint: "alert / accent" },
+      { name: "Green", hex: "#218A38", hint: "success" }
+    ] },
+    { label: "Gray scale (5 steps)", colors: [
+      { name: "Step 1 - lightest", hex: "#F9F9F9", hint: "background / card / popover (no pure white)" },
+      { name: "Step 2", hex: "#E4E3E3", hint: "border / input / muted" },
+      { name: "Step 3", hex: "#919191", hint: "disabled label / chart5" },
+      { name: "Step 4", hex: "#383838", hint: "muted-foreground" },
+      { name: "Step 5 - darkest", hex: "#1B1B1B", hint: "foreground" }
+    ] }
+  ]
+};
+const DARK_SET = {
+  label: "Dark",
+  boxes: [
+    { bg: "#1B1B1B", text: "#F9F9F9" },
+    { bg: "#383838", text: "#F9F9F9" }
+  ],
+  groups: [
+    { label: "Brand", colors: [{ name: "Primary", hex: "#6C8FCB", cssVar: "primary", hint: "brand primary - live from --primary" }] },
+    { label: "Traffic lights", colors: [
+      { name: "Red", hex: "#EE1F25", hint: "error / destructive" },
+      { name: "Yellow", hex: "#CFEC14", hint: "alert / accent" },
+      { name: "Green", hex: "#5BB86B", hint: "success" }
+    ] },
+    { label: "Gray scale (5 steps)", colors: [
+      { name: "Step 1 - lightest", hex: "#F9F9F9", hint: "foreground" },
+      { name: "Step 2", hex: "#E4E3E3", hint: "muted-foreground" },
+      { name: "Step 3", hex: "#919191", hint: "intermediate step (added for scale completeness)" },
+      { name: "Step 4", hex: "#383838", hint: "card / border / surface" },
+      { name: "Step 5 - darkest", hex: "#1B1B1B", hint: "background" }
+    ] }
+  ]
+};
+function ColorTriple({ name, hex, hint, textColor, cssVar, hostBg }) {
+  const live = useLiveVar(cssVar);
+  let baseHex = hex;
+  if (cssVar && live) {
+    const parsed = hslTripleToHex(live);
+    if (parsed) baseHex = parsed;
+  }
+  const variants = [
+    { label: "Base", value: baseHex },
+    { label: "Lighter " + HOVER_LAYER_ALPHA_LABEL, value: blendHex(baseHex, true) },
+    { label: "Darker " + HOVER_LAYER_ALPHA_LABEL, value: blendHex(baseHex, false) }
+  ];
+  return /* @__PURE__ */ jsxs("div", { className: "space-y-1.5", children: [
+    /* @__PURE__ */ jsxs("p", { className: textColor + " text-xs font-medium", children: [
+      name,
+      hint ? /* @__PURE__ */ jsx("span", { className: "ml-2 text-[10px] opacity-60", children: hint }) : null
+    ] }),
+    /* @__PURE__ */ jsx("div", { className: "grid grid-cols-3 gap-2", children: variants.map((variant) => /* @__PURE__ */ jsxs("div", { className: "space-y-1", children: [
+      /* @__PURE__ */ jsx("div", { className: "relative h-9 rounded-md", style: { backgroundColor: variant.value, boxShadow: "inset 0 0 0 1px rgba(127, 127, 127, 0.35)" }, children: hostBg ? (() => {
+        const ratio = contrastRatio(variant.value, hostBg);
+        const pass = ratio >= 3;
+        const ink = inkOn(variant.value);
+        const scrim = ink === "#1B1B1B" ? "rgba(255,255,255,0.6)" : "rgba(0,0,0,0.3)";
+        return /* @__PURE__ */ jsx("span", { className: "absolute inset-0 flex items-center justify-center", children: /* @__PURE__ */ jsxs(
+          "span",
+          {
+            className: "flex items-center gap-1 rounded-full px-2 py-0.5 text-[11px] font-semibold tabular-nums",
+            style: { color: ink, backgroundColor: scrim },
+            title: pass ? "Contrasto WCAG superato (>= 3:1)" : "Contrasto WCAG non superato (< 3:1)",
+            children: [
+              pass ? /* @__PURE__ */ jsx(Check, { className: "size-3.5" }) : /* @__PURE__ */ jsx(X, { className: "size-3.5" }),
+              ratio.toFixed(2)
+            ]
+          }
+        ) });
+      })() : null }),
+      /* @__PURE__ */ jsx("p", { className: textColor + " text-[9px] leading-tight opacity-80", children: variant.label }),
+      /* @__PURE__ */ jsx("p", { className: textColor + " font-mono text-[10px]", children: variant.value.toUpperCase() })
+    ] }, variant.label)) })
+  ] });
+}
+function ColorsPage() {
+  const slot = useContext(SurfaceThemeContext);
+  const set = slot.mode === "dark" ? DARK_SET : LIGHT_SET;
+  const textClass = slot.surface === "base" ? "text-foreground" : "text-secondary-foreground";
+  return /* @__PURE__ */ jsx("div", { className: "space-y-5", children: set.groups.map((group) => /* @__PURE__ */ jsxs("section", { className: "space-y-3", children: [
+    /* @__PURE__ */ jsx("h3", { className: textClass + " text-xs font-semibold uppercase tracking-wide", children: group.label }),
+    group.colors.map((color) => /* @__PURE__ */ jsx(
+      ColorTriple,
+      {
+        name: color.name,
+        hex: color.hex,
+        cssVar: color.cssVar,
+        hostBg: set.boxes[slot.surface === "base" ? 0 : 1].bg,
+        hint: color.hint,
+        textColor: textClass
+      },
+      color.name + " " + color.hex
+    ))
+  ] }, group.label)) });
+}
+const remToPx = (value) => Math.round(parseFloat(value.slice(0, -3)) * 16) + "px";
+function FontsPage() {
+  const styles = tokens.typographyStyles;
+  const slot = useContext(SurfaceThemeContext);
+  if (slot.part === "dual") {
+    return /* @__PURE__ */ jsx("div", { className: "space-y-8 p-6 text-card-foreground", children: /* @__PURE__ */ jsxs("section", { children: [
+      /* @__PURE__ */ jsx("h2", { className: "text-xs font-medium uppercase tracking-wide text-muted-foreground", children: "Typeface" }),
+      /* @__PURE__ */ jsx(
+        "p",
+        {
+          style: {
+            fontFamily: "Roboto, Arial, sans-serif",
+            fontWeight: 300,
+            letterSpacing: "var(--letter-spacing-base)",
+            fontSize: "4rem",
+            lineHeight: "5rem"
+          },
+          children: "The quick brown fox jumps over the lazy dog."
+        }
+      ),
+      /* @__PURE__ */ jsx("p", { className: "mt-3 max-w-3xl text-sm text-muted-foreground", children: "Roboto Light (weight 300) is the only face and weight of the original system. It is self-hosted from /fonts as a latin woff2 subset, tracked at +0.25px everywhere." })
+    ] }) });
+  }
+  return /* @__PURE__ */ jsxs("div", { className: "space-y-8 p-6 text-card-foreground", children: [
+    /* @__PURE__ */ jsxs("section", { className: "space-y-4", children: [
+      /* @__PURE__ */ jsx("h2", { className: "text-xs font-medium uppercase tracking-wide text-muted-foreground", children: "Text styles" }),
+      Object.entries(styles).map(([name, s]) => /* @__PURE__ */ jsxs("div", { className: "grid items-start gap-x-4 sm:grid-cols-[130px_1fr]", children: [
+        /* @__PURE__ */ jsxs("span", { className: "pt-1.5 text-xs font-medium uppercase tracking-wide text-muted-foreground", children: [
+          name,
+          /* @__PURE__ */ jsxs("span", { className: "ml-2 font-mono text-[10px] normal-case opacity-70", children: [
+            "(",
+            remToPx(s.fontSize),
+            " /",
+            " ",
+            remToPx(s.lineHeight),
+            ")"
+          ] })
+        ] }),
+        /* @__PURE__ */ jsx(
+          "p",
+          {
+            className: "min-w-0",
+            style: {
+              fontFamily: s.fontFamily + ", Arial, sans-serif",
+              fontWeight: s.fontWeight,
+              fontSize: s.fontSize,
+              lineHeight: s.lineHeight,
+              letterSpacing: s.letterSpacing
+            },
+            children: "Build products people understand."
+          }
+        )
+      ] }, name))
+    ] }),
+    /* @__PURE__ */ jsxs("section", { className: "space-y-6 border-t pt-6", children: [
+      /* @__PURE__ */ jsx(ScaleTable, { title: "Font sizes", rows: Object.entries(tokens.fontSizes) }),
+      /* @__PURE__ */ jsx(ScaleTable, { title: "Line heights", rows: Object.entries(tokens.lineHeights) })
+    ] }),
+    /* @__PURE__ */ jsxs("section", { className: "space-y-3 border-t pt-6", children: [
+      /* @__PURE__ */ jsx("h2", { className: "text-xs font-medium uppercase tracking-wide text-muted-foreground", children: "System constants" }),
+      /* @__PURE__ */ jsxs("div", { className: "grid gap-3 sm:grid-cols-3", children: [
+        /* @__PURE__ */ jsx(Constant, { label: "Family", value: "Roboto, Arial, sans-serif" }),
+        /* @__PURE__ */ jsx(Constant, { label: "Weight", value: "300 (Light) only" }),
+        /* @__PURE__ */ jsx(Constant, { label: "Tracking", value: "+0.25px on every style" })
+      ] })
+    ] })
+  ] });
+}
+function ScaleTable({ title, rows }) {
+  return /* @__PURE__ */ jsxs("div", { className: "space-y-3", children: [
+    /* @__PURE__ */ jsx("h2", { className: "text-xs font-medium uppercase tracking-wide text-muted-foreground", children: title }),
+    /* @__PURE__ */ jsx("dl", { className: "divide-y rounded-lg border", children: rows.map(([name, value]) => /* @__PURE__ */ jsxs("div", { className: "flex items-baseline justify-between gap-4 px-3 py-1.5", children: [
+      /* @__PURE__ */ jsx("dt", { className: "font-mono text-xs", children: name }),
+      /* @__PURE__ */ jsxs("dd", { className: "text-sm font-medium", children: [
+        value,
+        /* @__PURE__ */ jsxs("span", { className: "ml-2 font-mono text-[10px] opacity-70", children: [
+          "(",
+          remToPx(value),
+          ")"
+        ] })
+      ] })
+    ] }, name)) })
+  ] });
+}
+function Constant({ label, value }) {
+  return /* @__PURE__ */ jsxs("div", { className: "rounded-lg border p-3", children: [
+    /* @__PURE__ */ jsx("p", { className: "text-[10px] font-medium uppercase tracking-wide text-muted-foreground", children: label }),
+    /* @__PURE__ */ jsx("p", { className: "mt-1 font-mono text-xs", children: value })
+  ] });
+}
+function TagInputDemo({ filled = false }) {
+  const [tags, setTags] = useState(["Team", "Design"]);
+  const [draft, setDraft] = useState("");
+  const add = () => {
+    const v = draft.trim().replace(/,$/, "");
+    if (v && !tags.includes(v)) setTags((c) => [...c, v]);
+    setDraft("");
+  };
+  const remove = (t) => setTags((c) => c.filter((x) => x !== t));
+  return /* @__PURE__ */ jsxs("div", { className: "flex min-h-[2.75rem] flex-wrap items-center gap-2 rounded-lg p-2 " + (filled ? "[background-color:var(--pds-field-fill-bg)]" : "border"), children: [
+    tags.map((t) => /* @__PURE__ */ jsx(Tag, { variant: "default", onDismiss: () => remove(t), children: t }, t)),
+    /* @__PURE__ */ jsx(
+      "input",
+      {
+        value: draft,
+        onChange: (e) => setDraft(e.target.value),
+        onKeyDown: (e) => {
+          if (e.key === "Enter" || e.key === ",") {
+            e.preventDefault();
+            add();
+          } else if (e.key === "Backspace" && draft === "") setTags((c) => c.slice(0, -1));
+        },
+        placeholder: tags.length ? "" : "Add a tag\u2026",
+        "aria-label": "Add a tag",
+        className: "min-w-[6rem] flex-1 bg-transparent text-sm outline-none placeholder:text-muted-foreground"
+      }
+    )
+  ] });
+}
+const TAG_SEED = ["Team", "Billing", "Admin"];
+function TagsPage() {
+  const [demoTags, setDemoTags] = useState(TAG_SEED);
+  const removeTag = (t) => setDemoTags((cur) => cur.filter((x) => x !== t));
+  const dismissibleRow = /* @__PURE__ */ jsxs("div", { className: "flex flex-wrap items-center gap-2", children: [
+    demoTags.map((t) => /* @__PURE__ */ jsx(Tag, { variant: "default", onDismiss: () => removeTag(t), children: t }, t)),
+    demoTags.length === 0 ? /* @__PURE__ */ jsx("button", { type: "button", onClick: () => setDemoTags(TAG_SEED), className: "text-sm text-muted-foreground underline underline-offset-2 hover:text-foreground", children: "Reset" }) : null
+  ] });
+  const states = [
+    { variant: "default", sample: "New", fillRef: "pella.sys.color.custom.light", hexes: "#204384 / #6C8FCB dark" },
+    { variant: "error", sample: "Error 500", fillRef: "semantic.error (red)", hexes: "#EE1F25 both themes" },
+    { variant: "alert", sample: "Alert", fillRef: "semantic.alert (yellow)", hexes: "#CFEC14 both themes" },
+    { variant: "ready", sample: "Ready", fillRef: "semantic.success (green)", hexes: "#218A38 / #5BB86B dark" },
+    { variant: "disabled", sample: "Off", fillRef: "custom.light + opacity.disabled", hexes: "base fill at 32% opacity" }
+  ];
+  const slot = useContext(SurfaceThemeContext);
+  if (slot.part === "dual") {
+    return /* @__PURE__ */ jsxs("div", { className: "space-y-8 p-6 text-card-foreground", children: [
+      /* @__PURE__ */ jsxs("section", { className: "space-y-3", children: [
+        /* @__PURE__ */ jsx("h2", { className: "text-xs font-medium uppercase tracking-wide text-muted-foreground", children: "Variants" }),
+        /* @__PURE__ */ jsx("div", { className: "flex flex-wrap items-center gap-3", children: states.map((s) => /* @__PURE__ */ jsx(Tag, { variant: s.variant, children: s.sample }, s.variant)) })
+      ] }),
+      /* @__PURE__ */ jsxs("section", { className: "space-y-3", children: [
+        /* @__PURE__ */ jsx("h2", { className: "text-xs font-medium uppercase tracking-wide text-muted-foreground", children: "Dismissible" }),
+        dismissibleRow
+      ] }),
+      /* @__PURE__ */ jsxs("section", { className: "space-y-3", children: [
+        /* @__PURE__ */ jsx("h2", { className: "text-xs font-medium uppercase tracking-wide text-muted-foreground", children: "Tag input" }),
+        /* @__PURE__ */ jsxs("div", { className: "space-y-2", children: [
+          /* @__PURE__ */ jsx(TagInputDemo, {}),
+          /* @__PURE__ */ jsx(TagInputDemo, { filled: true })
+        ] })
+      ] }),
+      /* @__PURE__ */ jsxs("section", { className: "space-y-3", children: [
+        /* @__PURE__ */ jsx("h2", { className: "text-xs font-medium uppercase tracking-wide text-muted-foreground", children: "Preset tags (toggle)" }),
+        /* @__PURE__ */ jsx("div", { className: "flex flex-wrap items-center gap-2", children: TAG_SEED.map((t) => /* @__PURE__ */ jsx(TagToggle, { variant: "default", children: t }, t)) })
+      ] })
+    ] });
+  }
+  return /* @__PURE__ */ jsxs("div", { className: "space-y-8 p-6 text-card-foreground", children: [
+    /* @__PURE__ */ jsxs("section", { className: "space-y-3", children: [
+      /* @__PURE__ */ jsx("h2", { className: "text-xs font-medium uppercase tracking-wide text-muted-foreground", children: "Dismissible (optional onDismiss)" }),
+      /* @__PURE__ */ jsxs("p", { className: "max-w-3xl text-sm text-muted-foreground", children: [
+        "Pass ",
+        /* @__PURE__ */ jsx("code", { className: "font-mono text-[13px]", children: "onDismiss" }),
+        " to render a small close button; the parent owns removal. Click an X to remove that tag."
+      ] }),
+      dismissibleRow
+    ] }),
+    /* @__PURE__ */ jsxs("section", { className: "space-y-3", children: [
+      /* @__PURE__ */ jsx("h2", { className: "text-xs font-medium uppercase tracking-wide text-muted-foreground", children: "Tag input" }),
+      /* @__PURE__ */ jsxs("p", { className: "max-w-3xl text-sm text-muted-foreground", children: [
+        "Type a tag and press ",
+        /* @__PURE__ */ jsx("code", { className: "font-mono text-[13px]", children: "Enter" }),
+        " (or comma) to add it; remove any with its X, or Backspace on an empty field. Shown in both container styles - OUTLINE (bordered) and FILL (solid, no border)."
+      ] }),
+      /* @__PURE__ */ jsxs("div", { className: "space-y-2", children: [
+        /* @__PURE__ */ jsx(TagInputDemo, {}),
+        /* @__PURE__ */ jsx(TagInputDemo, { filled: true })
+      ] })
+    ] }),
+    /* @__PURE__ */ jsxs("section", { className: "space-y-3", children: [
+      /* @__PURE__ */ jsx("h2", { className: "text-xs font-medium uppercase tracking-wide text-muted-foreground", children: "Preset tags (toggle)" }),
+      /* @__PURE__ */ jsx("p", { className: "max-w-3xl text-sm text-muted-foreground", children: "A fixed set of preset tags with a self-contained on/off life-cycle: click the X to switch one off (it fades to the disabled state), click it again to re-enable. No custom text is added." }),
+      /* @__PURE__ */ jsx("div", { className: "flex flex-wrap items-center gap-2", children: TAG_SEED.map((t) => /* @__PURE__ */ jsx(TagToggle, { variant: "default", children: t }, t)) })
+    ] }),
+    /* @__PURE__ */ jsxs("section", { className: "space-y-3", children: [
+      /* @__PURE__ */ jsx("h2", { className: "text-xs font-medium uppercase tracking-wide text-muted-foreground", children: "Composition (tags.json)" }),
+      states.map((s) => /* @__PURE__ */ jsxs("div", { className: "flex flex-wrap items-center gap-x-4 gap-y-1 rounded-lg border p-3", children: [
+        /* @__PURE__ */ jsx(Tag, { variant: s.variant, children: s.sample }),
+        /* @__PURE__ */ jsx("code", { className: "text-[11px] opacity-80", children: s.fillRef }),
+        /* @__PURE__ */ jsx("span", { className: "font-mono text-[11px] opacity-70", children: s.hexes })
+      ] }, s.variant))
+    ] }),
+    /* @__PURE__ */ jsxs("section", { className: "space-y-3 border-t pt-6", children: [
+      /* @__PURE__ */ jsx("h2", { className: "text-xs font-medium uppercase tracking-wide text-muted-foreground", children: "System mapping" }),
+      /* @__PURE__ */ jsxs("div", { className: "grid gap-3 sm:grid-cols-2", children: [
+        /* @__PURE__ */ jsx(Constant, { label: "Corner radius", value: "--radius-sm = 0.25rem (sss - the same canonical value as fields, checkboxes and tooltips)" }),
+        /* @__PURE__ */ jsx(Constant, { label: "Label typography", value: "caption style - Roboto Light 300, 12px / 16px line / 0.25px tracking" }),
+        /* @__PURE__ */ jsx(Constant, { label: "Container padding", value: "horizontal sss only (0 {sss}) per the pill composition convention; tags.json exports no inner spacing" })
+      ] })
+    ] })
+  ] });
+}
+function LayoutPage() {
+  const radii = [
+    { name: "sm", value: tokens.radiusSm },
+    { name: "md", value: tokens.radiusMd },
+    { name: "lg (base)", value: tokens.radius }
+  ];
+  const slot = useContext(SurfaceThemeContext);
+  if (slot.part === "dual") {
+    return /* @__PURE__ */ jsx("div", { className: "space-y-8 p-6 text-card-foreground", children: /* @__PURE__ */ jsxs("section", { className: "space-y-4", children: [
+      /* @__PURE__ */ jsx("h2", { className: "text-xs font-medium uppercase tracking-wide text-muted-foreground", children: "Corner radii" }),
+      /* @__PURE__ */ jsx("p", { className: "max-w-3xl text-sm text-muted-foreground", children: "Three canonical corner treatments. Buttons and inputs use the large radius; chips, tags and badges step down to sm." }),
+      /* @__PURE__ */ jsx("div", { className: "grid gap-4 sm:grid-cols-3", children: radii.map((r) => /* @__PURE__ */ jsxs("div", { className: "space-y-2", children: [
+        /* @__PURE__ */ jsx(
+          "div",
+          {
+            className: "flex h-20 items-end border bg-background p-3",
+            style: { borderRadius: r.value },
+            children: /* @__PURE__ */ jsx("span", { className: "text-xs font-medium", children: r.name })
+          }
+        ),
+        /* @__PURE__ */ jsxs("p", { className: "font-mono text-[11px] opacity-70", children: [
+          r.value,
+          " (",
+          remToPx(r.value),
+          ")"
+        ] })
+      ] }, r.name)) })
+    ] }) });
+  }
+  return /* @__PURE__ */ jsxs("div", { className: "space-y-8 p-6 text-card-foreground", children: [
+    /* @__PURE__ */ jsxs("section", { children: [
+      /* @__PURE__ */ jsx("h2", { className: "text-xs font-medium uppercase tracking-wide text-muted-foreground", children: "Dimensions" }),
+      /* @__PURE__ */ jsx("p", { className: "mt-1 max-w-3xl text-sm text-muted-foreground", children: "The full dimension scale from the original tokens: component heights, widths and paddings, referenced verbatim by name in every component definition." }),
+      /* @__PURE__ */ jsx("div", { className: "mt-4", children: /* @__PURE__ */ jsx(ScaleTable, { title: "Core dimensions", rows: Object.entries(tokens.dimensions) }) })
+    ] }),
+    /* @__PURE__ */ jsxs("section", { className: "space-y-4 border-t pt-6", children: [
+      /* @__PURE__ */ jsx("h2", { className: "text-xs font-medium uppercase tracking-wide text-muted-foreground", children: "Spacing" }),
+      /* @__PURE__ */ jsx("p", { className: "max-w-3xl text-sm text-muted-foreground", children: "Base spacing and the named presets (including compound ones like textAndIcon) that components reference instead of raw values." }),
+      /* @__PURE__ */ jsx(ScaleTable, { title: "Spacing", rows: Object.entries(tokens.spacingPresets) })
+    ] })
+  ] });
+}
+function ShadowsPage() {
+  const slot = useContext(SurfaceThemeContext);
+  if (slot.part === "dual") {
+    return /* @__PURE__ */ jsxs("div", { className: "space-y-8 p-6 text-card-foreground", children: [
+      /* @__PURE__ */ jsxs("section", { className: "space-y-4", children: [
+        /* @__PURE__ */ jsx("h2", { className: "text-xs font-medium uppercase tracking-wide text-muted-foreground", children: "Shadows" }),
+        /* @__PURE__ */ jsx("p", { className: "max-w-3xl text-sm text-muted-foreground", children: "The six original elevation recipes: one per interaction surface. Note the trigger halo (pure spread, no blur) and the dots inner shadow." }),
+        Object.entries(tokens.shadows).map(([name, css]) => /* @__PURE__ */ jsxs("div", { className: "space-y-1", children: [
+          /* @__PURE__ */ jsx(
+            "div",
+            {
+              className: "flex h-14 items-center justify-center rounded-lg border bg-card",
+              style: { boxShadow: css },
+              children: /* @__PURE__ */ jsx("span", { className: "text-xs font-medium", children: name })
+            }
+          ),
+          /* @__PURE__ */ jsx("p", { className: "break-all font-mono text-[10px] opacity-70", children: css })
+        ] }, name))
+      ] }),
+      /* @__PURE__ */ jsxs("section", { className: "space-y-4 border-t pt-6", children: [
+        /* @__PURE__ */ jsx("h2", { className: "text-xs font-medium uppercase tracking-wide text-muted-foreground", children: "Scrim" }),
+        /* @__PURE__ */ jsx("p", { className: "max-w-3xl text-sm text-muted-foreground", children: "The modal backdrop layer: black at 80% opacity, theme-independent. Shown here over a sample surface so the content underneath stays visible but dimmed." }),
+        /* @__PURE__ */ jsxs("div", { className: "relative h-24 overflow-hidden rounded-lg border bg-card", children: [
+          /* @__PURE__ */ jsxs("div", { className: "flex h-full items-center justify-center gap-3 p-6", children: [
+            /* @__PURE__ */ jsx(Button, { size: "small", children: "Primary action" }),
+            /* @__PURE__ */ jsx("span", { className: "text-sm text-muted-foreground", children: "Content behind the scrim" })
+          ] }),
+          /* @__PURE__ */ jsx("div", { className: "absolute inset-0", style: { background: "var(--overlay-scrim)" } })
+        ] })
+      ] })
+    ] });
+  }
+  return /* @__PURE__ */ jsxs("div", { className: "space-y-8 p-6 text-card-foreground", children: [
+    /* @__PURE__ */ jsxs("section", { className: "space-y-3", children: [
+      /* @__PURE__ */ jsx("h2", { className: "text-xs font-medium uppercase tracking-wide text-muted-foreground", children: "Shadow recipes" }),
+      /* @__PURE__ */ jsx("dl", { className: "divide-y rounded-lg border", children: Object.entries(tokens.shadows).map(([name, css]) => /* @__PURE__ */ jsxs("div", { className: "flex items-baseline justify-between gap-4 px-3 py-1.5", children: [
+        /* @__PURE__ */ jsx("dt", { className: "font-mono text-xs", children: name }),
+        /* @__PURE__ */ jsx("dd", { className: "break-all text-right font-mono text-[11px]", children: css })
+      ] }, name)) })
+    ] }),
+    /* @__PURE__ */ jsxs("section", { className: "space-y-3 border-t pt-6", children: [
+      /* @__PURE__ */ jsx("h2", { className: "text-xs font-medium uppercase tracking-wide text-muted-foreground", children: "Scrim" }),
+      /* @__PURE__ */ jsxs("div", { className: "grid gap-3 sm:grid-cols-2", children: [
+        /* @__PURE__ */ jsx(Constant, { label: "overlay.scrim", value: tokens.overlays.scrim }),
+        /* @__PURE__ */ jsx(Constant, { label: "Consumers", value: "dialog / drawer / sheet / alert-dialog backdrops (bg-scrim)" })
+      ] })
+    ] })
+  ] });
+}
+export {
+  ColorsPage,
+  DARK_SET,
+  FontsPage,
+  LIGHT_SET,
+  LayoutPage,
+  OverviewPage,
+  ShadowsPage,
+  TagsPage
+};

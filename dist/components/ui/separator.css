@@ -1,0 +1,8 @@
+.pds-separator--auto {
+  background-color: var(--pds-separator-solid);
+  background-image: var(--pds-separator-image-h);
+}
+
+.pds-separator--auto[data-orientation="vertical"] {
+  background-image: var(--pds-separator-image-v);
+}

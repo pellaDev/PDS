@@ -1,0 +1,12 @@
+{
+  "type": "module",
+  "exports": {
+    ".": "./generated/tokens.js",
+    "./tokens": "./generated/tokens.js",
+    "./styles.css": "./styles.css",
+    "./config": "./config.js",
+    "./components/*": "./components/*",
+    "./lib/*": "./lib/*",
+    "./hooks/*": "./hooks/*"
+  }
+}

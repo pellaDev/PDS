@@ -1,0 +1,109 @@
+.pds-toggle {
+  --_wash-lighter: color-mix(in srgb, var(--color-primary) calc(100% - 32%), #fff); 
+  --_wash-darker: color-mix(in srgb, var(--color-primary) calc(100% - 32%), #000); 
+  display: inline-flex;
+  align-items: center;
+  gap: var(--dim-sss); 
+  cursor: pointer;
+  user-select: none;
+  font-family: var(--pds-font-sans);
+  font-weight: 300;
+  font-size: var(--type-body2-size);
+  line-height: var(--type-body2-lh); 
+  color: var(--color-black-soft); 
+}
+
+.pds-toggle[data-disabled] {
+  opacity: var(--opacity-disabled);
+  cursor: not-allowed;
+}
+.pds-toggle input[type="checkbox"] {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+  clip-path: inset(50%);
+  overflow: hidden;
+}
+.pds-toggle__switch {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start; 
+  box-sizing: border-box;
+  width: var(--dim-llll); 
+  height: var(--dim-mmmm); 
+  border-radius: var(--dim-llll); 
+  border: var(--dim-ssss) solid var(--color-black-soft); 
+  background-color: transparent; 
+  padding-left: var(--dim-sss); 
+  transition: border-color 120ms ease, background-color 120ms ease, box-shadow 120ms ease;
+}
+.pds-toggle__thumb {
+  width: var(--dim-ss); 
+  height: var(--dim-ss);
+  border-radius: var(--dim-l); 
+  background-color: var(--color-black-soft); 
+  transition: width 120ms ease, height 120ms ease, margin 120ms ease, background-color 120ms ease, box-shadow 120ms ease;
+}
+
+.pds-toggle:hover:not([data-disabled]) input[type="checkbox"]:not(:checked):not(:disabled) ~ .pds-toggle__switch {
+  border-color: var(--_wash-lighter); 
+}
+.pds-toggle:hover:not([data-disabled]) input[type="checkbox"]:not(:checked):not(:disabled) ~ .pds-toggle__switch > .pds-toggle__thumb {
+  background-color: var(--_wash-lighter); 
+}
+
+.pds-toggle input[type="checkbox"]:focus-visible:not(:checked):not(:disabled) ~ .pds-toggle__switch {
+  border-color: var(--_wash-darker); 
+}
+.pds-toggle input[type="checkbox"]:focus-visible:not(:checked):not(:disabled) ~ .pds-toggle__switch > .pds-toggle__thumb,
+.pds-toggle input[type="checkbox"]:active:not(:checked):not(:disabled) ~ .pds-toggle__switch > .pds-toggle__thumb {
+  background-color: var(--_wash-darker); 
+}
+.pds-toggle input[type="checkbox"]:active:not(:checked):not(:disabled) ~ .pds-toggle__switch > .pds-toggle__thumb {
+  box-shadow: 0 0 0 var(--dim-ss) rgba(0, 0, 0, 0.08); 
+}
+
+.pds-toggle input[type="checkbox"]:checked:not(:disabled) ~ .pds-toggle__switch {
+  background-color: var(--color-primary); 
+  border-color: transparent;
+  justify-content: flex-end; 
+  padding-left: 0;
+  padding-right: var(--dim-sssss); 
+}
+.pds-toggle input[type="checkbox"]:checked:not(:disabled) ~ .pds-toggle__switch > .pds-toggle__thumb {
+  width: var(--dim-s); 
+  height: var(--dim-s);
+  background-color: var(--color-gray-soft); 
+}
+
+.pds-toggle input[type="checkbox"]:checked:disabled ~ .pds-toggle__switch {
+  background-color: var(--color-primary);
+  border-color: transparent;
+  justify-content: flex-end;
+  padding-left: 0;
+  padding-right: var(--dim-sssss);
+}
+.pds-toggle input[type="checkbox"]:checked:disabled ~ .pds-toggle__switch > .pds-toggle__thumb {
+  width: var(--dim-s);
+  height: var(--dim-s);
+  background-color: var(--color-gray-soft); 
+}
+
+.pds-toggle:hover:not([data-disabled]) input[type="checkbox"]:checked ~ .pds-toggle__switch {
+  background-color: var(--_wash-lighter); 
+}
+.pds-toggle input[type="checkbox"]:focus-visible:checked:not(:disabled) ~ .pds-toggle__switch,
+.pds-toggle input[type="checkbox"]:active:checked:not(:disabled) ~ .pds-toggle__switch {
+  background-color: var(--_wash-darker); 
+}
+
+.pds-toggle[data-disabled] .pds-toggle__switch {
+  border-color: var(--color-gray); 
+}
+.pds-toggle[data-disabled] input[type="checkbox"]:not(:checked):disabled ~ .pds-toggle__switch > .pds-toggle__thumb,
+.pds-toggle[data-disabled] input[type="checkbox"]:not(:checked) ~ .pds-toggle__switch > .pds-toggle__thumb {
+  background-color: var(--color-gray); 
+}
