@@ -10,7 +10,7 @@
 
 If you discover a security issue, please report it responsibly:
 
-- **Email:** michele@pella.dev
+- **Email:** support@pellawebmaster.com
 - **Subject prefix:** `[PDS Security]`
 
 Please do **not** open a public issue for security vulnerabilities.
