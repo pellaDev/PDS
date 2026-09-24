@@ -3,15 +3,13 @@ import * as React from "react";
 import * as AccordionPrimitive from "@radix-ui/react-accordion";
 import { ChevronDown } from "lucide-react";
 import { cn } from "../../lib/utils";
+import { Separator } from "./separator";
+import "./accordion.css";
 const Accordion = AccordionPrimitive.Root;
-const AccordionItem = React.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ jsx(
-  AccordionPrimitive.Item,
-  {
-    ref,
-    className: cn("border-b", className),
-    ...props
-  }
-));
+const AccordionItem = React.forwardRef(({ className, children, ...props }, ref) => /* @__PURE__ */ jsxs(AccordionPrimitive.Item, { ref, "data-slot": "accordion-item", className, ...props, children: [
+  children,
+  /* @__PURE__ */ jsx(Separator, { orientation: "horizontal", "data-slot": "pds-accordion-separator" })
+] }));
 AccordionItem.displayName = "AccordionItem";
 const AccordionTrigger = React.forwardRef(({ className, children, ...props }, ref) => /* @__PURE__ */ jsx(AccordionPrimitive.Header, { className: "flex", children: /* @__PURE__ */ jsxs(
   AccordionPrimitive.Trigger,

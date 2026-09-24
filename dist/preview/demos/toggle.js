@@ -12,7 +12,10 @@ function ToggleDemo() {
     /* @__PURE__ */ jsxs(Row, { label: "Text (plain text)", children: [
       /* @__PURE__ */ jsx(Toggle, { defaultPressed: true, children: "Bold" }),
       /* @__PURE__ */ jsx(Toggle, { children: "Italic" }),
-      /* @__PURE__ */ jsx(Toggle, { children: "Underline" })
+      /* @__PURE__ */ jsx(Toggle, { children: "Underline" }),
+      /* @__PURE__ */ jsx(Toggle, { size: "sm", defaultPressed: true, children: "Bold" }),
+      /* @__PURE__ */ jsx(Toggle, { size: "sm", children: "Italic" }),
+      /* @__PURE__ */ jsx(Toggle, { size: "sm", children: "Underline" })
     ] }),
     /* @__PURE__ */ jsxs(Row, { label: "Sizes and states", children: [
       /* @__PURE__ */ jsx(Toggle, { size: "sm", "aria-label": "Small", children: /* @__PURE__ */ jsx(Bold, {}) }),

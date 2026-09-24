@@ -32,6 +32,9 @@ const tokens = {
       "graySoft": "#E4E3E3",
       "gray": "#919191",
       "blackSoft": "#383838",
+      "black": "#1B1B1B",
+      "whitePure": "#FFFFFF",
+      "blackPure": "#000000",
       "sidebar": "#F9F9F9",
       "sidebarForeground": "#383838",
       "sidebarBorder": "#E4E3E3",
@@ -42,19 +45,19 @@ const tokens = {
       "sidebarRing": "#204384"
     },
     "dark": {
-      "background": "#1B1B1B",
+      "background": "#383838",
       "foreground": "#F9F9F9",
       "border": "#383838",
       "separator": "#6C8FCB",
-      "card": "#383838",
+      "card": "#1B1B1B",
       "cardForeground": "#F9F9F9",
-      "popover": "#383838",
+      "popover": "#1B1B1B",
       "popoverForeground": "#F9F9F9",
       "primary": "#6C8FCB",
       "primaryForeground": "#1B1B1B",
-      "secondary": "#383838",
+      "secondary": "#1B1B1B",
       "secondaryForeground": "#F9F9F9",
-      "muted": "#383838",
+      "muted": "#1B1B1B",
       "mutedForeground": "#E4E3E3",
       "accent": "#CFEC14",
       "accentForeground": "#1B1B1B",
@@ -62,7 +65,7 @@ const tokens = {
       "destructiveForeground": "#F9F9F9",
       "success": "#5BB86B",
       "successForeground": "#1B1B1B",
-      "input": "#383838",
+      "input": "#1B1B1B",
       "ring": "#CFEC14",
       "chart1": "#6C8FCB",
       "chart2": "#5BB86B",
@@ -73,9 +76,12 @@ const tokens = {
       "graySoft": "#E4E3E3",
       "gray": "#919191",
       "blackSoft": "#383838",
-      "sidebar": "#1B1B1B",
+      "black": "#1B1B1B",
+      "whitePure": "#FFFFFF",
+      "blackPure": "#000000",
+      "sidebar": "#383838",
       "sidebarForeground": "#F9F9F9",
-      "sidebarBorder": "#383838",
+      "sidebarBorder": "#4a4a4a",
       "sidebarPrimary": "#6C8FCB",
       "sidebarPrimaryForeground": "#1B1B1B",
       "sidebarAccent": "#CFEC14",
@@ -253,6 +259,25 @@ const tokens = {
     "dropDown": "0rem 0.1rem 0.1rem rgba(0, 0, 0, 0.32)",
     "trigger": "0rem 0rem 0rem 0.5rem rgba(0, 0, 0, 0.08)",
     "dots": "inset 0rem 0rem 0.25rem rgba(0, 0, 0, 0.32)"
+  },
+  "layout": {
+    "sidebarWidth": "16rem",
+    "sidebarWidthMobile": "18rem",
+    "sidebarWidthIcon": "3rem"
+  },
+  "motion": {
+    "duration": {
+      "fast": "120ms",
+      "base": "150ms",
+      "slow": "200ms",
+      "sheet-closed": "300ms",
+      "sheet-open": "500ms"
+    },
+    "easing": {
+      "standard": "cubic-bezier(0.4, 0, 0.2, 1)",
+      "linear": "linear",
+      "in-out": "ease-in-out"
+    }
   }
 };
 var stdin_default = tokens;

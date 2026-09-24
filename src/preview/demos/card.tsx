@@ -17,13 +17,21 @@ export function CardDemo() {
       </CardHeader>
       <CardContent>
         <div className="grid grid-cols-2 gap-3">
-          <div className="rounded-lg bg-muted p-4">
-            <p className="text-2xl font-semibold">24</p>
-            <p className="text-sm text-muted-foreground">Projects</p>
+          <div className="rounded-lg [background-color:var(--pds-surface-bg)] p-4">
+            <p className="[font-size:var(--type-body1-size)] [line-height:var(--type-body1-lh)] font-light">
+              24
+            </p>
+            <p className="[font-size:var(--type-body2-size)] [line-height:var(--type-body2-lh)] font-light text-muted-foreground">
+              Projects
+            </p>
           </div>
-          <div className="rounded-lg bg-muted p-4">
-            <p className="text-2xl font-semibold">89%</p>
-            <p className="text-sm text-muted-foreground">On track</p>
+          <div className="rounded-lg [background-color:var(--pds-surface-bg)] p-4">
+            <p className="[font-size:var(--type-body1-size)] [line-height:var(--type-body1-lh)] font-light">
+              89%
+            </p>
+            <p className="[font-size:var(--type-body2-size)] [line-height:var(--type-body2-lh)] font-light text-muted-foreground">
+              On track
+            </p>
           </div>
         </div>
       </CardContent>

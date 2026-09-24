@@ -20,8 +20,8 @@ function NavigationMenuDemo() {
             href: "#page=navigation-menu",
             className: "block rounded-md p-3 hover:bg-[color-mix(in_srgb,var(--color-primary)_12%,transparent)]",
             children: [
-              /* @__PURE__ */ jsx("span", { className: "font-medium", children: "Apps" }),
-              /* @__PURE__ */ jsx("span", { className: "block text-sm text-muted-foreground", children: "Build and publish full-stack projects." })
+              /* @__PURE__ */ jsx("span", { className: "[font-size:var(--type-body2-size)] [line-height:var(--type-body2-lh)] font-light", children: "Apps" }),
+              /* @__PURE__ */ jsx("span", { className: "block [font-size:var(--type-body2-size)] [line-height:var(--type-body2-lh)] font-light text-muted-foreground", children: "Build and publish full-stack projects." })
             ]
           }
         ) }),
@@ -31,8 +31,8 @@ function NavigationMenuDemo() {
             href: "#page=navigation-menu",
             className: "block rounded-md p-3 hover:bg-[color-mix(in_srgb,var(--color-primary)_12%,transparent)]",
             children: [
-              /* @__PURE__ */ jsx("span", { className: "font-medium", children: "Teams" }),
-              /* @__PURE__ */ jsx("span", { className: "block text-sm text-muted-foreground", children: "Collaborate with shared tools and access." })
+              /* @__PURE__ */ jsx("span", { className: "[font-size:var(--type-body2-size)] [line-height:var(--type-body2-lh)] font-light", children: "Teams" }),
+              /* @__PURE__ */ jsx("span", { className: "block [font-size:var(--type-body2-size)] [line-height:var(--type-body2-lh)] font-light text-muted-foreground", children: "Collaborate with shared tools and access." })
             ]
           }
         ) })

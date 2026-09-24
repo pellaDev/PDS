@@ -1,8 +1,9 @@
 import { lazy } from "react";
 import {
   ColorsPage,
-  FontsPage,
+  FamiliesPage,
   LayoutPage,
+  TextStylesPage,
   OverviewPage,
   ShadowsPage,
   TagsPage
@@ -13,42 +14,28 @@ function lazyPage(load) {
 const AccordionDemo = lazyPage(
   () => import("./demos/accordion").then(({ AccordionDemo: AccordionDemo2 }) => AccordionDemo2)
 );
-const AlertDemo = lazyPage(
-  () => import("./demos/alert").then(({ AlertDemo: AlertDemo2 }) => AlertDemo2)
-);
+const AlertDemo = lazyPage(() => import("./demos/alert").then(({ AlertDemo: AlertDemo2 }) => AlertDemo2));
 const AlertDialogDemo = lazyPage(
   () => import("./demos/alert-dialog").then(({ AlertDialogDemo: AlertDialogDemo2 }) => AlertDialogDemo2)
 );
 const AspectRatioDemo = lazyPage(
   () => import("./demos/aspect-ratio").then(({ AspectRatioDemo: AspectRatioDemo2 }) => AspectRatioDemo2)
 );
-const AvatarDemo = lazyPage(
-  () => import("./demos/avatar").then(({ AvatarDemo: AvatarDemo2 }) => AvatarDemo2)
-);
-const IconsDemo = lazyPage(
-  () => import("./demos/icons").then(({ IconsDemo: IconsDemo2 }) => IconsDemo2)
-);
-const BadgeDemo = lazyPage(
-  () => import("./demos/badge").then(({ BadgeDemo: BadgeDemo2 }) => BadgeDemo2)
-);
+const AvatarDemo = lazyPage(() => import("./demos/avatar").then(({ AvatarDemo: AvatarDemo2 }) => AvatarDemo2));
+const IconsDemo = lazyPage(() => import("./demos/icons").then(({ IconsDemo: IconsDemo2 }) => IconsDemo2));
+const BadgeDemo = lazyPage(() => import("./demos/badge").then(({ BadgeDemo: BadgeDemo2 }) => BadgeDemo2));
 const BreadcrumbDemo = lazyPage(
   () => import("./demos/breadcrumb").then(({ BreadcrumbDemo: BreadcrumbDemo2 }) => BreadcrumbDemo2)
 );
-const ButtonDemo = lazyPage(
-  () => import("./demos/button").then(({ ButtonDemo: ButtonDemo2 }) => ButtonDemo2)
-);
+const ButtonDemo = lazyPage(() => import("./demos/button").then(({ ButtonDemo: ButtonDemo2 }) => ButtonDemo2));
 const CalendarDemo = lazyPage(
   () => import("./demos/calendar").then(({ CalendarDemo: CalendarDemo2 }) => CalendarDemo2)
 );
-const CardDemo = lazyPage(
-  () => import("./demos/card").then(({ CardDemo: CardDemo2 }) => CardDemo2)
-);
+const CardDemo = lazyPage(() => import("./demos/card").then(({ CardDemo: CardDemo2 }) => CardDemo2));
 const CarouselDemo = lazyPage(
   () => import("./demos/carousel").then(({ CarouselDemo: CarouselDemo2 }) => CarouselDemo2)
 );
-const ChartDemo = lazyPage(
-  () => import("./demos/chart").then(({ ChartDemo: ChartDemo2 }) => ChartDemo2)
-);
+const ChartDemo = lazyPage(() => import("./demos/chart").then(({ ChartDemo: ChartDemo2 }) => ChartDemo2));
 const CheckboxDemo = lazyPage(
   () => import("./demos/checkbox").then(({ CheckboxDemo: CheckboxDemo2 }) => CheckboxDemo2)
 );
@@ -58,51 +45,26 @@ const CollapsibleDemo = lazyPage(
 const CommandDemo = lazyPage(
   () => import("./demos/command").then(({ CommandDemo: CommandDemo2 }) => CommandDemo2)
 );
-const ContextMenuDemo = lazyPage(
-  () => import("./demos/context-menu").then(({ ContextMenuDemo: ContextMenuDemo2 }) => ContextMenuDemo2)
-);
-const DialogDemo = lazyPage(
-  () => import("./demos/dialog").then(({ DialogDemo: DialogDemo2 }) => DialogDemo2)
-);
-const DrawerDemo = lazyPage(
-  () => import("./demos/drawer").then(({ DrawerDemo: DrawerDemo2 }) => DrawerDemo2)
-);
-const DropdownMenuDemo = lazyPage(
-  () => import("./demos/dropdown-menu").then(
-    ({ DropdownMenuDemo: DropdownMenuDemo2 }) => DropdownMenuDemo2
-  )
-);
-const EmptyDemo = lazyPage(
-  () => import("./demos/empty").then(({ EmptyDemo: EmptyDemo2 }) => EmptyDemo2)
-);
-const FieldDemo = lazyPage(
-  () => import("./demos/field").then(({ FieldDemo: FieldDemo2 }) => FieldDemo2)
-);
-const FormDemo = lazyPage(
-  () => import("./demos/form").then(({ FormDemo: FormDemo2 }) => FormDemo2)
-);
+const DialogDemo = lazyPage(() => import("./demos/dialog").then(({ DialogDemo: DialogDemo2 }) => DialogDemo2));
+const DrawerDemo = lazyPage(() => import("./demos/drawer").then(({ DrawerDemo: DrawerDemo2 }) => DrawerDemo2));
+const EmptyDemo = lazyPage(() => import("./demos/empty").then(({ EmptyDemo: EmptyDemo2 }) => EmptyDemo2));
+const FieldDemo = lazyPage(() => import("./demos/field").then(({ FieldDemo: FieldDemo2 }) => FieldDemo2));
+const FormDemo = lazyPage(() => import("./demos/form").then(({ FormDemo: FormDemo2 }) => FormDemo2));
 const HoverCardDemo = lazyPage(
   () => import("./demos/hover-card").then(({ HoverCardDemo: HoverCardDemo2 }) => HoverCardDemo2)
 );
-const InputDemo = lazyPage(
-  () => import("./demos/input").then(({ InputDemo: InputDemo2 }) => InputDemo2)
-);
+const InputDemo = lazyPage(() => import("./demos/input").then(({ InputDemo: InputDemo2 }) => InputDemo2));
 const InputOtpDemo = lazyPage(
   () => import("./demos/input-otp").then(({ InputOtpDemo: InputOtpDemo2 }) => InputOtpDemo2)
 );
-const ItemDemo = lazyPage(
-  () => import("./demos/item").then(({ ItemDemo: ItemDemo2 }) => ItemDemo2)
-);
-const KbdDemo = lazyPage(
-  () => import("./demos/kbd").then(({ KbdDemo: KbdDemo2 }) => KbdDemo2)
-);
+const ItemDemo = lazyPage(() => import("./demos/item").then(({ ItemDemo: ItemDemo2 }) => ItemDemo2));
+const KbdDemo = lazyPage(() => import("./demos/kbd").then(({ KbdDemo: KbdDemo2 }) => KbdDemo2));
+const MenuDemo = lazyPage(() => import("./demos/menu").then(({ MenuDemo: MenuDemo2 }) => MenuDemo2));
 const MenubarDemo = lazyPage(
   () => import("./demos/menubar").then(({ MenubarDemo: MenubarDemo2 }) => MenubarDemo2)
 );
 const NavigationMenuDemo = lazyPage(
-  () => import("./demos/navigation-menu").then(
-    ({ NavigationMenuDemo: NavigationMenuDemo2 }) => NavigationMenuDemo2
-  )
+  () => import("./demos/navigation-menu").then(({ NavigationMenuDemo: NavigationMenuDemo2 }) => NavigationMenuDemo2)
 );
 const PaginationDemo = lazyPage(
   () => import("./demos/pagination").then(({ PaginationDemo: PaginationDemo2 }) => PaginationDemo2)
@@ -113,9 +75,7 @@ const PopoverDemo = lazyPage(
 const ProgressDemo = lazyPage(
   () => import("./demos/progress").then(({ ProgressDemo: ProgressDemo2 }) => ProgressDemo2)
 );
-const RadioDemo = lazyPage(
-  () => import("./demos/radio").then(({ RadioDemo: RadioDemo2 }) => RadioDemo2)
-);
+const RadioDemo = lazyPage(() => import("./demos/radio").then(({ RadioDemo: RadioDemo2 }) => RadioDemo2));
 const ResizableDemo = lazyPage(
   () => import("./demos/resizable").then(({ ResizableDemo: ResizableDemo2 }) => ResizableDemo2)
 );
@@ -125,42 +85,26 @@ const ScrollAreaDemo = lazyPage(
 const SeparatorDemo = lazyPage(
   () => import("./demos/separator").then(({ SeparatorDemo: SeparatorDemo2 }) => SeparatorDemo2)
 );
-const SheetDemo = lazyPage(
-  () => import("./demos/sheet").then(({ SheetDemo: SheetDemo2 }) => SheetDemo2)
-);
+const SheetDemo = lazyPage(() => import("./demos/sheet").then(({ SheetDemo: SheetDemo2 }) => SheetDemo2));
 const SidebarDemo = lazyPage(
   () => import("./demos/sidebar").then(({ SidebarDemo: SidebarDemo2 }) => SidebarDemo2)
 );
 const SkeletonDemo = lazyPage(
   () => import("./demos/skeleton").then(({ SkeletonDemo: SkeletonDemo2 }) => SkeletonDemo2)
 );
-const SliderDemo = lazyPage(
-  () => import("./demos/slider").then(({ SliderDemo: SliderDemo2 }) => SliderDemo2)
-);
-const SonnerDemo = lazyPage(
-  () => import("./demos/sonner").then(({ SonnerDemo: SonnerDemo2 }) => SonnerDemo2)
-);
+const SliderDemo = lazyPage(() => import("./demos/slider").then(({ SliderDemo: SliderDemo2 }) => SliderDemo2));
+const SonnerDemo = lazyPage(() => import("./demos/sonner").then(({ SonnerDemo: SonnerDemo2 }) => SonnerDemo2));
 const SpinnerDemo = lazyPage(
   () => import("./demos/spinner").then(({ SpinnerDemo: SpinnerDemo2 }) => SpinnerDemo2)
 );
-const SwitchDemo = lazyPage(
-  () => import("./demos/switch").then(({ SwitchDemo: SwitchDemo2 }) => SwitchDemo2)
-);
-const TableDemo = lazyPage(
-  () => import("./demos/table").then(({ TableDemo: TableDemo2 }) => TableDemo2)
-);
-const TabsDemo = lazyPage(
-  () => import("./demos/tabs").then(({ TabsDemo: TabsDemo2 }) => TabsDemo2)
-);
+const SwitchDemo = lazyPage(() => import("./demos/switch").then(({ SwitchDemo: SwitchDemo2 }) => SwitchDemo2));
+const TableDemo = lazyPage(() => import("./demos/table").then(({ TableDemo: TableDemo2 }) => TableDemo2));
+const TabsDemo = lazyPage(() => import("./demos/tabs").then(({ TabsDemo: TabsDemo2 }) => TabsDemo2));
 const TextareaDemo = lazyPage(
   () => import("./demos/textarea").then(({ TextareaDemo: TextareaDemo2 }) => TextareaDemo2)
 );
-const ToastDemo = lazyPage(
-  () => import("./demos/toast").then(({ ToastDemo: ToastDemo2 }) => ToastDemo2)
-);
-const ToggleDemo = lazyPage(
-  () => import("./demos/toggle").then(({ ToggleDemo: ToggleDemo2 }) => ToggleDemo2)
-);
+const ToastDemo = lazyPage(() => import("./demos/toast").then(({ ToastDemo: ToastDemo2 }) => ToastDemo2));
+const ToggleDemo = lazyPage(() => import("./demos/toggle").then(({ ToggleDemo: ToggleDemo2 }) => ToggleDemo2));
 const ToggleGroupDemo = lazyPage(
   () => import("./demos/toggle-group").then(({ ToggleGroupDemo: ToggleGroupDemo2 }) => ToggleGroupDemo2)
 );
@@ -168,9 +112,13 @@ const TooltipDemo = lazyPage(
   () => import("./demos/tooltip").then(({ TooltipDemo: TooltipDemo2 }) => TooltipDemo2)
 );
 const DESIGN_SYSTEM = {
-  title: "PDS | Pella Design System",
-  version: "v1.0.0",
-  description: "Il linguaggio visivo React di Pella: fondazioni, componenti accessibili e pattern pronti per prodotti coerenti."
+  // Wordmark parts — the logo mark is rendered inline between prefix and suffix by the preview shell.
+  titlePrefix: "PDS",
+  titleSuffix: "Pella Design System",
+  // Current design system version -- mirrors the git tag on branch pds-gh.
+  version: "v1.3.0",
+  description: "Simple but complete AI Ready design system in React: foundations, accessible components, and ready-to-use patterns for consistent products.",
+  descriptionBody: "Pick up your Light theme and Dark theme colors, check if the colors pass the contrast test in Color roles, and choose an available font and style. When you are ready, install the PDS with the flags your colors/font/style and you are done."
 };
 const OVERVIEW_ENTRY = {
   id: "overview",
@@ -180,12 +128,21 @@ const OVERVIEW_ENTRY = {
 };
 const NON_PRIMITIVE_IDS = /* @__PURE__ */ new Set([
   "overview",
+  // meta / foundations intro
   "color-roles",
-  "type-scale",
+  // color specimen
+  "text-styles",
+  // type specimen (named styles)
+  "font-families",
+  // families & weights specimen
   "shadows",
+  // elevation specimen
   "spacing-radius",
+  // spacing & radius specimen
   "form",
+  // composes several fields (a pattern, not a single primitive)
   "chart"
+  // application-level data visualization, not a core UI primitive
 ]);
 const isPrimitiveEntry = (e) => !NON_PRIMITIVE_IDS.has(e.id);
 const RAW_NAV_GROUPS = [
@@ -202,14 +159,20 @@ const RAW_NAV_GROUPS = [
     ]
   },
   {
-    name: "Fonts",
+    name: "Typography",
     entries: [
       {
-        id: "type-scale",
-        name: "Type scale",
-        description: "Font families, headings, body text, labels, and captions.",
-        Page: FontsPage,
+        id: "text-styles",
+        name: "Text styles",
+        description: "The eight named text styles \u2014 family, size, line height, tracking, weight \u2014 and the raw scales.",
+        Page: TextStylesPage,
         splitLayout: true
+      },
+      {
+        id: "font-families",
+        name: "Families & weights",
+        description: "Installable font families, their available weights, and the system emphasis rule.",
+        Page: FamiliesPage
       }
     ]
   },
@@ -396,16 +359,10 @@ const RAW_NAV_GROUPS = [
     name: "Menus & navigation",
     entries: [
       {
-        id: "dropdown-menu",
-        name: "Dropdown menu",
-        description: "Dropdown trigger from dropdowns.json - filled square box with runtime 32% state washes; opens a tokenized PDS listbox. Merges the former Select + dropdown menu into one control.",
-        Page: DropdownMenuDemo
-      },
-      {
-        id: "context-menu",
-        name: "Context menu",
-        description: "Right-click actions and nested choices.",
-        Page: ContextMenuDemo
+        id: "menu",
+        name: "Dropdown",
+        description: 'Unified PDS dropdown + context menu (mode="dropdown" opens on click, mode="context" on right-click): token-faithful trigger from dropdowns.json, floating listbox with the dropDown shadow recipe, rounded rows in the sidebar-menu idiom with neutral washes and a brand edge.',
+        Page: MenuDemo
       },
       {
         id: "menubar",
@@ -440,7 +397,7 @@ const RAW_NAV_GROUPS = [
       {
         id: "sidebar",
         name: "Sidebar",
-        description: "Bounded application navigation and content layout.",
+        description: "Bounded application navigation and content layout - category items sit right of a vertical separator, and labels can collapse their category via the optional accordion prop on SidebarGroup.",
         Page: SidebarDemo
       }
     ]
@@ -512,7 +469,8 @@ const RAW_NAV_GROUPS = [
         id: "aspect-ratio",
         name: "Aspect ratio",
         description: "Responsive proportional media containers.",
-        Page: AspectRatioDemo
+        Page: AspectRatioDemo,
+        singleColumn: true
       }
     ]
   },
@@ -547,13 +505,15 @@ const RAW_NAV_GROUPS = [
         id: "toast",
         name: "Toast",
         description: "Provider-backed transient notifications and actions.",
-        Page: ToastDemo
+        Page: ToastDemo,
+        singleColumn: true
       },
       {
         id: "sonner",
         name: "Sonner",
         description: "Stacked notifications with status and actions.",
-        Page: SonnerDemo
+        Page: SonnerDemo,
+        singleColumn: true
       }
     ]
   },
@@ -570,13 +530,15 @@ const RAW_NAV_GROUPS = [
         id: "scroll-area",
         name: "Scroll area",
         description: "Bounded vertical and horizontal scrolling.",
-        Page: ScrollAreaDemo
+        Page: ScrollAreaDemo,
+        singleColumn: true
       },
       {
         id: "resizable",
         name: "Resizable panels",
         description: "Bounded split panes with draggable handles.",
-        Page: ResizableDemo
+        Page: ResizableDemo,
+        singleColumn: true
       }
     ]
   },

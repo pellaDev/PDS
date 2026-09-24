@@ -14,10 +14,7 @@ function ItemGroup({ className, ...props }) {
     }
   );
 }
-function ItemSeparator({
-  className,
-  ...props
-}) {
+function ItemSeparator({ className, ...props }) {
   return /* @__PURE__ */ jsx(
     Separator,
     {
@@ -73,7 +70,7 @@ const itemMediaVariants = cva(
     variants: {
       variant: {
         default: "bg-transparent",
-        icon: "bg-muted size-8 rounded-sm border [&_svg:not([class*='size-'])]:size-4",
+        icon: "size-8 [&_svg:not([class*='size-'])]:size-4",
         image: "size-10 overflow-hidden rounded-sm [&_img]:size-full [&_img]:object-cover"
       }
     },
@@ -102,10 +99,7 @@ function ItemContent({ className, ...props }) {
     "div",
     {
       "data-slot": "item-content",
-      className: cn(
-        "flex flex-1 flex-col gap-1 [&+[data-slot=item-content]]:flex-none",
-        className
-      ),
+      className: cn("flex flex-1 flex-col gap-1 [&+[data-slot=item-content]]:flex-none", className),
       ...props
     }
   );
@@ -115,10 +109,7 @@ function ItemTitle({ className, ...props }) {
     "div",
     {
       "data-slot": "item-title",
-      className: cn(
-        "flex w-fit items-center gap-2 text-sm font-medium leading-snug",
-        className
-      ),
+      className: cn("flex w-fit items-center gap-2 text-sm font-medium leading-snug", className),
       ...props
     }
   );
@@ -138,24 +129,14 @@ function ItemDescription({ className, ...props }) {
   );
 }
 function ItemActions({ className, ...props }) {
-  return /* @__PURE__ */ jsx(
-    "div",
-    {
-      "data-slot": "item-actions",
-      className: cn("flex items-center gap-2", className),
-      ...props
-    }
-  );
+  return /* @__PURE__ */ jsx("div", { "data-slot": "item-actions", className: cn("flex items-center gap-2", className), ...props });
 }
 function ItemHeader({ className, ...props }) {
   return /* @__PURE__ */ jsx(
     "div",
     {
       "data-slot": "item-header",
-      className: cn(
-        "flex basis-full items-center justify-between gap-2",
-        className
-      ),
+      className: cn("flex basis-full items-center justify-between gap-2", className),
       ...props
     }
   );
@@ -165,10 +146,7 @@ function ItemFooter({ className, ...props }) {
     "div",
     {
       "data-slot": "item-footer",
-      className: cn(
-        "flex basis-full items-center justify-between gap-2",
-        className
-      ),
+      className: cn("flex basis-full items-center justify-between gap-2", className),
       ...props
     }
   );

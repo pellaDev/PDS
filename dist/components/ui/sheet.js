@@ -39,47 +39,21 @@ const sheetVariants = cva(
 );
 const SheetContent = React.forwardRef(({ side = "right", className, children, ...props }, ref) => /* @__PURE__ */ jsxs(SheetPortal, { children: [
   /* @__PURE__ */ jsx(SheetOverlay, {}),
-  /* @__PURE__ */ jsxs(
-    SheetPrimitive.Content,
-    {
-      ref,
-      className: cn(sheetVariants({ side }), className),
-      ...props,
-      children: [
-        /* @__PURE__ */ jsxs(SheetPrimitive.Close, { className: "absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-secondary", children: [
-          /* @__PURE__ */ jsx(X, { className: "h-4 w-4" }),
-          /* @__PURE__ */ jsx("span", { className: "sr-only", children: "Close" })
-        ] }),
-        children
-      ]
-    }
-  )
+  /* @__PURE__ */ jsxs(SheetPrimitive.Content, { ref, className: cn(sheetVariants({ side }), className), ...props, children: [
+    /* @__PURE__ */ jsxs(SheetPrimitive.Close, { className: "absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-secondary", children: [
+      /* @__PURE__ */ jsx(X, { className: "h-4 w-4" }),
+      /* @__PURE__ */ jsx("span", { className: "sr-only", children: "Close" })
+    ] }),
+    children
+  ] })
 ] }));
 SheetContent.displayName = SheetPrimitive.Content.displayName;
-const SheetHeader = ({
-  className,
-  ...props
-}) => /* @__PURE__ */ jsx(
-  "div",
-  {
-    className: cn(
-      "flex flex-col space-y-2 text-center sm:text-left",
-      className
-    ),
-    ...props
-  }
-);
+const SheetHeader = ({ className, ...props }) => /* @__PURE__ */ jsx("div", { className: cn("flex flex-col space-y-2 text-center sm:text-left", className), ...props });
 SheetHeader.displayName = "SheetHeader";
-const SheetFooter = ({
-  className,
-  ...props
-}) => /* @__PURE__ */ jsx(
+const SheetFooter = ({ className, ...props }) => /* @__PURE__ */ jsx(
   "div",
   {
-    className: cn(
-      "flex flex-col-reverse sm:flex-row sm:justify-end sm:space-x-2",
-      className
-    ),
+    className: cn("flex flex-col-reverse sm:flex-row sm:justify-end sm:space-x-2", className),
     ...props
   }
 );

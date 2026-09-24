@@ -6,7 +6,13 @@ import {
 
 function PanelBody({ label, muted = false }: { label: string; muted?: boolean }) {
   return (
-    <div className={muted ? "flex h-full items-center justify-center bg-muted text-sm" : "flex h-full items-center justify-center text-sm"}>
+    <div
+      className={
+        muted
+          ? 'flex h-full items-center justify-center bg-muted [font-size:var(--type-body2-size)] [line-height:var(--type-body2-lh)] font-light'
+          : 'flex h-full items-center justify-center [font-size:var(--type-body2-size)] [line-height:var(--type-body2-lh)] font-light'
+      }
+    >
       {label}
     </div>
   );
@@ -36,21 +42,12 @@ function Panels() {
 
 export function ResizableDemo() {
   return (
-    <div className="max-w-2xl space-y-5">
+    <div className="max-w-2xl">
       <figure className="m-0">
-        <figcaption className="mb-2 text-xs font-medium uppercase tracking-wide text-muted-foreground">
-          Fill — separatore visibile solo in hover
+        <figcaption className="mb-2 [font-size:var(--type-caption-size)] [line-height:var(--type-caption-lh)] font-light text-muted-foreground">
+          Field style segue il default della sidebar (fill/outline)
         </figcaption>
-        <div data-pds-fieldstyle="fill" className="h-52 overflow-hidden rounded-lg border bg-background">
-          <Panels />
-        </div>
-      </figure>
-
-      <figure className="m-0">
-        <figcaption className="mb-2 text-xs font-medium uppercase tracking-wide text-muted-foreground">
-          Outline — doppio spessore del border in hover
-        </figcaption>
-        <div data-pds-fieldstyle="outline" className="h-52 overflow-hidden rounded-lg border bg-background">
+        <div className="h-52 overflow-hidden rounded-lg border bg-background">
           <Panels />
         </div>
       </figure>

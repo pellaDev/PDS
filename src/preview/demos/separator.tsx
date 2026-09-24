@@ -11,7 +11,7 @@ export function SeparatorDemo() {
         <Separator fade />
       </Stack>
       <Stack label="Vertical (normal / fading)">
-        <div className="flex h-16 items-center gap-4 text-sm">
+        <div className="flex h-16 items-center gap-4 [font-size:var(--type-body2-size)] [line-height:var(--type-body2-lh)] font-light">
           <span>Docs</span>
           <Separator orientation="vertical" />
           <span>Components</span>

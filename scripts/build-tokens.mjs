@@ -1,21 +1,41 @@
-import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
-import { groupEntries, hexToRgba, boxShadowCss, buildCoreTokens, buildFontFaces } from "./core-tokens.mjs";
-import { dirname, join } from "node:path";
-import { fileURLToPath } from "node:url";
+/**
+ * Generates the consumable web theme (src/index.css) and the portable token
+ * object (src/generated/tokens.tsx) from tokens.json.
+ *
+ * tokens.json (DTCG) is the single source of truth. This runs on dev start and
+ * on every tokens.json change (see vite.config.ts) and before build/typecheck
+ * (see package.json). Do not edit the generated files by hand.
+ *
+ * - src/index.css        the design system's theme. The preview app imports it,
+ *                        and consuming apps import this same file (web).
+ * - src/generated/tokens.tsx  hex token object for mobile (Expo) and any other
+ *                             platform, so web + mobile share one source.
+ */
+import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
+import {
+  groupEntries,
+  hexToRgba,
+  boxShadowCss,
+  buildCoreTokens,
+  buildFontFaces,
+} from './core-tokens.mjs';
+import { dirname, join } from 'node:path';
+import { fileURLToPath } from 'node:url';
 
 const here = dirname(fileURLToPath(import.meta.url));
-const root = join(here, "..");
-const tokensPath = join(root, "tokens.json");
-const templatePath = join(here, "theme-template.css");
-const cssOut = join(root, "src", "index.css");
-const tsOutDir = join(root, "src", "generated");
-const indexHtmlPath = join(root, "index.html");
-const faviconOut = join(root, "public", "favicon.svg");
+const root = join(here, '..');
+const tokensPath = join(root, 'tokens.json');
+const templatePath = join(here, 'theme-template.css');
+const cssOut = join(root, 'src', 'index.css');
+const tsOutDir = join(root, 'src', 'generated');
+const indexHtmlPath = join(root, 'index.html');
+const faviconOut = join(root, 'public', 'favicon.svg');
 
+/** Resolve a DTCG node's $value, following {alias} references. */
 function resolveValue(node, tokens) {
   const raw = node?.$value;
-  if (typeof raw === "string" && raw.startsWith("{") && raw.endsWith("}")) {
-    const path = raw.slice(1, -1).split(".");
+  if (typeof raw === 'string' && raw.startsWith('{') && raw.endsWith('}')) {
+    const path = raw.slice(1, -1).split('.');
     let cur = tokens;
     for (const key of path) cur = cur?.[key];
     return resolveValue(cur, tokens);
@@ -24,12 +44,12 @@ function resolveValue(node, tokens) {
 }
 
 function hexToHslChannels(hex) {
-  let h = hex.replace("#", "").trim();
+  let h = hex.replace('#', '').trim();
   if (h.length === 3) {
     h = h
-      .split("")
+      .split('')
       .map((c) => c + c)
-      .join("");
+      .join('');
   }
   const r = parseInt(h.slice(0, 2), 16) / 255;
   const g = parseInt(h.slice(2, 4), 16) / 255;
@@ -61,31 +81,30 @@ function hexToHslChannels(hex) {
 }
 
 function toFontStack(value) {
-  return Array.isArray(value) ? value.join(", ") : value;
+  return Array.isArray(value) ? value.join(', ') : value;
 }
 
 function buildFavicon() {
-  const logo = readFileSync(join(root, "src", "preview", "assets", "logo.svg"), "utf8");
+  const logo = readFileSync(join(root, 'src', 'preview', 'assets', 'logo.svg'), 'utf8');
   return logo;
 }
 
 function colorEntries(scope, tokens) {
   const out = {};
   for (const [name, node] of Object.entries(tokens.color[scope])) {
-    if (name.startsWith("$")) continue;
+    if (name.startsWith('$')) continue;
     out[name] = resolveValue(node, tokens);
   }
   return out;
 }
 
 function buildCss(tokens) {
-  let css = readFileSync(templatePath, "utf8");
+  let css = readFileSync(templatePath, 'utf8');
   const replacements = {};
 
-  for (const scope of ["light", "dark"]) {
+  for (const scope of ['light', 'dark']) {
     for (const [name, hex] of Object.entries(colorEntries(scope, tokens))) {
-      replacements[`__DS_${scope.toUpperCase()}_${name.toUpperCase()}__`] =
-        hexToHslChannels(hex);
+      replacements[`__DS_${scope.toUpperCase()}_${name.toUpperCase()}__`] = hexToHslChannels(hex);
     }
   }
 
@@ -111,9 +130,7 @@ function buildCss(tokens) {
 
   const leftover = css.match(/__DS_[A-Z0-9_]+__/g);
   if (leftover) {
-    throw new Error(
-      `tokens.json is missing values for: ${[...new Set(leftover)].join(", ")}`,
-    );
+    throw new Error(`tokens.json is missing values for: ${[...new Set(leftover)].join(', ')}`);
   }
   return css;
 }
@@ -121,8 +138,8 @@ function buildCss(tokens) {
 function buildTs(tokens) {
   const portable = {
     color: {
-      light: colorEntries("light", tokens),
-      dark: colorEntries("dark", tokens),
+      light: colorEntries('light', tokens),
+      dark: colorEntries('dark', tokens),
     },
     fontFamily: {
       sans: resolveValue(tokens.typography.fontFamily.sans, tokens),
@@ -130,28 +147,68 @@ function buildTs(tokens) {
       mono: resolveValue(tokens.typography.fontFamily.mono, tokens),
     },
     fontOptions: Object.fromEntries(
-      groupEntries(tokens.typography.fontOptions || {}).map(([name, node]) => [name, resolveValue(node, tokens)]),
+      groupEntries(tokens.typography.fontOptions || {}).map(([name, node]) => [
+        name,
+        resolveValue(node, tokens),
+      ]),
     ),
     radius: resolveValue(tokens.radius.base, tokens),
     radiusSm: resolveValue(tokens.radius.sm, tokens),
     radiusMd: resolveValue(tokens.radius.md, tokens),
     spacing: resolveValue(tokens.spacing.base, tokens),
-    typographyStyles: Object.fromEntries(groupEntries(tokens.typography.styles).map(([name, node]) => [name, resolveValue(node, tokens)])),
-    fontSizes: Object.fromEntries(groupEntries(tokens.typography.fontSizes || {}).map(([name, node]) => [name, resolveValue(node, tokens)])),
-    lineHeights: Object.fromEntries(groupEntries(tokens.typography.lineHeights || {}).map(([name, node]) => [name, resolveValue(node, tokens)])),
-    dimensions: Object.fromEntries(groupEntries(tokens.dimensions).map(([name, node]) => [name, resolveValue(node, tokens)])),
-    spacingPresets: Object.fromEntries(groupEntries(tokens.spacing.presets || {}).map(([name, node]) => [name, resolveValue(node, tokens)])),
+    typographyStyles: Object.fromEntries(
+      groupEntries(tokens.typography.styles).map(([name, node]) => [
+        name,
+        resolveValue(node, tokens),
+      ]),
+    ),
+    fontSizes: Object.fromEntries(
+      groupEntries(tokens.typography.fontSizes || {}).map(([name, node]) => [
+        name,
+        resolveValue(node, tokens),
+      ]),
+    ),
+    lineHeights: Object.fromEntries(
+      groupEntries(tokens.typography.lineHeights || {}).map(([name, node]) => [
+        name,
+        resolveValue(node, tokens),
+      ]),
+    ),
+    dimensions: Object.fromEntries(
+      groupEntries(tokens.dimensions).map(([name, node]) => [name, resolveValue(node, tokens)]),
+    ),
+    spacingPresets: Object.fromEntries(
+      groupEntries(tokens.spacing.presets || {}).map(([name, node]) => [
+        name,
+        resolveValue(node, tokens),
+      ]),
+    ),
     borderWidth: resolveValue(tokens.border.width, tokens),
     opacityDisabled: resolveValue(tokens.opacity.disabled, tokens),
     overlays: {
       lighter: hexToRgba(resolveValue(tokens.overlay.lighter, tokens)),
       darker: hexToRgba(resolveValue(tokens.overlay.darker, tokens)),
-    scrim: hexToRgba(resolveValue(tokens.overlay.scrim, tokens)),
+      scrim: hexToRgba(resolveValue(tokens.overlay.scrim, tokens)),
     },
-    shadows: Object.fromEntries(groupEntries(tokens.shadows).map(([name, node]) => [name, boxShadowCss(node.$value)])),
+    shadows: Object.fromEntries(
+      groupEntries(tokens.shadows).map(([name, node]) => [name, boxShadowCss(node.$value)]),
+    ),
+    layout: Object.fromEntries(
+      groupEntries(tokens.layout ?? {}).map(([name, node]) => [name, node?.$value]),
+    ),
+    motion: {
+      duration: Object.fromEntries(
+        groupEntries(tokens.motion?.duration ?? {}).map(([name, node]) => [name, node?.$value]),
+      ),
+      easing: Object.fromEntries(
+        groupEntries(tokens.motion?.easing ?? {}).map(([name, node]) => [name, node?.$value]),
+      ),
+    },
   };
-  return `
-
+  return `/* GENERATED FROM tokens.json -- DO NOT EDIT. Run scripts/build-tokens.mjs. */
+// Portable design tokens (colors as hex). Web consumes the theme via
+// src/index.css; mobile (Expo) and any other platform import this object so the
+// whole product shares one source of truth.
 export const tokens = ${JSON.stringify(portable, null, 2)} as const;
 
 export type Tokens = typeof tokens;
@@ -160,17 +217,17 @@ export default tokens;
 }
 
 export function buildTokens() {
-  const tokens = JSON.parse(readFileSync(tokensPath, "utf8"));
+  const tokens = JSON.parse(readFileSync(tokensPath, 'utf8'));
   writeFileSync(cssOut, buildCss(tokens));
   mkdirSync(tsOutDir, { recursive: true });
-  writeFileSync(join(tsOutDir, "tokens.tsx"), buildTs(tokens));
+  writeFileSync(join(tsOutDir, 'tokens.tsx'), buildTs(tokens));
   mkdirSync(dirname(faviconOut), { recursive: true });
   writeFileSync(faviconOut, buildFavicon(tokens));
 }
 
-if (process.argv[1] === fileURLToPath(import.meta.url)) {
+if (import.meta.url === `file://${process.argv[1]}`) {
   buildTokens();
   process.stdout.write(
-    "Generated src/index.css, src/generated/tokens.tsx, and public/favicon.svg\n",
+    'Generated src/index.css, src/generated/tokens.tsx, and public/favicon.svg\n',
   );
 }

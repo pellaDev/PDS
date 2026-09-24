@@ -3,26 +3,18 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import * as React from "react";
 import { Slot } from "@radix-ui/react-slot";
 import { cva } from "class-variance-authority";
-import { PanelLeftIcon } from "lucide-react";
+import { ChevronDownIcon, PanelLeftIcon } from "lucide-react";
 import { useIsMobile } from "../../hooks/use-mobile";
 import { cn } from "../../lib/utils";
 import { Button } from "./button";
 import { Input } from "./input";
 import { Separator } from "./separator";
-import {
-  Sheet,
-  SheetContent,
-  SheetDescription,
-  SheetHeader,
-  SheetTitle
-} from "./sheet";
+import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle } from "./sheet";
 import { Skeleton } from "./skeleton";
 import { Tooltip } from "./tooltip";
+import "./sidebar.css";
 const SIDEBAR_COOKIE_NAME = "sidebar_state";
 const SIDEBAR_COOKIE_MAX_AGE = 60 * 60 * 24 * 7;
-const SIDEBAR_WIDTH = "16rem";
-const SIDEBAR_WIDTH_MOBILE = "18rem";
-const SIDEBAR_WIDTH_ICON = "3rem";
 const SIDEBAR_KEYBOARD_SHORTCUT = "b";
 const SidebarContext = React.createContext(null);
 function useSidebar() {
@@ -87,11 +79,7 @@ function SidebarProvider({
     "div",
     {
       "data-slot": "sidebar-wrapper",
-      style: {
-        "--sidebar-width": SIDEBAR_WIDTH,
-        "--sidebar-width-icon": SIDEBAR_WIDTH_ICON,
-        ...style
-      },
+      style,
       className: cn(
         "group/sidebar-wrapper has-data-[variant=inset]:bg-sidebar flex min-h-svh w-full",
         className
@@ -133,7 +121,7 @@ function Sidebar({
         "data-mobile": "true",
         className: "bg-sidebar text-sidebar-foreground w-[var(--sidebar-width)] p-0 [&>button]:hidden",
         style: {
-          "--sidebar-width": SIDEBAR_WIDTH_MOBILE
+          "--sidebar-width": "var(--sidebar-width-mobile)"
         },
         side,
         children: [
@@ -164,7 +152,7 @@ function Sidebar({
               "relative w-[var(--sidebar-width)] bg-transparent transition-[width] duration-200 ease-linear",
               "group-data-[collapsible=offcanvas]:w-0",
               "group-data-[side=right]:rotate-180",
-              variant === "floating" || variant === "inset" ? "group-data-[collapsible=icon]:w-[calc(var(--sidebar-width-icon)+var(--spacing-4))]" : "group-data-[collapsible=icon]:w-[var(--sidebar-width-icon)]"
+              variant === "floating" || variant === "inset" ? "group-data-[collapsible=icon]:w-[calc(var(--sidebar-width-icon)+var(--spacing)*4)]" : "group-data-[collapsible=icon]:w-[var(--sidebar-width-icon)]"
             )
           }
         ),
@@ -175,7 +163,8 @@ function Sidebar({
             className: cn(
               "fixed inset-y-0 z-10 hidden h-svh w-[var(--sidebar-width)] transition-[left,right,width] duration-200 ease-linear md:flex",
               side === "left" ? "left-0 group-data-[collapsible=offcanvas]:left-[calc(var(--sidebar-width)*-1)]" : "right-0 group-data-[collapsible=offcanvas]:right-[calc(var(--sidebar-width)*-1)]",
-              variant === "floating" || variant === "inset" ? "p-2 group-data-[collapsible=icon]:w-[calc(var(--sidebar-width-icon)+var(--spacing-4)+2px)]" : "group-data-[collapsible=icon]:w-[var(--sidebar-width-icon)] group-data-[side=left]:border-r group-data-[side=right]:border-l",
+              // Adjust the padding for floating and inset variants.
+              variant === "floating" || variant === "inset" ? "p-2 group-data-[collapsible=icon]:w-[calc(var(--sidebar-width-icon)+var(--spacing)*4+2px)]" : "group-data-[collapsible=icon]:w-[var(--sidebar-width-icon)] group-data-[side=left]:border-r group-data-[side=right]:border-l",
               className
             ),
             ...props,
@@ -194,11 +183,7 @@ function Sidebar({
     }
   );
 }
-function SidebarTrigger({
-  className,
-  onClick,
-  ...props
-}) {
+function SidebarTrigger({ className, onClick, ...props }) {
   const { toggleSidebar } = useSidebar();
   return /* @__PURE__ */ jsxs(
     Button,
@@ -257,10 +242,7 @@ function SidebarInset({ className, ...props }) {
     }
   );
 }
-function SidebarInput({
-  className,
-  ...props
-}) {
+function SidebarInput({ className, ...props }) {
   return /* @__PURE__ */ jsx(
     Input,
     {
@@ -293,16 +275,13 @@ function SidebarFooter({ className, ...props }) {
     }
   );
 }
-function SidebarSeparator({
-  className,
-  ...props
-}) {
+function SidebarSeparator({ className, ...props }) {
   return /* @__PURE__ */ jsx(
     Separator,
     {
       "data-slot": "sidebar-separator",
       "data-sidebar": "separator",
-      className: cn("bg-sidebar-border mx-2 w-auto", className),
+      className: cn("mx-2 w-auto", className),
       ...props
     }
   );
@@ -321,14 +300,66 @@ function SidebarContent({ className, ...props }) {
     }
   );
 }
-function SidebarGroup({ className, ...props }) {
+function SidebarGroup({
+  className,
+  accordion = false,
+  defaultOpen = true,
+  children,
+  ...props
+}) {
+  const [open, setOpen] = React.useState(defaultOpen);
+  const content = React.Children.map(children, (child) => {
+    if (!React.isValidElement(child)) return child;
+    const slot = child.props["data-slot"];
+    if (slot === "sidebar-group-label") {
+      const label = React.cloneElement(child, {
+        className: cn(child.props.className, "-ml-2")
+      });
+      if (accordion) {
+        return /* @__PURE__ */ jsxs(
+          "button",
+          {
+            type: "button",
+            "data-slot": "sidebar-group-label-toggle",
+            "aria-expanded": open,
+            onClick: () => setOpen((o) => !o),
+            className: cn(
+              "ring-sidebar-ring flex w-full items-center justify-between gap-1 rounded-md outline-hidden hover-elevate focus-visible:ring-2",
+              // The label is hidden in icon mode; hide its toggle row with it.
+              "group-data-[collapsible=icon]:hidden"
+            ),
+            children: [
+              label,
+              /* @__PURE__ */ jsx(
+                ChevronDownIcon,
+                {
+                  className: cn(
+                    "text-(--state-sidebar-label) size-4 shrink-0 transition-transform duration-200 ease-linear",
+                    !open && "-rotate-90"
+                  )
+                }
+              )
+            ]
+          }
+        );
+      }
+      return label;
+    }
+    if (accordion && slot === "sidebar-group-content") {
+      return open ? child : React.cloneElement(child, {
+        className: cn(child.props.className, "hidden")
+      });
+    }
+    return child;
+  });
   return /* @__PURE__ */ jsx(
     "div",
     {
       "data-slot": "sidebar-group",
       "data-sidebar": "group",
       className: cn("relative flex w-full min-w-0 flex-col p-2", className),
-      ...props
+      ...props,
+      children: content
     }
   );
 }
@@ -365,6 +396,7 @@ function SidebarGroupAction({
       "data-sidebar": "group-action",
       className: cn(
         "text-sidebar-foreground ring-sidebar-ring hover-elevate absolute top-3.5 right-3 flex aspect-square w-5 items-center justify-center rounded-md p-0 outline-hidden transition-transform focus-visible:ring-2 [&>svg]:size-4 [&>svg]:shrink-0",
+        // Increases the hit area of the button on mobile.
         "after:absolute after:-inset-2 md:after:hidden",
         "group-data-[collapsible=icon]:hidden",
         className
@@ -373,17 +405,25 @@ function SidebarGroupAction({
     }
   );
 }
-function SidebarGroupContent({
-  className,
-  ...props
-}) {
-  return /* @__PURE__ */ jsx(
+function SidebarGroupContent({ className, children, ...props }) {
+  return /* @__PURE__ */ jsxs(
     "div",
     {
       "data-slot": "sidebar-group-content",
       "data-sidebar": "group-content",
-      className: cn("w-full text-sm", className),
-      ...props
+      className: cn("flex w-full min-w-0 items-stretch gap-2 text-sm", className),
+      ...props,
+      children: [
+        /* @__PURE__ */ jsx(
+          Separator,
+          {
+            orientation: "vertical",
+            "data-slot": "sidebar-group-divider",
+            className: "h-auto min-h-4 shrink-0"
+          }
+        ),
+        /* @__PURE__ */ jsx("div", { className: "flex min-w-0 flex-1 flex-col", children })
+      ]
     }
   );
 }
@@ -473,6 +513,7 @@ function SidebarMenuAction({
       "data-sidebar": "menu-action",
       className: cn(
         "text-sidebar-foreground ring-sidebar-ring hover-elevate absolute top-1.5 right-1 flex aspect-square w-5 items-center justify-center rounded-md p-0 outline-hidden transition-transform focus-visible:ring-2 [&>svg]:size-4 [&>svg]:shrink-0",
+        // Increases the hit area of the button on mobile.
         "after:absolute after:-inset-2 md:after:hidden",
         "peer-data-[size=sm]/menu-button:top-1",
         "peer-data-[size=default]/menu-button:top-1.5",
@@ -485,10 +526,7 @@ function SidebarMenuAction({
     }
   );
 }
-function SidebarMenuBadge({
-  className,
-  ...props
-}) {
+function SidebarMenuBadge({ className, ...props }) {
   return /* @__PURE__ */ jsx(
     "div",
     {
@@ -522,13 +560,7 @@ function SidebarMenuSkeleton({
       className: cn("flex h-8 items-center gap-2 rounded-md px-2", className),
       ...props,
       children: [
-        showIcon && /* @__PURE__ */ jsx(
-          Skeleton,
-          {
-            className: "size-4 rounded-md",
-            "data-sidebar": "menu-skeleton-icon"
-          }
-        ),
+        showIcon && /* @__PURE__ */ jsx(Skeleton, { className: "size-4 rounded-md", "data-sidebar": "menu-skeleton-icon" }),
         /* @__PURE__ */ jsx(
           Skeleton,
           {
@@ -558,10 +590,7 @@ function SidebarMenuSub({ className, ...props }) {
     }
   );
 }
-function SidebarMenuSubItem({
-  className,
-  ...props
-}) {
+function SidebarMenuSubItem({ className, ...props }) {
   return /* @__PURE__ */ jsx(
     "li",
     {

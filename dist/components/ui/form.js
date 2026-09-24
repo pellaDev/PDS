@@ -37,10 +37,12 @@ const useFormField = () => {
   };
 };
 const FormItemContext = React.createContext(null);
-const FormItem = React.forwardRef(({ className, ...props }, ref) => {
-  const id = React.useId();
-  return /* @__PURE__ */ jsx(FormItemContext.Provider, { value: { id }, children: /* @__PURE__ */ jsx("div", { ref, className: cn("space-y-2", className), ...props }) });
-});
+const FormItem = React.forwardRef(
+  ({ className, ...props }, ref) => {
+    const id = React.useId();
+    return /* @__PURE__ */ jsx(FormItemContext.Provider, { value: { id }, children: /* @__PURE__ */ jsx("div", { ref, className: cn("space-y-2", className), ...props }) });
+  }
+);
 FormItem.displayName = "FormItem";
 const FormLabel = React.forwardRef(({ className, ...props }, ref) => {
   const { error, formItemId } = useFormField();

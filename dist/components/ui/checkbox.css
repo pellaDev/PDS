@@ -1,60 +1,63 @@
 .pds-checkbox {
-  --_halo: 0 0 0 var(--dim-ss) rgba(0, 0, 0, 0.08); 
-  position: relative; 
+  --_halo: var(--shadow-trigger);
+  position: relative;
   display: inline-flex;
   align-items: center;
-  gap: var(--dim-sss); 
+  gap: var(--dim-sss);
   cursor: pointer;
   user-select: none;
   font-family: var(--pds-font-sans);
   font-weight: 300;
   font-size: var(--type-body2-size);
-  line-height: var(--type-body2-lh); 
-  color: var(--color-black-soft); 
+  line-height: var(--type-body2-lh);
+  color: var(--pds-surface-fg);
 }
 
 .pds-checkbox[data-disabled] {
   opacity: var(--opacity-disabled);
   cursor: not-allowed;
 }
-.pds-checkbox input[type="checkbox"] {
+.pds-checkbox input[type='checkbox'] {
   appearance: none;
   -webkit-appearance: none;
   margin: 0;
   flex: none;
-  width: var(--dim-mmmm); 
+  width: var(--dim-mmmm);
   height: var(--dim-mmmm);
   box-sizing: border-box;
   position: relative;
-  border-radius: var(--dim-sss); 
-  background: var(--color-white); 
-  border: var(--dim-ssss) solid var(--color-black-soft); 
-  transition: border-color 120ms ease, background-color 120ms ease, box-shadow 120ms ease;
+  border-radius: var(--dim-sss);
+  background: var(--pds-surface-bg);
+  border: var(--dim-ssss) solid var(--pds-surface-fg);
+  transition:
+    border-color var(--duration-fast) ease,
+    background-color var(--duration-fast) ease,
+    box-shadow var(--duration-fast) ease;
 }
 
-.pds-checkbox input[type="checkbox"]:not(:checked):hover:not(:disabled) { 
-  border-color: color-mix(in srgb, var(--color-primary) calc(100% - 32%), #fff);
+.pds-checkbox input[type='checkbox']:not(:checked):hover:not(:disabled) {
+  border-color: color-mix(in srgb, var(--color-primary) calc(100% - 32%), var(--color-white-pure));
 }
-.pds-checkbox input[type="checkbox"]:focus-visible:not(:disabled),
-.pds-checkbox input[type="checkbox"]:active:not(:disabled) { 
-  border-color: color-mix(in srgb, var(--color-primary) calc(100% - 32%), #000);
+.pds-checkbox input[type='checkbox']:focus-visible:not(:disabled),
+.pds-checkbox input[type='checkbox']:active:not(:disabled) {
+  border-color: color-mix(in srgb, var(--color-primary) calc(100% - 32%), var(--color-black-pure));
 }
-.pds-checkbox input[type="checkbox"]:active:not(:disabled) {
-  box-shadow: var(--_halo); 
+.pds-checkbox input[type='checkbox']:active:not(:disabled) {
+  box-shadow: var(--_halo);
 }
 
-.pds-checkbox input[type="checkbox"]:checked {
+.pds-checkbox input[type='checkbox']:checked {
   border-color: transparent;
-  background: var(--color-primary); 
+  background: var(--color-primary);
 }
-.pds-checkbox input[type="checkbox"]:checked:hover:not(:disabled) { 
-  background: color-mix(in srgb, var(--color-primary) calc(100% - 32%), #fff);
+.pds-checkbox input[type='checkbox']:checked:hover:not(:disabled) {
+  background: color-mix(in srgb, var(--color-primary) calc(100% - 32%), var(--color-white-pure));
 }
-.pds-checkbox input[type="checkbox"]:checked:focus-visible:not(:disabled),
-.pds-checkbox input[type="checkbox"]:checked:active:not(:disabled) { 
-  background: color-mix(in srgb, var(--color-primary) calc(100% - 32%), #000);
+.pds-checkbox input[type='checkbox']:checked:focus-visible:not(:disabled),
+.pds-checkbox input[type='checkbox']:checked:active:not(:disabled) {
+  background: color-mix(in srgb, var(--color-primary) calc(100% - 32%), var(--color-black-pure));
 }
-.pds-checkbox input[type="checkbox"]:checked:active:not(:disabled) {
+.pds-checkbox input[type='checkbox']:checked:active:not(:disabled) {
   box-shadow: var(--_halo);
 }
 
@@ -68,17 +71,13 @@
   display: none;
   align-items: center;
   justify-content: center;
-  color: var(--color-gray-soft); 
+  color: var(--color-card);
 }
-.pds-checkbox input[type="checkbox"]:checked ~ .pds-checkbox__icon {
+.pds-checkbox input[type='checkbox']:checked ~ .pds-checkbox__icon {
   display: flex;
 }
 
-.pds-checkbox input[type="checkbox"]:not(:checked):disabled {
+.pds-checkbox input[type='checkbox']:not(:checked):disabled {
   border-color: transparent;
-  background: var(--color-gray); 
-}
-
-[data-pds-surface='alternate'] .pds-checkbox input[type="checkbox"]:not(:checked) {
-  background: var(--color-secondary);
+  background: var(--color-gray);
 }

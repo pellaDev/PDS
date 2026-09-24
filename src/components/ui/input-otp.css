@@ -1,21 +1,27 @@
 .pds-otp-slot {
-  
-  --_focus-o: color-mix(in srgb, var(--color-primary) calc(100% - 32%), #000);
+  --_focus-o: color-mix(in srgb, var(--color-primary) calc(100% - 32%), var(--color-black-pure));
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
-  height: var(--dim-lll); 
+  height: var(--dim-lll);
   width: var(--dim-lll);
-  background-color: var(--color-secondary); 
-  border: var(--dim-ssss) solid transparent; 
-  font-family: var(--pds-font-sans); 
-  font-weight: 300;                          
-  font-size: var(--type-body2-size);         
+  background-color: var(--color-secondary);
+  border: var(--dim-ssss) solid transparent;
+  font-family: var(--pds-font-sans);
+  font-weight: 300;
+  font-size: var(--type-body2-size);
   line-height: var(--type-body2-lh);
   color: var(--color-foreground);
 }
-.pds-otp-slot:first-child { border-radius: var(--dim-sss) 0 0 var(--dim-sss); }
-.pds-otp-slot:last-child { border-radius: 0 var(--dim-sss) var(--dim-sss) 0; }
+.pds-otp-slot:first-child {
+  border-radius: var(--dim-sss) 0 0 var(--dim-sss);
+}
+.pds-otp-slot:last-child {
+  border-radius: 0 var(--dim-sss) var(--dim-sss) 0;
+}
 
-.pds-otp-slot[data-active] { z-index: 10; border-color: var(--_focus-o); }
+.pds-otp-slot[data-active] {
+  z-index: 10;
+  border-color: var(--_focus-o);
+}

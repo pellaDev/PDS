@@ -23,8 +23,10 @@ export function NavigationMenuDemo() {
                     href="#page=navigation-menu"
                     className="block rounded-md p-3 hover:bg-[color-mix(in_srgb,var(--color-primary)_12%,transparent)]"
                   >
-                    <span className="font-medium">Apps</span>
-                    <span className="block text-sm text-muted-foreground">
+                    <span className="[font-size:var(--type-body2-size)] [line-height:var(--type-body2-lh)] font-light">
+                      Apps
+                    </span>
+                    <span className="block [font-size:var(--type-body2-size)] [line-height:var(--type-body2-lh)] font-light text-muted-foreground">
                       Build and publish full-stack projects.
                     </span>
                   </NavigationMenuLink>
@@ -34,8 +36,10 @@ export function NavigationMenuDemo() {
                     href="#page=navigation-menu"
                     className="block rounded-md p-3 hover:bg-[color-mix(in_srgb,var(--color-primary)_12%,transparent)]"
                   >
-                    <span className="font-medium">Teams</span>
-                    <span className="block text-sm text-muted-foreground">
+                    <span className="[font-size:var(--type-body2-size)] [line-height:var(--type-body2-lh)] font-light">
+                      Teams
+                    </span>
+                    <span className="block [font-size:var(--type-body2-size)] [line-height:var(--type-body2-lh)] font-light text-muted-foreground">
                       Collaborate with shared tools and access.
                     </span>
                   </NavigationMenuLink>

@@ -45,14 +45,7 @@ const CommandList = React.forwardRef(({ className, ...props }, ref) => /* @__PUR
   }
 ));
 CommandList.displayName = CommandPrimitive.List.displayName;
-const CommandEmpty = React.forwardRef((props, ref) => /* @__PURE__ */ jsx(
-  CommandPrimitive.Empty,
-  {
-    ref,
-    className: "py-6 text-center text-sm",
-    ...props
-  }
-));
+const CommandEmpty = React.forwardRef((props, ref) => /* @__PURE__ */ jsx(CommandPrimitive.Empty, { ref, className: "py-6 text-center text-sm", ...props }));
 CommandEmpty.displayName = CommandPrimitive.Empty.displayName;
 const CommandGroup = React.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ jsx(
   CommandPrimitive.Group,
@@ -87,17 +80,11 @@ const CommandItem = React.forwardRef(({ className, ...props }, ref) => /* @__PUR
   }
 ));
 CommandItem.displayName = CommandPrimitive.Item.displayName;
-const CommandShortcut = ({
-  className,
-  ...props
-}) => {
+const CommandShortcut = ({ className, ...props }) => {
   return /* @__PURE__ */ jsx(
     "span",
     {
-      className: cn(
-        "ml-auto text-xs tracking-widest text-muted-foreground",
-        className
-      ),
+      className: cn("ml-auto text-xs tracking-widest text-muted-foreground", className),
       ...props
     }
   );

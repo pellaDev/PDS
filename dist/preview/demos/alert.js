@@ -1,10 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { AlertCircle, CheckCircle2 } from "lucide-react";
-import {
-  Alert,
-  AlertDescription,
-  AlertTitle
-} from "../../components/ui/alert";
+import { Alert, AlertDescription, AlertTitle } from "../../components/ui/alert";
 import { Stack } from "../parts";
 function AlertDemo() {
   return /* @__PURE__ */ jsx("div", { className: "max-w-xl p-6", children: /* @__PURE__ */ jsxs(Stack, { label: "Variants", children: [

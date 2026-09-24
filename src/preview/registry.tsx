@@ -1,8 +1,9 @@
 import { lazy, type ComponentType } from 'react';
 import {
   ColorsPage,
-  FontsPage,
+  FamiliesPage,
   LayoutPage,
+  TextStylesPage,
   OverviewPage,
   ShadowsPage,
   TagsPage,
@@ -15,42 +16,28 @@ function lazyPage(load: () => Promise<ComponentType>) {
 const AccordionDemo = lazyPage(() =>
   import('./demos/accordion').then(({ AccordionDemo }) => AccordionDemo),
 );
-const AlertDemo = lazyPage(() =>
-  import('./demos/alert').then(({ AlertDemo }) => AlertDemo),
-);
+const AlertDemo = lazyPage(() => import('./demos/alert').then(({ AlertDemo }) => AlertDemo));
 const AlertDialogDemo = lazyPage(() =>
   import('./demos/alert-dialog').then(({ AlertDialogDemo }) => AlertDialogDemo),
 );
 const AspectRatioDemo = lazyPage(() =>
   import('./demos/aspect-ratio').then(({ AspectRatioDemo }) => AspectRatioDemo),
 );
-const AvatarDemo = lazyPage(() =>
-  import('./demos/avatar').then(({ AvatarDemo }) => AvatarDemo),
-);
-const IconsDemo = lazyPage(() =>
-  import('./demos/icons').then(({ IconsDemo }) => IconsDemo),
-);
-const BadgeDemo = lazyPage(() =>
-  import('./demos/badge').then(({ BadgeDemo }) => BadgeDemo),
-);
+const AvatarDemo = lazyPage(() => import('./demos/avatar').then(({ AvatarDemo }) => AvatarDemo));
+const IconsDemo = lazyPage(() => import('./demos/icons').then(({ IconsDemo }) => IconsDemo));
+const BadgeDemo = lazyPage(() => import('./demos/badge').then(({ BadgeDemo }) => BadgeDemo));
 const BreadcrumbDemo = lazyPage(() =>
   import('./demos/breadcrumb').then(({ BreadcrumbDemo }) => BreadcrumbDemo),
 );
-const ButtonDemo = lazyPage(() =>
-  import('./demos/button').then(({ ButtonDemo }) => ButtonDemo),
-);
+const ButtonDemo = lazyPage(() => import('./demos/button').then(({ ButtonDemo }) => ButtonDemo));
 const CalendarDemo = lazyPage(() =>
   import('./demos/calendar').then(({ CalendarDemo }) => CalendarDemo),
 );
-const CardDemo = lazyPage(() =>
-  import('./demos/card').then(({ CardDemo }) => CardDemo),
-);
+const CardDemo = lazyPage(() => import('./demos/card').then(({ CardDemo }) => CardDemo));
 const CarouselDemo = lazyPage(() =>
   import('./demos/carousel').then(({ CarouselDemo }) => CarouselDemo),
 );
-const ChartDemo = lazyPage(() =>
-  import('./demos/chart').then(({ ChartDemo }) => ChartDemo),
-);
+const ChartDemo = lazyPage(() => import('./demos/chart').then(({ ChartDemo }) => ChartDemo));
 const CheckboxDemo = lazyPage(() =>
   import('./demos/checkbox').then(({ CheckboxDemo }) => CheckboxDemo),
 );
@@ -60,51 +47,26 @@ const CollapsibleDemo = lazyPage(() =>
 const CommandDemo = lazyPage(() =>
   import('./demos/command').then(({ CommandDemo }) => CommandDemo),
 );
-const ContextMenuDemo = lazyPage(() =>
-  import('./demos/context-menu').then(({ ContextMenuDemo }) => ContextMenuDemo),
-);
-const DialogDemo = lazyPage(() =>
-  import('./demos/dialog').then(({ DialogDemo }) => DialogDemo),
-);
-const DrawerDemo = lazyPage(() =>
-  import('./demos/drawer').then(({ DrawerDemo }) => DrawerDemo),
-);
-const DropdownMenuDemo = lazyPage(() =>
-  import('./demos/dropdown-menu').then(
-    ({ DropdownMenuDemo }) => DropdownMenuDemo,
-  ),
-);
-const EmptyDemo = lazyPage(() =>
-  import('./demos/empty').then(({ EmptyDemo }) => EmptyDemo),
-);
-const FieldDemo = lazyPage(() =>
-  import('./demos/field').then(({ FieldDemo }) => FieldDemo),
-);
-const FormDemo = lazyPage(() =>
-  import('./demos/form').then(({ FormDemo }) => FormDemo),
-);
+const DialogDemo = lazyPage(() => import('./demos/dialog').then(({ DialogDemo }) => DialogDemo));
+const DrawerDemo = lazyPage(() => import('./demos/drawer').then(({ DrawerDemo }) => DrawerDemo));
+const EmptyDemo = lazyPage(() => import('./demos/empty').then(({ EmptyDemo }) => EmptyDemo));
+const FieldDemo = lazyPage(() => import('./demos/field').then(({ FieldDemo }) => FieldDemo));
+const FormDemo = lazyPage(() => import('./demos/form').then(({ FormDemo }) => FormDemo));
 const HoverCardDemo = lazyPage(() =>
   import('./demos/hover-card').then(({ HoverCardDemo }) => HoverCardDemo),
 );
-const InputDemo = lazyPage(() =>
-  import('./demos/input').then(({ InputDemo }) => InputDemo),
-);
+const InputDemo = lazyPage(() => import('./demos/input').then(({ InputDemo }) => InputDemo));
 const InputOtpDemo = lazyPage(() =>
   import('./demos/input-otp').then(({ InputOtpDemo }) => InputOtpDemo),
 );
-const ItemDemo = lazyPage(() =>
-  import('./demos/item').then(({ ItemDemo }) => ItemDemo),
-);
-const KbdDemo = lazyPage(() =>
-  import('./demos/kbd').then(({ KbdDemo }) => KbdDemo),
-);
+const ItemDemo = lazyPage(() => import('./demos/item').then(({ ItemDemo }) => ItemDemo));
+const KbdDemo = lazyPage(() => import('./demos/kbd').then(({ KbdDemo }) => KbdDemo));
+const MenuDemo = lazyPage(() => import('./demos/menu').then(({ MenuDemo }) => MenuDemo));
 const MenubarDemo = lazyPage(() =>
   import('./demos/menubar').then(({ MenubarDemo }) => MenubarDemo),
 );
 const NavigationMenuDemo = lazyPage(() =>
-  import('./demos/navigation-menu').then(
-    ({ NavigationMenuDemo }) => NavigationMenuDemo,
-  ),
+  import('./demos/navigation-menu').then(({ NavigationMenuDemo }) => NavigationMenuDemo),
 );
 const PaginationDemo = lazyPage(() =>
   import('./demos/pagination').then(({ PaginationDemo }) => PaginationDemo),
@@ -115,9 +77,7 @@ const PopoverDemo = lazyPage(() =>
 const ProgressDemo = lazyPage(() =>
   import('./demos/progress').then(({ ProgressDemo }) => ProgressDemo),
 );
-const RadioDemo = lazyPage(() =>
-  import('./demos/radio').then(({ RadioDemo }) => RadioDemo),
-);
+const RadioDemo = lazyPage(() => import('./demos/radio').then(({ RadioDemo }) => RadioDemo));
 const ResizableDemo = lazyPage(() =>
   import('./demos/resizable').then(({ ResizableDemo }) => ResizableDemo),
 );
@@ -127,42 +87,26 @@ const ScrollAreaDemo = lazyPage(() =>
 const SeparatorDemo = lazyPage(() =>
   import('./demos/separator').then(({ SeparatorDemo }) => SeparatorDemo),
 );
-const SheetDemo = lazyPage(() =>
-  import('./demos/sheet').then(({ SheetDemo }) => SheetDemo),
-);
+const SheetDemo = lazyPage(() => import('./demos/sheet').then(({ SheetDemo }) => SheetDemo));
 const SidebarDemo = lazyPage(() =>
   import('./demos/sidebar').then(({ SidebarDemo }) => SidebarDemo),
 );
 const SkeletonDemo = lazyPage(() =>
   import('./demos/skeleton').then(({ SkeletonDemo }) => SkeletonDemo),
 );
-const SliderDemo = lazyPage(() =>
-  import('./demos/slider').then(({ SliderDemo }) => SliderDemo),
-);
-const SonnerDemo = lazyPage(() =>
-  import('./demos/sonner').then(({ SonnerDemo }) => SonnerDemo),
-);
+const SliderDemo = lazyPage(() => import('./demos/slider').then(({ SliderDemo }) => SliderDemo));
+const SonnerDemo = lazyPage(() => import('./demos/sonner').then(({ SonnerDemo }) => SonnerDemo));
 const SpinnerDemo = lazyPage(() =>
   import('./demos/spinner').then(({ SpinnerDemo }) => SpinnerDemo),
 );
-const SwitchDemo = lazyPage(() =>
-  import('./demos/switch').then(({ SwitchDemo }) => SwitchDemo),
-);
-const TableDemo = lazyPage(() =>
-  import('./demos/table').then(({ TableDemo }) => TableDemo),
-);
-const TabsDemo = lazyPage(() =>
-  import('./demos/tabs').then(({ TabsDemo }) => TabsDemo),
-);
+const SwitchDemo = lazyPage(() => import('./demos/switch').then(({ SwitchDemo }) => SwitchDemo));
+const TableDemo = lazyPage(() => import('./demos/table').then(({ TableDemo }) => TableDemo));
+const TabsDemo = lazyPage(() => import('./demos/tabs').then(({ TabsDemo }) => TabsDemo));
 const TextareaDemo = lazyPage(() =>
   import('./demos/textarea').then(({ TextareaDemo }) => TextareaDemo),
 );
-const ToastDemo = lazyPage(() =>
-  import('./demos/toast').then(({ ToastDemo }) => ToastDemo),
-);
-const ToggleDemo = lazyPage(() =>
-  import('./demos/toggle').then(({ ToggleDemo }) => ToggleDemo),
-);
+const ToastDemo = lazyPage(() => import('./demos/toast').then(({ ToastDemo }) => ToastDemo));
+const ToggleDemo = lazyPage(() => import('./demos/toggle').then(({ ToggleDemo }) => ToggleDemo));
 const ToggleGroupDemo = lazyPage(() =>
   import('./demos/toggle-group').then(({ ToggleGroupDemo }) => ToggleGroupDemo),
 );
@@ -171,15 +115,17 @@ const TooltipDemo = lazyPage(() =>
 );
 
 export type PreviewEntry = {
-  
-  
-  
+  // Globally unique across every group — it is the deep-link slug (`#page=<id>`)
+  // and the active-page key. Group-qualify names that repeat across groups
+  // (e.g. `brand-icons` vs `components-icons`).
   id: string;
   name: string;
   description: string;
   Page: ComponentType;
-  
+  // When true, the page renders its dual-background sections in the top pair and the rest in a full-width single column below it.
   splitLayout?: boolean;
+  // When true, the page renders a single full-width base-surface column instead of the dual pair.
+  singleColumn?: boolean;
 };
 
 export type NavGroup = {
@@ -188,11 +134,15 @@ export type NavGroup = {
 };
 
 export const DESIGN_SYSTEM = {
-  title: 'PDS | Pella Design System',
-  
-  version: 'v1.0.0',
+  // Wordmark parts — the logo mark is rendered inline between prefix and suffix by the preview shell.
+  titlePrefix: 'PDS',
+  titleSuffix: 'Pella Design System',
+  // Current design system version -- mirrors the git tag on branch pds-gh.
+  version: 'v1.3.0',
   description:
-    'Il linguaggio visivo React di Pella: fondazioni, componenti accessibili e pattern pronti per prodotti coerenti.',
+    'Simple but complete AI Ready design system in React: foundations, accessible components, and ready-to-use patterns for consistent products.',
+  descriptionBody:
+    'Pick up your Light theme and Dark theme colors, check if the colors pass the contrast test in Color roles, and choose an available font and style. When you are ready, install the PDS with the flags your colors/font/style and you are done.',
 } as const;
 
 export const OVERVIEW_ENTRY: PreviewEntry = {
@@ -202,18 +152,22 @@ export const OVERVIEW_ENTRY: PreviewEntry = {
   Page: OverviewPage,
 };
 
+// Entries that are NOT dedicated to a single UI primitive (token specimens, meta or
+// multi-component composition pages). Every other nav entry demonstrates one PDS primitive.
 const NON_PRIMITIVE_IDS = new Set([
-  'overview',         
-  'color-roles',      
-  'type-scale',       
-  'shadows',          
-  'spacing-radius',   
-  'form',             
-  'chart',            
+  'overview', // meta / foundations intro
+  'color-roles', // color specimen
+  'text-styles', // type specimen (named styles)
+  'font-families', // families & weights specimen
+  'shadows', // elevation specimen
+  'spacing-radius', // spacing & radius specimen
+  'form', // composes several fields (a pattern, not a single primitive)
+  'chart', // application-level data visualization, not a core UI primitive
 ]);
 
 export const isPrimitiveEntry = (e: PreviewEntry): boolean => !NON_PRIMITIVE_IDS.has(e.id);
 
+// Definition order only -- the exported NAV_GROUPS below sorts every group's entries alphabetically.
 const RAW_NAV_GROUPS: NavGroup[] = [
   { name: 'Brand', entries: [] },
   {
@@ -222,20 +176,29 @@ const RAW_NAV_GROUPS: NavGroup[] = [
       {
         id: 'color-roles',
         name: 'Color roles',
-        description: 'Global colors for both themes - brand primaries, traffic lights, gray scales, hover-layer variants.',
+        description:
+          'Global colors for both themes - brand primaries, traffic lights, gray scales, hover-layer variants.',
         Page: ColorsPage,
       },
     ],
   },
   {
-    name: 'Fonts',
+    name: 'Typography',
     entries: [
       {
-        id: 'type-scale',
-        name: 'Type scale',
-        description: 'Font families, headings, body text, labels, and captions.',
-        Page: FontsPage,
+        id: 'text-styles',
+        name: 'Text styles',
+        description:
+          'The eight named text styles — family, size, line height, tracking, weight — and the raw scales.',
+        Page: TextStylesPage,
         splitLayout: true,
+      },
+      {
+        id: 'font-families',
+        name: 'Families & weights',
+        description:
+          'Installable font families, their available weights, and the system emphasis rule.',
+        Page: FamiliesPage,
       },
     ],
   },
@@ -282,7 +245,8 @@ const RAW_NAV_GROUPS: NavGroup[] = [
       {
         id: 'tag',
         name: 'Tags',
-        description: 'Pill markers with one solid fill per state, straight from the original tags.json composition.',
+        description:
+          'Pill markers with one solid fill per state, straight from the original tags.json composition.',
         Page: TagsPage,
         splitLayout: true,
       },
@@ -324,13 +288,15 @@ const RAW_NAV_GROUPS: NavGroup[] = [
       {
         id: 'checkbox',
         name: 'Checkbox',
-        description: 'Pella checkbox from checkboxes.json — brand-family fill states with graySoft glyph.',
+        description:
+          'Pella checkbox from checkboxes.json — brand-family fill states with graySoft glyph.',
         Page: CheckboxDemo,
       },
       {
         id: 'radio',
         name: 'Radio',
-        description: 'Pella radio control from radios.json — selected ring with runtime ±32% state outlines.',
+        description:
+          'Pella radio control from radios.json — selected ring with runtime ±32% state outlines.',
         Page: RadioDemo,
       },
       {
@@ -342,7 +308,8 @@ const RAW_NAV_GROUPS: NavGroup[] = [
       {
         id: 'switch',
         name: 'Switch',
-        description: 'Toggle switch from toggles.json - outlined off track to solid live-brand on fill with token-set knob geometry.',
+        description:
+          'Toggle switch from toggles.json - outlined off track to solid live-brand on fill with token-set knob geometry.',
         Page: SwitchDemo,
       },
       {
@@ -354,7 +321,8 @@ const RAW_NAV_GROUPS: NavGroup[] = [
       {
         id: 'field',
         name: 'Field',
-        description: 'Floating-label inputs from fields.json - fill/border x small/large, runtime-computed ±32% state outlines.',
+        description:
+          'Floating-label inputs from fields.json - fill/border x small/large, runtime-computed ±32% state outlines.',
         Page: FieldDemo,
       },
       {
@@ -407,7 +375,8 @@ const RAW_NAV_GROUPS: NavGroup[] = [
       {
         id: 'tooltip',
         name: 'Tooltip',
-        description: 'Tooltip bubbles from tooltips.json - brand / alert / error fills at caption type, CSS-only reveal.',
+        description:
+          'Tooltip bubbles from tooltips.json - brand / alert / error fills at caption type, CSS-only reveal.',
         Page: TooltipDemo,
       },
       {
@@ -422,16 +391,11 @@ const RAW_NAV_GROUPS: NavGroup[] = [
     name: 'Menus & navigation',
     entries: [
       {
-        id: 'dropdown-menu',
-        name: 'Dropdown menu',
-        description: 'Dropdown trigger from dropdowns.json - filled square box with runtime 32% state washes; opens a tokenized PDS listbox. Merges the former Select + dropdown menu into one control.',
-        Page: DropdownMenuDemo,
-      },
-      {
-        id: 'context-menu',
-        name: 'Context menu',
-        description: 'Right-click actions and nested choices.',
-        Page: ContextMenuDemo,
+        id: 'menu',
+        name: 'Dropdown',
+        description:
+          'Unified PDS dropdown + context menu (mode="dropdown" opens on click, mode="context" on right-click): token-faithful trigger from dropdowns.json, floating listbox with the dropDown shadow recipe, rounded rows in the sidebar-menu idiom with neutral washes and a brand edge.',
+        Page: MenuDemo,
       },
       {
         id: 'menubar',
@@ -454,7 +418,8 @@ const RAW_NAV_GROUPS: NavGroup[] = [
       {
         id: 'pagination',
         name: 'Pagination',
-        description: 'Pagination cells from paginations.json - odd/even resting fills with capped previous/next corners per export.',
+        description:
+          'Pagination cells from paginations.json - odd/even resting fills with capped previous/next corners per export.',
         Page: PaginationDemo,
       },
       {
@@ -466,7 +431,8 @@ const RAW_NAV_GROUPS: NavGroup[] = [
       {
         id: 'sidebar',
         name: 'Sidebar',
-        description: 'Bounded application navigation and content layout.',
+        description:
+          'Bounded application navigation and content layout - category items sit right of a vertical separator, and labels can collapse their category via the optional accordion prop on SidebarGroup.',
         Page: SidebarDemo,
       },
     ],
@@ -483,7 +449,8 @@ const RAW_NAV_GROUPS: NavGroup[] = [
       {
         id: 'badge',
         name: 'Badge',
-        description: 'Simple markers and numbered pills from badges.json (caption label, live brand fills).',
+        description:
+          'Simple markers and numbered pills from badges.json (caption label, live brand fills).',
         Page: BadgeDemo,
       },
       {
@@ -539,6 +506,7 @@ const RAW_NAV_GROUPS: NavGroup[] = [
         name: 'Aspect ratio',
         description: 'Responsive proportional media containers.',
         Page: AspectRatioDemo,
+        singleColumn: true,
       },
     ],
   },
@@ -574,12 +542,14 @@ const RAW_NAV_GROUPS: NavGroup[] = [
         name: 'Toast',
         description: 'Provider-backed transient notifications and actions.',
         Page: ToastDemo,
+        singleColumn: true,
       },
       {
         id: 'sonner',
         name: 'Sonner',
         description: 'Stacked notifications with status and actions.',
         Page: SonnerDemo,
+        singleColumn: true,
       },
     ],
   },
@@ -597,12 +567,14 @@ const RAW_NAV_GROUPS: NavGroup[] = [
         name: 'Scroll area',
         description: 'Bounded vertical and horizontal scrolling.',
         Page: ScrollAreaDemo,
+        singleColumn: true,
       },
       {
         id: 'resizable',
         name: 'Resizable panels',
         description: 'Bounded split panes with draggable handles.',
         Page: ResizableDemo,
+        singleColumn: true,
       },
     ],
   },
@@ -622,6 +594,7 @@ const RAW_NAV_GROUPS: NavGroup[] = [
   { name: 'Applied examples', entries: [] },
 ];
 
+// Sidebar order: entries are always shown alphabetically within every category.
 export const NAV_GROUPS: NavGroup[] = RAW_NAV_GROUPS.map((group) => ({
   ...group,
   entries: [...group.entries].sort((a, b) => a.name.localeCompare(b.name)),
@@ -632,6 +605,8 @@ export const ALL_ENTRIES: PreviewEntry[] = [
   ...NAV_GROUPS.flatMap((group) => group.entries),
 ];
 
+// A duplicate id would make one page unreachable (its deep link and highlight
+// resolve to the first match), so fail loudly instead of shipping a dead page.
 const duplicateIds = ALL_ENTRIES.map((entry) => entry.id).filter(
   (id, index, ids) => ids.indexOf(id) !== index,
 );

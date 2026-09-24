@@ -21,9 +21,7 @@ export function DrawerDemo() {
           <div className="mx-auto w-full max-w-md">
             <DrawerHeader>
               <DrawerTitle>Recent activity</DrawerTitle>
-              <DrawerDescription>
-                Review changes made to this project.
-              </DrawerDescription>
+              <DrawerDescription>Review changes made to this project.</DrawerDescription>
             </DrawerHeader>
             <DrawerFooter>
               <DrawerClose asChild>

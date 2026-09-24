@@ -41,30 +41,12 @@ const DialogContent = React.forwardRef(({ className, children, ...props }, ref) 
   )
 ] }));
 DialogContent.displayName = DialogPrimitive.Content.displayName;
-const DialogHeader = ({
-  className,
-  ...props
-}) => /* @__PURE__ */ jsx(
-  "div",
-  {
-    className: cn(
-      "flex flex-col space-y-1.5 text-center sm:text-left",
-      className
-    ),
-    ...props
-  }
-);
+const DialogHeader = ({ className, ...props }) => /* @__PURE__ */ jsx("div", { className: cn("flex flex-col space-y-1.5 text-center sm:text-left", className), ...props });
 DialogHeader.displayName = "DialogHeader";
-const DialogFooter = ({
-  className,
-  ...props
-}) => /* @__PURE__ */ jsx(
+const DialogFooter = ({ className, ...props }) => /* @__PURE__ */ jsx(
   "div",
   {
-    className: cn(
-      "flex flex-col-reverse sm:flex-row sm:justify-end sm:space-x-2",
-      className
-    ),
+    className: cn("flex flex-col-reverse sm:flex-row sm:justify-end sm:space-x-2", className),
     ...props
   }
 );
@@ -73,10 +55,7 @@ const DialogTitle = React.forwardRef(({ className, ...props }, ref) => /* @__PUR
   DialogPrimitive.Title,
   {
     ref,
-    className: cn(
-      "text-lg font-semibold leading-none tracking-tight",
-      className
-    ),
+    className: cn("text-lg font-semibold leading-none tracking-tight", className),
     ...props
   }
 ));

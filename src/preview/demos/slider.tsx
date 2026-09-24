@@ -14,6 +14,7 @@ export function SliderDemo() {
         <div className="flex h-40 items-center justify-center gap-8">
           <Slider orientation="vertical" defaultValue={[40]} max={100} step={1} />
           <Slider orientation="vertical" defaultValue={[25, 75]} max={100} step={5} />
+          <Slider orientation="vertical" defaultValue={[60]} max={100} step={1} disabled />
         </div>
       </Stack>
       <Stack label="Disabled">

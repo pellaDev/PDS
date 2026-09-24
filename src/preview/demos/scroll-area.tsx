@@ -6,7 +6,10 @@ export function ScrollAreaDemo() {
       <ScrollArea className="h-48 rounded-xl border bg-card p-4">
         <div className="space-y-3 pr-4">
           {Array.from({ length: 12 }, (_, index) => (
-            <div key={index} className="border-b pb-3 text-sm last:border-0">
+            <div
+              key={index}
+              className="border-b pb-3 [font-size:var(--type-body2-size)] [line-height:var(--type-body2-lh)] font-light last:border-0"
+            >
               Activity item {index + 1}
             </div>
           ))}
@@ -17,7 +20,7 @@ export function ScrollAreaDemo() {
           {['Alpha', 'Beta', 'Gamma', 'Delta', 'Epsilon'].map((label) => (
             <div
               key={label}
-              className="flex h-32 w-32 items-end rounded-lg bg-muted p-3 text-sm font-medium"
+              className="flex h-32 w-32 items-end rounded-lg bg-muted p-3 [font-size:var(--type-body2-size)] [line-height:var(--type-body2-lh)] font-light"
             >
               {label}
             </div>

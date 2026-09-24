@@ -1,9 +1,5 @@
 import { AlertCircle, CheckCircle2 } from 'lucide-react';
-import {
-  Alert,
-  AlertDescription,
-  AlertTitle,
-} from '../../components/ui/alert';
+import { Alert, AlertDescription, AlertTitle } from '../../components/ui/alert';
 import { Stack } from '../parts';
 
 export function AlertDemo() {

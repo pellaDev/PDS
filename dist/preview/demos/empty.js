@@ -10,7 +10,7 @@ import {
   EmptyTitle
 } from "../../components/ui/empty";
 function EmptyDemo() {
-  return /* @__PURE__ */ jsxs(Empty, { className: "max-w-xl border bg-card", children: [
+  return /* @__PURE__ */ jsxs(Empty, { className: "max-w-xl border [border-color:var(--pds-container-border-color)]", children: [
     /* @__PURE__ */ jsxs(EmptyHeader, { children: [
       /* @__PURE__ */ jsx(EmptyMedia, { variant: "icon", children: /* @__PURE__ */ jsx(FolderOpen, {}) }),
       /* @__PURE__ */ jsx(EmptyTitle, { children: "No projects yet" }),

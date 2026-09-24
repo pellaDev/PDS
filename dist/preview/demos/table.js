@@ -19,12 +19,12 @@ function TableDemo() {
     ] }) }),
     /* @__PURE__ */ jsxs(TableBody, { children: [
       /* @__PURE__ */ jsxs(TableRow, { children: [
-        /* @__PURE__ */ jsx(TableCell, { className: "font-medium", children: "Launch site" }),
+        /* @__PURE__ */ jsx(TableCell, { children: "Launch site" }),
         /* @__PURE__ */ jsx(TableCell, { children: "Active" }),
         /* @__PURE__ */ jsx(TableCell, { className: "text-right", children: "12" })
       ] }),
       /* @__PURE__ */ jsxs(TableRow, { children: [
-        /* @__PURE__ */ jsx(TableCell, { className: "font-medium", children: "Mobile app" }),
+        /* @__PURE__ */ jsx(TableCell, { children: "Mobile app" }),
         /* @__PURE__ */ jsx(TableCell, { children: "Review" }),
         /* @__PURE__ */ jsx(TableCell, { className: "text-right", children: "8" })
       ] })

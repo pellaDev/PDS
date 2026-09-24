@@ -11,15 +11,13 @@ import {
 
 export function EmptyDemo() {
   return (
-    <Empty className="max-w-xl border bg-card">
+    <Empty className="max-w-xl border [border-color:var(--pds-container-border-color)]">
       <EmptyHeader>
         <EmptyMedia variant="icon">
           <FolderOpen />
         </EmptyMedia>
         <EmptyTitle>No projects yet</EmptyTitle>
-        <EmptyDescription>
-          Create a project to start organizing your work.
-        </EmptyDescription>
+        <EmptyDescription>Create a project to start organizing your work.</EmptyDescription>
       </EmptyHeader>
       <EmptyContent>
         <Button>Create project</Button>

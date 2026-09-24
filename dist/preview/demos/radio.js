@@ -3,7 +3,7 @@ import { Radio } from "../../components/ui/radio";
 import { BaseSurfaceOnly, Row } from "../parts";
 function RadioDemo() {
   return /* @__PURE__ */ jsxs("div", { className: "space-y-6 p-6 text-card-foreground", children: [
-    /* @__PURE__ */ jsx(BaseSurfaceOnly, { children: /* @__PURE__ */ jsx("p", { className: "text-sm text-muted-foreground", children: "Disabled: the whole row (control + label) drops to opacity 0.32 per sys.opacity.disabled; selected + disabled keeps the brand dot under the same fade." }) }),
+    /* @__PURE__ */ jsx(BaseSurfaceOnly, { children: /* @__PURE__ */ jsx("p", { className: "[font-size:var(--type-body2-size)] [line-height:var(--type-body2-lh)] font-light text-muted-foreground", children: "Disabled: the whole row (control + label) drops to opacity 0.32 per sys.opacity.disabled; selected + disabled keeps the brand dot under the same fade." }) }),
     /* @__PURE__ */ jsxs(Row, { label: "States", children: [
       /* @__PURE__ */ jsx(Radio, { name: "states", defaultChecked: true, label: "Selected" }),
       /* @__PURE__ */ jsx(Radio, { name: "states", label: "Unselected" }),

@@ -1,11 +1,5 @@
 import { jsx, jsxs } from "react/jsx-runtime";
-import {
-  Bar,
-  BarChart,
-  CartesianGrid,
-  XAxis,
-  YAxis
-} from "recharts";
+import { Bar, BarChart, CartesianGrid, XAxis, YAxis } from "recharts";
 import {
   ChartContainer,
   ChartLegend,
@@ -27,8 +21,8 @@ const chartData = [
 function ChartDemo() {
   return /* @__PURE__ */ jsxs("div", { className: "max-w-2xl p-6", children: [
     /* @__PURE__ */ jsxs("div", { className: "mb-4", children: [
-      /* @__PURE__ */ jsx("p", { className: "font-medium", children: "Monthly visitors" }),
-      /* @__PURE__ */ jsx("p", { className: "text-sm text-muted-foreground", children: "Desktop and mobile traffic." })
+      /* @__PURE__ */ jsx("p", { className: "[font-size:var(--type-body2-size)] [line-height:var(--type-body2-lh)] font-light", children: "Monthly visitors" }),
+      /* @__PURE__ */ jsx("p", { className: "[font-size:var(--type-body2-size)] [line-height:var(--type-body2-lh)] font-light text-muted-foreground", children: "Desktop and mobile traffic." })
     ] }),
     /* @__PURE__ */ jsx(ChartContainer, { config: chartConfig, className: "max-h-72 w-full", children: /* @__PURE__ */ jsxs(BarChart, { data: chartData, accessibilityLayer: true, children: [
       /* @__PURE__ */ jsx(CartesianGrid, { vertical: false }),

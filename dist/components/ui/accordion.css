@@ -1,0 +1,3 @@
+[data-slot='accordion-item']:last-child > [data-slot='pds-accordion-separator'] {
+  display: none;
+}

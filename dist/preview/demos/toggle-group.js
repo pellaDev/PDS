@@ -1,9 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { AlignCenter, AlignLeft, AlignRight } from "lucide-react";
-import {
-  ToggleGroup,
-  ToggleGroupItem
-} from "../../components/ui/toggle-group";
+import { ToggleGroup, ToggleGroupItem } from "../../components/ui/toggle-group";
 import { Stack } from "../parts";
 function ToggleGroupDemo() {
   return /* @__PURE__ */ jsxs("div", { className: "max-w-sm space-y-6 p-6", children: [

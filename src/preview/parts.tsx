@@ -1,25 +1,29 @@
 import { createContext, useContext, type ReactNode } from 'react';
 
-export type SurfaceSlot = { mode: 'light' | 'dark'; surface: 'base' | 'alternate'; part: 'dual' | 'single' };
+/** Which background surface a page is currently rendered on. `mode` mirrors the global Light/Dark toggle; `surface` marks the base vs alternate column of the dual pair; `part` distinguishes the top dual pair ('dual') from the full-width single column below it ('single' -- split-layout pages only). */
+export type SurfaceSlot = {
+  mode: 'light' | 'dark';
+  surface: 'base' | 'alternate';
+  part: 'dual' | 'single';
+};
 
-export const SurfaceThemeContext = createContext<SurfaceSlot>({ mode: 'light', surface: 'base', part: 'dual' });
+export const SurfaceThemeContext = createContext<SurfaceSlot>({
+  mode: 'light',
+  surface: 'base',
+  part: 'dual',
+});
 
+/** Render children only on the base (left) background surface -- for blocks that should appear once, not repeated on the alternate background. */
 export function BaseSurfaceOnly({ children }: { children: ReactNode }) {
   const slot = useContext(SurfaceThemeContext);
   return slot.surface === 'base' ? <>{children}</> : null;
 }
 
-export function Row({
-  label,
-  children,
-}: {
-  label?: string;
-  children: ReactNode;
-}) {
+export function Row({ label, children }: { label?: string; children: ReactNode }) {
   return (
     <div className="space-y-2">
       {label ? (
-        <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
+        <p className="[font-size:var(--type-caption-size)] [line-height:var(--type-caption-lh)] font-light text-muted-foreground">
           {label}
         </p>
       ) : null}
@@ -28,17 +32,11 @@ export function Row({
   );
 }
 
-export function Stack({
-  label,
-  children,
-}: {
-  label?: string;
-  children: ReactNode;
-}) {
+export function Stack({ label, children }: { label?: string; children: ReactNode }) {
   return (
     <div className="space-y-2">
       {label ? (
-        <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
+        <p className="[font-size:var(--type-caption-size)] [line-height:var(--type-caption-lh)] font-light text-muted-foreground">
           {label}
         </p>
       ) : null}
@@ -47,17 +45,13 @@ export function Stack({
   );
 }
 
-export function Guidelines({
-  items,
-}: {
-  items: Array<{ kind: 'do' | 'dont'; text: string }>;
-}) {
+export function Guidelines({ items }: { items: Array<{ kind: 'do' | 'dont'; text: string }> }) {
   return (
-    <ul className="space-y-2 text-sm">
+    <ul className="space-y-2 [font-size:var(--type-body2-size)] [line-height:var(--type-body2-lh)] font-light">
       {items.map((item) => (
         <li key={`${item.kind}-${item.text}`} className="flex gap-3">
           <span
-            className={`shrink-0 font-medium ${
+            className={`shrink-0 font-light ${
               item.kind === 'do' ? 'text-primary' : 'text-destructive'
             }`}
           >

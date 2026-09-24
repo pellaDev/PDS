@@ -20,11 +20,22 @@ export function ToggleDemo() {
         <Toggle defaultPressed>Bold</Toggle>
         <Toggle>Italic</Toggle>
         <Toggle>Underline</Toggle>
+        <Toggle size="sm" defaultPressed>
+          Bold
+        </Toggle>
+        <Toggle size="sm">Italic</Toggle>
+        <Toggle size="sm">Underline</Toggle>
       </Row>
       <Row label="Sizes and states">
-        <Toggle size="sm" aria-label="Small"><Bold /></Toggle>
-        <Toggle size="lg" aria-label="Large"><Bold /></Toggle>
-        <Toggle disabled aria-label="Disabled bold"><Bold /></Toggle>
+        <Toggle size="sm" aria-label="Small">
+          <Bold />
+        </Toggle>
+        <Toggle size="lg" aria-label="Large">
+          <Bold />
+        </Toggle>
+        <Toggle disabled aria-label="Disabled bold">
+          <Bold />
+        </Toggle>
       </Row>
     </div>
   );

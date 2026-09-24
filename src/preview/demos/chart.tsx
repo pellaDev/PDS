@@ -1,10 +1,4 @@
-import {
-  Bar,
-  BarChart,
-  CartesianGrid,
-  XAxis,
-  YAxis,
-} from 'recharts';
+import { Bar, BarChart, CartesianGrid, XAxis, YAxis } from 'recharts';
 import type { ChartConfig } from '../../components/ui/chart';
 import {
   ChartContainer,
@@ -31,8 +25,12 @@ export function ChartDemo() {
   return (
     <div className="max-w-2xl p-6">
       <div className="mb-4">
-        <p className="font-medium">Monthly visitors</p>
-        <p className="text-sm text-muted-foreground">Desktop and mobile traffic.</p>
+        <p className="[font-size:var(--type-body2-size)] [line-height:var(--type-body2-lh)] font-light">
+          Monthly visitors
+        </p>
+        <p className="[font-size:var(--type-body2-size)] [line-height:var(--type-body2-lh)] font-light text-muted-foreground">
+          Desktop and mobile traffic.
+        </p>
       </div>
       <ChartContainer config={chartConfig} className="max-h-72 w-full">
         <BarChart data={chartData} accessibilityLayer>

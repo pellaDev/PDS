@@ -33,9 +33,7 @@ const ChartContainer = React.forwardRef(({ id, className, children, config, ...p
 });
 ChartContainer.displayName = "Chart";
 const ChartStyle = ({ id, config }) => {
-  const colorConfig = Object.entries(config).filter(
-    ([, config2]) => config2.theme || config2.color
-  );
+  const colorConfig = Object.entries(config).filter(([, config2]) => config2.theme || config2.color);
   if (!colorConfig.length) {
     return null;
   }
@@ -90,15 +88,7 @@ const ChartTooltipContent = React.forwardRef(
         return null;
       }
       return /* @__PURE__ */ jsx("div", { className: cn("font-medium", labelClassName), children: value });
-    }, [
-      label,
-      labelFormatter,
-      payload,
-      hideLabel,
-      labelClassName,
-      config,
-      labelKey
-    ]);
+    }, [label, labelFormatter, payload, hideLabel, labelClassName, config, labelKey]);
     if (!active || !payload?.length) {
       return null;
     }
@@ -128,15 +118,12 @@ const ChartTooltipContent = React.forwardRef(
                   itemConfig?.icon ? /* @__PURE__ */ jsx(itemConfig.icon, {}) : !hideIndicator && /* @__PURE__ */ jsx(
                     "div",
                     {
-                      className: cn(
-                        "shrink-0 rounded-sm border-border bg-[--color-bg]",
-                        {
-                          "h-2.5 w-2.5": indicator === "dot",
-                          "w-1": indicator === "line",
-                          "w-0 border-2 border-dashed bg-transparent": indicator === "dashed",
-                          "my-0.5": nestLabel && indicator === "dashed"
-                        }
-                      ),
+                      className: cn("shrink-0 rounded-sm border-border bg-[--color-bg]", {
+                        "h-2.5 w-2.5": indicator === "dot",
+                        "w-1": indicator === "line",
+                        "w-0 border-2 border-dashed bg-transparent": indicator === "dashed",
+                        "my-0.5": nestLabel && indicator === "dashed"
+                      }),
                       style: {
                         "--color-bg": indicatorColor,
                         "--color-border": indicatorColor
@@ -171,50 +158,48 @@ const ChartTooltipContent = React.forwardRef(
 );
 ChartTooltipContent.displayName = "ChartTooltip";
 const ChartLegend = RechartsPrimitive.Legend;
-const ChartLegendContent = React.forwardRef(
-  ({ className, hideIcon = false, payload, verticalAlign = "bottom", nameKey }, ref) => {
-    const { config } = useChart();
-    if (!payload?.length) {
-      return null;
-    }
-    return /* @__PURE__ */ jsx(
-      "div",
-      {
-        ref,
-        className: cn(
-          "flex items-center justify-center gap-4",
-          verticalAlign === "top" ? "pb-3" : "pt-3",
-          className
-        ),
-        children: payload.filter((item) => item.type !== "none").map((item) => {
-          const key = `${nameKey || item.dataKey || "value"}`;
-          const itemConfig = getPayloadConfigFromPayload(config, item, key);
-          return /* @__PURE__ */ jsxs(
-            "div",
-            {
-              className: cn(
-                "flex items-center gap-1.5 [&>svg]:h-3 [&>svg]:w-3 [&>svg]:text-muted-foreground"
-              ),
-              children: [
-                itemConfig?.icon && !hideIcon ? /* @__PURE__ */ jsx(itemConfig.icon, {}) : /* @__PURE__ */ jsx(
-                  "div",
-                  {
-                    className: "h-2 w-2 shrink-0 rounded-[2px]",
-                    style: {
-                      backgroundColor: item.color
-                    }
-                  }
-                ),
-                itemConfig?.label
-              ]
-            },
-            item.value
-          );
-        })
-      }
-    );
+const ChartLegendContent = React.forwardRef(({ className, hideIcon = false, payload, verticalAlign = "bottom", nameKey }, ref) => {
+  const { config } = useChart();
+  if (!payload?.length) {
+    return null;
   }
-);
+  return /* @__PURE__ */ jsx(
+    "div",
+    {
+      ref,
+      className: cn(
+        "flex items-center justify-center gap-4",
+        verticalAlign === "top" ? "pb-3" : "pt-3",
+        className
+      ),
+      children: payload.filter((item) => item.type !== "none").map((item) => {
+        const key = `${nameKey || item.dataKey || "value"}`;
+        const itemConfig = getPayloadConfigFromPayload(config, item, key);
+        return /* @__PURE__ */ jsxs(
+          "div",
+          {
+            className: cn(
+              "flex items-center gap-1.5 [&>svg]:h-3 [&>svg]:w-3 [&>svg]:text-muted-foreground"
+            ),
+            children: [
+              itemConfig?.icon && !hideIcon ? /* @__PURE__ */ jsx(itemConfig.icon, {}) : /* @__PURE__ */ jsx(
+                "div",
+                {
+                  className: "h-2 w-2 shrink-0 rounded-[2px]",
+                  style: {
+                    backgroundColor: item.color
+                  }
+                }
+              ),
+              itemConfig?.label
+            ]
+          },
+          item.value
+        );
+      })
+    }
+  );
+});
 ChartLegendContent.displayName = "ChartLegend";
 function getPayloadConfigFromPayload(config, payload, key) {
   if (typeof payload !== "object" || payload === null) {

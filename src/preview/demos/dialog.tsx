@@ -20,11 +20,9 @@ export function DialogDemo() {
         <DialogContent>
           <DialogHeader>
             <DialogTitle>Edit profile</DialogTitle>
-            <DialogDescription>
-              Update the details shown to your teammates.
-            </DialogDescription>
+            <DialogDescription>Update the details shown to your teammates.</DialogDescription>
           </DialogHeader>
-          <div className="rounded-md border bg-muted p-4 text-sm">
+          <div className="rounded-md border bg-muted p-4 [font-size:var(--type-body2-size)] [line-height:var(--type-body2-lh)] font-light">
             Profile settings appear here.
           </div>
           <DialogFooter>

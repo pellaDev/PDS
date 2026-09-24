@@ -5,8 +5,8 @@ import { FolderOpen } from 'lucide-react';
 import { Stack } from '../parts';
 
 export function InputDemo() {
-  
-  
+  // The file control is a plain <input type="file"> whose native name display we hide; the chosen
+  // filename is surfaced as the Field's centered label instead, so it stays visible and on-brand.
   const [fileName, setFileName] = useState('');
   return (
     <div className="max-w-md space-y-6 p-6">

@@ -23,12 +23,12 @@ export function TableDemo() {
         </TableHeader>
         <TableBody>
           <TableRow>
-            <TableCell className="font-medium">Launch site</TableCell>
+            <TableCell>Launch site</TableCell>
             <TableCell>Active</TableCell>
             <TableCell className="text-right">12</TableCell>
           </TableRow>
           <TableRow>
-            <TableCell className="font-medium">Mobile app</TableCell>
+            <TableCell>Mobile app</TableCell>
             <TableCell>Review</TableCell>
             <TableCell className="text-right">8</TableCell>
           </TableRow>

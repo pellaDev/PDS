@@ -18,7 +18,7 @@ function SheetDemo() {
         /* @__PURE__ */ jsx(SheetTitle, { children: "Workspace settings" }),
         /* @__PURE__ */ jsx(SheetDescription, { children: "Configure members, access, and notifications." })
       ] }),
-      /* @__PURE__ */ jsx("div", { className: "my-6 rounded-md border p-4 text-sm text-muted-foreground", children: "Settings content" }),
+      /* @__PURE__ */ jsx("div", { className: "my-6 rounded-md border p-4 [font-size:var(--type-body2-size)] [line-height:var(--type-body2-lh)] font-light text-muted-foreground", children: "Settings content" }),
       /* @__PURE__ */ jsx(SheetFooter, { children: /* @__PURE__ */ jsx(SheetClose, { asChild: true, children: /* @__PURE__ */ jsx(Button, { children: "Save" }) }) })
     ] })
   ] }) });

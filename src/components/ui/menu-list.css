@@ -2,17 +2,17 @@
   outline: none;
 }
 
-.pds-list-item:hover:not([data-disabled]):not([aria-disabled="true"]),
+.pds-list-item:hover:not([data-disabled]):not([aria-disabled='true']),
 .pds-list-item:focus {
   background-color: color-mix(in srgb, currentColor 8%, transparent);
 }
 
-.pds-list-item[data-selected="true"],
-.pds-list-item[data-state="open"] {
+.pds-list-item[data-selected='true'],
+.pds-list-item[data-state='open'] {
   background-color: color-mix(in srgb, currentColor 10%, transparent);
 }
 
-.pds-list-item[data-selected="true"],
-.pds-sub[data-state="open"] {
+.pds-list-item[data-selected='true'],
+.pds-sub[data-state='open'] {
   box-shadow: inset 2px 0 0 var(--color-primary);
 }

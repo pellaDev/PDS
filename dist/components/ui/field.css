@@ -1,7 +1,7 @@
 .pds-field {
   position: relative;
   display: block;
-  --_bw: var(--dim-ssss); 
+  --_bw: var(--dim-ssss);
   --_hover-o: color-mix(in srgb, var(--color-primary) calc(100% - 32%), white);
   --_focus-o: color-mix(in srgb, var(--color-primary) calc(100% - 32%), black);
 }
@@ -9,68 +9,85 @@
 .pds-field__input {
   width: 100%;
   height: var(--field-h);
-  padding-block: var(--dim-sss); 
+  padding-block: var(--dim-sss);
   padding-inline: var(--dim-s);
   background: transparent;
   border: none;
   outline: none;
   font-family: inherit;
   font-weight: inherit;
-  font-size: var(--type-body2-size); 
+  font-size: var(--type-body2-size);
   line-height: var(--type-body2-lh);
   color: inherit;
 }
 
 .pds-field__label {
   position: absolute;
-  left: var(--dim-s); 
+  left: var(--dim-s);
   top: 50%;
   transform: translateY(-50%);
-  font-size: var(--type-body2-size); 
+  font-size: var(--type-body2-size);
   line-height: var(--type-body2-lh);
-  letter-spacing: 0.25px; 
+  letter-spacing: 0.25px;
   pointer-events: none;
   white-space: nowrap;
-  transition: transform 120ms ease, top 120ms ease, background-color 120ms ease;
+  transition:
+    transform var(--duration-fast) ease,
+    top var(--duration-fast) ease,
+    background-color var(--duration-fast) ease;
 }
 
 .pds-field--fill {
   display: block;
-  height: var(--field-h); 
-  border-radius: var(--dim-sss); 
-  background: var(--color-secondary); 
-  color: var(--color-muted-foreground); 
-  padding-block: var(--dim-sss); 
-  padding-inline: var(--dim-s);  
-  border: var(--_bw) solid transparent; 
+  height: var(--field-h);
+  border-radius: var(--dim-sss);
+  background: var(--color-secondary);
+  color: var(--color-muted-foreground);
+  padding-block: var(--dim-sss);
+  padding-inline: var(--dim-s);
+  border: var(--_bw) solid transparent;
 }
-.pds-field--fill:hover:not([data-disabled]) { border-color: var(--_hover-o); }    
-.pds-field--fill:focus-within:not([data-disabled]) { border-color: var(--_focus-o); } 
+.pds-field--fill:hover:not([data-disabled]) {
+  border-color: var(--_hover-o);
+}
+.pds-field--fill:focus-within:not([data-disabled]) {
+  border-color: var(--_focus-o);
+}
 
 .pds-field--fill .pds-field__label {
-  transition: opacity 120ms ease; 
+  transition: opacity var(--duration-fast) ease;
 }
-.pds-field--fill :is(.pds-field__input:focus, .pds-field__input:not(:placeholder-shown)) ~ .pds-field__label {
+.pds-field--fill
+  :is(.pds-field__input:focus, .pds-field__input:not(:placeholder-shown))
+  ~ .pds-field__label {
   opacity: 0;
 }
 .pds-field--fill .pds-field__input {
-  height: 100%; 
-  padding: 0; 
+  height: 100%;
+  padding: 0;
 }
 
 .pds-field--outline {
-  height: var(--field-h); 
+  height: var(--field-h);
   border-radius: var(--dim-sss);
-  background: var(--color-background); 
-  color: var(--color-muted-foreground); 
-  border: var(--_bw) solid var(--color-primary); 
+  background: var(--color-background);
+  color: var(--color-muted-foreground);
+  border: var(--_bw) solid var(--color-primary);
 }
 
-.pds-field--outline > .pds-field__input { height: 100%; }
-.pds-field--outline:hover:not([data-disabled]) { border-color: var(--_hover-o); }
-.pds-field--outline:focus-within:not([data-disabled]) { border-color: var(--_focus-o); }
+.pds-field--outline > .pds-field__input {
+  height: 100%;
+}
+.pds-field--outline:hover:not([data-disabled]) {
+  border-color: var(--_hover-o);
+}
+.pds-field--outline:focus-within:not([data-disabled]) {
+  border-color: var(--_focus-o);
+}
 
-.pds-field--outline :is(.pds-field__input:focus, .pds-field__input:not(:placeholder-shown)) ~ .pds-field__label {
+.pds-field--outline
+  :is(.pds-field__input:focus, .pds-field__input:not(:placeholder-shown))
+  ~ .pds-field__label {
   top: calc(-1 * var(--_bw) / 2);
   transform: translateY(-50%);
   background: var(--color-background);
@@ -80,43 +97,92 @@
 }
 
 .pds-field[data-disabled],
-.pds-field:disabled { opacity: var(--opacity-disabled); }
+.pds-field:disabled {
+  opacity: var(--opacity-disabled);
+}
 .pds-field--fill[data-disabled],
-.pds-field--fill:disabled { background: var(--color-gray); color: var(--color-white); border-color: transparent; }  
+.pds-field--fill:disabled {
+  background: var(--color-gray);
+  color: var(--color-white);
+  border-color: transparent;
+}
 .pds-field--outline[data-disabled],
-.pds-field--outline:disabled { color: var(--color-gray); border-color: var(--color-gray); background: var(--color-background); } 
+.pds-field--outline:disabled {
+  color: var(--color-gray);
+  border-color: var(--color-gray);
+  background: var(--color-background);
+}
 
-.pds-field--fill.pds-field--error:not([data-disabled]) { border-color: var(--color-destructive); } 
-.pds-field--outline.pds-field--error:not([data-disabled]) { border-color: var(--color-destructive); color: var(--color-foreground); } 
+.pds-field--fill.pds-field--error:not([data-disabled]) {
+  border-color: var(--color-destructive);
+}
+.pds-field--outline.pds-field--error:not([data-disabled]) {
+  border-color: var(--color-destructive);
+  color: var(--color-foreground);
+}
 
 input.pds-field,
 textarea.pds-field {
-  outline: none; 
+  outline: none;
   display: block;
   width: 100%;
-  font-family: inherit; 
-  font-size: var(--type-body2-size);   
+  font-family: inherit;
+  font-size: var(--type-body2-size);
   line-height: var(--type-body2-lh);
-  padding-block: var(--dim-sss); 
-  padding-inline: var(--dim-s);  
+  padding-block: var(--dim-sss);
+  padding-inline: var(--dim-s);
 }
-textarea.pds-field { height: auto; min-height: var(--field-h); }
+textarea.pds-field {
+  height: auto;
+  min-height: var(--field-h);
+}
 
 input.pds-field::placeholder,
-textarea.pds-field::placeholder { color: inherit; }
+textarea.pds-field::placeholder {
+  color: inherit;
+}
 
-.pds-field--fill[aria-invalid='true']:not([data-disabled]):not(:disabled) { border-color: var(--color-destructive); }
-.pds-field--outline[aria-invalid='true']:not([data-disabled]):not(:disabled) { border-color: var(--color-destructive); color: var(--color-foreground); }
+.pds-field--fill[aria-invalid='true']:not([data-disabled]):not(:disabled) {
+  border-color: var(--color-destructive);
+}
+.pds-field--outline[aria-invalid='true']:not([data-disabled]):not(:disabled) {
+  border-color: var(--color-destructive);
+  color: var(--color-foreground);
+}
 
-[data-pds-surface='alternate'] .pds-field--outline:not([data-disabled]):not(:disabled) { background: var(--color-secondary); }
-[data-pds-surface='alternate'] .pds-field--fill:not([data-disabled]):not(:disabled) { background: var(--color-background); }
+[data-pds-surface='alternate'] .pds-field--outline:not([data-disabled]):not(:disabled) {
+  background: var(--color-secondary);
+}
+[data-pds-surface='alternate'] .pds-field--fill:not([data-disabled]):not(:disabled) {
+  background: var(--color-background);
+}
 
-[data-pds-surface='alternate'] .pds-field--outline :is(.pds-field__input:focus, .pds-field__input:not(:placeholder-shown)) ~ .pds-field__label { background: var(--color-secondary); }
+[data-pds-surface='alternate']
+  .pds-field--outline
+  :is(.pds-field__input:focus, .pds-field__input:not(:placeholder-shown))
+  ~ .pds-field__label {
+  background: var(--color-secondary);
+}
 
-.pds-field[data-has-icon] > .pds-field__input { padding-inline-end: calc(var(--dim-s) + 1.25rem); }
-.pds-field__icon { position:absolute; top:50%; transform:translateY(-50%); inset-inline-end: var(--dim-s); display:inline-flex; align-items:center; color:currentColor; opacity:.72; pointer-events:none; }
+.pds-field[data-has-icon] > .pds-field__input {
+  padding-inline-end: calc(var(--dim-s) + 1.25rem);
+}
+.pds-field__icon {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  inset-inline-end: var(--dim-s);
+  display: inline-flex;
+  align-items: center;
+  color: currentColor;
+  opacity: 0.72;
+  pointer-events: none;
+}
 
-.pds-field__input[type='file'] { opacity: 0; cursor: pointer; }
+.pds-field__input[type='file'] {
+  opacity: 0;
+  cursor: pointer;
+}
 .pds-field .pds-field__input[type='file'] ~ .pds-field__label {
   top: 50%;
   transform: translateY(-50%);
@@ -125,7 +191,7 @@ textarea.pds-field::placeholder { color: inherit; }
   padding-inline: 0;
   font-size: var(--type-body2-size);
   line-height: var(--type-body2-lh);
-  max-width: calc(100% - 3rem); 
+  max-width: calc(100% - 3rem);
   overflow: hidden;
   text-overflow: ellipsis;
 }

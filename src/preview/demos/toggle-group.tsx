@@ -1,8 +1,5 @@
 import { AlignCenter, AlignLeft, AlignRight } from 'lucide-react';
-import {
-  ToggleGroup,
-  ToggleGroupItem,
-} from '../../components/ui/toggle-group';
+import { ToggleGroup, ToggleGroupItem } from '../../components/ui/toggle-group';
 import { Stack } from '../parts';
 
 export function ToggleGroupDemo() {

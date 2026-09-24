@@ -13,7 +13,7 @@ export function TooltipDemo() {
           <Tooltip variant="alert" content="Alert - yellow step with blackSoft text">
             <Button size="small">Hover me</Button>
           </Tooltip>
-          <Tooltip variant="error" content="Error - red semantic fill, graySoft text">
+          <Tooltip variant="error" content="Error - red semantic fill, darkest-black text">
             <Button size="small">Hover me</Button>
           </Tooltip>
         </Row>

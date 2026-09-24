@@ -1,49 +1,36 @@
 import { jsx } from "react/jsx-runtime";
 import * as React from "react";
 import { cn } from "../../lib/utils";
-const Table = React.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ jsx("div", { className: "relative w-full overflow-auto", children: /* @__PURE__ */ jsx(
-  "table",
-  {
-    ref,
-    className: cn("w-full caption-bottom text-sm", className),
-    ...props
-  }
-) }));
+const Table = React.forwardRef(
+  ({ className, ...props }, ref) => /* @__PURE__ */ jsx("div", { className: "relative w-full overflow-auto", children: /* @__PURE__ */ jsx("table", { ref, className: cn("w-full caption-bottom text-sm", className), ...props }) })
+);
 Table.displayName = "Table";
 const TableHeader = React.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ jsx("thead", { ref, className: cn("[&_tr]:border-b", className), ...props }));
 TableHeader.displayName = "TableHeader";
-const TableBody = React.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ jsx(
-  "tbody",
-  {
-    ref,
-    className: cn("[&_tr:last-child]:border-0", className),
-    ...props
-  }
-));
+const TableBody = React.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ jsx("tbody", { ref, className: cn("[&_tr:last-child]:border-0", className), ...props }));
 TableBody.displayName = "TableBody";
 const TableFooter = React.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ jsx(
   "tfoot",
   {
     ref,
-    className: cn(
-      "border-t bg-muted font-medium [&>tr]:last:border-b-0",
-      className
-    ),
+    className: cn("border-t bg-muted font-medium [&>tr]:last:border-b-0", className),
     ...props
   }
 ));
 TableFooter.displayName = "TableFooter";
-const TableRow = React.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ jsx(
-  "tr",
-  {
-    ref,
-    className: cn(
-      "border-b transition-colors hover:bg-muted data-[state=selected]:bg-muted",
-      className
-    ),
-    ...props
-  }
-));
+const TableRow = React.forwardRef(
+  ({ className, ...props }, ref) => /* @__PURE__ */ jsx(
+    "tr",
+    {
+      ref,
+      className: cn(
+        "border-b transition-colors hover:bg-muted data-[state=selected]:bg-muted",
+        className
+      ),
+      ...props
+    }
+  )
+);
 TableRow.displayName = "TableRow";
 const TableHead = React.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ jsx(
   "th",
@@ -69,14 +56,7 @@ const TableCell = React.forwardRef(({ className, ...props }, ref) => /* @__PURE_
   }
 ));
 TableCell.displayName = "TableCell";
-const TableCaption = React.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ jsx(
-  "caption",
-  {
-    ref,
-    className: cn("mt-4 text-sm text-muted-foreground", className),
-    ...props
-  }
-));
+const TableCaption = React.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ jsx("caption", { ref, className: cn("mt-4 text-sm text-muted-foreground", className), ...props }));
 TableCaption.displayName = "TableCaption";
 export {
   Table,

@@ -33,10 +33,7 @@ function Calendar({
       },
       classNames: {
         root: cn("w-fit", defaultClassNames.root),
-        months: cn(
-          "relative flex flex-col gap-6 md:flex-row",
-          defaultClassNames.months
-        ),
+        months: cn("relative flex flex-col gap-6 md:flex-row", defaultClassNames.months),
         month: cn("flex w-full flex-col gap-6", defaultClassNames.month),
         nav: cn(
           "absolute inset-x-0 top-0 flex w-full items-center justify-between gap-2",
@@ -64,10 +61,7 @@ function Calendar({
           "border-border relative rounded-md shadow-xs has-focus:ring-2 has-focus:ring-(--state-ring-soft)",
           defaultClassNames.dropdown_root
         ),
-        dropdown: cn(
-          "bg-popover absolute inset-0 opacity-0",
-          defaultClassNames.dropdown
-        ),
+        dropdown: cn("bg-popover absolute inset-0 opacity-0", defaultClassNames.dropdown),
         caption_label: cn(
           "select-none font-medium",
           captionLayout === "label" ? "text-sm" : "[&>svg]:text-muted-foreground flex h-8 items-center gap-1 rounded-md pl-2 pr-1 text-sm [&>svg]:size-3.5",
@@ -80,10 +74,7 @@ function Calendar({
           defaultClassNames.weekday
         ),
         week: cn("mt-3 flex w-full gap-1", defaultClassNames.week),
-        week_number_header: cn(
-          "w-10 select-none",
-          defaultClassNames.week_number_header
-        ),
+        week_number_header: cn("w-10 select-none", defaultClassNames.week_number_header),
         week_number: cn(
           "text-muted-foreground select-none text-[0.8rem]",
           defaultClassNames.week_number
@@ -92,10 +83,7 @@ function Calendar({
           "group/day relative flex size-10 flex-none select-none p-0 text-center [&:first-child[data-selected=true]_button]:rounded-l-md [&:last-child[data-selected=true]_button]:rounded-r-md",
           defaultClassNames.day
         ),
-        range_start: cn(
-          "bg-accent rounded-l-md",
-          defaultClassNames.range_start
-        ),
+        range_start: cn("bg-accent rounded-l-md", defaultClassNames.range_start),
         range_middle: cn("rounded-none", defaultClassNames.range_middle),
         range_end: cn("bg-accent rounded-r-md", defaultClassNames.range_end),
         today: cn(
@@ -106,24 +94,13 @@ function Calendar({
           "text-muted-foreground aria-selected:text-muted-foreground",
           defaultClassNames.outside
         ),
-        disabled: cn(
-          "text-muted-foreground opacity-50",
-          defaultClassNames.disabled
-        ),
+        disabled: cn("text-muted-foreground opacity-50", defaultClassNames.disabled),
         hidden: cn("invisible", defaultClassNames.hidden),
         ...classNames
       },
       components: {
         Root: ({ className: className2, rootRef, ...props2 }) => {
-          return /* @__PURE__ */ jsx(
-            "div",
-            {
-              "data-slot": "calendar",
-              ref: rootRef,
-              className: cn(className2),
-              ...props2
-            }
-          );
+          return /* @__PURE__ */ jsx("div", { "data-slot": "calendar", ref: rootRef, className: cn(className2), ...props2 });
         },
         Chevron: ({ className: className2, orientation, ...props2 }) => {
           if (orientation === "left") {

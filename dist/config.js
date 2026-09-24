@@ -14,7 +14,8 @@ const STORAGE_KEY = "pds-config";
 const HEX_RE = /^#([0-9a-f]{3}|[0-9a-f]{6})$/i;
 function hexToHslTriple(hex) {
   let h = hex.replace("#", "").trim();
-  if (h.length === 3) h = h.split("").map((c) => c + c).join("");
+  if (h.length === 3)
+    h = h.split("").map((c) => c + c).join("");
   if (!HEX_RE.test("#" + h)) throw new Error("pds/config: expected #RGB or #RRGGBB, got " + hex);
   const r = parseInt(h.slice(0, 2), 16) / 255;
   const g = parseInt(h.slice(2, 4), 16) / 255;
