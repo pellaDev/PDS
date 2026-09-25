@@ -12,9 +12,9 @@
   <img src="src/preview/assets/logoAnimated.svg" width="124" alt="Pella Design System animated logo"/>
 </div>
 
-<div align="center">
-A Plug & Play React design system
-</div>
+<h2 align="center">
+  A Plug & Play React design system
+</h1>
 
 <div align="center">
   <img src="src/preview/assets/pdsLight.png" alt="Pella Design System"/>
