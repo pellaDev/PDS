@@ -17,10 +17,6 @@ A Plug & Play React design system
 </div>
 
 <div align="center">
-  <img src="src/preview/assets/logoAnimated.svg" width="124" alt="Pella Design System animated logo"/>
-</div>
-
-<div align="center">
   <img src="src/preview/assets/pdsLight.png" alt="Pella Design System"/>
 </div>
 
