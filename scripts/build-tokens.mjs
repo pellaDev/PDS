@@ -11,7 +11,7 @@
  * - src/generated/tokens.tsx  hex token object for mobile (Expo) and any other
  *                             platform, so web + mobile share one source.
  */
-import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import {
   groupEntries,
   hexToRgba,
@@ -85,8 +85,14 @@ function toFontStack(value) {
 }
 
 function buildFavicon() {
-  const logo = readFileSync(join(root, 'src', 'preview', 'assets', 'logo.svg'), 'utf8');
-  return logo;
+  // Full dev layout keeps the brand logo with the showcase assets; the
+  // library-only release ships it in public/ instead (see release.sh).
+  const candidates = [
+    join(root, 'src', 'preview', 'assets', 'logo.svg'),
+    join(root, 'public', 'logo.svg'),
+  ];
+  for (const p of candidates) if (existsSync(p)) return readFileSync(p, 'utf8');
+  throw new Error('logo.svg not found (looked in src/preview/assets/ and public/)');
 }
 
 function colorEntries(scope, tokens) {

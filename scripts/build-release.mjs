@@ -163,8 +163,9 @@ console.log('      \xe2\x9c\x85 ' + files.length + ' files compiled');
 // --- Step 4: Generate .d.ts ---
 console.log('\n   \xf0\x9f\x93\x8b Types...');
 try {
+  // --noEmit false overrides the tsconfig noEmit (needed for declaration emit).
   execSync(
-    'npx tsc --declaration --emitDeclarationOnly --outDir dist --rootDir src --module esnext --moduleResolution bundler --jsx react-jsx --skipLibCheck',
+    'npx tsc --declaration --emitDeclarationOnly --noEmit false --outDir dist --rootDir src --module esnext --moduleResolution bundler --jsx react-jsx --skipLibCheck',
     { cwd: root, stdio: 'pipe' },
   );
   console.log('      \xe2\x9c\x85 .d.ts generated');

@@ -1,6 +1,6 @@
 {
   "name": "@workspace/pds",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "license": "MIT",
   "type": "module",
   "exports": {
@@ -17,13 +17,10 @@
   ],
   "scripts": {
     "tokens": "node scripts/build-tokens.mjs",
-    "dev": "vite --config vite.config.ts --host 0.0.0.0",
-    "prebuild": "node scripts/build-tokens.mjs",
-    "build": "vite build --config vite.config.ts",
-    "build:release": "node scripts/build-release.mjs",
-    "serve": "vite preview --config vite.config.ts --host 0.0.0.0",
     "pretypecheck": "node scripts/build-tokens.mjs",
-    "typecheck": "tsc -p tsconfig.json --noEmit"
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "build:release": "node scripts/build-release.mjs",
+    "update": "node update.mjs"
   },
   "peerDependencies": {
     "react": ">=18",
@@ -80,16 +77,14 @@
   "devDependencies": {
     "@tailwindcss/cli": "^4.3.3",
     "@tailwindcss/typography": "^0.5.15",
-    "@tailwindcss/vite": "^4.1.14",
     "@types/node": "^25.3.3",
     "@types/react": "^19.2.0",
     "@types/react-dom": "^19.2.0",
-    "@vitejs/plugin-react": "^5.0.4",
     "esbuild": "^0.28.2",
     "react": "19.1.0",
     "react-dom": "19.1.0",
     "tailwindcss": "^4.1.14",
     "tsup": "^8.5.1",
-    "vite": "^7.3.0"
+    "typescript": "^5.7.3"
   }
 }

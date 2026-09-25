@@ -1,0 +1,260 @@
+export declare const tokens: {
+    readonly color: {
+        readonly light: {
+            readonly background: "#F9F9F9";
+            readonly foreground: "#1B1B1B";
+            readonly border: "#E4E3E3";
+            readonly separator: "#204384";
+            readonly card: "#F9F9F9";
+            readonly cardForeground: "#1B1B1B";
+            readonly popover: "#F9F9F9";
+            readonly popoverForeground: "#1B1B1B";
+            readonly primary: "#204384";
+            readonly primaryForeground: "#F9F9F9";
+            readonly secondary: "#E4E3E3";
+            readonly secondaryForeground: "#1B1B1B";
+            readonly muted: "#E4E3E3";
+            readonly mutedForeground: "#383838";
+            readonly accent: "#CFEC14";
+            readonly accentForeground: "#1B1B1B";
+            readonly destructive: "#EE1F25";
+            readonly destructiveForeground: "#F9F9F9";
+            readonly success: "#218A38";
+            readonly successForeground: "#F9F9F9";
+            readonly input: "#E4E3E3";
+            readonly ring: "#204384";
+            readonly chart1: "#204384";
+            readonly chart2: "#218A38";
+            readonly chart3: "#CFEC14";
+            readonly chart4: "#EE1F25";
+            readonly chart5: "#919191";
+            readonly white: "#F9F9F9";
+            readonly graySoft: "#E4E3E3";
+            readonly gray: "#919191";
+            readonly blackSoft: "#383838";
+            readonly black: "#1B1B1B";
+            readonly whitePure: "#FFFFFF";
+            readonly blackPure: "#000000";
+            readonly sidebar: "#F9F9F9";
+            readonly sidebarForeground: "#383838";
+            readonly sidebarBorder: "#E4E3E3";
+            readonly sidebarPrimary: "#204384";
+            readonly sidebarPrimaryForeground: "#F9F9F9";
+            readonly sidebarAccent: "#CFEC14";
+            readonly sidebarAccentForeground: "#1B1B1B";
+            readonly sidebarRing: "#204384";
+        };
+        readonly dark: {
+            readonly background: "#383838";
+            readonly foreground: "#F9F9F9";
+            readonly border: "#383838";
+            readonly separator: "#6C8FCB";
+            readonly card: "#1B1B1B";
+            readonly cardForeground: "#F9F9F9";
+            readonly popover: "#1B1B1B";
+            readonly popoverForeground: "#F9F9F9";
+            readonly primary: "#6C8FCB";
+            readonly primaryForeground: "#1B1B1B";
+            readonly secondary: "#1B1B1B";
+            readonly secondaryForeground: "#F9F9F9";
+            readonly muted: "#1B1B1B";
+            readonly mutedForeground: "#E4E3E3";
+            readonly accent: "#CFEC14";
+            readonly accentForeground: "#1B1B1B";
+            readonly destructive: "#EE1F25";
+            readonly destructiveForeground: "#F9F9F9";
+            readonly success: "#5BB86B";
+            readonly successForeground: "#1B1B1B";
+            readonly input: "#1B1B1B";
+            readonly ring: "#CFEC14";
+            readonly chart1: "#6C8FCB";
+            readonly chart2: "#5BB86B";
+            readonly chart3: "#CFEC14";
+            readonly chart4: "#FF6B6F";
+            readonly chart5: "#919191";
+            readonly white: "#F9F9F9";
+            readonly graySoft: "#E4E3E3";
+            readonly gray: "#919191";
+            readonly blackSoft: "#383838";
+            readonly black: "#1B1B1B";
+            readonly whitePure: "#FFFFFF";
+            readonly blackPure: "#000000";
+            readonly sidebar: "#383838";
+            readonly sidebarForeground: "#F9F9F9";
+            readonly sidebarBorder: "#4a4a4a";
+            readonly sidebarPrimary: "#6C8FCB";
+            readonly sidebarPrimaryForeground: "#1B1B1B";
+            readonly sidebarAccent: "#CFEC14";
+            readonly sidebarAccentForeground: "#1B1B1B";
+            readonly sidebarRing: "#CFEC14";
+        };
+    };
+    readonly fontFamily: {
+        readonly sans: readonly ["Roboto", "Arial", "sans-serif"];
+        readonly serif: readonly ["Georgia", "serif"];
+        readonly mono: readonly ["Menlo", "monospace"];
+    };
+    readonly fontOptions: {
+        readonly roboto: readonly ["Roboto", "Arial", "sans-serif"];
+        readonly inter: readonly ["Inter", "Roboto", "Arial", "sans-serif"];
+        readonly spaceGrotesk: readonly ["Space Grotesk", "Roboto", "Arial", "sans-serif"];
+    };
+    readonly radius: "0.75rem";
+    readonly radiusSm: "0.25rem";
+    readonly radiusMd: "0.5rem";
+    readonly spacing: "0.25rem";
+    readonly typographyStyles: {
+        readonly h1: {
+            readonly fontFamily: "Roboto";
+            readonly fontWeight: 300;
+            readonly fontSize: "6rem";
+            readonly lineHeight: "7rem";
+            readonly letterSpacing: "0.25px";
+            readonly paragraphSpacing: "0rem";
+        };
+        readonly h2: {
+            readonly fontFamily: "Roboto";
+            readonly fontWeight: 300;
+            readonly fontSize: "4rem";
+            readonly lineHeight: "4.5rem";
+            readonly letterSpacing: "0.25px";
+            readonly paragraphSpacing: "0rem";
+        };
+        readonly h3: {
+            readonly fontFamily: "Roboto";
+            readonly fontWeight: 300;
+            readonly fontSize: "2.5rem";
+            readonly lineHeight: "3rem";
+            readonly letterSpacing: "0.25px";
+            readonly paragraphSpacing: "0rem";
+        };
+        readonly subtitle1: {
+            readonly fontFamily: "Roboto";
+            readonly fontWeight: 300;
+            readonly fontSize: "2rem";
+            readonly lineHeight: "2.5rem";
+            readonly letterSpacing: "0.25px";
+            readonly paragraphSpacing: "0.25rem";
+        };
+        readonly body1: {
+            readonly fontFamily: "Roboto";
+            readonly fontWeight: 300;
+            readonly fontSize: "1.5rem";
+            readonly lineHeight: "2rem";
+            readonly letterSpacing: "0.25px";
+            readonly paragraphSpacing: "0.25rem";
+        };
+        readonly body2: {
+            readonly fontFamily: "Roboto";
+            readonly fontWeight: 300;
+            readonly fontSize: "1rem";
+            readonly lineHeight: "1.5rem";
+            readonly letterSpacing: "0.25px";
+            readonly paragraphSpacing: "0.25rem";
+        };
+        readonly button: {
+            readonly fontFamily: "Roboto";
+            readonly fontWeight: 300;
+            readonly fontSize: "1rem";
+            readonly lineHeight: "1.5rem";
+            readonly letterSpacing: "0.25px";
+            readonly paragraphSpacing: "0.25rem";
+        };
+        readonly caption: {
+            readonly fontFamily: "Roboto";
+            readonly fontWeight: 300;
+            readonly fontSize: "0.75rem";
+            readonly lineHeight: "1rem";
+            readonly letterSpacing: "0.25px";
+            readonly paragraphSpacing: "0.25rem";
+        };
+    };
+    readonly fontSizes: {
+        readonly s: "0.75rem";
+        readonly mmmm: "1rem";
+        readonly mm: "1.5rem";
+        readonly llll: "2rem";
+        readonly lll: "2.5rem";
+        readonly xl: "4rem";
+        readonly xxxl: "6rem";
+    };
+    readonly lineHeights: {
+        readonly ss: "0.5rem";
+        readonly mmmm: "1rem";
+        readonly mm: "1.5rem";
+        readonly llll: "2rem";
+        readonly lll: "2.5rem";
+        readonly ll: "3rem";
+        readonly xxl: "4.5rem";
+        readonly xxxxl: "7rem";
+    };
+    readonly dimensions: {
+        readonly negative: "-0.25rem";
+        readonly zero: "0rem";
+        readonly sssss: "0.125rem";
+        readonly ssss: "0.1rem";
+        readonly sss: "0.25rem";
+        readonly ss: "0.5rem";
+        readonly s: "0.75rem";
+        readonly mmmm: "1rem";
+        readonly mmm: "1.25rem";
+        readonly mm: "1.5rem";
+        readonly m: "1.75rem";
+        readonly llll: "2rem";
+        readonly lll: "2.5rem";
+        readonly ll: "3rem";
+        readonly l: "3.5rem";
+        readonly xl: "4rem";
+        readonly xxl: "4.5rem";
+        readonly xxxl: "6rem";
+        readonly xxxxl: "7rem";
+    };
+    readonly spacingPresets: {
+        readonly regular: "0.5rem";
+        readonly regularMini: "0.25rem";
+        readonly textAndIcon: "0 0.25rem";
+        readonly paddingLeft: "0 0 0 0.25rem";
+        readonly ss: "0.25rem 0.5rem";
+        readonly s: "0.25rem 0.75rem";
+        readonly mm: "0.25rem 1rem";
+        readonly m: "0.75rem 0.75rem";
+        readonly ll: "0.5rem 0.75rem";
+        readonly l: "0.5rem 1.5rem";
+    };
+    readonly borderWidth: "0.1rem";
+    readonly opacityDisabled: 0.32;
+    readonly overlays: {
+        readonly lighter: "rgba(255, 255, 255, 0.32)";
+        readonly darker: "rgba(0, 0, 0, 0.32)";
+        readonly scrim: "rgba(0, 0, 0, 0.8)";
+    };
+    readonly shadows: {
+        readonly button: "0rem 0.25rem 0.5rem rgba(0, 0, 0, 0.08)";
+        readonly menuLeft: "-0.25rem 0rem 0.5rem rgba(0, 0, 0, 0.08)";
+        readonly menuRight: "0.25rem 0rem 0.5rem rgba(0, 0, 0, 0.08)";
+        readonly dropDown: "0rem 0.1rem 0.1rem rgba(0, 0, 0, 0.32)";
+        readonly trigger: "0rem 0rem 0rem 0.5rem rgba(0, 0, 0, 0.08)";
+        readonly dots: "inset 0rem 0rem 0.25rem rgba(0, 0, 0, 0.32)";
+    };
+    readonly layout: {
+        readonly sidebarWidth: "16rem";
+        readonly sidebarWidthMobile: "18rem";
+        readonly sidebarWidthIcon: "3rem";
+    };
+    readonly motion: {
+        readonly duration: {
+            readonly fast: "120ms";
+            readonly base: "150ms";
+            readonly slow: "200ms";
+            readonly "sheet-closed": "300ms";
+            readonly "sheet-open": "500ms";
+        };
+        readonly easing: {
+            readonly standard: "cubic-bezier(0.4, 0, 0.2, 1)";
+            readonly linear: "linear";
+            readonly "in-out": "ease-in-out";
+        };
+    };
+};
+export type Tokens = typeof tokens;
+export default tokens;

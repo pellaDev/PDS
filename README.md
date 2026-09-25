@@ -5,16 +5,33 @@
 </p>
 
 <h1 align="center">
-  PDS | Pella Design System
+  PDS - Pella Design System
 </h1>
 
 <div align="center">
   <img src="src/preview/assets/logoAnimated.svg" width="124" alt="Pella Design System animated logo"/>
 </div>
 
+<h2 align="center">
+  A Plug & Play React design system
+</h2>
+
 <div align="center">
-React design system: tokens, components, and a live showcase.
+  <img src="src/preview/assets/pdsLight.png" alt="Pella Design System"/>
 </div>
+
+<div align="center">
+  <img src="src/preview/assets/pdsDark.png" alt="Pella Design System"/>
+</div>
+
+## Showcase
+
+The live showcase — component browser, demos, token inspector — is not bundled
+with this repository. It lives at:
+
+**https://pds.pellawebmaster.com**
+
+The site always serves the latest released version of PDS.
 
 ## Install
 
@@ -24,11 +41,28 @@ pnpm add "https://github.com/pellaDev/PDS#main"
 
 That's it. No config, no Vite plugin, no postcss setup — the CSS is pre-compiled and ships with the package.
 
-Pin a version:
+Pin a release instead of tracking `main`:
 
 ```bash
-pnpm add "https://github.com/pellaDev/PDS#v1.2.0"
+pnpm add "https://github.com/pellaDev/PDS#v1.4.0"
 ```
+
+## Update / revert
+
+Inside a clone of this repository, `update.mjs` moves the installation to any
+released version — upgrade or roll back at will:
+
+```bash
+node update.mjs --1.3.1      # that exact release (the "--" is optional)
+node update.mjs --latest     # newest release, pre-releases included
+node update.mjs --stable     # newest stable (non-prerelease) release
+```
+
+`--latest`/`--stable` are resolved through the GitHub Releases API (public repo,
+no token needed); exact versions resolve against git tags. A dirty working tree
+aborts the update unless you pass `--force` (discards local changes). When
+`pnpm-lock.yaml` and pnpm are available, dependencies are reinstalled after the
+checkout.
 
 ## Usage
 
@@ -56,15 +90,6 @@ setPdsConfig({ fieldStyle: "outline" });
 | Brand colors | `lightBrand` / `darkBrand` — hex | exported brand primaries |
 | Field style | `"fill"` or `"outline"` | `"fill"` |
 | Font | self-hosted typeface name from tokens | `roboto` |
-
-## Showcase (local preview)
-
-```bash
-git clone git@github-secondary:pellaDev/PDS.git
-cd PDS
-pnpm install
-pnpm dev          # -> http://localhost:5173/
-```
 
 ## Exports
 
