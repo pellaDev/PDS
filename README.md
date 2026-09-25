@@ -5,7 +5,7 @@
 </p>
 
 <h1 align="center">
-  PDS | Pella Design System
+  PDS - Pella Design System
 </h1>
 
 <div align="center">
@@ -13,7 +13,19 @@
 </div>
 
 <div align="center">
-React design system: tokens, components, and a live showcase.
+A Plug & Play React design system
+</div>
+
+<div align="center">
+  <img src="src/preview/assets/logoAnimated.svg" width="124" alt="Pella Design System animated logo"/>
+</div>
+
+<div align="center">
+  <img src="src/preview/assets/pdsLight.png" alt="Pella Design System"/>
+</div>
+
+<div align="center">
+  <img src="src/preview/assets/pdsDark.png" alt="Pella Design System"/>
 </div>
 
 ## Install
