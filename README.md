@@ -18,30 +18,14 @@
 
 <div align="center">
   <a href="https://pds.pellawebmaster.com" target="_blank" rel="noopener"><img src="https://img.shields.io/badge/LIVE_SHOWCASE-pds.pellawebmaster.com-0B5FFF?style=for-the-badge&logo=react&logoColor=white" alt="LIVE SHOWCASE"/></a>
-  <!-- TODO: wrap in <a target="_blank"> when the Figma file link is available -->
-  <img src="https://img.shields.io/badge/FIGMA_FILE-design_file-F24E1E?style=for-the-badge&logo=figma&logoColor=white" alt="FIGMA FILE"/>
 </div>
 
+<div align="center">
+  <img src="https://img.shields.io/badge/FIGMA_FILE-design_file-F24E1E?style=for-the-badge&logo=figma&logoColor=white" alt="FIGMA FILE"/>
+</div>
 <div align="center">
   <sub>(coming soon..)</sub>
 </div>
-
-<div align="center">
-  <img src="src/preview/assets/pdsLight.png" alt="Pella Design System"/>
-</div>
-
-<div align="center">
-  <img src="src/preview/assets/pdsDark.png" alt="Pella Design System"/>
-</div>
-
-## Showcase
-
-The live showcase — component browser, demos, token inspector — is not bundled
-with this repository. It lives at:
-
-**https://pds.pellawebmaster.com**
-
-The site always serves the latest released version of PDS.
 
 ## Install
 
