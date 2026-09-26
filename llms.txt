@@ -1,0 +1,36 @@
+# PDS — Pella Design System
+
+> A plug & play React design system. Radix UI primitives + Tailwind CSS v4 + CVA, shipped as a prebuilt ESM package with a token pipeline (tokens.json → generated CSS variables + TypeScript). Zero build step for consumers; runtime theming via configurePds() — theme changes are pure CSS custom-property updates on <html>, no re-render.
+
+## Install
+
+pnpm add "https://github.com/pellaDev/PDS#main"    # or pin a release: #v1.4.0
+
+## Quick start
+
+import "@workspace/pds/styles.css";              // once, in the app entry
+import { Button } from "@workspace/pds/components/button";
+import { configurePds, setPdsConfig } from "@workspace/pds/config";  // optional
+
+configurePds({ lightBrand: "#0B5FFF", darkBrand: "#7AB8FF", font: "inter" }); // install flags (once at bootstrap)
+setPdsConfig({ fieldStyle: "outline" });          // live update, persisted in localStorage
+
+## Components (53)
+
+accordion · alert · alert-dialog · aspect-ratio · avatar · badge · breadcrumb · button · calendar · card · carousel · chart · checkbox · collapsible · command · dialog · drawer · empty · field · form · hover-card · icon · input · input-otp · item · kbd · label · menu · menubar · navigation-menu · pagination · popover · progress · radio · resizable · scroll-area · separator · sheet · sidebar · skeleton · slider · sonner · spinner · switch · table · tabs · tag · textarea · toast · toaster · toggle · toggle-group · tooltip
+
+PDS additions beyond the shadcn/ui registry: icon, menu, tag, toast, toaster (radio follows the shadcn RadioGroup API). Not included: select, dropdown-menu, context-menu, button-group, input-group, native-select.
+
+## Exports
+
+- @workspace/pds | /tokens — generated token values + types
+- @workspace/pds/styles.css — generated CSS theme
+- @workspace/pds/config — runtime configuration (brand colors, field style, font)
+- @workspace/pds/components/* · /lib/* · /hooks/* — components, utilities, hooks
+
+## Resources
+
+- Live showcase (component browser, demos, token inspector): https://pds.pellawebmaster.com
+- Repository: https://github.com/pellaDev/PDS
+- Public docs: README.md in this repo
+- Agent operating rules: AGENTS.md in this repo
