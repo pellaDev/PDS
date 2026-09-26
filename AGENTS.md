@@ -57,8 +57,11 @@ package**. This repository IS the published package (flat layout): `src/` is the
 
 ```tsx
 import "@workspace/pds/styles.css";
-import { Button } from "@workspace/pds/components/button";
+import { Button } from "@workspace/pds/components/ui/button";
 import { configurePds, setPdsConfig } from "@workspace/pds/config"; // optional runtime theming
 ```
 
+- Optional peer dependencies — install only if you use the component:
+  `chart`→recharts, `carousel`→embla-carousel-react, `drawer`→vaul,
+  `command`→cmdk, `sonner`→sonner. Full table in `README.md`.
 - ESM tree-shaking: import only what you use. Full API in `README.md`.

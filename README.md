@@ -53,8 +53,25 @@ That's it. No config, no Vite plugin, no postcss setup — the CSS is pre-compil
 Pin a release instead of tracking `main`:
 
 ```bash
-pnpm add "https://github.com/pellaDev/PDS#v1.4.0"
+pnpm add "https://github.com/pellaDev/PDS#v1.5.0"
 ```
+
+## Optional dependencies
+
+Most components have no extra requirements. Five components use an **optional
+peer dependency** that you only need if you use that component:
+
+| Component | Extra package | Install |
+| --- | --- | --- |
+| `chart` | `recharts` | `pnpm add recharts` |
+| `carousel` | `embla-carousel-react` | `pnpm add embla-carousel-react` |
+| `drawer` | `vaul` | `pnpm add vaul` |
+| `command` | `cmdk` | `pnpm add cmdk` |
+| `sonner` | `sonner` | `pnpm add sonner` |
+
+PDS installs without them; the peer is optional by design (declared in
+`peerDependenciesMeta`). `framer-motion` is no longer required by PDS at all —
+it was removed in v1.5.0 as an unused dependency.
 
 ## Update / revert
 
@@ -77,7 +94,7 @@ checkout.
 
 ```tsx
 import "@workspace/pds/styles.css";
-import { Button } from "@workspace/pds/components/button";
+import { Button } from "@workspace/pds/components/ui/button";
 import { tokens } from "@workspace/pds/tokens";
 
 export function App() {

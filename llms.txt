@@ -4,12 +4,12 @@
 
 ## Install
 
-pnpm add "https://github.com/pellaDev/PDS#main"    # or pin a release: #v1.4.0
+pnpm add "https://github.com/pellaDev/PDS#main"    # or pin a release: #v1.5.0
 
 ## Quick start
 
 import "@workspace/pds/styles.css";              // once, in the app entry
-import { Button } from "@workspace/pds/components/button";
+import { Button } from "@workspace/pds/components/ui/button";
 import { configurePds, setPdsConfig } from "@workspace/pds/config";  // optional
 
 configurePds({ lightBrand: "#0B5FFF", darkBrand: "#7AB8FF", font: "inter" }); // install flags (once at bootstrap)
@@ -27,6 +27,10 @@ PDS additions beyond the shadcn/ui registry: icon, menu, tag, toast, toaster (ra
 - @workspace/pds/styles.css — generated CSS theme
 - @workspace/pds/config — runtime configuration (brand colors, field style, font)
 - @workspace/pds/components/* · /lib/* · /hooks/* — components, utilities, hooks
+
+## Optional dependencies
+
+Install only if you use the component: chart→recharts · carousel→embla-carousel-react · drawer→vaul · command→cmdk · sonner→sonner. framer-motion is not required by PDS (removed in v1.5.0).
 
 ## Resources
 
