@@ -1,6 +1,7 @@
 import { jsx } from "react/jsx-runtime";
 import * as React from "react";
 import { cn } from "../../lib/utils";
+import "./table.css";
 const Table = React.forwardRef(
   ({ className, ...props }, ref) => /* @__PURE__ */ jsx("div", { className: "relative w-full overflow-auto", children: /* @__PURE__ */ jsx("table", { ref, className: cn("w-full caption-bottom text-sm", className), ...props }) })
 );

@@ -7,18 +7,35 @@
 }
 
 .pds-sidebar-actionbar {
-  background-color: color-mix(in srgb, var(--pds-surface-bg) 82%, transparent);
+  isolation: isolate;
+  padding-left: var(--sb-action-fade-width, 48px);
 }
 
-:root:not(.dark) .pds-sidebar-actionbar {
+.pds-sidebar-actionbar::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  background-color: var(--pds-surface-bg);
+
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0,
+    #000 var(--sb-action-fade-width, 48px)
+  );
+  mask-image: linear-gradient(to right, transparent 0, #000 var(--sb-action-fade-width, 48px));
+}
+
+:root:not(.dark) .pds-sidebar-actionbar::before {
   background-image: linear-gradient(to left, hsl(var(--white-pure)), hsl(var(--white-pure) / 0));
 }
 
-.dark [data-pds-surface='base'] .pds-sidebar-actionbar {
+.dark [data-pds-surface='base'] .pds-sidebar-actionbar::before {
   background-image: linear-gradient(
     to right,
     var(--pds-surface-bg),
-    color-mix(in srgb, hsl(var(--white-pure)) 32%, var(--pds-surface-bg))
+    color-mix(in srgb, hsl(0deg 0% 100% / 0%) 32%, var(--pds-surface-bg))
   );
 }
 
@@ -26,6 +43,7 @@
   position: relative;
   z-index: 0;
   --sb-action-hover-timing: opacity var(--duration-base) var(--ease-standard);
+  --sb-action-fade-width: 48px;
 }
 
 .pds-sidebar-actionrow::after {
@@ -35,13 +53,17 @@
   inset: 0px;
   border-radius: inherit;
   z-index: -1;
-  background-image: linear-gradient(to right, var(--elevate-1) 0%, transparent 50%);
+  background-color: var(--elevate-1);
   opacity: 0;
   transition: var(--sb-action-hover-timing);
 }
 
 .pds-sidebar-actionrow:hover::after {
   opacity: 1;
+}
+
+.pds-sidebar-actionrow:active::after {
+  opacity: 0;
 }
 
 .pds-sidebar-actionbar {

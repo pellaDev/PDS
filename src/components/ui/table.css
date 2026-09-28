@@ -1,0 +1,19 @@
+.pds-table-actionbar {
+  --tbl-action-fade-width: 48px;
+  --tbl-action-fill: hsl(var(--secondary));
+  isolation: isolate;
+  padding-left: var(--tbl-action-fade-width);
+  transition: opacity var(--duration-base) var(--ease-standard);
+}
+
+.pds-table-actionbar::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  background-color: var(--tbl-action-fill);
+
+  -webkit-mask-image: linear-gradient(to right, transparent 0, #000 var(--tbl-action-fade-width));
+  mask-image: linear-gradient(to right, transparent 0, #000 var(--tbl-action-fade-width));
+}
