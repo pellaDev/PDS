@@ -240,6 +240,8 @@ export declare const tokens: {
         readonly sidebarWidth: "16rem";
         readonly sidebarWidthMobile: "18rem";
         readonly sidebarWidthIcon: "3rem";
+        readonly mobileNavHeaderHeight: "3rem";
+        readonly mobileNavHeaderButton: "2.5rem";
     };
     readonly motion: {
         readonly duration: {

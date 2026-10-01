@@ -43,7 +43,7 @@ package**. This repository IS the published package (flat layout): `src/` is the
 
 ## Layout
 
-- `src/components/ui/` — 53 components: a shadcn/ui v4 registry subset plus PDS additions (icon, menu, tag, toast, toaster).
+- `src/components/ui/` — 55 components: a shadcn/ui v4 registry subset plus PDS additions (icon, menu, mobile-navigation-menu, tag, toast, toaster).
 - `tokens.json` — token SSOT · `scripts/build-tokens.mjs` + `scripts/core-tokens.mjs` — generators
 - `src/config.tsx` — runtime configuration (brand colors, field style, font)
 - `dist/` — prebuilt ESM + CSS + .d.ts (build output)

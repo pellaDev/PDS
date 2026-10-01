@@ -232,8 +232,10 @@
   --shadow-trigger: 0rem 0rem 0rem 0.5rem rgba(0, 0, 0, 0.08); /* Soft 8% halo ring (toggle/trigger focus). */
   --shadow-dots: inset 0rem 0rem 0.25rem rgba(0, 0, 0, 0.32); /* Inset 32% blur for dot/indicator surfaces. */
   --sidebar-width: 16rem; /* Sidebar expanded width (256px) -- default for the --sidebar-width custom property. */
-  --sidebar-width-mobile: 18rem; /* Sidebar offcanvas width on mobile (288px). */
+  --sidebar-width-mobile: 18rem; /* Sidebar offcanvas width on mobile (288px) -- shared by the sidebar offcanvas and the mobile navigation drawer panel. */
   --sidebar-width-icon: 3rem; /* Collapsed icon-rail width (48px) -- equals coreDimensions.ll. */
+  --mobile-nav-header-height: 3rem; /* Mobile navigation drawer header height (48px) -- equals coreDimensions.ll (touch-row minimum); holds the 40px icon button with one dim-sss step of air per side. */
+  --mobile-nav-header-button: 2.5rem; /* Mobile navigation drawer trigger/close size (40x40) -- equals coreDimensions.lll; Button size 'icon', the square label-less composition. */
   --duration-fast: 120ms; /* Component state transitions: checkbox, radio, switch, field label, tooltip reveal. */
   --duration-base: 150ms; /* Standard hover/interaction fade -- sidebar action-row contract; equals Tailwind default transition duration. */
   --duration-slow: 200ms; /* Sidebar collapse width/left transitions (Tailwind duration-200 in sidebar.tsx). */

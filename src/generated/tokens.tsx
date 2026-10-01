@@ -267,7 +267,9 @@ export const tokens = {
   "layout": {
     "sidebarWidth": "16rem",
     "sidebarWidthMobile": "18rem",
-    "sidebarWidthIcon": "3rem"
+    "sidebarWidthIcon": "3rem",
+    "mobileNavHeaderHeight": "3rem",
+    "mobileNavHeaderButton": "2.5rem"
   },
   "motion": {
     "duration": {
