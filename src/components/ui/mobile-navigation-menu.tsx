@@ -12,34 +12,7 @@ import { Button } from './button';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from './collapsible';
 import { Separator } from './separator';
 
-// Mobile navigation menu: the off-canvas drawer variant of PDS primary navigation.
-// Mechanics mirror sheet.tsx (Radix dialog + scrim overlay + 300/500ms slide) and the
-// row idiom mirrors sidebar.tsx (hover-elevate, active washes, inset brand bar), so
-// both surfaces speak the same interaction language. All geometry/motion/shadows come
-// from existing tokens: --sidebar-width-mobile, --shadow-menuLeft/Right, dim grid,
-// body1/body2/caption type scales, scrim overlay, sheet durations.
-//
-// Container hairlines (panel edge, header, footer) read --pds-container-border-color,
-// the same live token as Card, so they flip with the global FILL/OUTLINE field style:
-// transparent in FILL (fill + shadow define the container), visible in OUTLINE.
-// Separators use Separator's auto variant and flip too (fading in FILL, solid in OUTLINE).
-// The panel is portaled to <body>, outside the [data-pds-fieldstyle] scope a host app puts
-// on its layout root, so it carries data-pds-fieldstyle itself: the attribute-scoped token
-// rules in index.css then apply across the portal boundary exactly as they do in-page.
-// Trigger/close are PDS Buttons (size "icon" -- the square label-less composition); tree groups
-// expand with the accordion idiom.
-
 const MobileNavigationMenu = MobileNavigationMenuPrimitive.Root;
-
-// Trigger and close are the PDS Button itself, size "icon" -- the square label-less composition
-// (40x40, the documented 'small without label' form), so they keep the system's interaction
-// language and focus ring while staying perfectly square with a comfortable touch target.
-// Radix trigger/close merge through asChild; the merged props (onClick, aria-expanded,
-// data-state) flow on to the native button element via Button's own prop spread.
-// Close carries ml-auto by default: in the header's flex row it owns the free space and pins
-// itself to the far edge. (With size small the auto Tooltip would wrap the button in a span and
-// swallow that margin -- icon buttons are not tooltip-wrapped, so the class lands on the real
-// flex item.)
 
 const MobileNavigationMenuTrigger = React.forwardRef<
   HTMLButtonElement,
@@ -100,8 +73,6 @@ const mobileNavigationMenuPanelVariants = cva(
   {
     variants: {
       side: {
-        // Panel hugging the left edge casts its shadow to the right (menuRight),
-        // a right-edge panel casts it to the left (menuLeft).
         left: 'left-0 border-r shadow-[var(--shadow-menuRight)] data-[state=closed]:slide-out-to-left data-[state=open]:slide-in-from-left',
         right:
           'right-0 border-l shadow-[var(--shadow-menuLeft)] data-[state=closed]:slide-out-to-right data-[state=open]:slide-in-from-right',
@@ -185,8 +156,6 @@ const MobileNavigationMenuDescription = React.forwardRef<
 ));
 MobileNavigationMenuDescription.displayName = MobileNavigationMenuPrimitive.Description.displayName;
 
-// Scrollable navigation body. A <nav> landmark so the drawer announces as a
-// navigation region; rows are touch-sized (48px min from the dim grid).
 function MobileNavigationMenuContent({ className, ...props }: React.ComponentProps<'nav'>) {
   return (
     <nav
@@ -201,8 +170,6 @@ function MobileNavigationMenuContent({ className, ...props }: React.ComponentPro
 }
 MobileNavigationMenuContent.displayName = 'MobileNavigationMenuContent';
 
-// Touch row in the sidebar-menu idiom: hover wash, pressed currentColor wash, and -
-// when active - a stronger currentColor tint plus the inset brand edge bar.
 const mobileNavigationMenuItemVariants = cva(
   'flex w-full min-w-0 items-center gap-[var(--dim-s)] rounded-md px-[var(--dim-mmm)] text-left outline-hidden transition-colors hover-elevate focus-visible:ring-2 focus-visible:ring-ring active:bg-[color-mix(in_srgb,currentColor_8%,transparent)] disabled:pointer-events-none disabled:opacity-50 data-[active=true]:bg-[color-mix(in_srgb,currentColor_10%,transparent)] data-[active=true]:font-medium data-[active=true]:shadow-[inset_2px_0_0_var(--color-primary)] min-h-[var(--dim-ll)] [font-size:var(--type-body2-size)] [line-height:var(--type-body2-lh)] font-light [&>svg]:size-5 [&>svg]:shrink-0 [&>span:last-child]:truncate',
 );
@@ -229,17 +196,10 @@ function MobileNavigationMenuItem({
 }
 MobileNavigationMenuItem.displayName = 'MobileNavigationMenuItem';
 
-// Tree group: a top-level row that expands an inline subtree of child rows (tree format).
-// Same expansion language as accordion.tsx - Radix collapsible primitive, chevron rotation,
-// accordion-down/up keyframes; children are regular MobileNavigationMenuItem rows, indented
-// one icon+gap step so they align under the parent label.
-// The native "title" attribute is deliberately overridden: on this component the label IS the
-// visible row text, not a browser tooltip.
 interface MobileNavigationMenuTreeProps
   extends Omit<React.ComponentPropsWithoutRef<typeof Collapsible>, 'title'> {
-  /** Label shown on the expandable row. */
   title: React.ReactNode;
-  /** Optional leading icon, sized like every other row icon. */
+
   icon?: React.ReactNode;
 }
 
@@ -260,7 +220,7 @@ const MobileNavigationMenuTree = React.forwardRef<
         aria-label={typeof title === 'string' ? title : undefined}
         className={cn(
           mobileNavigationMenuItemVariants(),
-          // chevron (last svg child) rotates like the accordion trigger
+
           '[&[data-state=open]>svg:last-child]:rotate-180',
         )}
       >
@@ -276,7 +236,7 @@ const MobileNavigationMenuTree = React.forwardRef<
       data-slot="mobile-navigation-menu-tree-content"
       className="overflow-hidden data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down"
     >
-      {/* indent = row icon (dim-mmm) + row gap (dim-s): children align under the parent label */}
+      {}
       <div className="flex flex-col gap-[var(--dim-sss)] py-[var(--dim-sss)] pl-[calc(var(--dim-mmm)+var(--dim-s))]">
         {children}
       </div>

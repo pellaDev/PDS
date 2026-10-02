@@ -55,8 +55,6 @@ const mobileNavigationMenuPanelVariants = cva(
   {
     variants: {
       side: {
-        // Panel hugging the left edge casts its shadow to the right (menuRight),
-        // a right-edge panel casts it to the left (menuLeft).
         left: "left-0 border-r shadow-[var(--shadow-menuRight)] data-[state=closed]:slide-out-to-left data-[state=open]:slide-in-from-left",
         right: "right-0 border-l shadow-[var(--shadow-menuLeft)] data-[state=closed]:slide-out-to-right data-[state=open]:slide-in-from-right"
       }
@@ -175,7 +173,6 @@ const MobileNavigationMenuTree = React.forwardRef(({ className, children, title,
           "aria-label": typeof title === "string" ? title : void 0,
           className: cn(
             mobileNavigationMenuItemVariants(),
-            // chevron (last svg child) rotates like the accordion trigger
             "[&[data-state=open]>svg:last-child]:rotate-180"
           ),
           children: [

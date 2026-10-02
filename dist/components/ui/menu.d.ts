@@ -1,9 +1,5 @@
 import * as React from 'react';
 import './menu.css';
-/** Interaction mode of the unified Pella Menu:
- *  - "dropdown": opens from a <Menu.Trigger> click (former DropdownMenu)
- *  - "context":  opens on right-click inside <Menu.Trigger> (former ContextMenu)
- */
 export type MenuMode = 'dropdown' | 'context';
 type PassProps = Record<string, unknown>;
 declare function MenuRoot({ mode, children, ...rest }: {
@@ -66,9 +62,6 @@ declare function MenuSubContent({ className, children, ...rest }: {
     className?: string;
     children?: React.ReactNode;
 } & PassProps): React.JSX.Element;
-/** Unified Pella Menu — one component for both former DropdownMenu and ContextMenu, recreated on
- * PDS tokens (see menu.css). mode="dropdown" opens from a trigger click; mode="context" opens on
- * right-click inside the trigger. */
 export declare const Menu: typeof MenuRoot & {
     Trigger: typeof MenuTrigger;
     Content: typeof MenuContent;

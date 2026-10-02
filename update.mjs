@@ -1,23 +1,5 @@
 #!/usr/bin/env node
-/**
- * PDS update — sync this installation to any released version.
- *
- * Run from the root of a clone of https://github.com/pellaDev/PDS:
- *
- *   node update.mjs 1.3.1       check out that exact release tag (v prefix optional)
- *   node update.mjs latest      newest release, pre-releases included
- *   node update.mjs stable      newest stable (non-prerelease) release
- *   node update.mjs <t> --force discard local changes before switching (dangerous)
- *
- * "latest"/"stable" are resolved through the GitHub Releases API (public repo,
- * no token required). If the API is unreachable, resolution falls back to git
- * tags, where "stable" means the highest v<X>.<Y>.0 tag. Exact versions always
- * resolve against git tags on origin.
- *
- * A dirty working tree aborts the update unless --force is given. After the
- * checkout, dependencies are reinstalled automatically when pnpm-lock.yaml and
- * pnpm are both available.
- */
+
 import { execSync } from "node:child_process";
 import { existsSync, readFileSync } from "node:fs";
 
@@ -46,8 +28,6 @@ if (!target) usage();
 function git(cmd) {
   return execSync("git " + cmd, { stdio: ["ignore", "pipe", "pipe"] }).toString().trim();
 }
-
-// --- resolve target tag ------------------------------------------------------
 
 function explicitTag(v) {
   const tag = v.startsWith("v") ? v : "v" + v;
@@ -99,8 +79,6 @@ if (/^v?\d/.test(target)) {
   }
 }
 
-// --- switch -------------------------------------------------------------------
-
 const dirty = git("status --porcelain");
 if (dirty && !force) die("working tree is dirty - commit or stash your changes first (or pass --force to discard them)");
 
@@ -113,8 +91,6 @@ if (dirty) {
 } else {
   git("checkout --detach " + tag);
 }
-
-// --- reinstall dependencies when possible --------------------------------------
 
 let hasPnpm = true;
 try { execSync("command -v pnpm", { stdio: "ignore" }); } catch { hasPnpm = false; }

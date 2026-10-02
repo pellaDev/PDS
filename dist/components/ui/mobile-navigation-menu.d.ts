@@ -31,9 +31,7 @@ declare namespace MobileNavigationMenuItem {
     var displayName: string;
 }
 interface MobileNavigationMenuTreeProps extends Omit<React.ComponentPropsWithoutRef<typeof Collapsible>, 'title'> {
-    /** Label shown on the expandable row. */
     title: React.ReactNode;
-    /** Optional leading icon, sized like every other row icon. */
     icon?: React.ReactNode;
 }
 declare const MobileNavigationMenuTree: React.ForwardRefExoticComponent<MobileNavigationMenuTreeProps & React.RefAttributes<HTMLDivElement>>;

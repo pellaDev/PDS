@@ -3,14 +3,9 @@ import { cn } from '../../lib/utils';
 import './checkbox.css';
 
 export interface CheckboxProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'size'> {
-  /** Visible text next to the control — every state in the export carries a label child. */
   label: string;
 }
 
-/**
- * Pella checkbox control — ported from tokens/components/checkboxes.json (brand family).
- * The check glyph is inline SVG colored graySoft per icon.onContainer in the export.
- */
 const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
   ({ className, label, disabled, ...props }, ref) => (
     <label
@@ -23,7 +18,7 @@ const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
           <path
             d="M3.4 8.6l3 3L12.6 5"
             fill="none"
-            stroke="currentColor" /* icon.onContainer graySoft — carried by the .pds-checkbox__icon color token */
+            stroke="currentColor"
             strokeWidth="1.9"
             strokeLinecap="round"
             strokeLinejoin="round"

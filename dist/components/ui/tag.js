@@ -8,15 +8,10 @@ const tagVariants = cva(
   {
     variants: {
       variant: {
-        // fill pella.sys.color.custom.light - theme-aware primary role (#204384 light / #6C8FCB dark).
         default: "bg-primary text-primary-foreground",
-        // fill pella.sys.color.red via semantic.error (#EE1F25 in both themes).
         error: "bg-destructive text-destructive-foreground",
-        // fill pella.sys.color.yellow via semantic.alert (#CFEC14), dark label per accent foreground.
         alert: "bg-accent text-accent-foreground",
-        // fill pella.sys.color.green - light #218A38 / dark #5BB86B, readable labels on both themes.
         ready: "bg-success text-success-foreground",
-        // original disabled state: same container fill as default plus opacity.disabled on the whole pill.
         disabled: "bg-primary text-primary-foreground [opacity:var(--opacity-disabled)]"
       }
     },

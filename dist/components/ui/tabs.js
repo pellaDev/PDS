@@ -8,7 +8,6 @@ const TabsList = React.forwardRef(({ className, size = "default", ...props }, re
   {
     ref,
     className: cn(
-      // Fill flips with the host surface via --pds-surface-canvas-bg (base -> secondary gray, alternate -> background white) so the nav box never goes flush on its panel.
       "inline-flex items-center justify-center [border-radius:var(--radius-lg)] [background-color:var(--pds-surface-canvas-bg)] p-[var(--dim-sss)] text-muted-foreground",
       size === "mobile" && "flex w-full",
       className

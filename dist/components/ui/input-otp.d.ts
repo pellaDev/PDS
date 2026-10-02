@@ -1,12 +1,5 @@
 import * as React from 'react';
 import './input-otp.css';
-/**
- * Pella Input OTP. No composition export exists; cell styling is documented assumptions on the
- * field system canon in ./input-otp.css next to this file (fill-tone graySoft cells at field-sm
- * height, brand border only on the active slot, Roboto 300 @ mmmm per typographySet refs).
- * The input-otp package renders one overlay <input> per group, so the active cell is flagged
- * with data-active from context (focus-within would not work here).
- */
 declare const InputOTP: React.ForwardRefExoticComponent<((Omit<Omit<React.InputHTMLAttributes<HTMLInputElement>, "nonce" | "onChange" | "value" | "maxLength" | "textAlign" | "onComplete" | "pushPasswordManagerStrategy" | "pasteTransformer" | "containerClassName" | "noScriptCSSFallback"> & {
     value?: string;
     onChange?: (newValue: string) => unknown;

@@ -33,9 +33,7 @@ declare function SidebarFooter({ className, ...props }: React.ComponentProps<'di
 declare function SidebarSeparator({ className, ...props }: React.ComponentProps<typeof Separator>): React.JSX.Element;
 declare function SidebarContent({ className, ...props }: React.ComponentProps<'div'>): React.JSX.Element;
 declare function SidebarGroup({ className, accordion, defaultOpen, children, ...props }: React.ComponentProps<'div'> & {
-    /** Optional per-category accordion: the label becomes a toggle button. */
     accordion?: boolean;
-    /** Initial open state of an accordion group. */
     defaultOpen?: boolean;
 }): React.JSX.Element;
 declare function SidebarGroupLabel({ className, asChild, ...props }: React.ComponentProps<'div'> & {

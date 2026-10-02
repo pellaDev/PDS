@@ -2,14 +2,11 @@ import * as React from 'react';
 import './pagination.css';
 
 export interface PaginationProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'children'> {
-  /** Number of pages. @default 1 */
   total?: number;
-  /** Currently selected page (rendered with aria-current="page"). @default 1 */
+
   current?: number;
 }
 
-/** Windowing: first, last and a plus/minus-2 window around the current page; gaps collapse to ellipsis cells - standard
-    composition heuristics on top of the token family (the export defines cell states, not pagination math). */
 function buildItems(current: number, total: number): (number | 'gap')[] {
   const wanted = new Set<number>([1, total]);
   for (const n of [current - 2, current - 1, current, current + 1, current + 2])
@@ -46,7 +43,6 @@ function Chevron({ dir }: { dir: 'left' | 'right' }) {
   );
 }
 
-/** Pella Pagination - tokens/components/paginations.json (simple.brand family). */
 export function Pagination({ total = 1, current = 1, ...props }: PaginationProps) {
   const items = buildItems(Math.min(current, Math.max(total, 1)), Math.max(total, 1));
   return (

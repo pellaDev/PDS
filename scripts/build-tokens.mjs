@@ -1,16 +1,3 @@
-/**
- * Generates the consumable web theme (src/index.css) and the portable token
- * object (src/generated/tokens.tsx) from tokens.json.
- *
- * tokens.json (DTCG) is the single source of truth. This runs on dev start and
- * on every tokens.json change (see vite.config.ts) and before build/typecheck
- * (see package.json). Do not edit the generated files by hand.
- *
- * - src/index.css        the design system's theme. The preview app imports it,
- *                        and consuming apps import this same file (web).
- * - src/generated/tokens.tsx  hex token object for mobile (Expo) and any other
- *                             platform, so web + mobile share one source.
- */
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import {
   groupEntries,
@@ -31,7 +18,6 @@ const tsOutDir = join(root, 'src', 'generated');
 const indexHtmlPath = join(root, 'index.html');
 const faviconOut = join(root, 'public', 'favicon.svg');
 
-/** Resolve a DTCG node's $value, following {alias} references. */
 function resolveValue(node, tokens) {
   const raw = node?.$value;
   if (typeof raw === 'string' && raw.startsWith('{') && raw.endsWith('}')) {
@@ -85,8 +71,6 @@ function toFontStack(value) {
 }
 
 function buildFavicon() {
-  // Full dev layout keeps the brand logo with the showcase assets; the
-  // library-only release ships it in public/ instead (see release.sh).
   const candidates = [
     join(root, 'src', 'preview', 'assets', 'logo.svg'),
     join(root, 'public', 'logo.svg'),

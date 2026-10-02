@@ -1,8 +1,5 @@
 #!/usr/bin/env node
-/**
- * PDS Release Build
- * Usage: node scripts/build-release.mjs [--outline] [--flat] [--lightPrimary HEX] [--darkPrimary HEX] [--font NAME]
- */
+
 import {
   readFileSync,
   writeFileSync,
@@ -21,7 +18,6 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const root = resolve(__dirname, '..');
 const dist = resolve(root, 'dist');
 
-// --- Parse CLI flags ---
 const args = process.argv.slice(2);
 const flags = {};
 for (let i = 0; i < args.length; i++) {
@@ -37,7 +33,6 @@ console.log('\n\xf0\x9f\x94\xa8 PDS Release Build');
 const activeFlags = Object.entries(flags).filter(([_, v]) => v !== undefined);
 if (activeFlags.length) console.log('   ' + activeFlags.map(([k, v]) => k + '=' + v).join('  '));
 
-// --- Hex to HSL ---
 function hexToHsl(hex) {
   hex = hex.replace('#', '');
   if (hex.length === 3)
@@ -71,7 +66,6 @@ function hexToHsl(hex) {
   return Math.round(h * 360) + ' ' + Math.round(s * 100) + '% ' + Math.round(l * 1000) / 10 + '%';
 }
 
-// --- Step 1: Prepare CSS ---
 console.log('\n   \xf0\x9f\x93\x9d CSS...');
 let css = readFileSync(resolve(root, 'src/index.css'), 'utf-8');
 
@@ -103,7 +97,6 @@ if (flags.outline) {
   console.log('      \xf0\x9f\x93\x90 outline (border mode)');
 }
 
-// --- Step 2: Compile CSS with Tailwind ---
 mkdirSync(dist, { recursive: true });
 const tmpCss = join(dist, '.input.css');
 writeFileSync(tmpCss, css);
@@ -124,7 +117,6 @@ try {
 }
 if (existsSync(tmpCss)) unlinkSync(tmpCss);
 
-// --- Step 3: Compile TSX to JS with esbuild ---
 console.log('\n   \xe2\x9a\x99\xef\xb8\x8f TSX -> ESM...');
 const esbuild = await import('esbuild');
 
@@ -160,10 +152,8 @@ for (const { from, to } of files) {
 }
 console.log('      \xe2\x9c\x85 ' + files.length + ' files compiled');
 
-// --- Step 4: Generate .d.ts ---
 console.log('\n   \xf0\x9f\x93\x8b Types...');
 try {
-  // --noEmit false overrides the tsconfig noEmit (needed for declaration emit).
   execSync(
     'npx tsc --declaration --emitDeclarationOnly --noEmit false --outDir dist --rootDir src --module esnext --moduleResolution bundler --jsx react-jsx --skipLibCheck',
     { cwd: root, stdio: 'pipe' },
@@ -173,14 +163,12 @@ try {
   console.warn('      \xe2\x9a\xa0\xef\xb8\x8f tsc failed (non-fatal)');
 }
 
-// --- Step 5: Copy fonts + component CSS ---
 const fontsSrc = resolve(root, 'public/fonts');
 if (existsSync(fontsSrc)) {
   cpSync(fontsSrc, join(dist, 'fonts'), { recursive: true });
   console.log('\n   \xf0\x9f\x93\xbd dist/fonts/');
 }
 
-// Copy component .css files (tooltip.css, checkbox.css, etc.)
 function copyCssFiles(srcDir, outDir) {
   if (!existsSync(srcDir)) return;
   for (const entry of readdirSync(srcDir)) {
@@ -196,7 +184,6 @@ function copyCssFiles(srcDir, outDir) {
 copyCssFiles(resolve(root, 'src/components'), join(dist, 'components'));
 console.log('   \xf0\x9f\x93\xbd component CSS files');
 
-// Fix font paths in compiled CSS: /fonts/ -> ./fonts/ (relative for Vite)
 const stylesPath = join(dist, 'styles.css');
 if (existsSync(stylesPath)) {
   let cssOut = readFileSync(stylesPath, 'utf-8');
@@ -204,7 +191,6 @@ if (existsSync(stylesPath)) {
   writeFileSync(stylesPath, cssOut);
 }
 
-// --- Step 6: dist/package.json ---
 const exportMap = {
   '.': './generated/tokens.js',
   './tokens': './generated/tokens.js',

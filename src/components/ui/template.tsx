@@ -20,40 +20,107 @@ Template.displayName = 'Template';
 
 const TemplateHeader = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
   ({ className, ...props }, ref) => (
-    <div ref={ref} data-slot="template-header" className={cn(className)} {...props} />
+    <div
+      ref={ref}
+      data-slot="template-header"
+      data-pds-surface="alternate"
+      className={cn(className)}
+      {...props}
+    />
   ),
 );
 TemplateHeader.displayName = 'TemplateHeader';
 
 const TemplateFooter = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
   ({ className, ...props }, ref) => (
-    <div ref={ref} data-slot="template-footer" className={cn(className)} {...props} />
+    <div
+      ref={ref}
+      data-slot="template-footer"
+      data-pds-surface="alternate"
+      className={cn(className)}
+      {...props}
+    />
   ),
 );
 TemplateFooter.displayName = 'TemplateFooter';
 
+const TemplateSubHeader = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
+  ({ className, ...props }, ref) => (
+    <div ref={ref} data-slot="template-subheader" className={cn(className)} {...props} />
+  ),
+);
+TemplateSubHeader.displayName = 'TemplateSubHeader';
+
 type TemplateBodyProps = {
-  sidebar: React.ReactNode;
+  subHeader?: React.ReactNode;
+
+  sidebar?: React.ReactNode;
+
+  rightSidebar?: React.ReactNode;
   defaultSidebarSize?: number;
   minSidebarSize?: number;
+  defaultRightSidebarSize?: number;
+  minRightSidebarSize?: number;
   children: React.ReactNode;
   className?: string;
 };
 
 const TemplateBody = React.forwardRef<HTMLDivElement, TemplateBodyProps>(
-  ({ sidebar, defaultSidebarSize = 30, minSidebarSize = 20, children, className }, ref) => (
-    <div ref={ref} data-slot="template-body" className={cn('min-h-0 flex-1', className)}>
-      <ResizablePanelGroup direction="horizontal" className="h-full w-full">
-        <ResizablePanel defaultSize={defaultSidebarSize} minSize={minSidebarSize}>
-          {sidebar}
-        </ResizablePanel>
-        <ResizableHandle />
-        <ResizablePanel defaultSize={100 - defaultSidebarSize} minSize={40}>
-          {children}
-        </ResizablePanel>
-      </ResizablePanelGroup>
-    </div>
-  ),
+  (
+    {
+      subHeader,
+      sidebar,
+      rightSidebar,
+      defaultSidebarSize = 30,
+      minSidebarSize = 20,
+      defaultRightSidebarSize = 30,
+      minRightSidebarSize = 20,
+      children,
+      className,
+    },
+    ref,
+  ) => {
+    const hasLeft = sidebar != null;
+    const hasRight = rightSidebar != null;
+    const canvasSize =
+      100 - (hasLeft ? defaultSidebarSize : 0) - (hasRight ? defaultRightSidebarSize : 0);
+
+    return (
+      <div
+        ref={ref}
+        data-slot="template-body"
+        className={cn('flex min-h-0 flex-1 flex-col', className)}
+      >
+        {subHeader}
+        {}
+        <ResizablePanelGroup
+          key={`${hasLeft}|${hasRight}`}
+          direction="horizontal"
+          className="min-h-0 flex-1 w-full"
+        >
+          {hasLeft && (
+            <>
+              <ResizablePanel defaultSize={defaultSidebarSize} minSize={minSidebarSize}>
+                {sidebar}
+              </ResizablePanel>
+              <ResizableHandle />
+            </>
+          )}
+          <ResizablePanel defaultSize={canvasSize} minSize={40}>
+            {children}
+          </ResizablePanel>
+          {hasRight && (
+            <>
+              <ResizableHandle />
+              <ResizablePanel defaultSize={defaultRightSidebarSize} minSize={minRightSidebarSize}>
+                {rightSidebar}
+              </ResizablePanel>
+            </>
+          )}
+        </ResizablePanelGroup>
+      </div>
+    );
+  },
 );
 TemplateBody.displayName = 'TemplateBody';
 
@@ -68,6 +135,7 @@ const TemplateCanvas = React.forwardRef<HTMLDivElement, TemplateCanvasProps>(
     <div
       ref={ref}
       data-slot="template-canvas"
+      data-pds-surface="alternate"
       data-layout={layout}
       className={cn('h-full min-h-0 w-full overflow-auto', className)}
       {...props}
@@ -76,4 +144,11 @@ const TemplateCanvas = React.forwardRef<HTMLDivElement, TemplateCanvasProps>(
 );
 TemplateCanvas.displayName = 'TemplateCanvas';
 
-export { Template, TemplateHeader, TemplateFooter, TemplateBody, TemplateCanvas };
+export {
+  Template,
+  TemplateHeader,
+  TemplateSubHeader,
+  TemplateFooter,
+  TemplateBody,
+  TemplateCanvas,
+};

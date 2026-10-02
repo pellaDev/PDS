@@ -88,8 +88,6 @@ const Slider = React.forwardRef(
         onValueChange: handleValueChange,
         className: cn(
           "group/slider relative flex touch-none select-none data-[disabled]:cursor-not-allowed data-[disabled]:opacity-[var(--opacity-disabled)]",
-          // Vertical root is w-2 (8px = coreDimensions.ss): the container hugs the track width, so the
-          // 12px thumb overflows symmetrically on both sides. Token: pds.comp.slider.brand.vertical.
           vertical ? "h-full w-2 justify-center" : "w-full items-center",
           className
         ),
@@ -101,8 +99,6 @@ const Slider = React.forwardRef(
               ref: trackRef,
               className: cn(
                 "relative grow overflow-hidden rounded-full bg-(--state-track-idle)",
-                // Both axes run 8px (coreDimensions.ss): horizontal h-2, vertical w-2 — one scale value
-                // for the track on either orientation.
                 vertical ? "h-full w-2" : "h-2 w-full"
               ),
               children: /* @__PURE__ */ jsx(

@@ -9,17 +9,10 @@ import { cn } from '../../lib/utils';
 
 import './menu.css';
 
-/** Interaction mode of the unified Pella Menu:
- *  - "dropdown": opens from a <Menu.Trigger> click (former DropdownMenu)
- *  - "context":  opens on right-click inside <Menu.Trigger> (former ContextMenu)
- */
 export type MenuMode = 'dropdown' | 'context';
 
 const MenuContext = React.createContext<MenuMode>('dropdown');
 
-/* The two Radix menu primitives share the same prop surface for every subcomponent exposed here;
-   the mode only decides which primitive renders. Consumer props pass through a single cast,
-   exactly like the former per-mode wrappers did. */
 type PassProps = Record<string, unknown>;
 const toDropdown = <T,>(props: PassProps): T => props as T;
 const toContext = <T,>(props: PassProps): T => props as T;
@@ -401,9 +394,6 @@ function MenuSubContent({
   );
 }
 
-/** Unified Pella Menu — one component for both former DropdownMenu and ContextMenu, recreated on
- * PDS tokens (see menu.css). mode="dropdown" opens from a trigger click; mode="context" opens on
- * right-click inside the trigger. */
 export const Menu = Object.assign(MenuRoot, {
   Trigger: MenuTrigger,
   Content: MenuContent,
