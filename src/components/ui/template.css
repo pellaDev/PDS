@@ -38,7 +38,8 @@
 }
 
 [data-slot='template-canvas'][data-layout='center'] {
-  place-items: center;
+  justify-items: center;
+  align-items: start;
 }
 
 [data-slot='template-canvas'][data-layout='full'] {
