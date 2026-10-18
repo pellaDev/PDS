@@ -265,7 +265,20 @@ const tokens = {
     "sidebarWidthMobile": "18rem",
     "sidebarWidthIcon": "3rem",
     "mobileNavHeaderHeight": "3rem",
-    "mobileNavHeaderButton": "2.5rem"
+    "mobileNavHeaderButton": "2.5rem",
+    "sidebarSide": "left",
+    "breakpointMobile": "48rem",
+    "touchMin": "2.75rem",
+    "deviceWidth": "24.375rem",
+    "deviceHeight": "46.5rem",
+    "deviceRadius": "2.5rem",
+    "deviceBezel": "0.5rem",
+    "devicePadding": "0.75rem",
+    "deviceStatusBar": "1.25rem",
+    "deviceHomeIndicator": "0.25rem",
+    "deviceHomeIndicatorWidth": "5rem",
+    "gridColumns": 3,
+    "canvasColumns": 2
   },
   "motion": {
     "duration": {

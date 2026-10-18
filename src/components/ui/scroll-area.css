@@ -1,0 +1,19 @@
+[data-slot='scroll-area-scrollbar'] {
+  transition: opacity var(--duration-fast) ease;
+}
+
+[data-slot='device-content'] [data-slot='scroll-area-scrollbar'] {
+  opacity: 0;
+}
+[data-slot='device-content'] [data-slot='scroll-area-scrollbar'][data-scrolling='true'] {
+  opacity: 1;
+}
+
+@media (max-width: 48rem) {
+  [data-slot='scroll-area-scrollbar'] {
+    opacity: 0;
+  }
+  [data-slot='scroll-area-scrollbar'][data-scrolling='true'] {
+    opacity: 1;
+  }
+}

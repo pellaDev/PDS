@@ -8,12 +8,14 @@ import {
   ToastViewport,
 } from './toast';
 
-export function Toaster() {
+export function Toaster({ toasterId }: { toasterId?: string }) {
   const { toasts } = useToast();
+
+  const visible = toasts.filter((entry) => entry.toasterId === toasterId);
 
   return (
     <ToastProvider>
-      {toasts.map(function ({ id, title, description, action, ...props }) {
+      {visible.map(function ({ id, title, description, action, toasterId: _ignored, ...props }) {
         return (
           <Toast key={id} {...props}>
             <div className="grid gap-1">

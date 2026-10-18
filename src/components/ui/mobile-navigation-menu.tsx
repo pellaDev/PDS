@@ -8,6 +8,8 @@ import { ChevronDownIcon, MenuIcon, XIcon } from 'lucide-react';
 
 import { cn } from '../../lib/utils';
 import { usePdsConfig } from '../../config';
+import tokens from '../../generated/tokens';
+import { useDevicePortal } from '../../hooks/use-mobile';
 import { Button } from './button';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from './collapsible';
 import { Separator } from './separator';
@@ -78,8 +80,9 @@ const mobileNavigationMenuPanelVariants = cva(
           'right-0 border-l shadow-[var(--shadow-menuLeft)] data-[state=closed]:slide-out-to-right data-[state=open]:slide-in-from-right',
       },
     },
+
     defaultVariants: {
-      side: 'left',
+      side: tokens.layout.sidebarSide,
     },
   },
 );
@@ -91,10 +94,11 @@ interface MobileNavigationMenuPanelProps
 const MobileNavigationMenuPanel = React.forwardRef<
   React.ElementRef<typeof MobileNavigationMenuPrimitive.Content>,
   MobileNavigationMenuPanelProps
->(({ side = 'left', className, children, ...props }, ref) => {
+>(({ side = tokens.layout.sidebarSide, className, children, ...props }, ref) => {
   const { fieldStyle } = usePdsConfig();
+
   return (
-    <MobileNavigationMenuPrimitive.Portal>
+    <MobileNavigationMenuPrimitive.Portal container={useDevicePortal()}>
       <MobileNavigationMenuOverlay />
       <MobileNavigationMenuPrimitive.Content
         ref={ref}

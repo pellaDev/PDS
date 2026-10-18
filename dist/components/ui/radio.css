@@ -58,3 +58,7 @@
   border-width: 0;
   background: var(--color-gray);
 }
+
+.pds-radio {
+  min-height: var(--pds-touch-min);
+}

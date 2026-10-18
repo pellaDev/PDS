@@ -8,10 +8,11 @@ import {
   ToastTitle,
   ToastViewport
 } from "./toast";
-function Toaster() {
+function Toaster({ toasterId }) {
   const { toasts } = useToast();
+  const visible = toasts.filter((entry) => entry.toasterId === toasterId);
   return /* @__PURE__ */ jsxs(ToastProvider, { children: [
-    toasts.map(function({ id, title, description, action, ...props }) {
+    visible.map(function({ id, title, description, action, toasterId: _ignored, ...props }) {
       return /* @__PURE__ */ jsxs(Toast, { ...props, children: [
         /* @__PURE__ */ jsxs("div", { className: "grid gap-1", children: [
           title && /* @__PURE__ */ jsx(ToastTitle, { children: title }),

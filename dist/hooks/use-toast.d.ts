@@ -5,6 +5,7 @@ type ToasterToast = ToastProps & {
     title?: React.ReactNode;
     description?: React.ReactNode;
     action?: ToastActionElement;
+    toasterId?: string;
 };
 declare const actionTypes: {
     readonly ADD_TOAST: "ADD_TOAST";

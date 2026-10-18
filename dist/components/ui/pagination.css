@@ -1,5 +1,8 @@
 .pds-pg {
   display: inline-flex;
+
+  flex-wrap: var(--pds-row-wrap);
+  width: var(--pds-block-width);
   align-items: stretch;
 }
 .pds-pg__cell {

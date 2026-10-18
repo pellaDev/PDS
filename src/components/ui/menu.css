@@ -95,3 +95,18 @@
 .pds-menu-separator {
   background-color: var(--color-border);
 }
+
+[data-slot='device-content'] .pds-menu-trigger,
+[data-slot='device-content'] .pds-menu-item {
+  min-height: var(--pds-touch-min);
+}
+[data-slot='device-content'] .pds-menu-content {
+  width: var(--pds-block-width);
+}
+
+@media (max-width: 48rem) {
+  .pds-menu-trigger,
+  .pds-menu-item {
+    min-height: var(--pds-touch-min);
+  }
+}

@@ -1,0 +1,6 @@
+[data-sonner-toaster] [data-sonner-toast][data-styled='true'] {
+  border-color: var(--pds-container-border-color);
+}
+[data-sonner-toaster] [data-sonner-toast][data-styled='true'][data-type='error'] {
+  border-color: var(--color-destructive);
+}

@@ -16,3 +16,7 @@
 .pds-sub[data-state='open'] {
   box-shadow: inset 2px 0 0 var(--color-primary);
 }
+
+.pds-list-item {
+  min-height: var(--pds-touch-min);
+}

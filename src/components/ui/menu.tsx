@@ -6,6 +6,7 @@ import * as ContextMenuPrimitive from '@radix-ui/react-context-menu';
 import { Check, ChevronRight, Circle } from 'lucide-react';
 
 import { cn } from '../../lib/utils';
+import { useDevicePortal } from '../../hooks/use-mobile';
 
 import './menu.css';
 
@@ -79,7 +80,7 @@ function MenuContent({
   const mode = React.useContext(MenuContext);
   if (mode === 'dropdown') {
     return (
-      <DropdownMenuPrimitive.Portal>
+      <DropdownMenuPrimitive.Portal container={useDevicePortal()}>
         <DropdownMenuPrimitive.Content
           sideOffset={sideOffset}
           className={cn(
@@ -98,7 +99,7 @@ function MenuContent({
     );
   }
   return (
-    <ContextMenuPrimitive.Portal>
+    <ContextMenuPrimitive.Portal container={useDevicePortal()}>
       <ContextMenuPrimitive.Content
         className={cn(
           'z-50 max-h-[var(--radix-context-menu-content-available-height)] min-w-[8rem] overflow-y-auto overflow-x-hidden p-1 pds-menu-content',

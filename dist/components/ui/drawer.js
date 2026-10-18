@@ -2,6 +2,7 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import * as React from "react";
 import { Drawer as DrawerPrimitive } from "vaul";
 import { cn } from "../../lib/utils";
+import { useDevicePortal } from "../../hooks/use-mobile";
 const Drawer = ({
   shouldScaleBackground = true,
   ...props
@@ -19,14 +20,14 @@ const DrawerOverlay = React.forwardRef(({ className, ...props }, ref) => /* @__P
   }
 ));
 DrawerOverlay.displayName = DrawerPrimitive.Overlay.displayName;
-const DrawerContent = React.forwardRef(({ className, children, ...props }, ref) => /* @__PURE__ */ jsxs(DrawerPortal, { children: [
+const DrawerContent = React.forwardRef(({ className, children, ...props }, ref) => /* @__PURE__ */ jsxs(DrawerPortal, { container: useDevicePortal(), children: [
   /* @__PURE__ */ jsx(DrawerOverlay, {}),
   /* @__PURE__ */ jsxs(
     DrawerPrimitive.Content,
     {
       ref,
       className: cn(
-        "fixed inset-x-0 bottom-0 z-50 mt-24 flex h-auto flex-col rounded-t-[10px] border bg-background",
+        "fixed inset-x-0 bottom-0 z-50 mt-24 flex h-auto flex-col rounded-t-[10px] border [border-color:var(--pds-container-border-color)] bg-background",
         className
       ),
       ...props,

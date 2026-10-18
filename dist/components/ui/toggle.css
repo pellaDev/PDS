@@ -22,6 +22,6 @@
   color: var(--color-primary);
 }
 
-[data-pds-surface='alternate'] .pds-toggle-btn--ghost[data-state='on']:not(:disabled) {
+[data-pds-surface='alternative'] .pds-toggle-btn--ghost[data-state='on']:not(:disabled) {
   background-color: var(--color-background);
 }

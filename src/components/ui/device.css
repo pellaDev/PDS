@@ -1,0 +1,79 @@
+[data-slot='device'] {
+  width: var(--device-width);
+  height: var(--device-height);
+  max-width: 100%;
+  border-radius: var(--device-radius);
+  background-color: var(--pds-surface-bg);
+  box-shadow: var(--shadow-trigger), var(--shadow-button);
+}
+
+[data-slot='device-screen'] {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
+  border-radius: var(--device-radius);
+  background-color: var(--pds-surface-bg);
+  color: var(--pds-surface-fg);
+  overflow: hidden;
+}
+
+[data-slot='device-status-bar'] {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--device-padding);
+  min-height: var(--device-status-bar);
+  padding: var(--dim-ss) var(--device-padding);
+  font-size: var(--type-caption-size);
+  line-height: var(--type-caption-lh);
+  font-weight: 300;
+}
+[data-slot='device-status-bar'] svg {
+  width: var(--type-caption-size);
+  height: var(--type-caption-size);
+}
+
+[data-slot='device-content'] {
+  display: flex;
+  flex-direction: column;
+  gap: var(--dim-s);
+  flex: 1;
+  min-height: 0;
+  padding: var(--device-padding);
+  overflow: auto;
+  scrollbar-width: none;
+
+  contain: layout;
+}
+[data-slot='device-content']::-webkit-scrollbar {
+  display: none;
+}
+
+[data-slot='device-portal'] {
+  position: absolute;
+  inset: 0;
+  contain: layout;
+  pointer-events: none;
+}
+[data-slot='device-portal'] > * {
+  pointer-events: auto;
+}
+
+[data-slot='device-home-indicator'] {
+  align-self: center;
+  width: var(--device-home-indicator-width);
+  height: var(--device-home-indicator);
+  margin: var(--dim-ss) 0;
+  border-radius: calc(var(--device-home-indicator) / 2);
+  background-color: var(--pds-surface-fg);
+}
+
+[data-slot='device-content'] > * {
+  padding: 0;
+}
+
+[data-slot='device-content'] [data-slot='guidelines'] {
+  display: none;
+}

@@ -111,6 +111,7 @@ function buildCss(tokens) {
   replacements.__DS_RADIUS_SM__ = resolveValue(tokens.radius.sm, tokens);
   replacements.__DS_RADIUS_MD__ = resolveValue(tokens.radius.md, tokens);
   replacements.__DS_SPACING__ = resolveValue(tokens.spacing.base, tokens);
+  replacements.__DS_BREAKPOINT_MOBILE__ = resolveValue(tokens.layout.breakpointMobile, tokens);
   replacements.__DS_CORE_TOKENS__ = buildCoreTokens(tokens);
   replacements.__DS_FONT_FACES__ = buildFontFaces(tokens);
 
@@ -183,8 +184,9 @@ function buildTs(tokens) {
     shadows: Object.fromEntries(
       groupEntries(tokens.shadows).map(([name, node]) => [name, boxShadowCss(node.$value)]),
     ),
+
     layout: Object.fromEntries(
-      groupEntries(tokens.layout ?? {}).map(([name, node]) => [name, node?.$value]),
+      groupEntries(tokens.layout ?? {}).map(([name, node]) => [name, resolveValue(node, tokens)]),
     ),
     motion: {
       duration: Object.fromEntries(

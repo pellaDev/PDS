@@ -6,17 +6,18 @@ import { cn } from '../../lib/utils';
 import { Tooltip } from './tooltip';
 
 const buttonVariants = cva(
-  'inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md font-light [font-size:var(--type-body2-size)] [line-height:var(--type-body2-lh)] transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-[var(--opacity-disabled)] [&_svg]:pointer-events-none [&_svg]:shrink-0 hover-elevate active-elevate-2',
+  'inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md font-light [font-size:var(--type-body2-size)] [line-height:var(--type-body2-lh)] transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-[var(--opacity-disabled)] [&_svg]:pointer-events-none [&_svg]:shrink-0 hover-elevate active-elevate-2 [min-height:var(--pds-control-min,_var(--pds-touch-min))]',
   {
     variants: {
       size: {
-        mini: 'h-6 w-6 [&_svg]:size-4',
+        mini: 'h-6 w-6 [--pds-control-min:auto] [&_svg]:size-4',
 
         small: 'h-8 px-3 [&_svg]:size-4',
 
         large: 'h-10 px-6 [&_svg]:size-4',
 
-        special: 'flex-col min-h-[4.5rem] min-w-[4.5rem] gap-1.5 p-3 [&_svg]:size-5',
+        special:
+          'flex-col size-[4.5rem] min-h-[4.5rem] min-w-[4.5rem] gap-1.5 overflow-hidden p-3 [&_svg]:size-5',
 
         icon: 'h-10 w-10 [&_svg]:size-4',
       },
@@ -31,12 +32,23 @@ const buttonVariants = cva(
   },
 );
 
+function truncateLabel(children: React.ReactNode) {
+  return React.Children.map(children, (child) =>
+    typeof child === 'string' || typeof child === 'number' ? (
+      <span className="max-w-full truncate">{child}</span>
+    ) : (
+      child
+    ),
+  );
+}
+
 function Button({
   className,
   variant,
   size,
   asChild = false,
   tooltip,
+  children,
   ...props
 }: React.ComponentProps<'button'> &
   VariantProps<typeof buttonVariants> & {
@@ -51,7 +63,9 @@ function Button({
       data-slot="button"
       className={cn(buttonVariants({ variant, size, className }))}
       {...props}
-    />
+    >
+      {size === 'special' && !asChild ? truncateLabel(children) : children}
+    </Comp>
   );
 
   if (!asChild && (size === 'mini' || size === 'small')) {

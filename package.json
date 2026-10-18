@@ -1,6 +1,6 @@
 {
   "name": "@workspace/pds",
-  "version": "1.9.0",
+  "version": "1.10.0",
   "license": "MIT",
   "type": "module",
   "exports": {
@@ -17,7 +17,7 @@
   ],
   "scripts": {
     "tokens": "node scripts/build-tokens.mjs",
-    "pretypecheck": "node scripts/build-tokens.mjs",
+    "pretypecheck": "node scripts/build-tokens.mjs && node scripts/check-breakpoint.mjs",
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "build:release": "node scripts/build-release.mjs",
     "update": "node update.mjs"

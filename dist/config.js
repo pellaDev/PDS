@@ -71,6 +71,7 @@ function applyToDocument(cfg) {
   root.style.setProperty("--pds-brand-light", hexToHslTriple(cfg.lightBrand));
   root.style.setProperty("--pds-brand-dark", hexToHslTriple(cfg.darkBrand));
   root.style.setProperty("--pds-font-sans", tokens.fontOptions[cfg.font].join(", "));
+  root.setAttribute("data-pds-fieldstyle", cfg.fieldStyle);
 }
 let baseConfig = { ...PDS_DEFAULTS };
 let snapshot = { ...baseConfig, ...loadPersisted() };

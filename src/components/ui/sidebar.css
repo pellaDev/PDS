@@ -2,7 +2,7 @@
   --elevate-1: color-mix(in srgb, var(--pds-surface-fg) 10%, transparent);
 }
 
-:root:not(.dark) [data-pds-surface='alternate'] [data-slot='sidebar-menu-button'] {
+:root:not(.dark) [data-pds-surface='alternative'] [data-slot='sidebar-menu-button'] {
   --elevate-1: hsl(var(--white-pure) / 0.65);
 }
 

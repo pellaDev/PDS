@@ -8,7 +8,15 @@ const Table = React.forwardRef(
 Table.displayName = "Table";
 const TableHeader = React.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ jsx("thead", { ref, className: cn("[&_tr]:border-b", className), ...props }));
 TableHeader.displayName = "TableHeader";
-const TableBody = React.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ jsx("tbody", { ref, className: cn("[&_tr:last-child]:border-0", className), ...props }));
+const TableBody = React.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ jsx(
+  "tbody",
+  {
+    ref,
+    "data-slot": "table-body",
+    className: cn("[&_tr:last-child]:border-0", className),
+    ...props
+  }
+));
 TableBody.displayName = "TableBody";
 const TableFooter = React.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ jsx(
   "tfoot",

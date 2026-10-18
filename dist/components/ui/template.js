@@ -2,6 +2,7 @@
 import { Fragment, jsx, jsxs } from "react/jsx-runtime";
 import * as React from "react";
 import { cn } from "../../lib/utils";
+import { useIsMobile } from "../../hooks/use-mobile";
 import { ResizablePanelGroup, ResizablePanel, ResizableHandle } from "./resizable";
 import "./template.css";
 const Template = React.forwardRef(
@@ -22,7 +23,7 @@ const TemplateHeader = React.forwardRef(
     {
       ref,
       "data-slot": "template-header",
-      "data-pds-surface": "alternate",
+      "data-pds-surface": "alternative",
       className: cn(className),
       ...props
     }
@@ -35,7 +36,7 @@ const TemplateFooter = React.forwardRef(
     {
       ref,
       "data-slot": "template-footer",
-      "data-pds-surface": "alternate",
+      "data-pds-surface": "alternative",
       className: cn(className),
       ...props
     }
@@ -61,6 +62,24 @@ const TemplateBody = React.forwardRef(
     const hasLeft = sidebar != null;
     const hasRight = rightSidebar != null;
     const canvasSize = 100 - (hasLeft ? defaultSidebarSize : 0) - (hasRight ? defaultRightSidebarSize : 0);
+    const isMobile = useIsMobile();
+    if (isMobile) {
+      return /* @__PURE__ */ jsxs(
+        "div",
+        {
+          ref,
+          "data-slot": "template-body",
+          "data-mobile": "true",
+          className: cn("flex min-h-0 flex-1 flex-col", className),
+          children: [
+            subHeader,
+            hasLeft ? /* @__PURE__ */ jsx("div", { "data-slot": "template-offcanvas", className: "contents", children: sidebar }) : null,
+            /* @__PURE__ */ jsx("div", { "data-slot": "template-content", className: "min-h-0 flex-1", children }),
+            hasRight ? /* @__PURE__ */ jsx("div", { "data-slot": "template-offcanvas", className: "contents", children: rightSidebar }) : null
+          ]
+        }
+      );
+    }
     return /* @__PURE__ */ jsxs(
       "div",
       {
@@ -100,7 +119,7 @@ const TemplateCanvas = React.forwardRef(
     {
       ref,
       "data-slot": "template-canvas",
-      "data-pds-surface": "alternate",
+      "data-pds-surface": "alternative",
       "data-layout": layout,
       className: cn("h-full min-h-0 w-full overflow-auto", className),
       ...props

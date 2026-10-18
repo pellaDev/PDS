@@ -1,0 +1,12 @@
+[data-slot='toast'] {
+  border-color: var(--pds-container-border-color);
+}
+[data-slot='toast'].destructive {
+  border-color: var(--color-destructive);
+}
+[data-slot='toast-action'] {
+  border-color: var(--pds-container-border-color);
+}
+[data-slot='toast'].destructive [data-slot='toast-action'] {
+  border-color: var(--state-toast-border);
+}

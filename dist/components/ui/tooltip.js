@@ -2,6 +2,7 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import * as React from "react";
 import { createPortal } from "react-dom";
 import "./tooltip.css";
+import { useDevicePortal } from "../../hooks/use-mobile";
 function Tooltip({ content, variant = "default", children, ...props }) {
   const [anchor, setAnchor] = React.useState(null);
   const show = (element) => setAnchor(element.getBoundingClientRect());
@@ -16,7 +17,10 @@ function Tooltip({ content, variant = "default", children, ...props }) {
       window.removeEventListener("resize", onInvalidate);
     };
   }, [anchor]);
-  const bottom = anchor ? "calc(" + (window.innerHeight - anchor.top) + "px + var(--dim-sss))" : void 0;
+  const portal = useDevicePortal();
+  const origin = portal ? portal.getBoundingClientRect() : null;
+  const left = anchor ? origin ? anchor.left - origin.left : anchor.left : void 0;
+  const bottom = anchor ? "calc(" + ((origin ? origin.bottom : window.innerHeight) - anchor.top) + "px + var(--dim-sss))" : void 0;
   return /* @__PURE__ */ jsxs(
     "span",
     {
@@ -38,11 +42,11 @@ function Tooltip({ content, variant = "default", children, ...props }) {
               role: "tooltip",
               className: "pds-tooltip__bubble",
               "data-variant": variant,
-              style: { left: anchor.left + anchor.width / 2, bottom },
+              style: { left: (left ?? 0) + anchor.width / 2, bottom },
               children: content
             }
           ),
-          document.body
+          portal ?? document.body
         )
       ]
     }

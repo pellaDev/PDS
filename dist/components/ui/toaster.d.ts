@@ -1,1 +1,3 @@
-export declare function Toaster(): import("react").JSX.Element;
+export declare function Toaster({ toasterId }: {
+    toasterId?: string;
+}): import("react").JSX.Element;

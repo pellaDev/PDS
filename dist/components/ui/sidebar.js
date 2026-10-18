@@ -98,20 +98,6 @@ function Sidebar({
   ...props
 }) {
   const { isMobile, state, openMobile, setOpenMobile } = useSidebar();
-  if (collapsible === "none") {
-    return /* @__PURE__ */ jsx(
-      "div",
-      {
-        "data-slot": "sidebar",
-        className: cn(
-          "[background-color:var(--pds-surface-bg)] text-sidebar-foreground flex h-full w-[var(--sidebar-width)] flex-col",
-          className
-        ),
-        ...props,
-        children
-      }
-    );
-  }
   if (isMobile) {
     return /* @__PURE__ */ jsx(Sheet, { open: openMobile, onOpenChange: setOpenMobile, ...props, children: /* @__PURE__ */ jsxs(
       SheetContent,
@@ -133,6 +119,20 @@ function Sidebar({
         ]
       }
     ) });
+  }
+  if (collapsible === "none") {
+    return /* @__PURE__ */ jsx(
+      "div",
+      {
+        "data-slot": "sidebar",
+        className: cn(
+          "[background-color:var(--pds-surface-bg)] text-sidebar-foreground flex h-full w-[var(--sidebar-width)] flex-col",
+          className
+        ),
+        ...props,
+        children
+      }
+    );
   }
   return /* @__PURE__ */ jsxs(
     "div",
@@ -190,7 +190,10 @@ function SidebarTrigger({ className, onClick, ...props }) {
       "data-sidebar": "trigger",
       "data-slot": "sidebar-trigger",
       size: "icon",
-      className: cn("h-7 w-7 bg-transparent text-foreground", className),
+      className: cn(
+        "h-7 w-7 bg-transparent text-foreground [min-height:var(--pds-touch-min)] [min-width:var(--pds-touch-min)]",
+        className
+      ),
       onClick: (event) => {
         onClick?.(event);
         toggleSidebar();

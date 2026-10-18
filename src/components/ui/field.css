@@ -8,7 +8,7 @@
 
 .pds-field__input {
   width: 100%;
-  height: var(--field-h);
+  min-height: var(--field-h);
   padding-block: var(--dim-sss);
   padding-inline: var(--dim-s);
   background: transparent;
@@ -30,7 +30,9 @@
   line-height: var(--type-body2-lh);
   letter-spacing: 0.25px;
   pointer-events: none;
-  white-space: nowrap;
+
+  white-space: normal;
+  max-width: calc(100% - var(--dim-s));
   transition:
     transform var(--duration-fast) ease,
     top var(--duration-fast) ease,
@@ -41,7 +43,7 @@
   display: block;
   height: var(--field-h);
   border-radius: var(--dim-sss);
-  background: var(--color-secondary);
+  background: var(--pds-field-fill-bg);
   color: var(--color-muted-foreground);
   padding-block: var(--dim-sss);
   padding-inline: var(--dim-s);
@@ -70,7 +72,7 @@
 .pds-field--outline {
   height: var(--field-h);
   border-radius: var(--dim-sss);
-  background: var(--color-background);
+  background: var(--pds-field-outline-bg);
   color: var(--color-muted-foreground);
   border: var(--_bw) solid var(--color-primary);
 }
@@ -90,7 +92,7 @@
   ~ .pds-field__label {
   top: calc(-1 * var(--_bw) / 2);
   transform: translateY(-50%);
-  background: var(--color-background);
+  background: var(--pds-field-outline-bg);
   padding-inline: var(--dim-sss);
   font-size: calc(var(--type-body2-size) * 0.66);
   line-height: calc(var(--type-body2-lh) * 0.66);
@@ -150,22 +152,12 @@ textarea.pds-field::placeholder {
   color: var(--color-foreground);
 }
 
-[data-pds-surface='alternate'] .pds-field--outline:not([data-disabled]):not(:disabled) {
-  background: var(--color-secondary);
-}
-[data-pds-surface='alternate'] .pds-field--fill:not([data-disabled]):not(:disabled) {
-  background: var(--color-background);
-}
-
-[data-pds-surface='alternate']
-  .pds-field--outline
-  :is(.pds-field__input:focus, .pds-field__input:not(:placeholder-shown))
-  ~ .pds-field__label {
-  background: var(--color-secondary);
-}
-
 .pds-field[data-has-icon] > .pds-field__input {
   padding-inline-end: calc(var(--dim-s) + 1.25rem);
+}
+
+.pds-field[data-has-icon] > .pds-field__label {
+  max-width: calc(100% - var(--dim-s) - 1.25rem);
 }
 .pds-field__icon {
   position: absolute;
@@ -194,4 +186,8 @@ textarea.pds-field::placeholder {
   max-width: calc(100% - 3rem);
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.pds-field__input {
+  min-height: var(--pds-touch-min);
 }

@@ -7,6 +7,8 @@ import { cva } from "class-variance-authority";
 import { ChevronDownIcon, MenuIcon, XIcon } from "lucide-react";
 import { cn } from "../../lib/utils";
 import { usePdsConfig } from "../../config";
+import tokens from "../../generated/tokens";
+import { useDevicePortal } from "../../hooks/use-mobile";
 import { Button } from "./button";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "./collapsible";
 import { Separator } from "./separator";
@@ -60,13 +62,13 @@ const mobileNavigationMenuPanelVariants = cva(
       }
     },
     defaultVariants: {
-      side: "left"
+      side: tokens.layout.sidebarSide
     }
   }
 );
-const MobileNavigationMenuPanel = React.forwardRef(({ side = "left", className, children, ...props }, ref) => {
+const MobileNavigationMenuPanel = React.forwardRef(({ side = tokens.layout.sidebarSide, className, children, ...props }, ref) => {
   const { fieldStyle } = usePdsConfig();
-  return /* @__PURE__ */ jsxs(MobileNavigationMenuPrimitive.Portal, { children: [
+  return /* @__PURE__ */ jsxs(MobileNavigationMenuPrimitive.Portal, { container: useDevicePortal(), children: [
     /* @__PURE__ */ jsx(MobileNavigationMenuOverlay, {}),
     /* @__PURE__ */ jsx(
       MobileNavigationMenuPrimitive.Content,

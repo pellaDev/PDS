@@ -166,6 +166,8 @@
   --radius-md: 0.5rem;
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
+
+  --breakpoint-mobile: 48rem;
 }
 
 /* ===================================================================== */
@@ -236,6 +238,19 @@
   --sidebar-width-icon: 3rem; /* Collapsed icon-rail width (48px) -- equals coreDimensions.ll. */
   --mobile-nav-header-height: 3rem; /* Mobile navigation drawer header height (48px) -- equals coreDimensions.ll (touch-row minimum); holds the 40px icon button with one dim-sss step of air per side. */
   --mobile-nav-header-button: 2.5rem; /* Mobile navigation drawer trigger/close size (40x40) -- equals coreDimensions.lll; Button size 'icon', the square label-less composition. */
+  --sidebar-side: left; /* Side the mobile navigation drawer opens on (left or right). Emitted as --sidebar-side and as tokens.layout.sidebarSide; MobileNavigationMenuPanel's side prop defaults to it. cva cannot branch on a keyword, so the component reads the generated value as its default. */
+  --breakpoint-mobile: 48rem; /* THE shared mobile breakpoint (768px). Single source for every desktop/mobile switch: use-mobile.tsx reads it through the generated tokens, and component CSS media queries must state the same value (scripts/check-breakpoint.mjs fails the build on any other literal). Retires the old 640px/768px split. */
+  --touch-min: 2.75rem; /* Minimum touch target (44px) -- the mobile floor for every interactive control (WCAG 2.5.5). Every size="mobile" variant uses it as its min-height. */
+  --device-width: 24.375rem; /* Device (phone) screen width (390px) -- the demonstration viewport the Device frame renders inside. */
+  --device-height: 46.5rem; /* Device (phone) screen height (744px) -- Device frame height; content scrolls inside the screen. */
+  --device-radius: 2.5rem; /* Device frame corner radius (40px) -- equals coreDimensions.lll. */
+  --device-bezel: 0.5rem; /* Device frame thickness (8px) -- equals coreDimensions.ss. */
+  --device-padding: 0.75rem; /* Device screen content padding (12px) -- equals coreDimensions.s. */
+  --device-status-bar: 1.25rem; /* Device status bar height (20px) -- caption type with dim-ss of air per side. */
+  --device-home-indicator: 0.25rem; /* Device home indicator thickness (4px) -- equals coreDimensions.sss. */
+  --device-home-indicator-width: 5rem; /* Device home indicator width (80px) -- equals coreDimensions.xl. */
+  --grid-columns: 3; /* Default column count of a Grid (layout.css). Consumed as --grid-columns; the mobile layer collapses it to 1. Derived from the current implementation, not from the original export. */
+  --canvas-columns: 2; /* Default column count of a Template canvas in grid and columns layouts (template.css). Consumed as --canvas-columns; the mobile layer collapses it to 1. Derived from the current implementation, not from the original export. */
   --duration-fast: 120ms; /* Component state transitions: checkbox, radio, switch, field label, tooltip reveal. */
   --duration-base: 150ms; /* Standard hover/interaction fade -- sidebar action-row contract; equals Tailwind default transition duration. */
   --duration-slow: 200ms; /* Sidebar collapse width/left transitions (Tailwind duration-200 in sidebar.tsx). */
@@ -512,27 +527,33 @@
 
 :root { --pds-surface-bg: var(--color-background); }
 [data-pds-surface='base']      { --pds-surface-bg: var(--color-background); }
-[data-pds-surface='alternate'] { --pds-surface-bg: var(--color-secondary); }
+[data-pds-surface='alternative'] { --pds-surface-bg: var(--color-secondary); }
 
 :root                          { --pds-surface-fg: var(--color-foreground); }
 [data-pds-surface='base']      { --pds-surface-fg: var(--color-foreground); }
-[data-pds-surface='alternate'] { --pds-surface-fg: var(--color-foreground); }
+[data-pds-surface='alternative'] { --pds-surface-fg: var(--color-foreground); }
 .dark                          { --pds-surface-fg: var(--color-white); }
 .dark [data-pds-surface='base']      { --pds-surface-fg: var(--color-white); }
-.dark [data-pds-surface='alternate'] { --pds-surface-fg: var(--color-gray-soft); }
+.dark [data-pds-surface='alternative'] { --pds-surface-fg: var(--color-gray-soft); }
 
 :root { --pds-surface-canvas-bg: var(--color-background); }
 [data-pds-surface='base']      { --pds-surface-canvas-bg: var(--color-secondary); }
-[data-pds-surface='alternate'] { --pds-surface-canvas-bg: var(--color-background); }
+[data-pds-surface='alternative'] { --pds-surface-canvas-bg: var(--color-background); }
 
 :root { --pds-card-bg: var(--color-card); }
 [data-pds-surface='base']      { --pds-card-bg: var(--color-card); }
-[data-pds-surface='alternate'] { --pds-card-bg: var(--color-card); }
-.dark [data-pds-surface='alternate'] { --pds-card-bg: var(--color-background); }
+[data-pds-surface='alternative'] { --pds-card-bg: var(--color-card); }
+.dark [data-pds-surface='alternative'] { --pds-card-bg: var(--color-background); }
 
-:root { --pds-field-fill-bg: var(--color-secondary); }
-[data-pds-surface='base']      { --pds-field-fill-bg: var(--color-secondary); }
-[data-pds-surface='alternate'] { --pds-field-fill-bg: var(--color-background); }
+:root { --pds-field-fill-bg: var(--color-secondary); --pds-field-outline-bg: var(--color-background); }
+[data-pds-surface='base']      { --pds-field-fill-bg: var(--color-secondary); --pds-field-outline-bg: var(--color-background); }
+[data-pds-surface='alternative'] { --pds-field-fill-bg: var(--color-background); --pds-field-outline-bg: var(--color-secondary); }
+[data-slot='card'] {
+  --pds-field-fill-bg: color-mix(in srgb, var(--pds-card-bg) 92%, var(--color-foreground));
+  --pds-field-outline-bg: var(--pds-card-bg);
+}
+
+:root { --pds-row-alt-bg: color-mix(in oklab, var(--color-foreground) 4%, transparent); }
 
 :root { --pds-separator-solid: var(--color-separator); --pds-separator-image-h: none; --pds-separator-image-v: none; }
 [data-pds-fieldstyle='fill'] {
@@ -545,3 +566,26 @@
   --pds-separator-image-h: none;
   --pds-separator-image-v: none;
 }
+
+:root {
+
+  --pds-touch-min: auto;
+  --pds-row-wrap: nowrap;
+  --pds-item-grow: 0;
+  --pds-block-width: auto;
+}
+@media (max-width: 48rem) {
+  :root {
+    --pds-touch-min: var(--touch-min);
+    --pds-row-wrap: wrap;
+    --pds-item-grow: 1;
+    --pds-block-width: 100%;
+  }
+}
+[data-slot="device-content"] {
+  --pds-touch-min: var(--touch-min);
+  --pds-row-wrap: wrap;
+  --pds-item-grow: 1;
+  --pds-block-width: 100%;
+}
+

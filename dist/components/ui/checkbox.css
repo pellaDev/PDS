@@ -81,3 +81,7 @@
   border-color: transparent;
   background: var(--color-gray);
 }
+
+.pds-checkbox {
+  min-height: var(--pds-touch-min);
+}

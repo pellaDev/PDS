@@ -242,6 +242,19 @@ export declare const tokens: {
         readonly sidebarWidthIcon: "3rem";
         readonly mobileNavHeaderHeight: "3rem";
         readonly mobileNavHeaderButton: "2.5rem";
+        readonly sidebarSide: "left";
+        readonly breakpointMobile: "48rem";
+        readonly touchMin: "2.75rem";
+        readonly deviceWidth: "24.375rem";
+        readonly deviceHeight: "46.5rem";
+        readonly deviceRadius: "2.5rem";
+        readonly deviceBezel: "0.5rem";
+        readonly devicePadding: "0.75rem";
+        readonly deviceStatusBar: "1.25rem";
+        readonly deviceHomeIndicator: "0.25rem";
+        readonly deviceHomeIndicatorWidth: "5rem";
+        readonly gridColumns: 3;
+        readonly canvasColumns: 2;
     };
     readonly motion: {
         readonly duration: {

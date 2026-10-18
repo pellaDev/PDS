@@ -148,3 +148,7 @@
   > .pds-toggle__thumb {
   background-color: var(--color-gray);
 }
+
+.pds-toggle {
+  min-height: var(--pds-touch-min);
+}

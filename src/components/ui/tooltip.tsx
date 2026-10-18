@@ -2,6 +2,7 @@ import * as React from 'react';
 import { createPortal } from 'react-dom';
 
 import './tooltip.css';
+import { useDevicePortal } from '../../hooks/use-mobile';
 
 export type TooltipVariant = 'default' | 'alert' | 'error';
 
@@ -28,8 +29,13 @@ export function Tooltip({ content, variant = 'default', children, ...props }: To
     };
   }, [anchor]);
 
+  const portal = useDevicePortal();
+  const origin = portal ? portal.getBoundingClientRect() : null;
+  const left = anchor ? (origin ? anchor.left - origin.left : anchor.left) : undefined;
   const bottom = anchor
-    ? 'calc(' + (window.innerHeight - anchor.top) + 'px + var(--dim-sss))'
+    ? 'calc(' +
+      ((origin ? origin.bottom : window.innerHeight) - anchor.top) +
+      'px + var(--dim-sss))'
     : undefined;
 
   return (
@@ -52,11 +58,11 @@ export function Tooltip({ content, variant = 'default', children, ...props }: To
             role="tooltip"
             className="pds-tooltip__bubble"
             data-variant={variant}
-            style={{ left: anchor.left + anchor.width / 2, bottom }}
+            style={{ left: (left ?? 0) + anchor.width / 2, bottom }}
           >
             {content}
           </span>,
-          document.body,
+          portal ?? document.body,
         )}
     </span>
   );

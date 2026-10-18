@@ -1,0 +1,106 @@
+[data-slot='stack'] {
+  display: flex;
+  flex-direction: column;
+  gap: var(--pds-stack-gap);
+}
+
+[data-slot='row'] {
+  display: flex;
+  align-items: center;
+  gap: var(--pds-row-gap);
+
+  flex-wrap: var(--pds-row-wrap);
+}
+
+[data-slot='grid'] {
+  display: grid;
+  gap: var(--pds-grid-gap);
+
+  grid-template-columns: repeat(var(--pds-grid-columns), minmax(0, 1fr));
+}
+
+[data-slot='panel'] {
+  display: flex;
+  flex-direction: column;
+  gap: var(--pds-panel-gap);
+  padding: var(--pds-panel-padding);
+  border-radius: var(--pds-panel-radius);
+
+  background-color: var(--pds-surface-canvas-bg);
+  color: var(--pds-surface-fg);
+  border: 1px solid var(--pds-container-border-color);
+}
+
+[data-slot='stack'] {
+  --pds-stack-gap: var(--dim-m);
+}
+[data-slot='row'] {
+  --pds-row-gap: var(--dim-s);
+}
+[data-slot='grid'] {
+  --pds-grid-columns: var(--grid-columns, 3);
+  --pds-grid-gap: var(--dim-m);
+}
+[data-slot='panel'] {
+  --pds-panel-gap: var(--dim-s);
+  --pds-panel-padding: var(--dim-m);
+  --pds-panel-radius: var(--radius-md);
+}
+
+[data-gap='sss'] {
+  --pds-stack-gap: var(--dim-sss);
+  --pds-row-gap: var(--dim-sss);
+  --pds-grid-gap: var(--dim-sss);
+  --pds-panel-gap: var(--dim-sss);
+}
+[data-gap='ss'] {
+  --pds-stack-gap: var(--dim-ss);
+  --pds-row-gap: var(--dim-ss);
+  --pds-grid-gap: var(--dim-ss);
+  --pds-panel-gap: var(--dim-ss);
+}
+[data-gap='s'] {
+  --pds-stack-gap: var(--dim-s);
+  --pds-row-gap: var(--dim-s);
+  --pds-grid-gap: var(--dim-s);
+  --pds-panel-gap: var(--dim-s);
+}
+[data-gap='m'] {
+  --pds-stack-gap: var(--dim-m);
+  --pds-row-gap: var(--dim-m);
+  --pds-grid-gap: var(--dim-m);
+  --pds-panel-gap: var(--dim-m);
+}
+[data-gap='l'] {
+  --pds-stack-gap: var(--dim-l);
+  --pds-row-gap: var(--dim-l);
+  --pds-grid-gap: var(--dim-l);
+  --pds-panel-gap: var(--dim-l);
+}
+[data-gap='ll'] {
+  --pds-stack-gap: var(--dim-ll);
+  --pds-row-gap: var(--dim-ll);
+  --pds-grid-gap: var(--dim-ll);
+  --pds-panel-gap: var(--dim-ll);
+}
+
+@media (max-width: 48rem) {
+  :root {
+    --pds-grid-columns: 1;
+    --pds-row-wrap: wrap;
+    --pds-block-width: 100%;
+  }
+}
+
+[data-slot='device-content'] {
+  --pds-grid-columns: 1;
+  --pds-row-wrap: wrap;
+  --pds-block-width: 100%;
+}
+
+[data-slot='row'] > * {
+  min-width: 0;
+}
+[data-slot='grid'] > * {
+  min-width: 0;
+}

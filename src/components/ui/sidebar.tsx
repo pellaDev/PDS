@@ -136,21 +136,6 @@ function Sidebar({
 }) {
   const { isMobile, state, openMobile, setOpenMobile } = useSidebar();
 
-  if (collapsible === 'none') {
-    return (
-      <div
-        data-slot="sidebar"
-        className={cn(
-          '[background-color:var(--pds-surface-bg)] text-sidebar-foreground flex h-full w-[var(--sidebar-width)] flex-col',
-          className,
-        )}
-        {...props}
-      >
-        {children}
-      </div>
-    );
-  }
-
   if (isMobile) {
     return (
       <Sheet open={openMobile} onOpenChange={setOpenMobile} {...props}>
@@ -173,6 +158,21 @@ function Sidebar({
           <div className="flex h-full w-full flex-col">{children}</div>
         </SheetContent>
       </Sheet>
+    );
+  }
+
+  if (collapsible === 'none') {
+    return (
+      <div
+        data-slot="sidebar"
+        className={cn(
+          '[background-color:var(--pds-surface-bg)] text-sidebar-foreground flex h-full w-[var(--sidebar-width)] flex-col',
+          className,
+        )}
+        {...props}
+      >
+        {children}
+      </div>
     );
   }
 
@@ -232,7 +232,10 @@ function SidebarTrigger({ className, onClick, ...props }: React.ComponentProps<t
       data-sidebar="trigger"
       data-slot="sidebar-trigger"
       size="icon"
-      className={cn('h-7 w-7 bg-transparent text-foreground', className)}
+      className={cn(
+        'h-7 w-7 bg-transparent text-foreground [min-height:var(--pds-touch-min)] [min-width:var(--pds-touch-min)]',
+        className,
+      )}
       onClick={(event) => {
         onClick?.(event);
         toggleSidebar();
