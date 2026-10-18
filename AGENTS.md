@@ -44,7 +44,7 @@ package**. This repository IS the published package (flat layout): `src/` is the
 
 ## Layout
 
-- `src/components/ui/` — 56 components: a shadcn/ui v4 registry subset plus PDS additions (color-picker, icon, menu, mobile-navigation-menu, tag, toast, toaster).
+- `src/components/ui/` — 57 components: a shadcn/ui v4 registry subset plus PDS additions (color-picker, device, icon, layout, menu, mobile-navigation-menu, tag, toast, toaster).
 - `tokens.json` — token SSOT · `scripts/build-tokens.mjs` + `scripts/core-tokens.mjs` — generators
 - `src/config.tsx` — runtime configuration (brand colors, field style, font)
 - `dist/` — prebuilt ESM + CSS + .d.ts (build output)
@@ -63,7 +63,7 @@ Files that need custom styles pull them in automatically — no per-component CS
 | Button | `button` | Primary action control — sizes, destructive/link states, tooltips on compact sizes |
 | Tag | `tag` | Pill status markers |
 | Toggle | `toggle` | Pressable on/off control with icon or label |
-| ToggleGroup | `toggle-group` | Single- or multi-select set of toggles |
+| ToggleGroup | `toggle` | Single- or multi-select set of toggles — same file as `Toggle` |
 
 ### Forms & inputs
 
@@ -144,6 +144,8 @@ Files that need custom styles pull them in automatically — no per-component CS
 | ScrollArea | `scroll-area` | Bounded scrolling region with styled scrollbar |
 | Template | `template` | Application frame — header, sub-header, sidebars, canvas, footer |
 | Resizable | `resizable` | Resizable panel group (used by `TemplateBody`) |
+| Layout | `layout` | Composition primitives — `Stack`, `Row`, `Grid`, `Panel`; gap and radius are token-driven |
+| Device | `device` | Tokenized phone frame — `Device`, `DeviceContent`, `DeviceStatusBar` |
 
 ### Charts
 
@@ -410,6 +412,23 @@ export function AppFrame() {
 - **Drawer** — bottom sheet on vaul (peer: vaul): `Drawer > DrawerTrigger + DrawerContent(DrawerHeader(DrawerTitle, DrawerDescription), …, DrawerFooter)`; `DrawerClose` closes from anywhere inside.
 - **Item** — list row: `Item > ItemMedia + ItemContent(ItemHeader(ItemTitle, ItemDescription), ItemActions) + ItemFooter?`; group rows in `ItemGroup`, divide with `ItemSeparator`.
 - **Toast / Toaster** — mount `<Toaster />` once at the app root; fire notifications with `toast({ title, description, action? })` from `/hooks/use-toast` (also exported as `useToast`). The raw primitives (`ToastProvider`, `ToastViewport`, `Toast`, …) are available for custom setups.
+
+## Mobile behavior
+
+One shared breakpoint (`layout.breakpointMobile` = 48rem / 768px) and four role flags. The mobile form
+comes from this layer, not from a prop — there is no `size="mobile"`.
+
+| Flag | Desktop | Mobile |
+| --- | --- | --- |
+| `--pds-touch-min` | `auto` | `2.75rem` (44px control floor) |
+| `--pds-row-wrap` | `nowrap` | `wrap` |
+| `--pds-item-grow` | `0` | `1` |
+| `--pds-block-width` | `auto` | `100%` |
+
+The flags flip in three scopes: `:root`, the media query, and `[data-slot="device-content"]` — so a
+composition inside a `Device` reads the mobile form even on a desktop page. Desktop values are the
+neutral ones, so the layer only adds. A `size` override is legitimate only where the design defines a
+density per surface (Field `lg` inside a Device / `sm` outside, Item `default` inside / `sm` outside).
 
 ## Settings panel pattern
 

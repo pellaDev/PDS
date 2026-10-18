@@ -4,7 +4,7 @@
 
 ## Install
 
-pnpm add "https://github.com/pellaDev/PDS#main"    # or pin a release: #v1.9.0
+pnpm add "https://github.com/pellaDev/PDS#main"    # or pin a release: #v1.10.1
 
 ## Quick start
 
@@ -15,11 +15,11 @@ import { configurePds, setPdsConfig } from "@workspace/pds/config";  // optional
 configurePds({ lightBrand: "#0B5FFF", darkBrand: "#7AB8FF", font: "inter" }); // install flags (once at bootstrap)
 setPdsConfig({ fieldStyle: "outline" });          // live update, persisted in localStorage
 
-## Components (56)
+## Components (57)
 
-accordion · alert · alert-dialog · aspect-ratio · avatar · badge · breadcrumb · button · calendar · card · carousel · chart · checkbox · color-picker · collapsible · command · dialog · drawer · empty · field · form · hover-card · icon · input · input-otp · item · kbd · label · menu · menubar · mobile-navigation-menu · navigation-menu · pagination · popover · progress · radio · resizable · scroll-area · separator · sheet · sidebar · skeleton · slider · sonner · spinner · switch · table · tabs · tag · textarea · toast · toaster · toggle · toggle-group · tooltip
+accordion · alert · alert-dialog · aspect-ratio · avatar · badge · breadcrumb · button · calendar · card · carousel · chart · checkbox · color-picker · collapsible · command · dialog · device · drawer · empty · field · form · hover-card · icon · input · input-otp · item · kbd · label · layout · menu · menubar · mobile-navigation-menu · navigation-menu · pagination · popover · progress · radio · resizable · scroll-area · separator · sheet · sidebar · skeleton · slider · sonner · spinner · switch · table · tabs · tag · textarea · toast · toaster · toggle · tooltip
 
-PDS additions beyond the shadcn/ui registry: color-picker, icon, menu, mobile-navigation-menu, tag, toast, toaster (radio follows the shadcn RadioGroup API). Not included: select, dropdown-menu, context-menu, button-group, input-group, native-select.
+PDS additions beyond the shadcn/ui registry: color-picker, device, icon, layout, menu, mobile-navigation-menu, tag, toast, toaster (radio follows the shadcn RadioGroup API). ToggleGroup lives in the `toggle` module. Not included: select, dropdown-menu, context-menu, button-group, input-group, native-select.
 
 ## Exports
 

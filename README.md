@@ -39,7 +39,7 @@ That's it. No config, no Vite plugin, no postcss setup — the CSS is pre-compil
 Pin a release instead of tracking `main`:
 
 ```bash
-pnpm add "https://github.com/pellaDev/PDS#v1.9.0"
+pnpm add "https://github.com/pellaDev/PDS#v1.10.1"
 ```
 
 ## Optional dependencies
