@@ -1,0 +1,199 @@
+{
+  "$description": "Baseline snapshot for scripts/check-surface.mjs. A container background inside src/components/ui/ must read a surface ROLE (bg-surface, bg-surface-card, bg-surface-canvas, bg-surface-field, bg-surface-row, text-surface-fg), never a static palette step, because base and alternative are places, not colors. Every hit here is recorded so the gate fails on NEW static fills. token-faithful = the token export itself declares a fixed palette step for that component, so the line is correct. pending-role = the line should read a role and is recorded as debt: fixing it changes dark-mode rendering, so it is a design decision, not a mechanical rewrite. The baseline may only shrink.",
+  "generatedBy": "scripts/check-surface.mjs baseline mode",
+  "scannedAt": "2026-10-29",
+  "total": 31,
+  "files": {
+    "alert-dialog.tsx": {
+      "kind": "pending-role",
+      "note": "overlay container should read the card/popover role",
+      "count": 1,
+      "lines": [
+        38
+      ],
+      "marked": 0
+    },
+    "chart.tsx": {
+      "kind": "pending-role",
+      "note": "tooltip box should read the popover/card role",
+      "count": 1,
+      "lines": [
+        180
+      ],
+      "marked": 0
+    },
+    "color-picker.tsx": {
+      "kind": "pending-role",
+      "note": "container on the host surface should read a role",
+      "count": 1,
+      "lines": [
+        61
+      ],
+      "marked": 0
+    },
+    "dialog.tsx": {
+      "kind": "pending-role",
+      "note": "overlay container should read the card/popover role",
+      "count": 1,
+      "lines": [
+        40
+      ],
+      "marked": 0
+    },
+    "drawer.tsx": {
+      "kind": "pending-role",
+      "note": "overlay container and handle wash",
+      "count": 2,
+      "lines": [
+        45,
+        50
+      ],
+      "marked": 0
+    },
+    "field.css": {
+      "kind": "token-faithful",
+      "note": "disabled fill state declared by fields.json",
+      "count": 1,
+      "lines": [
+        115
+      ],
+      "marked": 0
+    },
+    "item.tsx": {
+      "kind": "pending-role",
+      "note": "muted variant container",
+      "count": 1,
+      "lines": [
+        40
+      ],
+      "marked": 0
+    },
+    "kbd.tsx": {
+      "kind": "token-faithful",
+      "note": "kbd state layer is defined from the palette step in theme-template.css",
+      "count": 1,
+      "lines": [
+        8
+      ],
+      "marked": 0
+    },
+    "menu.css": {
+      "kind": "pending-role",
+      "note": "listbox is a popover container, hardcoded step",
+      "count": 1,
+      "lines": [
+        40
+      ],
+      "marked": 0
+    },
+    "menubar.tsx": {
+      "kind": "pending-role",
+      "note": "bar fill reads the base step",
+      "count": 1,
+      "lines": [
+        50
+      ],
+      "marked": 0
+    },
+    "mobile-navigation-menu.tsx": {
+      "kind": "pending-role",
+      "note": "panel reads the base step",
+      "count": 1,
+      "lines": [
+        101
+      ],
+      "marked": 0
+    },
+    "navigation-menu.tsx": {
+      "kind": "pending-role",
+      "note": "row fill reads the base step",
+      "count": 1,
+      "lines": [
+        46
+      ],
+      "marked": 0
+    },
+    "pagination.css": {
+      "kind": "token-faithful",
+      "note": "the export declares fixed palette steps for the pagination cells",
+      "count": 7,
+      "lines": [
+        32,
+        33,
+        35,
+        36,
+        38,
+        54,
+        55
+      ],
+      "marked": 0
+    },
+    "radio.css": {
+      "kind": "token-faithful",
+      "note": "theme-extreme selected dot, documented as the card step",
+      "count": 1,
+      "lines": [
+        51
+      ],
+      "marked": 0
+    },
+    "sheet.tsx": {
+      "kind": "pending-role",
+      "note": "overlay container should read the card/popover role",
+      "count": 1,
+      "lines": [
+        35
+      ],
+      "marked": 0
+    },
+    "sidebar.tsx": {
+      "kind": "pending-role",
+      "note": "chrome containers read the base step",
+      "count": 2,
+      "lines": [
+        323,
+        546
+      ],
+      "marked": 0
+    },
+    "switch.css": {
+      "kind": "token-faithful",
+      "note": "theme-extreme knob, documented as the card step",
+      "count": 2,
+      "lines": [
+        80,
+        93
+      ],
+      "marked": 0
+    },
+    "table.tsx": {
+      "kind": "pending-role",
+      "note": "caption/footer row container",
+      "count": 1,
+      "lines": [
+        49
+      ],
+      "marked": 0
+    },
+    "toast.tsx": {
+      "kind": "pending-role",
+      "note": "overlay container",
+      "count": 1,
+      "lines": [
+        32
+      ],
+      "marked": 0
+    },
+    "toggle.css": {
+      "kind": "token-faithful",
+      "note": "fill tone container = graySoft canon; the alternative-surface rule is the alternative by definition",
+      "count": 3,
+      "lines": [
+        17,
+        19,
+        26
+      ],
+      "marked": 0
+    }
+  }
+}

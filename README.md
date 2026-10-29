@@ -13,8 +13,13 @@
 </div>
 
 <h2 align="center">
-  A Plug & Play React design system
+  React design system made for AI Agentic development
 </h2>
+
+<div align="center">
+  <sub>Aiming for the perfect Design System for AI vibe coding users.
+  Clean, fast and flawless updatable without any human supervisory.</sub>
+</div>
 
 <div align="center">
   <a href="https://pds.pellawebmaster.com" target="_blank" rel="noopener"><img src="https://img.shields.io/badge/LIVE_SHOWCASE-pds.pellawebmaster.com-0B5FFF?style=for-the-badge&logo=react&logoColor=white" alt="LIVE SHOWCASE"/></a>

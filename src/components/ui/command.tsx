@@ -8,6 +8,7 @@ import { Search } from 'lucide-react';
 import { cn } from '../../lib/utils';
 
 import './menu-list.css';
+import './scrollbar.css';
 import { Dialog, DialogContent } from './dialog';
 
 const Command = React.forwardRef<
@@ -62,7 +63,7 @@ const CommandList = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <CommandPrimitive.List
     ref={ref}
-    className={cn('max-h-[300px] overflow-y-auto overflow-x-hidden', className)}
+    className={cn('max-h-[300px] pds-scrollbar overflow-y-auto overflow-x-hidden', className)}
     {...props}
   />
 ));

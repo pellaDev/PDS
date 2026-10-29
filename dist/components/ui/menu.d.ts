@@ -1,23 +1,28 @@
 import * as React from 'react';
 import './menu.css';
+import './scrollbar.css';
 export type MenuMode = 'dropdown' | 'context';
 type PassProps = Record<string, unknown>;
 declare function MenuRoot({ mode, children, ...rest }: {
     mode?: MenuMode;
     children?: React.ReactNode;
 } & PassProps): React.JSX.Element;
-declare function MenuTrigger({ className, children, ...rest }: {
+declare function MenuTrigger({ className, asChild, children, ...rest }: {
     className?: string;
+    asChild?: boolean;
     children?: React.ReactNode;
 } & PassProps): React.JSX.Element;
-declare function MenuContent({ className, sideOffset, children, ...rest }: {
+declare function MenuContent({ className, sideOffset, align, children, ...rest }: {
     className?: string;
     sideOffset?: number;
+    align?: 'start' | 'center' | 'end';
     children?: React.ReactNode;
 } & PassProps): React.JSX.Element;
-declare function MenuItem({ className, inset, children, ...rest }: {
+export type MenuItemFormat = 'label' | 'avatar-label-tags';
+declare function MenuItem({ className, inset, format, children, ...rest }: {
     className?: string;
     inset?: boolean;
+    format?: MenuItemFormat;
     children?: React.ReactNode;
 } & PassProps): React.JSX.Element;
 type InteractiveProps = {

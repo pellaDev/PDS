@@ -4,8 +4,11 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  height: var(--dim-lll);
-  width: var(--dim-lll);
+
+  height: var(--pds-cell-size, var(--dim-lll));
+  width: var(--pds-cell-size, var(--dim-lll));
+  flex: 0 1 var(--pds-cell-size, var(--dim-lll));
+  min-width: var(--dim-mmmm);
   background-color: var(--pds-field-fill-bg);
   border: var(--dim-ssss) solid transparent;
   font-family: var(--pds-font-sans);
@@ -27,9 +30,15 @@
 }
 
 .pds-otp {
-  flex-wrap: var(--pds-row-wrap);
+  flex-wrap: nowrap;
   width: var(--pds-block-width);
 }
 .pds-otp-slot {
   min-height: var(--pds-touch-min);
+}
+.pds-otp-group {
+  flex: 0 1 auto;
+}
+.pds-otp-separator {
+  flex: 0 0 auto;
 }

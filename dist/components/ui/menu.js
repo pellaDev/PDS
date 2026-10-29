@@ -6,7 +6,10 @@ import * as ContextMenuPrimitive from "@radix-ui/react-context-menu";
 import { Check, ChevronRight, Circle } from "lucide-react";
 import { cn } from "../../lib/utils";
 import { useDevicePortal } from "../../hooks/use-mobile";
+import { usePdsConfig } from "../../config";
+import { fieldVariants } from "./field";
 import "./menu.css";
+import "./scrollbar.css";
 const MenuContext = React.createContext("dropdown");
 const toDropdown = (props) => props;
 const toContext = (props) => props;
@@ -31,15 +34,18 @@ function MenuRoot({
 }
 function MenuTrigger({
   className,
+  asChild,
   children,
   ...rest
 }) {
   const mode = React.useContext(MenuContext);
+  const fieldStyle = usePdsConfig().fieldStyle;
+  const fieldClasses = asChild || mode !== "dropdown" ? "" : fieldVariants({ size: "sm", tone: fieldStyle });
   if (mode === "dropdown") {
     return /* @__PURE__ */ jsx(
       DropdownMenuPrimitive.Trigger,
       {
-        className,
+        className: cn(fieldClasses, "pds-menu-trigger", className),
         ...toDropdown(rest),
         children
       }
@@ -48,7 +54,7 @@ function MenuTrigger({
   return /* @__PURE__ */ jsx(
     ContextMenuPrimitive.Trigger,
     {
-      className,
+      className: cn(fieldClasses, "pds-menu-trigger", className),
       ...toContext(rest),
       children
     }
@@ -58,6 +64,7 @@ const CONTENT_ANIMATION = "data-[state=open]:animate-in data-[state=closed]:anim
 function MenuContent({
   className,
   sideOffset = 4,
+  align = "start",
   children,
   ...rest
 }) {
@@ -67,8 +74,9 @@ function MenuContent({
       DropdownMenuPrimitive.Content,
       {
         sideOffset,
+        align,
         className: cn(
-          "z-50 max-h-[var(--radix-dropdown-menu-content-available-height)] min-w-[8rem] overflow-y-auto overflow-x-hidden p-1 pds-menu-content",
+          "z-50 max-h-[var(--radix-dropdown-menu-content-available-height)] min-w-[8rem] overflow-y-auto overflow-x-hidden p-1 pds-scrollbar pds-menu-content",
           CONTENT_ANIMATION,
           "origin-[--radix-dropdown-menu-content-transform-origin]",
           className
@@ -84,7 +92,7 @@ function MenuContent({
     ContextMenuPrimitive.Content,
     {
       className: cn(
-        "z-50 max-h-[var(--radix-context-menu-content-available-height)] min-w-[8rem] overflow-y-auto overflow-x-hidden p-1 pds-menu-content",
+        "z-50 max-h-[var(--radix-context-menu-content-available-height)] min-w-[8rem] overflow-y-auto overflow-x-hidden p-1 pds-scrollbar pds-menu-content",
         CONTENT_ANIMATION,
         "origin-[--radix-context-menu-content-transform-origin]",
         className
@@ -98,6 +106,7 @@ const ITEM_BASE = "pds-menu-item relative flex cursor-default select-none items-
 function MenuItem({
   className,
   inset,
+  format,
   children,
   ...rest
 }) {
@@ -107,6 +116,7 @@ function MenuItem({
     return /* @__PURE__ */ jsx(
       DropdownMenuPrimitive.Item,
       {
+        "data-format": format,
         className: classes,
         ...toDropdown(rest),
         children
@@ -116,6 +126,7 @@ function MenuItem({
   return /* @__PURE__ */ jsx(
     ContextMenuPrimitive.Item,
     {
+      "data-format": format,
       className: classes,
       ...toContext(rest),
       children

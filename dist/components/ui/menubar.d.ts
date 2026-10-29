@@ -1,7 +1,9 @@
 import * as React from 'react';
 import * as MenubarPrimitive from '@radix-ui/react-menubar';
+import { type MenuItemFormat } from './menu';
 import './menu-list.css';
 import './menu.css';
+import './scrollbar.css';
 declare function MenubarMenu({ ...props }: React.ComponentProps<typeof MenubarPrimitive.Menu>): React.JSX.Element;
 declare function MenubarGroup({ ...props }: React.ComponentProps<typeof MenubarPrimitive.Group>): React.JSX.Element;
 declare function MenubarPortal({ ...props }: React.ComponentProps<typeof MenubarPrimitive.Portal>): React.JSX.Element;
@@ -16,6 +18,7 @@ declare const MenubarSubContent: React.ForwardRefExoticComponent<Omit<MenubarPri
 declare const MenubarContent: React.ForwardRefExoticComponent<Omit<MenubarPrimitive.MenubarContentProps & React.RefAttributes<HTMLDivElement>, "ref"> & React.RefAttributes<HTMLDivElement>>;
 declare const MenubarItem: React.ForwardRefExoticComponent<Omit<MenubarPrimitive.MenubarItemProps & React.RefAttributes<HTMLDivElement>, "ref"> & {
     inset?: boolean;
+    format?: MenuItemFormat;
 } & React.RefAttributes<HTMLDivElement>>;
 declare const MenubarCheckboxItem: React.ForwardRefExoticComponent<Omit<MenubarPrimitive.MenubarCheckboxItemProps & React.RefAttributes<HTMLDivElement>, "ref"> & React.RefAttributes<HTMLDivElement>>;
 declare const MenubarRadioItem: React.ForwardRefExoticComponent<Omit<MenubarPrimitive.MenubarRadioItemProps & React.RefAttributes<HTMLDivElement>, "ref"> & React.RefAttributes<HTMLDivElement>>;

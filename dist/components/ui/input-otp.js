@@ -9,7 +9,7 @@ const InputOTP = React.forwardRef(({ className, containerClassName, ...props }, 
   {
     ref,
     containerClassName: cn(
-      "flex items-center gap-2 has-[:disabled]:opacity-[var(--opacity-disabled)]",
+      "pds-otp flex items-center gap-2 has-[:disabled]:opacity-[var(--opacity-disabled)]",
       containerClassName
     ),
     className: cn(className),
@@ -17,7 +17,7 @@ const InputOTP = React.forwardRef(({ className, containerClassName, ...props }, 
   }
 ));
 InputOTP.displayName = "InputOTP";
-const InputOTPGroup = React.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ jsx("div", { ref, className: cn("flex items-center", className), ...props }));
+const InputOTPGroup = React.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ jsx("div", { ref, className: cn("pds-otp-group flex items-center", className), ...props }));
 InputOTPGroup.displayName = "InputOTPGroup";
 const InputOTPSlot = React.forwardRef(({ index, className, ...props }, ref) => {
   const context = React.useContext(OTPInputContext);
@@ -37,7 +37,7 @@ const InputOTPSlot = React.forwardRef(({ index, className, ...props }, ref) => {
   );
 });
 InputOTPSlot.displayName = "InputOTPSlot";
-const InputOTPSeparator = React.forwardRef(({ ...props }, ref) => /* @__PURE__ */ jsx("div", { ref, ...props, children: /* @__PURE__ */ jsx(Minus, {}) }));
+const InputOTPSeparator = React.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ jsx("div", { ref, className: cn("pds-otp-separator", className), ...props, children: /* @__PURE__ */ jsx(Minus, {}) }));
 InputOTPSeparator.displayName = "InputOTPSeparator";
 export {
   InputOTP,

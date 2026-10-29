@@ -4,6 +4,7 @@ import { Button } from './button';
 import { Input } from './input';
 import { Separator } from './separator';
 import './sidebar.css';
+import './scrollbar.css';
 type SidebarContextProps = {
     state: 'expanded' | 'collapsed';
     open: boolean;

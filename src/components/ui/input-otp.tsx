@@ -14,7 +14,7 @@ const InputOTP = React.forwardRef<
   <OTPInput
     ref={ref}
     containerClassName={cn(
-      'flex items-center gap-2 has-[:disabled]:opacity-[var(--opacity-disabled)]',
+      'pds-otp flex items-center gap-2 has-[:disabled]:opacity-[var(--opacity-disabled)]',
       containerClassName,
     )}
     className={cn(className)}
@@ -27,7 +27,7 @@ const InputOTPGroup = React.forwardRef<
   React.ElementRef<'div'>,
   React.ComponentPropsWithoutRef<'div'>
 >(({ className, ...props }, ref) => (
-  <div ref={ref} className={cn('flex items-center', className)} {...props} />
+  <div ref={ref} className={cn('pds-otp-group flex items-center', className)} {...props} />
 ));
 InputOTPGroup.displayName = 'InputOTPGroup';
 
@@ -57,8 +57,8 @@ InputOTPSlot.displayName = 'InputOTPSlot';
 const InputOTPSeparator = React.forwardRef<
   React.ElementRef<'div'>,
   React.ComponentPropsWithoutRef<'div'>
->(({ ...props }, ref) => (
-  <div ref={ref} {...props}>
+>(({ className, ...props }, ref) => (
+  <div ref={ref} className={cn('pds-otp-separator', className)} {...props}>
     <Minus />
   </div>
 ));

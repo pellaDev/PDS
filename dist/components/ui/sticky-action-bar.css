@@ -1,0 +1,42 @@
+.pds-sticky-action-bar {
+  position: sticky;
+  bottom: 0;
+  z-index: 10;
+  display: flex;
+  flex-wrap: var(--pds-row-wrap);
+  align-items: center;
+  justify-content: center;
+  gap: var(--dim-sss);
+  padding: var(--dim-s) var(--dim-mm);
+  background-color: var(--pds-card-bg);
+  border-top: var(--dim-ssss) solid var(--pds-container-border-color);
+  border-radius: var(--radius-md) var(--radius-md) 0 0;
+  box-shadow: var(--shadow-dropDown);
+  animation: pds-sticky-action-bar-in var(--duration-slow) var(--ease-standard);
+}
+
+@keyframes pds-sticky-action-bar-in {
+  from {
+    opacity: 0;
+    transform: translateY(var(--dim-ss));
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.pds-sticky-action-bar [data-slot='button']:not([data-size]) {
+  height: var(--dim-llll);
+  padding-inline: var(--dim-s);
+}
+@media (max-width: 48rem) {
+  .pds-sticky-action-bar [data-slot='button']:not([data-size]) {
+    height: var(--dim-lll);
+    padding-inline: var(--dim-mm);
+  }
+}
+[data-slot='device-content'] .pds-sticky-action-bar [data-slot='button']:not([data-size]) {
+  height: var(--dim-lll);
+  padding-inline: var(--dim-mm);
+}

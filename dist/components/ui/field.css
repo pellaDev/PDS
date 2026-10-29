@@ -134,9 +134,12 @@ textarea.pds-field {
   padding-block: var(--dim-sss);
   padding-inline: var(--dim-s);
 }
+
 textarea.pds-field {
   height: auto;
-  min-height: var(--field-h);
+  min-height: calc(var(--field-h) * 2);
+  max-height: var(--field-grow-max, calc(var(--field-h) * 4));
+  overflow-y: auto;
 }
 
 input.pds-field::placeholder,

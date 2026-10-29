@@ -5,7 +5,7 @@ for agents building on an installed copy of PDS. Read before editing or building
 
 ## What this is
 
-PDS (Pella Design System) — a plug & play React design system built on the shadcn/ui
+PDS (Pella Design System) — a React design system made for AI agentic development, built on the shadcn/ui
 paradigm: Radix UI primitives + Tailwind CSS v4 + CVA, shipped as a **prebuilt ESM
 package**. This repository IS the published package (flat layout): `src/` is the source,
 `dist/` is the build output, `tokens.json` is the token SSOT.
@@ -30,6 +30,11 @@ package**. This repository IS the published package (flat layout): `src/` is the
 5. Theming stays zero-rerender: static CSS + CSS custom properties. Runtime theming goes
    through `configurePds()` / `setPdsConfig()` (src/config.tsx), which only sets inline
    variables on `<html>`. Never introduce runtime style computation.
+7. A component fills a container with a **surface role**, never a static palette step — see
+   "Surface roles (base vs alternative)". The guard is `scripts/check-surface.mjs` (runs in
+   prebuild and pretypecheck); recorded exceptions live in `scripts/surface-baseline.json` and the
+   baseline may only shrink.
+
 6. Version bumps and releases are managed by the maintainers.
    Do not commit ad-hoc changes to `package.json` version or to `dist/`.
 
@@ -41,10 +46,11 @@ package**. This repository IS the published package (flat layout): `src/` is the
 | `pnpm run typecheck` | tsc --noEmit (runs the token build first) |
 | `pnpm run dev` | Vite preview of the living style guide |
 | `pnpm run build` | Rebuild `dist/` (JS + CSS + .d.ts) |
+| Gates (run in prebuild / pretypecheck) | `scripts/check-breakpoint.mjs` (single mobile breakpoint) · `scripts/check-surface.mjs` (surface roles) |
 
 ## Layout
 
-- `src/components/ui/` — 57 components: a shadcn/ui v4 registry subset plus PDS additions (color-picker, device, icon, layout, menu, mobile-navigation-menu, tag, toast, toaster).
+- `src/components/ui/` — 58 components: a shadcn/ui v4 registry subset plus PDS additions (color-picker, device, icon, layout, menu, mobile-navigation-menu, tag, toast, toaster).
 - `tokens.json` — token SSOT · `scripts/build-tokens.mjs` + `scripts/core-tokens.mjs` — generators
 - `src/config.tsx` — runtime configuration (brand colors, field style, font)
 - `dist/` — prebuilt ESM + CSS + .d.ts (build output)
@@ -172,7 +178,7 @@ One brand style; size and state are props, not separate components.
 
 | Prop | Values | Notes |
 | --- | --- | --- |
-| `size` | `mini` · `small` (default) · `large` · `icon` · `special` | `mini`/`icon`: icon-only squares · `special`: icon stacked above the label |
+| `size` | `mini` · `small` (default, the desktop labelled row) · `large` (what `small` becomes past the breakpoint) · `icon` (the icon shape of `large`, shown on the mobile side) · `special` (mobile side, icon stacked above the label) | Prefer no `size` at all: `small` is the default and the mobile layer only raises the touch floor. The small ⇄ large mapping is documented in `tokens/components/buttons.json` → `pds.comp.button.sizeSwap` (documentation-only: DTCG has no mapping type, and the CSS layer does not swap padding) |
 | `variant` | `default` · `destructive` · `link` | States of the same button, not separate types |
 | `asChild` | boolean | Render a child element (e.g. `<a>`) with button styling — Radix Slot |
 | `tooltip` | string | Tooltip text; wins over `title`/`aria-label` when deriving the auto-tooltip |
@@ -187,25 +193,26 @@ import { Tooltip } from "@workspace/pds/components/ui/tooltip"
 export function Example() {
   return (
     <div className="flex flex-wrap items-center gap-3">
-      {/* Compact icon buttons */}
+      {/* Icon-only: mini on both sides; icon is the icon shape of the large composition (mobile side) */}
       <Button size="mini" aria-label="Edit"><Pencil /></Button>
       <Tooltip content="Send mail">
         <Button size="icon" aria-label="Send mail"><Mail /></Button>
       </Tooltip>
 
-      {/* Label with optional left/right icon */}
-      <Button size="small">Label</Button>
-      <Button size="large"><Mail />Label</Button>
-      <Button size="large">Label<ArrowRight /></Button>
+      {/* Labelled row with optional left/right icon — no size prop: small is the default and the same
+          button reads as the large composition past the breakpoint */}
+      <Button>Label</Button>
+      <Button><Mail />Label</Button>
+      <Button>Label<ArrowRight /></Button>
 
-      {/* Square tile, icon over label */}
+      {/* Mobile side only: icon stacked above the label */}
       <Button size="special"><Sparkles />Save</Button>
 
       {/* States */}
-      <Button size="small" disabled>Disabled</Button>
-      <Button size="small" disabled><Loader2 className="animate-spin" />Loading</Button>
-      <Button size="small" variant="link">Link</Button>
-      <Button size="small" variant="destructive">Destructive</Button>
+      <Button disabled>Disabled</Button>
+      <Button disabled><Loader2 className="animate-spin" />Loading</Button>
+      <Button variant="link">Link</Button>
+      <Button variant="destructive">Destructive</Button>
     </div>
   )
 }
@@ -216,6 +223,40 @@ export function Example() {
 - Use `asChild` to keep real semantics (links, inputs) while getting button styling.
 - Loading state = `disabled` + spinning icon; there is no dedicated loading variant.
 
+### Dropdown (menu, mode="dropdown")
+
+The trigger is **a Field**, not a box of its own: `Menu.Trigger` composes the Field cva (tone from
+`usePdsConfig().fieldStyle`, height `--field-h`) and `menu.css` adds only the row layout plus the arrow
+pinned to the right end inside the box. Hover, focus, disabled and error are the field's states (error
+through `aria-invalid`, disabled through `:disabled`) — the trigger owns no colors of its own. Use
+`asChild` only when the caller already owns the element (a Button, an area): then no field is composed
+and the caller owns the classes. The context trigger is an area, so it never composes a field.
+
+The listbox aligns to the **start edge** of the trigger (`align="start"` is the default here, not
+Radix's `center`), so the field and its list read as one element instead of a panel floating under a
+center point.
+
+```tsx
+import { Check, Chevron } from "lucide-react"
+import { Menu } from "@workspace/pds/components/ui/menu"
+
+export function Example() {
+  return (
+    <Menu mode="dropdown">
+      <Menu.Trigger>
+        Color role
+        <Chevron />   {/* arrow at the right end, inside the field */}
+      </Menu.Trigger>
+      <Menu.Content>
+        <Menu.Label>Color role</Menu.Label>
+        <Menu.Item data-selected><Check />Brand primary</Menu.Item>
+      </Menu.Content>
+    </Menu>
+  )
+}
+```
+
+- Row format `format="avatar-label-tags"` (avatar — label — tags) sizes the row avatar to the `xs` scale.
 ### Sidebar & mobile navigation
 
 Two shapes from one family: a bounded **desktop panel** (groups can collapse) and a
@@ -410,6 +451,7 @@ export function AppFrame() {
 - **Command** — keyboard-first palette: `Command` + `CommandInput`, `CommandList`, `CommandGroup`, `CommandItem`, `CommandEmpty`, `CommandShortcut`, `CommandSeparator`; `CommandDialog` for the dialog form. Peer: cmdk.
 - **Chart** — `ChartContainer` takes a `config` object mapping series keys to `{ label?, icon?, color | theme }` and wraps recharts elements; `ChartTooltip`/`ChartTooltipContent`, `ChartLegend`/`ChartLegendContent`, `ChartStyle`. Peer: recharts.
 - **Drawer** — bottom sheet on vaul (peer: vaul): `Drawer > DrawerTrigger + DrawerContent(DrawerHeader(DrawerTitle, DrawerDescription), …, DrawerFooter)`; `DrawerClose` closes from anywhere inside.
+- **Avatar** — two scales only: `default` (profile, `--dim-lll` = 40px) and `xs` (row scale, `--dim-mmm` = 20px) for a table row, a dropdown row, or a sidebar menu item. The component owns its own `--avatar-size` variable, so a host that needs the row scale names the scale, never the pixel.
 - **Item** — list row: `Item > ItemMedia + ItemContent(ItemHeader(ItemTitle, ItemDescription), ItemActions) + ItemFooter?`; group rows in `ItemGroup`, divide with `ItemSeparator`.
 - **Toast / Toaster** — mount `<Toaster />` once at the app root; fire notifications with `toast({ title, description, action? })` from `/hooks/use-toast` (also exported as `useToast`). The raw primitives (`ToastProvider`, `ToastViewport`, `Toast`, …) are available for custom setups.
 
@@ -430,6 +472,39 @@ composition inside a `Device` reads the mobile form even on a desktop page. Desk
 neutral ones, so the layer only adds. A `size` override is legitimate only where the design defines a
 density per surface (Field `lg` inside a Device / `sm` outside, Item `default` inside / `sm` outside).
 
+## Surface roles (base vs alternative)
+
+Base and alternative are **places, not colors**. A component never picks a background from the
+palette: it reads a role, and the role resolves per element from the surface it is standing on
+(`data-pds-surface="base"` or `"alternative"` on the page column, or on a `SurfaceSlot` wrapper).
+
+| role variable | Tailwind utility | what it is |
+| --- | --- | --- |
+| `--pds-surface-bg` | `bg-surface` | the surface the element stands on |
+| `--pds-surface-fg` | `text-surface-fg` | text or icon color on that surface |
+| `--pds-card-bg` | `bg-surface-card` | container sitting on the surface |
+| `--pds-surface-canvas-bg` | `bg-surface-canvas` | the deliberate opposite tone of the host, for inset panels only |
+| `--pds-field-fill-bg` | `bg-surface-field` | fill-tone field |
+| `--pds-row-alt-bg` | `bg-surface-row` | alternating row wash |
+
+Why an agent gets this wrong: `bg-background` and `bg-card` are not interchangeable. In light mode
+background, card and popover are the same value (#F9F9F9), so the mistake is invisible; in dark mode
+background is #383838 while card and popover are #1B1B1B. A static palette step is fixed where it was
+written, so a component that uses one reads correct on the base column and wrong inside an alternative
+one — the "alternative component on a base background" error. The role form has no such split, because
+the role is not a value: it is a reference resolved at the element.
+
+1. Container fills use a role utility. Never `bg-background`, `bg-secondary`, `bg-card`, `bg-muted`, or
+   `background-color: var(--color-<step>)`.
+2. An exception is legitimate only where the token export declares a fixed palette step for that
+   component (pagination cells, the theme-extreme switch/radio knob, the kbd state layer). Those are
+   recorded as `token-faithful` in `scripts/surface-baseline.json`; anything else needs an `intentional:`
+   comment on the line plus the token leaf that declares it.
+3. A component owns no surface decision and takes no surface prop. Rendered outside any
+   `[data-pds-surface]` container it resolves to `:root` (base). Do not compensate with a hardcoded color.
+4. `bg-surface-canvas` is the opposite-tone inset idiom (SidebarInset), not a generic panel.
+5. State washes are `color-mix` over the host role, so they follow the surface automatically; that is
+   why the guard ignores them.
 ## Settings panel pattern
 
 The settings an installation exposes, and how to wire each control. All runtime theming

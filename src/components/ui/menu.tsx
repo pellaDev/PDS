@@ -7,8 +7,11 @@ import { Check, ChevronRight, Circle } from 'lucide-react';
 
 import { cn } from '../../lib/utils';
 import { useDevicePortal } from '../../hooks/use-mobile';
+import { usePdsConfig } from '../../config';
+import { fieldVariants } from './field';
 
 import './menu.css';
+import './scrollbar.css';
 
 export type MenuMode = 'dropdown' | 'context';
 
@@ -44,14 +47,19 @@ function MenuRoot({
 
 function MenuTrigger({
   className,
+  asChild,
   children,
   ...rest
-}: { className?: string; children?: React.ReactNode } & PassProps) {
+}: { className?: string; asChild?: boolean; children?: React.ReactNode } & PassProps) {
   const mode = React.useContext(MenuContext);
+
+  const fieldStyle = usePdsConfig().fieldStyle;
+  const fieldClasses =
+    asChild || mode !== 'dropdown' ? '' : fieldVariants({ size: 'sm', tone: fieldStyle });
   if (mode === 'dropdown') {
     return (
       <DropdownMenuPrimitive.Trigger
-        className={className}
+        className={cn(fieldClasses, 'pds-menu-trigger', className)}
         {...toDropdown<React.ComponentPropsWithoutRef<typeof DropdownMenuPrimitive.Trigger>>(rest)}
       >
         {children}
@@ -60,7 +68,7 @@ function MenuTrigger({
   }
   return (
     <ContextMenuPrimitive.Trigger
-      className={className}
+      className={cn(fieldClasses, 'pds-menu-trigger', className)}
       {...toContext<React.ComponentPropsWithoutRef<typeof ContextMenuPrimitive.Trigger>>(rest)}
     >
       {children}
@@ -74,17 +82,25 @@ const CONTENT_ANIMATION =
 function MenuContent({
   className,
   sideOffset = 4,
+  align = 'start',
   children,
   ...rest
-}: { className?: string; sideOffset?: number; children?: React.ReactNode } & PassProps) {
+}: {
+  className?: string;
+  sideOffset?: number;
+
+  align?: 'start' | 'center' | 'end';
+  children?: React.ReactNode;
+} & PassProps) {
   const mode = React.useContext(MenuContext);
   if (mode === 'dropdown') {
     return (
       <DropdownMenuPrimitive.Portal container={useDevicePortal()}>
         <DropdownMenuPrimitive.Content
           sideOffset={sideOffset}
+          align={align}
           className={cn(
-            'z-50 max-h-[var(--radix-dropdown-menu-content-available-height)] min-w-[8rem] overflow-y-auto overflow-x-hidden p-1 pds-menu-content',
+            'z-50 max-h-[var(--radix-dropdown-menu-content-available-height)] min-w-[8rem] overflow-y-auto overflow-x-hidden p-1 pds-scrollbar pds-menu-content',
             CONTENT_ANIMATION,
             'origin-[--radix-dropdown-menu-content-transform-origin]',
             className,
@@ -102,7 +118,7 @@ function MenuContent({
     <ContextMenuPrimitive.Portal container={useDevicePortal()}>
       <ContextMenuPrimitive.Content
         className={cn(
-          'z-50 max-h-[var(--radix-context-menu-content-available-height)] min-w-[8rem] overflow-y-auto overflow-x-hidden p-1 pds-menu-content',
+          'z-50 max-h-[var(--radix-context-menu-content-available-height)] min-w-[8rem] overflow-y-auto overflow-x-hidden p-1 pds-scrollbar pds-menu-content',
           CONTENT_ANIMATION,
           'origin-[--radix-context-menu-content-transform-origin]',
           className,
@@ -118,17 +134,27 @@ function MenuContent({
 const ITEM_BASE =
   'pds-menu-item relative flex cursor-default select-none items-center gap-2 px-3 py-1.5 data-[disabled]:pointer-events-none [&>svg]:size-4 [&>svg]:shrink-0';
 
+export type MenuItemFormat = 'label' | 'avatar-label-tags';
+
 function MenuItem({
   className,
   inset,
+  format,
   children,
   ...rest
-}: { className?: string; inset?: boolean; children?: React.ReactNode } & PassProps) {
+}: {
+  className?: string;
+  inset?: boolean;
+  format?: MenuItemFormat;
+  children?: React.ReactNode;
+} & PassProps) {
   const mode = React.useContext(MenuContext);
+
   const classes = cn(ITEM_BASE, inset && 'pl-8', className);
   if (mode === 'dropdown') {
     return (
       <DropdownMenuPrimitive.Item
+        data-format={format}
         className={classes}
         {...toDropdown<React.ComponentPropsWithoutRef<typeof DropdownMenuPrimitive.Item>>(rest)}
       >
@@ -138,6 +164,7 @@ function MenuItem({
   }
   return (
     <ContextMenuPrimitive.Item
+      data-format={format}
       className={classes}
       {...toContext<React.ComponentPropsWithoutRef<typeof ContextMenuPrimitive.Item>>(rest)}
     >

@@ -1,6 +1,17 @@
 # PDS — Pella Design System
 
-> A plug & play React design system. Radix UI primitives + Tailwind CSS v4 + CVA, shipped as a prebuilt ESM package with a token pipeline (tokens.json → generated CSS variables + TypeScript). Zero build step for consumers; runtime theming via configurePds() — theme changes are pure CSS custom-property updates on <html>, no re-render.
+> React design system made for AI Agentic development, aiming for the perfect design system for AI vibe-coding users: clean, fast and flawless, updatable without any human supervisory. Radix UI primitives + Tailwind CSS v4 + CVA, shipped as a prebuilt ESM package with a token pipeline (tokens.json → generated CSS variables + TypeScript). Zero build step for consumers; runtime theming via configurePds() — theme changes are pure CSS custom-property updates on <html>, no re-render.
+
+## Surface roles
+
+Base and alternative are places, not colors. A component fills a container with a surface ROLE, never a
+static palette step: bg-surface (the surface it stands on), bg-surface-card (container on it),
+bg-surface-canvas (the deliberate opposite-tone inset), bg-surface-field, bg-surface-row, text-surface-fg.
+Roles resolve per element from data-pds-surface, so a component inside an alternative column reads the
+alternative tone even when the root is base. bg-background / bg-card / bg-secondary / bg-muted are fixed
+steps and cannot do that — in dark mode background (#383838) and card (#1B1B1B) are different values.
+Use a static step only when the token export declares one for that component; scripts/check-surface.mjs
+fails the build on any new one and lists the recorded exceptions in scripts/surface-baseline.json.
 
 ## Install
 
@@ -15,7 +26,7 @@ import { configurePds, setPdsConfig } from "@workspace/pds/config";  // optional
 configurePds({ lightBrand: "#0B5FFF", darkBrand: "#7AB8FF", font: "inter" }); // install flags (once at bootstrap)
 setPdsConfig({ fieldStyle: "outline" });          // live update, persisted in localStorage
 
-## Components (57)
+## Components (58)
 
 accordion · alert · alert-dialog · aspect-ratio · avatar · badge · breadcrumb · button · calendar · card · carousel · chart · checkbox · color-picker · collapsible · command · dialog · device · drawer · empty · field · form · hover-card · icon · input · input-otp · item · kbd · label · layout · menu · menubar · mobile-navigation-menu · navigation-menu · pagination · popover · progress · radio · resizable · scroll-area · separator · sheet · sidebar · skeleton · slider · sonner · spinner · switch · table · tabs · tag · textarea · toast · toaster · toggle · tooltip
 

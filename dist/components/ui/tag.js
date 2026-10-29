@@ -24,6 +24,7 @@ function Tag({ className, variant, onDismiss, children, ...props }) {
   return /* @__PURE__ */ jsxs(
     "span",
     {
+      "data-slot": "tag",
       className: cn(tagVariants({ variant }), onDismiss && "hover-elevate", className),
       ...props,
       children: [

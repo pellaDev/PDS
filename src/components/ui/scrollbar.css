@@ -1,0 +1,43 @@
+.pds-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-border) transparent;
+}
+.pds-scrollbar::-webkit-scrollbar {
+  width: var(--dim-lll);
+  height: var(--dim-lll);
+}
+.pds-scrollbar::-webkit-scrollbar-thumb {
+  background-color: var(--color-border);
+  border-radius: var(--dim-lll);
+}
+.pds-scrollbar::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+[data-slot='device-content'] .pds-scrollbar {
+  scrollbar-color: transparent transparent;
+}
+[data-slot='device-content'] .pds-scrollbar:is(:hover, :focus-within) {
+  scrollbar-color: var(--color-border) transparent;
+}
+[data-slot='device-content'] .pds-scrollbar::-webkit-scrollbar-thumb {
+  background-color: transparent;
+}
+[data-slot='device-content'] .pds-scrollbar:is(:hover, :focus-within)::-webkit-scrollbar-thumb {
+  background-color: var(--color-border);
+}
+
+@media (max-width: 48rem) {
+  .pds-scrollbar {
+    scrollbar-color: transparent transparent;
+  }
+  .pds-scrollbar:is(:hover, :focus-within) {
+    scrollbar-color: var(--color-border) transparent;
+  }
+  .pds-scrollbar::-webkit-scrollbar-thumb {
+    background-color: transparent;
+  }
+  .pds-scrollbar:is(:hover, :focus-within)::-webkit-scrollbar-thumb {
+    background-color: var(--color-border);
+  }
+}

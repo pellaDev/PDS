@@ -5,6 +5,7 @@ import { Command as CommandPrimitive } from "cmdk";
 import { Search } from "lucide-react";
 import { cn } from "../../lib/utils";
 import "./menu-list.css";
+import "./scrollbar.css";
 import { Dialog, DialogContent } from "./dialog";
 const Command = React.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ jsx(
   CommandPrimitive,
@@ -40,7 +41,7 @@ const CommandList = React.forwardRef(({ className, ...props }, ref) => /* @__PUR
   CommandPrimitive.List,
   {
     ref,
-    className: cn("max-h-[300px] overflow-y-auto overflow-x-hidden", className),
+    className: cn("max-h-[300px] pds-scrollbar overflow-y-auto overflow-x-hidden", className),
     ...props
   }
 ));

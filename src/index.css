@@ -93,6 +93,13 @@
   --color-muted-foreground: hsl(var(--muted-foreground));
   --color-muted-border: var(--muted-border);
 
+  --color-surface: var(--pds-surface-bg);
+  --color-surface-fg: var(--pds-surface-fg);
+  --color-surface-card: var(--pds-card-bg);
+  --color-surface-canvas: var(--pds-surface-canvas-bg);
+  --color-surface-field: var(--pds-field-fill-bg);
+  --color-surface-row: var(--pds-row-alt-bg);
+
   --color-accent: hsl(var(--accent));
   --color-accent-foreground: hsl(var(--accent-foreground));
   --color-accent-border: var(--accent-border);
@@ -555,6 +562,8 @@
 
 :root { --pds-row-alt-bg: color-mix(in oklab, var(--color-foreground) 4%, transparent); }
 
+:root { --pds-color-check-pass: var(--color-success); --pds-color-check-fail: var(--color-destructive); }
+
 :root { --pds-separator-solid: var(--color-separator); --pds-separator-image-h: none; --pds-separator-image-v: none; }
 [data-pds-fieldstyle='fill'] {
   --pds-separator-solid: transparent;
@@ -573,6 +582,7 @@
   --pds-row-wrap: nowrap;
   --pds-item-grow: 0;
   --pds-block-width: auto;
+  --pds-cell-size: var(--dim-lll);
 }
 @media (max-width: 48rem) {
   :root {
@@ -580,6 +590,7 @@
     --pds-row-wrap: wrap;
     --pds-item-grow: 1;
     --pds-block-width: 100%;
+    --pds-cell-size: var(--touch-min);
   }
 }
 [data-slot="device-content"] {
@@ -587,5 +598,6 @@
   --pds-row-wrap: wrap;
   --pds-item-grow: 1;
   --pds-block-width: 100%;
+  --pds-cell-size: var(--touch-min);
 }
 

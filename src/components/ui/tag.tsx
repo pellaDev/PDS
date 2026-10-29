@@ -35,6 +35,7 @@ export interface TagProps
 function Tag({ className, variant, onDismiss, children, ...props }: TagProps) {
   return (
     <span
+      data-slot="tag"
       className={cn(tagVariants({ variant }), onDismiss && 'hover-elevate', className)}
       {...props}
     >

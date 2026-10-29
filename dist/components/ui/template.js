@@ -5,6 +5,7 @@ import { cn } from "../../lib/utils";
 import { useIsMobile } from "../../hooks/use-mobile";
 import { ResizablePanelGroup, ResizablePanel, ResizableHandle } from "./resizable";
 import "./template.css";
+import "./scrollbar.css";
 const Template = React.forwardRef(
   ({ className, ...props }, ref) => /* @__PURE__ */ jsx(
     "div",
@@ -121,7 +122,7 @@ const TemplateCanvas = React.forwardRef(
       "data-slot": "template-canvas",
       "data-pds-surface": "alternative",
       "data-layout": layout,
-      className: cn("h-full min-h-0 w-full overflow-auto", className),
+      className: cn("h-full min-h-0 w-full pds-scrollbar overflow-auto", className),
       ...props
     }
   )

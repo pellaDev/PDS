@@ -37,5 +37,6 @@ const Field = React.forwardRef(function Field2({ className, size = "sm", tone, s
   );
 });
 export {
-  Field
+  Field,
+  fieldVariants
 };

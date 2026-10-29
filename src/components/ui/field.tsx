@@ -50,4 +50,4 @@ const Field = React.forwardRef<HTMLInputElement, FieldProps>(function Field(
   );
 });
 
-export { Field };
+export { Field, fieldVariants };
