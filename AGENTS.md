@@ -148,6 +148,7 @@ Files that need custom styles pull them in automatically — no per-component CS
 | --- | --- | --- |
 | Separator | `separator` | Horizontal/vertical divider |
 | ScrollArea | `scroll-area` | Bounded scrolling region with styled scrollbar |
+| StickyActionBar | `sticky-action-bar` | Row of actions pinned to the bottom edge of the container that hosts them (`position: sticky; bottom: 0`); the bar belongs to the window, so it draws one bottom edge |
 | Template | `template` | Application frame — header, sub-header, sidebars, canvas, footer |
 | Resizable | `resizable` | Resizable panel group (used by `TemplateBody`) |
 | Layout | `layout` | Composition primitives — `Stack`, `Row`, `Grid`, `Panel`; gap and radius are token-driven |

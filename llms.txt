@@ -28,7 +28,7 @@ setPdsConfig({ fieldStyle: "outline" });          // live update, persisted in l
 
 ## Components (58)
 
-accordion · alert · alert-dialog · aspect-ratio · avatar · badge · breadcrumb · button · calendar · card · carousel · chart · checkbox · color-picker · collapsible · command · dialog · device · drawer · empty · field · form · hover-card · icon · input · input-otp · item · kbd · label · layout · menu · menubar · mobile-navigation-menu · navigation-menu · pagination · popover · progress · radio · resizable · scroll-area · separator · sheet · sidebar · skeleton · slider · sonner · spinner · switch · table · tabs · tag · textarea · toast · toaster · toggle · tooltip
+accordion · alert · alert-dialog · aspect-ratio · avatar · badge · breadcrumb · button · calendar · card · carousel · chart · checkbox · color-picker · collapsible · command · dialog · device · drawer · empty · field · form · hover-card · icon · input · input-otp · item · kbd · label · layout · menu · menubar · mobile-navigation-menu · navigation-menu · pagination · popover · progress · radio · resizable · scroll-area · separator · sheet · sidebar · skeleton · slider · sonner · spinner · sticky-action-bar · switch · table · tabs · tag · template · textarea · toast · toaster · toggle · tooltip
 
 PDS additions beyond the shadcn/ui registry: color-picker, device, icon, layout, menu, mobile-navigation-menu, tag, toast, toaster (radio follows the shadcn RadioGroup API). ToggleGroup lives in the `toggle` module. Not included: select, dropdown-menu, context-menu, button-group, input-group, native-select.
 
