@@ -6,7 +6,7 @@
 
 Base and alternative are places, not colors. A component fills a container with a surface ROLE, never a
 static palette step: bg-surface (the surface it stands on), bg-surface-card (container on it),
-bg-surface-canvas (the deliberate opposite-tone inset), bg-surface-field, bg-surface-row, text-surface-fg.
+bg-surface-canvas (the deliberate opposite-tone inset), bg-surface-field, text-surface-fg.
 Roles resolve per element from data-pds-surface, so a component inside an alternative column reads the
 alternative tone even when the root is base. bg-background / bg-card / bg-secondary / bg-muted are fixed
 steps and cannot do that — in dark mode background (#383838) and card (#1B1B1B) are different values.

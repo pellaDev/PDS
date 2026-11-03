@@ -50,7 +50,7 @@ package**. This repository IS the published package (flat layout): `src/` is the
 
 ## Layout
 
-- `src/components/ui/` — 58 components: a shadcn/ui v4 registry subset plus PDS additions (color-picker, device, icon, layout, menu, mobile-navigation-menu, tag, toast, toaster).
+- `src/components/ui/` — 59 components: a shadcn/ui v4 registry subset plus PDS additions (color-picker, device, hero, icon, layout, menu, mobile-navigation-menu, tag, toast, toaster).
 - `tokens.json` — token SSOT · `scripts/build-tokens.mjs` + `scripts/core-tokens.mjs` — generators
 - `src/config.tsx` — runtime configuration (brand colors, field style, font)
 - `dist/` — prebuilt ESM + CSS + .d.ts (build output)
@@ -121,6 +121,7 @@ Files that need custom styles pull them in automatically — no per-component CS
 | Avatar | `avatar` | Profile image with fallback; `shape` circle or rounded square (`--radius-md`); static or interactive (the Button state set) |
 | Badge | `badge` | Simple markers and numbered pills |
 | Card | `card` | Grouped content block (header/body/footer) |
+| Hero | `hero` | The large card for one entity: swappable slots — head (title, tags, media) and foot (subheadline, cards, actions); the card composition as its box, an optional image as the element background layer under a fade; unfilled slots render nothing |
 | Table | `table` | Structured tabular data |
 | Accordion | `accordion` | Expandable sections |
 | Collapsible | `collapsible` | Single expandable region |
@@ -484,7 +485,6 @@ palette: it reads a role, and the role resolves per element from the surface it 
 | `--pds-card-bg` | `bg-surface-card` | container sitting on the surface |
 | `--pds-surface-canvas-bg` | `bg-surface-canvas` | the deliberate opposite tone of the host, for inset panels only |
 | `--pds-field-fill-bg` | `bg-surface-field` | fill-tone field |
-| `--pds-row-alt-bg` | `bg-surface-row` | alternating row wash |
 
 Why an agent gets this wrong: `bg-background` and `bg-card` are not interchangeable. In light mode
 background, card and popover are the same value (#F9F9F9), so the mistake is invisible; in dark mode

@@ -42,7 +42,6 @@ __DS_FONT_FACES__
   --color-surface-card: var(--pds-card-bg);
   --color-surface-canvas: var(--pds-surface-canvas-bg);
   --color-surface-field: var(--pds-field-fill-bg);
-  --color-surface-row: var(--pds-row-alt-bg);
 
   --color-accent: hsl(var(--accent));
   --color-accent-foreground: hsl(var(--accent-foreground));
@@ -414,8 +413,6 @@ __DS_CORE_TOKENS__
   --pds-field-fill-bg: color-mix(in srgb, var(--pds-card-bg) 92%, var(--color-foreground));
   --pds-field-outline-bg: var(--pds-card-bg);
 }
-
-:root { --pds-row-alt-bg: color-mix(in oklab, var(--color-foreground) 4%, transparent); }
 
 :root { --pds-color-check-pass: var(--color-success); --pds-color-check-fail: var(--color-destructive); }
 

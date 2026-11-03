@@ -15,11 +15,13 @@ const buttonVariants = cva(
   {
     variants: {
       size: {
-        mini: 'size-[var(--dim-mm)] p-[var(--space-regularMini)] [--pds-control-min:auto] [&_svg]:size-4',
+        mini: 'size-[var(--dim-mm)] p-[var(--space-regularMini)] [--pds-control-min:auto] [&_svg]:size-[var(--dim-mmmm)]',
 
-        small: 'h-8 px-3 [&_svg]:size-4',
+        small:
+          '[height:var(--dim-llll)] [padding-inline:var(--dim-s)] [&_svg]:size-[var(--dim-mmmm)]',
 
-        large: 'h-10 px-6 [&_svg]:size-4',
+        large:
+          '[height:var(--dim-lll)] [padding-inline:var(--dim-mm)] [&_svg]:size-[var(--dim-mmmm)]',
 
         special:
           'flex-col size-[4.5rem] min-h-[4.5rem] min-w-[4.5rem] gap-1.5 overflow-hidden p-3 [&_svg]:size-5',

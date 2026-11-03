@@ -6,7 +6,7 @@ import { cva } from "class-variance-authority";
 import { cn } from "../../lib/utils";
 import "./avatar.css";
 const avatarVariants = cva(
-  "pds-avatar relative flex shrink-0 overflow-hidden [width:var(--avatar-size)] [height:var(--avatar-size)]",
+  "pds-avatar relative flex shrink-0 overflow-hidden bg-surface-canvas [width:var(--avatar-size)] [height:var(--avatar-size)]",
   {
     variants: {
       size: {
@@ -20,12 +20,17 @@ const avatarVariants = cva(
       interactive: {
         static: "",
         interactive: "cursor-pointer hover-elevate active-elevate-2 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-[var(--opacity-disabled)]"
+      },
+      state: {
+        default: "",
+        error: "[color:var(--color-destructive-foreground)]",
+        loading: ""
       }
     },
     defaultVariants: { size: "default", shape: "circle", interactive: "static" }
   }
 );
-const Avatar = React.forwardRef(({ className, size, shape, interactive, ...props }, ref) => /* @__PURE__ */ jsx(
+const Avatar = React.forwardRef(({ className, size, shape, interactive, state, ...props }, ref) => /* @__PURE__ */ jsx(
   AvatarPrimitive.Root,
   {
     ref,
@@ -33,8 +38,9 @@ const Avatar = React.forwardRef(({ className, size, shape, interactive, ...props
     "data-size": size,
     "data-shape": shape,
     "data-interactive": interactive === "interactive" ? true : void 0,
+    "data-state": state,
     ...interactive === "interactive" ? { role: "button", tabIndex: 0 } : {},
-    className: cn(avatarVariants({ size, shape, interactive, className })),
+    className: cn(avatarVariants({ size, shape, interactive, state, className })),
     ...props
   }
 ));
@@ -53,7 +59,7 @@ const AvatarFallback = React.forwardRef(({ className, ...props }, ref) => /* @__
   {
     ref,
     className: cn(
-      "flex h-full w-full items-center justify-center [border-radius:inherit] [background-color:var(--pds-surface-canvas-bg)]",
+      "flex h-full w-full items-center justify-center [border-radius:inherit]",
       className
     ),
     ...props

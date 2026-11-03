@@ -12,3 +12,21 @@
 .pds-avatar[data-interactive][data-dragged]::after {
   background-color: var(--elevate-2);
 }
+
+.pds-avatar[data-interactive][data-state='error']::after {
+  background-color: var(--color-destructive);
+}
+
+.pds-avatar[data-interactive][data-state='loading']::after {
+  --pds-avatar-breathe-from: 0.35;
+  background-color: var(--elevate-1);
+  animation: pds-avatar-breathe var(--duration-breath) var(--ease-in-out) infinite alternate;
+}
+@keyframes pds-avatar-breathe {
+  from {
+    opacity: var(--pds-avatar-breathe-from);
+  }
+  to {
+    opacity: 1;
+  }
+}

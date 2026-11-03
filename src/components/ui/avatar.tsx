@@ -8,7 +8,7 @@ import { cn } from '../../lib/utils';
 import './avatar.css';
 
 const avatarVariants = cva(
-  'pds-avatar relative flex shrink-0 overflow-hidden [width:var(--avatar-size)] [height:var(--avatar-size)]',
+  'pds-avatar relative flex shrink-0 overflow-hidden bg-surface-canvas [width:var(--avatar-size)] [height:var(--avatar-size)]',
   {
     variants: {
       size: {
@@ -27,6 +27,13 @@ const avatarVariants = cva(
         interactive:
           'cursor-pointer hover-elevate active-elevate-2 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-[var(--opacity-disabled)]',
       },
+      state: {
+        default: '',
+
+        error: '[color:var(--color-destructive-foreground)]',
+
+        loading: '',
+      },
     },
     defaultVariants: { size: 'default', shape: 'circle', interactive: 'static' },
   },
@@ -35,15 +42,16 @@ const avatarVariants = cva(
 const Avatar = React.forwardRef<
   React.ElementRef<typeof AvatarPrimitive.Root>,
   React.ComponentPropsWithoutRef<typeof AvatarPrimitive.Root> & VariantProps<typeof avatarVariants>
->(({ className, size, shape, interactive, ...props }, ref) => (
+>(({ className, size, shape, interactive, state, ...props }, ref) => (
   <AvatarPrimitive.Root
     ref={ref}
     data-slot="avatar"
     data-size={size}
     data-shape={shape}
     data-interactive={interactive === 'interactive' ? true : undefined}
+    data-state={state}
     {...(interactive === 'interactive' ? { role: 'button', tabIndex: 0 } : {})}
-    className={cn(avatarVariants({ size, shape, interactive, className }))}
+    className={cn(avatarVariants({ size, shape, interactive, state, className }))}
     {...props}
   />
 ));
@@ -68,7 +76,7 @@ const AvatarFallback = React.forwardRef<
   <AvatarPrimitive.Fallback
     ref={ref}
     className={cn(
-      'flex h-full w-full items-center justify-center [border-radius:inherit] [background-color:var(--pds-surface-canvas-bg)]',
+      'flex h-full w-full items-center justify-center [border-radius:inherit]',
       className,
     )}
     {...props}

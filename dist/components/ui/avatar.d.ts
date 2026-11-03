@@ -6,6 +6,7 @@ declare const Avatar: React.ForwardRefExoticComponent<Omit<AvatarPrimitive.Avata
     size?: "default" | "xs" | null | undefined;
     shape?: "circle" | "roundedSquare" | null | undefined;
     interactive?: "interactive" | "static" | null | undefined;
+    state?: "default" | "error" | "loading" | null | undefined;
 } & import("class-variance-authority/types").ClassProp) | undefined) => string> & React.RefAttributes<HTMLSpanElement>>;
 declare const AvatarImage: React.ForwardRefExoticComponent<Omit<AvatarPrimitive.AvatarImageProps & React.RefAttributes<HTMLImageElement>, "ref"> & React.RefAttributes<HTMLImageElement>>;
 declare const AvatarFallback: React.ForwardRefExoticComponent<Omit<AvatarPrimitive.AvatarFallbackProps & React.RefAttributes<HTMLSpanElement>, "ref"> & React.RefAttributes<HTMLSpanElement>>;

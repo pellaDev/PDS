@@ -126,7 +126,7 @@ if (warnings.length) console.log('  recorded debt:\n  ' + warnings.join('\n  '))
 if (failures.length) {
   console.error('  new static fills:\n  ' + failures.join('\n  '));
   console.error(
-    "  Fix: use a surface role utility (bg-surface / bg-surface-card / bg-surface-canvas / bg-surface-field / bg-surface-row), or mark the line with an 'intentional:' comment plus the token leaf that declares it.",
+    "  Fix: use a surface role utility (bg-surface / bg-surface-card / bg-surface-canvas / bg-surface-field), or mark the line with an 'intentional:' comment plus the token leaf that declares it.",
   );
   process.exit(1);
 }

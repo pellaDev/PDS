@@ -7,7 +7,8 @@ const badgeVariants = cva(
     variants: {
       shape: {
         simple: "[width:var(--dim-s)] [height:var(--dim-s)]",
-        numbered: "[width:var(--dim-mmm)] [height:var(--dim-mmm)] [font-size:var(--type-caption-size)] [line-height:var(--type-caption-lh)] [letter-spacing:0.25px]"
+        numbered: "[width:var(--dim-mmm)] [height:var(--dim-mmm)] [font-size:var(--type-caption-size)] [line-height:var(--type-caption-lh)] [letter-spacing:0.25px]",
+        mini: "[width:var(--dim-ss)] [height:var(--dim-ss)]"
       },
       variant: {
         default: "bg-primary",
