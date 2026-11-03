@@ -22,7 +22,7 @@ function DeviceHomeIndicator({ className, ...props }) {
   return /* @__PURE__ */ jsx("div", { "data-slot": "device-home-indicator", className: cn(className), ...props });
 }
 function DeviceContent({ className, ...props }) {
-  return /* @__PURE__ */ jsx("div", { "data-slot": "device-content", className: cn(className), ...props });
+  return /* @__PURE__ */ jsx("div", { "data-slot": "device-content", "data-pds-region": true, className: cn(className), ...props });
 }
 function Device({
   children,

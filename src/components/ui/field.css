@@ -4,11 +4,25 @@
   --_bw: var(--dim-ssss);
   --_hover-o: color-mix(in srgb, var(--color-primary) calc(100% - 32%), white);
   --_focus-o: color-mix(in srgb, var(--color-primary) calc(100% - 32%), black);
+
+  --pds-field-label-band: calc(var(--type-body2-lh) * 0.66);
+
+  --pds-field-text-offset: min(
+    calc(var(--pds-field-label-band) + var(--dim-sss)),
+    calc(var(--field-h) - var(--type-body2-lh) - 2 * var(--_bw))
+  );
+  min-height: var(--pds-touch-min);
+
+  --pds-field-icon-slot: 0;
+
+  --pds-field-label-gap: var(--dim-sssss);
+
+  --pds-field-icon-inset: var(--dim-s);
 }
 
 .pds-field__input {
   width: 100%;
-  min-height: var(--field-h);
+  height: 100%;
   padding-block: var(--dim-sss);
   padding-inline: var(--dim-s);
   background: transparent;
@@ -31,8 +45,13 @@
   letter-spacing: 0.25px;
   pointer-events: none;
 
-  white-space: normal;
-  max-width: calc(100% - var(--dim-s));
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: calc(
+    100% - var(--dim-s) - var(--pds-field-icon-inset) - var(--pds-field-icon-slot) -
+      var(--pds-field-label-gap)
+  );
   transition:
     transform var(--duration-fast) ease,
     top var(--duration-fast) ease,
@@ -41,11 +60,12 @@
 
 .pds-field--fill {
   display: block;
+
   height: var(--field-h);
   border-radius: var(--dim-sss);
   background: var(--pds-field-fill-bg);
   color: var(--color-muted-foreground);
-  padding-block: var(--dim-sss);
+  padding-block: var(--dim-zero);
   padding-inline: var(--dim-s);
   border: var(--_bw) solid transparent;
 }
@@ -57,16 +77,26 @@
 }
 
 .pds-field--fill .pds-field__label {
-  transition: opacity var(--duration-fast) ease;
+  transition:
+    top var(--duration-fast) ease,
+    font-size var(--duration-fast) ease,
+    line-height var(--duration-fast) ease;
 }
 .pds-field--fill
   :is(.pds-field__input:focus, .pds-field__input:not(:placeholder-shown))
   ~ .pds-field__label {
-  opacity: 0;
+  top: var(--pds-field-label-top, var(--dim-ssss));
+  transform: none;
+  font-size: calc(var(--type-body2-size) * 0.66);
+  line-height: calc(var(--type-body2-lh) * 0.66);
 }
 .pds-field--fill .pds-field__input {
   height: 100%;
   padding: 0;
+}
+
+.pds-field--fill :is(.pds-field__input:focus, .pds-field__input:not(:placeholder-shown)) {
+  padding-block-start: var(--pds-field-text-offset);
 }
 
 .pds-field--outline {
@@ -138,7 +168,7 @@ textarea.pds-field {
 textarea.pds-field {
   height: auto;
   min-height: calc(var(--field-h) * 2);
-  max-height: var(--field-grow-max, calc(var(--field-h) * 4));
+  resize: vertical;
   overflow-y: auto;
 }
 
@@ -155,12 +185,12 @@ textarea.pds-field::placeholder {
   color: var(--color-foreground);
 }
 
-.pds-field[data-has-icon] > .pds-field__input {
-  padding-inline-end: calc(var(--dim-s) + 1.25rem);
+.pds-field[data-has-icon] {
+  --pds-field-icon-slot: var(--dim-mmm);
 }
 
-.pds-field[data-has-icon] > .pds-field__label {
-  max-width: calc(100% - var(--dim-s) - 1.25rem);
+.pds-field[data-has-icon] > .pds-field__input {
+  padding-inline-end: calc(var(--pds-field-icon-inset) + var(--pds-field-icon-slot));
 }
 .pds-field__icon {
   position: absolute;
@@ -186,11 +216,9 @@ textarea.pds-field::placeholder {
   padding-inline: 0;
   font-size: var(--type-body2-size);
   line-height: var(--type-body2-lh);
-  max-width: calc(100% - 3rem);
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
 
-.pds-field__input {
-  min-height: var(--pds-touch-min);
+  max-width: calc(
+    100% - var(--dim-s) - var(--pds-field-icon-inset) - var(--pds-field-icon-slot, var(--dim-ll)) -
+      var(--pds-field-label-gap)
+  );
 }

@@ -1,4 +1,6 @@
 .pds-sticky-action-bar {
+  --bar-shadow: var(--shadow-dropUp);
+  --bar-in-from: var(--dim-ss);
   position: sticky;
   bottom: 0;
   z-index: 10;
@@ -8,17 +10,48 @@
   justify-content: center;
   gap: var(--dim-sss);
   padding: var(--dim-s) var(--dim-mm);
+}
+
+[data-pds-region] {
+  position: relative;
+}
+[data-pds-region] > .pds-sticky-action-bar {
+  position: absolute;
+  inset-inline: 0;
+  inset-block-end: 0;
+}
+[data-pds-region] > .pds-sticky-action-bar[data-side='top'] {
+  inset-block-end: auto;
+  inset-block-start: 0;
+}
+
+.pds-sticky-action-bar {
   background-color: var(--pds-card-bg);
-  border-top: var(--dim-ssss) solid var(--pds-container-border-color);
-  border-radius: var(--radius-md) var(--radius-md) 0 0;
-  box-shadow: var(--shadow-dropDown);
-  animation: pds-sticky-action-bar-in var(--duration-slow) var(--ease-standard);
+  --bar-hairline: var(--pds-container-border-color);
+  border-block-start: var(--dim-ssss) solid var(--bar-hairline);
+}
+.pds-sticky-action-bar[data-tone='fill'] {
+  box-shadow: var(--bar-shadow);
+}
+.pds-sticky-action-bar[data-tone='outline'] {
+  --bar-hairline: var(--color-border);
+}
+.pds-sticky-action-bar[data-tone='outline'] {
+  --bar-hairline: var(--color-border);
+}
+.pds-sticky-action-bar[data-side='top'] {
+  bottom: auto;
+  top: 0;
+  border-block-start: 0;
+  border-block-end: var(--dim-ssss) solid var(--bar-hairline);
+  --bar-shadow: var(--shadow-dropDown);
+  --bar-in-from: calc(var(--dim-ss) * -1);
 }
 
 @keyframes pds-sticky-action-bar-in {
   from {
     opacity: 0;
-    transform: translateY(var(--dim-ss));
+    transform: translateY(var(--bar-in-from));
   }
   to {
     opacity: 1;

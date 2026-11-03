@@ -7,7 +7,10 @@ import './field.css';
 
 const fieldVariants = cva('pds-field font-sans font-light', {
   variants: {
-    size: { sm: '[--field-h:var(--dim-lll)]', lg: '[--field-h:var(--dim-l)]' },
+    size: {
+      sm: '[--field-h:var(--dim-lll)] [--pds-field-label-top:var(--dim-ssss)]',
+      lg: '[--field-h:var(--dim-l)] [--pds-field-label-top:var(--dim-sss)]',
+    },
     tone: { fill: 'pds-field--fill', outline: 'pds-field--outline' },
     state: { default: '', error: 'pds-field--error' },
   },

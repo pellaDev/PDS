@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { DayButton, DayPicker } from 'react-day-picker';
+import './calendar.css';
 import { Button } from './button';
 declare function Calendar({ className, classNames, showOutsideDays, captionLayout, buttonVariant, formatters, components, ...props }: React.ComponentProps<typeof DayPicker> & {
     buttonVariant?: React.ComponentProps<typeof Button>['variant'];

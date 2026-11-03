@@ -201,6 +201,7 @@
   --type-caption-size: 0.75rem; /* 12/16 -- captions and badge labels. */
   --type-caption-lh: 1rem;
   --dim-negative: -0.25rem; /* -4px */
+  --dim-negativeSsss: -0.1rem; /* -1.6px -- mirror of ssss, added for upward-projecting shadows (shadows.dropUp). The original scale has one negative leaf only. */
   --dim-zero: 0rem; /* 0px */
   --dim-sssss: 0.125rem; /* 2px */
   --dim-ssss: 0.1rem; /* 1.6px -- the original border weight */
@@ -209,7 +210,7 @@
   --dim-s: 0.75rem; /* 12px -- standard button radius */
   --dim-mmmm: 1rem; /* 16px -- radio/checkbox size, field label scale step */
   --dim-mmm: 1.25rem; /* 20px */
-  --dim-mm: 1.5rem; /* 24px -- button minimums / medium padding step */
+  --dim-mm: 1.5rem; /* 24px -- medium padding step. It is no longer a button minimum: the size that used it is out of the shipped set, so the floor applies to every button. */
   --dim-m: 1.75rem; /* 28px */
   --dim-llll: 2rem; /* 32px -- toggle track width */
   --dim-lll: 2.5rem; /* 40px -- button minimums / large padding step */
@@ -221,7 +222,7 @@
   --dim-xxxxl: 7rem; /* 112px */
   --border-width: 0.1rem; /* original border weight (coreDimensions.ssss) */
   --space-regular: 0.5rem; /* 8px */
-  --space-regularMini: 0.25rem; /* 4px -- mini button and tooltip spacing */
+  --space-regularMini: 0.25rem; /* 4px -- mini button and tooltip spacing (the tight step of the original scale). */
   --space-textAndIcon: 0 0.25rem; /* 0 4px */
   --space-paddingLeft: 0 0 0 0.25rem; /* 0 0 0 4px */
   --space-ss: 0.25rem 0.5rem; /* 4 8 -- small button padding pair */
@@ -238,6 +239,7 @@
   --shadow-menuLeft: -0.25rem 0rem 0.5rem rgba(0, 0, 0, 0.08); /* Left-side menu edge: -4 0 8. */
   --shadow-menuRight: 0.25rem 0rem 0.5rem rgba(0, 0, 0, 0.08); /* Right-side menu edge: 4 0 8. */
   --shadow-dropDown: 0rem 0.1rem 0.1rem rgba(0, 0, 0, 0.32); /* Popup/dropdown: 0 1.6 1.6 (32% black) -- the original's own description string. */
+  --shadow-dropUp: 0rem -0.1rem 0.1rem rgba(0, 0, 0, 0.32); /* Upward mirror of dropDown (0 -1.6 1.6, 32% black): the projection a bar pinned to the bottom edge of its region casts up onto the content above it. Added, not in the original export. */
   --shadow-trigger: 0rem 0rem 0rem 0.5rem rgba(0, 0, 0, 0.08); /* Soft 8% halo ring (toggle/trigger focus). */
   --shadow-dots: inset 0rem 0rem 0.25rem rgba(0, 0, 0, 0.32); /* Inset 32% blur for dot/indicator surfaces. */
   --sidebar-width: 16rem; /* Sidebar expanded width (256px) -- default for the --sidebar-width custom property. */
@@ -247,7 +249,10 @@
   --mobile-nav-header-button: 2.5rem; /* Mobile navigation drawer trigger/close size (40x40) -- equals coreDimensions.lll; Button size 'icon', the square label-less composition. */
   --sidebar-side: left; /* Side the mobile navigation drawer opens on (left or right). Emitted as --sidebar-side and as tokens.layout.sidebarSide; MobileNavigationMenuPanel's side prop defaults to it. cva cannot branch on a keyword, so the component reads the generated value as its default. */
   --breakpoint-mobile: 48rem; /* THE shared mobile breakpoint (768px). Single source for every desktop/mobile switch: use-mobile.tsx reads it through the generated tokens, and component CSS media queries must state the same value (scripts/check-breakpoint.mjs fails the build on any other literal). Retires the old 640px/768px split. */
-  --touch-min: 2.75rem; /* Minimum touch target (44px) -- the mobile floor for every interactive control (WCAG 2.5.5). Every size="mobile" variant uses it as its min-height. */
+  --touch-min: 2.75rem; /* Minimum touch target (44px) -- the mobile floor for every interactive control (WCAG 2.5.5). The mobile layer applies it through --pds-touch-min, so no size can opt out; on desktop the same role resolves to behaviour.floorOff, so the layer only adds. */
+  --sheet-width: 75%; /* Default Sheet panel width as a share of the viewport -- tokenizes the fraction the component already used (w-3/4). */
+  --sheet-width-large: 50%; /* Large Sheet panel width as a share of the viewport. The large form is the same sheet on a wider share: fill, hairline, radius and motion are the sheet canon already in overlays.json. */
+  --sheet-width-max: 24rem; /* Cap of the default Sheet panel width (384px) -- tokenizes the max-w-sm the component already used, so a wide screen never turns the default sheet into a 75% panel. The large form has no cap: its share of the viewport is its width. Addition to the original export (the export states no sheet cap), derived from the implementation. */
   --device-width: 24.375rem; /* Device (phone) screen width (390px) -- the demonstration viewport the Device frame renders inside. */
   --device-height: 46.5rem; /* Device (phone) screen height (744px) -- Device frame height; content scrolls inside the screen. */
   --device-radius: 2.5rem; /* Device frame corner radius (40px) -- equals coreDimensions.lll. */
@@ -263,6 +268,7 @@
   --duration-slow: 200ms; /* Sidebar collapse width/left transitions (Tailwind duration-200 in sidebar.tsx). */
   --duration-sheet-closed: 300ms; /* Sheet close (Tailwind duration-300 in sheet.tsx). */
   --duration-sheet-open: 500ms; /* Sheet open (Tailwind duration-500 in sheet.tsx). */
+  --duration-breath: 1200ms; /* Indeterminate loop, one way of the breath (Progress loading form). The calmest repeating cadence the system needs; the same 1200ms the ScrollArea idle-hide uses as a code literal. The only motion value added for this component. */
   --ease-standard: cubic-bezier(0.4, 0, 0.2, 1); /* Standard easing for hover/interaction fades (sidebar action-row contract). */
   --ease-linear: linear; /* Sidebar collapse motion -- the curve behind Tailwind ease-linear. */
   --ease-in-out: ease-in-out; /* Sheet enter/exit -- the curve behind Tailwind ease-in-out. */

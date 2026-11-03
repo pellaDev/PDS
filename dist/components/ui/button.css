@@ -1,0 +1,4 @@
+[data-slot='button'][data-size='mini'],
+[data-slot='button'][data-shape='icon'] {
+  min-width: var(--pds-control-min, var(--pds-touch-min));
+}

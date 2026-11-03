@@ -190,6 +190,7 @@ export declare const tokens: {
     };
     readonly dimensions: {
         readonly negative: "-0.25rem";
+        readonly negativeSsss: "-0.1rem";
         readonly zero: "0rem";
         readonly sssss: "0.125rem";
         readonly ssss: "0.1rem";
@@ -233,6 +234,7 @@ export declare const tokens: {
         readonly menuLeft: "-0.25rem 0rem 0.5rem rgba(0, 0, 0, 0.08)";
         readonly menuRight: "0.25rem 0rem 0.5rem rgba(0, 0, 0, 0.08)";
         readonly dropDown: "0rem 0.1rem 0.1rem rgba(0, 0, 0, 0.32)";
+        readonly dropUp: "0rem -0.1rem 0.1rem rgba(0, 0, 0, 0.32)";
         readonly trigger: "0rem 0rem 0rem 0.5rem rgba(0, 0, 0, 0.08)";
         readonly dots: "inset 0rem 0rem 0.25rem rgba(0, 0, 0, 0.32)";
     };
@@ -245,6 +247,9 @@ export declare const tokens: {
         readonly sidebarSide: "left";
         readonly breakpointMobile: "48rem";
         readonly touchMin: "2.75rem";
+        readonly sheetWidth: "75%";
+        readonly sheetWidthLarge: "50%";
+        readonly sheetWidthMax: "24rem";
         readonly deviceWidth: "24.375rem";
         readonly deviceHeight: "46.5rem";
         readonly deviceRadius: "2.5rem";
@@ -263,6 +268,7 @@ export declare const tokens: {
             readonly slow: "200ms";
             readonly "sheet-closed": "300ms";
             readonly "sheet-open": "500ms";
+            readonly breath: "1200ms";
         };
         readonly easing: {
             readonly standard: "cubic-bezier(0.4, 0, 0.2, 1)";

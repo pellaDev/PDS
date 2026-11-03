@@ -1,0 +1,58 @@
+.pds-progress [data-slot='progress-indicator'] {
+  transition: transform var(--duration-slow) var(--ease-standard);
+}
+.pds-progress[data-color='dynamic'] [data-slot='progress-indicator'] {
+  transition:
+    transform var(--duration-slow) var(--ease-standard),
+    background-color var(--duration-base) var(--ease-standard);
+}
+
+.pds-progress[data-loading] [data-slot='progress-indicator'] {
+  --pds-progress-segment: 0.33;
+  transform-origin: left center;
+  animation: pds-progress-breathe var(--duration-breath) var(--ease-in-out) infinite alternate;
+  transition: none;
+}
+@keyframes pds-progress-breathe {
+  from {
+    transform: scaleX(var(--pds-progress-segment));
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+.pds-progress[data-color='dynamic'] {
+  --pds-progress-band-color: var(--color-destructive);
+  --pds-progress-band-ink: var(--color-destructive-foreground);
+}
+.pds-progress[data-color='dynamic'][data-band='2'] {
+  --pds-progress-band-color: var(--color-accent);
+  --pds-progress-band-ink: var(--color-accent-foreground);
+}
+.pds-progress[data-color='dynamic'][data-band='3'] {
+  --pds-progress-band-color: var(--color-success);
+  --pds-progress-band-ink: var(--color-success-foreground);
+}
+.pds-progress[data-color='dynamic'][data-direction='descending'][data-band='1'] {
+  --pds-progress-band-color: var(--color-success);
+  --pds-progress-band-ink: var(--color-success-foreground);
+}
+.pds-progress[data-color='dynamic'][data-direction='descending'][data-band='3'] {
+  --pds-progress-band-color: var(--color-destructive);
+  --pds-progress-band-ink: var(--color-destructive-foreground);
+}
+
+.pds-progress [data-slot='progress-label'] {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--type-body2-size);
+  line-height: var(--type-body2-lh);
+  color: var(--pds-surface-fg);
+}
+.pds-progress[data-segment='fill'] [data-slot='progress-label'] {
+  color: var(--pds-progress-band-ink, var(--color-primary-foreground));
+}

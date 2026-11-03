@@ -1,0 +1,14 @@
+.pds-avatar[data-interactive] {
+  cursor: pointer;
+}
+.pds-avatar[data-interactive]:is(:active, [data-dragged]) {
+  cursor: grabbing;
+}
+
+.pds-avatar[data-interactive]:is([data-disabled], [aria-disabled]) {
+  opacity: var(--opacity-disabled);
+  pointer-events: none;
+}
+.pds-avatar[data-interactive][data-dragged]::after {
+  background-color: var(--elevate-2);
+}

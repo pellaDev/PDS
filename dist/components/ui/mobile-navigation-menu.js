@@ -17,7 +17,8 @@ const MobileNavigationMenuTrigger = React.forwardRef(({ className, children, ...
   Button,
   {
     ref,
-    size: "icon",
+    size: "large",
+    shape: "icon",
     "data-slot": "mobile-navigation-menu-trigger",
     "aria-label": "Open navigation menu",
     className: cn("shrink-0", className),
@@ -30,7 +31,8 @@ const MobileNavigationMenuClose = React.forwardRef(({ className, children, ...pr
   Button,
   {
     ref,
-    size: "icon",
+    size: "large",
+    shape: "icon",
     "data-slot": "mobile-navigation-menu-close",
     "aria-label": "Close navigation menu",
     className: cn("ml-auto shrink-0", className),

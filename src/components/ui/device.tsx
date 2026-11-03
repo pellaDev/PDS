@@ -28,7 +28,7 @@ function DeviceHomeIndicator({ className, ...props }: React.HTMLAttributes<HTMLD
 }
 
 function DeviceContent({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {
-  return <div data-slot="device-content" className={cn(className)} {...props} />;
+  return <div data-slot="device-content" data-pds-region className={cn(className)} {...props} />;
 }
 
 function Device({

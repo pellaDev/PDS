@@ -121,6 +121,7 @@ const TemplateCanvas = React.forwardRef(
       ref,
       "data-slot": "template-canvas",
       "data-pds-surface": "alternative",
+      "data-pds-region": true,
       "data-layout": layout,
       className: cn("h-full min-h-0 w-full pds-scrollbar overflow-auto", className),
       ...props

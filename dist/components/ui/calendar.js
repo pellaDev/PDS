@@ -3,6 +3,7 @@ import { jsx } from "react/jsx-runtime";
 import * as React from "react";
 import { DayPicker, getDefaultClassNames } from "react-day-picker";
 import { cn } from "../../lib/utils";
+import "./calendar.css";
 import { Button, buttonVariants } from "./button";
 import { Icon } from "./icon";
 function Calendar({
@@ -136,7 +137,8 @@ function CalendarDayButton({
     Button,
     {
       ref,
-      size: "icon",
+      size: "large",
+      shape: "icon",
       "data-day": day.date.toLocaleDateString(),
       "data-selected-single": modifiers.selected && !modifiers.range_start && !modifiers.range_end && !modifiers.range_middle,
       "data-range-start": modifiers.range_start,

@@ -1,0 +1,36 @@
+[data-slot='calendar'] [data-day] button {
+  --pds-calendar-number: var(--color-primary);
+  color: var(--pds-calendar-number);
+}
+
+[data-slot='calendar'] [data-day][data-today] button {
+  --pds-calendar-number: var(--color-accent-foreground);
+}
+[data-slot='calendar'] [data-day][data-outside] button {
+  --pds-calendar-number: var(--color-muted-foreground);
+}
+[data-slot='calendar'] [data-day] button[data-selected-single],
+[data-slot='calendar'] [data-day][data-range-start] button,
+[data-slot='calendar'] [data-day][data-range-end] button {
+  --pds-calendar-number: var(--color-primary-foreground);
+}
+
+[data-slot='calendar'] [data-day][data-range-middle] button {
+  --pds-calendar-number: var(--color-accent-foreground);
+}
+
+:root:not(.dark) [data-pds-surface='base'] [data-slot='calendar'] [data-day] button {
+  --elevate-1: color-mix(in srgb, var(--pds-surface-fg) 10%, transparent);
+}
+.dark
+  [data-slot='calendar']
+  [data-day]
+  button:not([data-selected-single]):not([data-range-start]):not([data-range-end]):not(
+    [data-range-middle]
+  ):hover {
+  --pds-calendar-number: var(--color-black);
+}
+
+.dark [data-slot='calendar'] [data-day] button[data-selected-single] {
+  border: var(--dim-ssss) solid var(--color-white);
+}

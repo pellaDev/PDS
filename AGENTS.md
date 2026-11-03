@@ -77,13 +77,13 @@ Files that need custom styles pull them in automatically — no per-component CS
 | --- | --- | --- |
 | Input | `input` | Text entry with validation states |
 | InputOTP | `input-otp` | Segmented one-time code entry |
-| Textarea | `textarea` | Multiline text entry |
+| Textarea | `textarea` | Multiline text entry; `autoGrow` with no upper limit, plus the corner resize handle |
 | Checkbox | `checkbox` | Checkbox with brand fill states |
 | Radio | `radio` | Single-choice radio control |
 | Slider | `slider` | Single-value and range slider |
 | Switch | `switch` | On/off switch, optional inline label |
 | Calendar | `calendar` | Single-date calendar picker |
-| Field | `field` | Floating-label input (fill/outline × small/large) |
+| Field | `field` | Floating-label input (fill/outline × small/large); the label truncates with an ellipsis when the row cannot hold it, the trailing-icon slot has priority and keeps 2px of air before the glyph |
 | Form | `form` | Validated form composition — labels, messages, field wiring |
 | Label | `label` | Accessible label for form controls |
 | ColorPicker | `color-picker` | Flat swatch + native color input; optional WCAG contrast check (V indicator) against a list of backgrounds |
@@ -94,7 +94,7 @@ Files that need custom styles pull them in automatically — no per-component CS
 | --- | --- | --- |
 | Dialog | `dialog` | Modal dialog with header, footer, actions |
 | AlertDialog | `alert-dialog` | Blocking confirmation for consequential actions |
-| Sheet | `sheet` | Edge-aligned slide-in panel |
+| Sheet | `sheet` | Edge-aligned slide-in panel, `default` 75% or `large` 50% of the screen |
 | Drawer | `drawer` | Bottom overlay panel (touch-friendly) |
 | Popover | `popover` | Anchored interactive content |
 | HoverCard | `hover-card` | Rich context revealed on hover |
@@ -118,7 +118,7 @@ Files that need custom styles pull them in automatically — no per-component CS
 
 | Component | File | What it does |
 | --- | --- | --- |
-| Avatar | `avatar` | Profile image with fallback |
+| Avatar | `avatar` | Profile image with fallback; `shape` circle or rounded square (`--radius-md`); static or interactive (the Button state set) |
 | Badge | `badge` | Simple markers and numbered pills |
 | Card | `card` | Grouped content block (header/body/footer) |
 | Table | `table` | Structured tabular data |
@@ -135,7 +135,7 @@ Files that need custom styles pull them in automatically — no per-component CS
 | Component | File | What it does |
 | --- | --- | --- |
 | Alert | `alert` | Inline informational or destructive message |
-| Progress | `progress` | Determinate progress bar |
+| Progress | `progress` | Progress bar, thin or thick with the percent label inside; `loading` is the indeterminate breath; `color="dynamic"` colors the indicator by band (three semantic roles, one third of the scale each) and `direction` reverses the reading |
 | Skeleton | `skeleton` | Loading placeholder shapes |
 | Spinner | `spinner` | Indeterminate loading indicator |
 | Toast | `toast` | Provider-backed transient notifications |
@@ -148,7 +148,7 @@ Files that need custom styles pull them in automatically — no per-component CS
 | --- | --- | --- |
 | Separator | `separator` | Horizontal/vertical divider |
 | ScrollArea | `scroll-area` | Bounded scrolling region with styled scrollbar |
-| StickyActionBar | `sticky-action-bar` | Row of actions pinned to the bottom edge of the container that hosts them (`position: sticky; bottom: 0`); the bar belongs to the window, so it draws one bottom edge |
+| StickyActionBar | `sticky-action-bar` | Row of actions pinned to the edge of its region (`data-pds-region`): the window root, the Template canvas or the Device screen, at full width; `tone` fill or outline, `side` bottom or top |
 | Template | `template` | Application frame — header, sub-header, sidebars, canvas, footer |
 | Resizable | `resizable` | Resizable panel group (used by `TemplateBody`) |
 | Layout | `layout` | Composition primitives — `Stack`, `Row`, `Grid`, `Panel`; gap and radius are token-driven |
@@ -179,7 +179,8 @@ One brand style; size and state are props, not separate components.
 
 | Prop | Values | Notes |
 | --- | --- | --- |
-| `size` | `mini` · `small` (default, the desktop labelled row) · `large` (what `small` becomes past the breakpoint) · `icon` (the icon shape of `large`, shown on the mobile side) · `special` (mobile side, icon stacked above the label) | Prefer no `size` at all: `small` is the default and the mobile layer only raises the touch floor. The small ⇄ large mapping is documented in `tokens/components/buttons.json` → `pds.comp.button.sizeSwap` (documentation-only: DTCG has no mapping type, and the CSS layer does not swap padding) |
+| `size` | `mini` (the 24px icon-only tile, the only size that opts out of the touch floor) · `small` (default, the desktop labelled row) · `large` (what `small` becomes past the breakpoint) · `special` (mobile side, icon stacked above the label) | Prefer no `size` at all: `small` is the default and the mobile layer only raises the touch floor. The small ⇄ large mapping is documented in `tokens/components/buttons.json` → `pds.comp.button.sizeSwap` (documentation-only: DTCG has no mapping type, and the CSS layer does not swap padding) |
+| `shape` | `label` (default) · `icon` | `icon` is not a size: it is the icon-only form of the size you pass, so `small shape="icon"` is the small button drawn as a square, on the side that size stands on |
 | `variant` | `default` · `destructive` · `link` | States of the same button, not separate types |
 | `asChild` | boolean | Render a child element (e.g. `<a>`) with button styling — Radix Slot |
 | `tooltip` | string | Tooltip text; wins over `title`/`aria-label` when deriving the auto-tooltip |
@@ -189,16 +190,13 @@ Plus all native `<button>` props (`disabled`, `onClick`, …).
 ```tsx
 import { ArrowRight, Loader2, Mail, Pencil, Sparkles } from "lucide-react"
 import { Button } from "@workspace/pds/components/ui/button"
-import { Tooltip } from "@workspace/pds/components/ui/tooltip"
 
 export function Example() {
   return (
     <div className="flex flex-wrap items-center gap-3">
-      {/* Icon-only: mini on both sides; icon is the icon shape of the large composition (mobile side) */}
-      <Button size="mini" aria-label="Edit"><Pencil /></Button>
-      <Tooltip content="Send mail">
-        <Button size="icon" aria-label="Send mail"><Mail /></Button>
-      </Tooltip>
+      {/* Icon-only: shape="icon" is the same size drawn as a square; mini is the 24px tile */}
+      <Button size="small" shape="icon" aria-label="Edit"><Pencil /></Button>
+      <Button size="mini" aria-label="Send mail"><Mail /></Button>
 
       {/* Labelled row with optional left/right icon — no size prop: small is the default and the same
           button reads as the large composition past the breakpoint */}
@@ -220,7 +218,7 @@ export function Example() {
 ```
 
 - Icon-only buttons must carry an `aria-label` — it also feeds the tooltip text.
-- `size="mini"`/`"small"` get a PDS Tooltip automatically when a label is derivable (`tooltip` → `title` → `aria-label`); for other sizes wrap in `<Tooltip>` explicitly if you want one.
+- The component emits the PDS Tooltip automatically when a name is derivable (`tooltip` → `title` → `aria-label`) and the button is `small` or icon-only **on the desktop side** — a tooltip needs hover, and hover does not exist past the breakpoint. Elsewhere wrap in `<Tooltip>` explicitly if you want one.
 - Use `asChild` to keep real semantics (links, inputs) while getting button styling.
 - Loading state = `disabled` + spinning icon; there is no dedicated loading variant.
 
@@ -452,7 +450,7 @@ export function AppFrame() {
 - **Command** — keyboard-first palette: `Command` + `CommandInput`, `CommandList`, `CommandGroup`, `CommandItem`, `CommandEmpty`, `CommandShortcut`, `CommandSeparator`; `CommandDialog` for the dialog form. Peer: cmdk.
 - **Chart** — `ChartContainer` takes a `config` object mapping series keys to `{ label?, icon?, color | theme }` and wraps recharts elements; `ChartTooltip`/`ChartTooltipContent`, `ChartLegend`/`ChartLegendContent`, `ChartStyle`. Peer: recharts.
 - **Drawer** — bottom sheet on vaul (peer: vaul): `Drawer > DrawerTrigger + DrawerContent(DrawerHeader(DrawerTitle, DrawerDescription), …, DrawerFooter)`; `DrawerClose` closes from anywhere inside.
-- **Avatar** — two scales only: `default` (profile, `--dim-lll` = 40px) and `xs` (row scale, `--dim-mmm` = 20px) for a table row, a dropdown row, or a sidebar menu item. The component owns its own `--avatar-size` variable, so a host that needs the row scale names the scale, never the pixel.
+- **Avatar** — two scales only: `default` (profile, `--dim-lll` = 40px) and `xs` (row scale, `--dim-mmm` = 20px) for a table row, a dropdown row, or a sidebar menu item. The component owns its own `--avatar-size` variable, so a host that needs the row scale names the scale, never the pixel. `shape` is `circle` (default) or `roundedSquare` (`--radius-md`); `interactive` avatars get the Button state set (hover, pressed, disabled, dragged) and carry `role="button"`, static ones are plain figures — see `tokens/components/avatar.json`.
 - **Item** — list row: `Item > ItemMedia + ItemContent(ItemHeader(ItemTitle, ItemDescription), ItemActions) + ItemFooter?`; group rows in `ItemGroup`, divide with `ItemSeparator`.
 - **Toast / Toaster** — mount `<Toaster />` once at the app root; fire notifications with `toast({ title, description, action? })` from `/hooks/use-toast` (also exported as `useToast`). The raw primitives (`ToastProvider`, `ToastViewport`, `Toast`, …) are available for custom setups.
 
@@ -535,12 +533,12 @@ export function SettingsSection() {
   return (
     <div className="flex flex-wrap items-center gap-4">
       {/* Dark / light */}
-      <Button size="mini" aria-label="Toggle theme" onClick={() => document.documentElement.classList.toggle("dark")}>
+      <Button size="small" aria-label="Toggle theme" onClick={() => document.documentElement.classList.toggle("dark")}>
         {dark ? "Light mode" : "Dark mode"}
       </Button>
 
       {/* Field style */}
-      <Button size="mini" aria-label="Toggle field style" onClick={() => setPdsConfig({ fieldStyle: cfg.fieldStyle === "fill" ? "outline" : "fill" })}>
+      <Button size="small" aria-label="Toggle field style" onClick={() => setPdsConfig({ fieldStyle: cfg.fieldStyle === "fill" ? "outline" : "fill" })}>
         Fields: {cfg.fieldStyle}
       </Button>
 

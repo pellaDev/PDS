@@ -14,17 +14,21 @@ declare const Carousel: React.ForwardRefExoticComponent<React.HTMLAttributes<HTM
 declare const CarouselContent: React.ForwardRefExoticComponent<React.HTMLAttributes<HTMLDivElement> & React.RefAttributes<HTMLDivElement>>;
 declare const CarouselItem: React.ForwardRefExoticComponent<React.HTMLAttributes<HTMLDivElement> & React.RefAttributes<HTMLDivElement>>;
 declare const CarouselPrevious: React.ForwardRefExoticComponent<Omit<React.ClassAttributes<HTMLButtonElement> & React.ButtonHTMLAttributes<HTMLButtonElement> & import("class-variance-authority").VariantProps<(props?: ({
-    size?: "small" | "mini" | "large" | "special" | "icon" | null | undefined;
+    size?: "small" | "mini" | "large" | "special" | null | undefined;
+    shape?: "label" | "icon" | null | undefined;
     variant?: "link" | "default" | "destructive" | null | undefined;
 } & import("class-variance-authority/types").ClassProp) | undefined) => string> & {
     asChild?: boolean;
+    shape?: "label" | "icon";
     tooltip?: string;
 }, "ref"> & React.RefAttributes<HTMLButtonElement>>;
 declare const CarouselNext: React.ForwardRefExoticComponent<Omit<React.ClassAttributes<HTMLButtonElement> & React.ButtonHTMLAttributes<HTMLButtonElement> & import("class-variance-authority").VariantProps<(props?: ({
-    size?: "small" | "mini" | "large" | "special" | "icon" | null | undefined;
+    size?: "small" | "mini" | "large" | "special" | null | undefined;
+    shape?: "label" | "icon" | null | undefined;
     variant?: "link" | "default" | "destructive" | null | undefined;
 } & import("class-variance-authority/types").ClassProp) | undefined) => string> & {
     asChild?: boolean;
+    shape?: "label" | "icon";
     tooltip?: string;
 }, "ref"> & React.RefAttributes<HTMLButtonElement>>;
 export { type CarouselApi, Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext, };

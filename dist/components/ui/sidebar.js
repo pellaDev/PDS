@@ -190,7 +190,8 @@ function SidebarTrigger({ className, onClick, ...props }) {
     {
       "data-sidebar": "trigger",
       "data-slot": "sidebar-trigger",
-      size: "icon",
+      size: "large",
+      shape: "icon",
       className: cn(
         "h-7 w-7 bg-transparent text-foreground [min-height:var(--pds-touch-min)] [min-width:var(--pds-touch-min)]",
         className

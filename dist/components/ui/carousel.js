@@ -132,7 +132,7 @@ const CarouselItem = React.forwardRef(
 );
 CarouselItem.displayName = "CarouselItem";
 const CarouselPrevious = React.forwardRef(
-  ({ className, variant = "link", size = "icon", ...props }, ref) => {
+  ({ className, variant = "link", size = "large", shape = "icon", ...props }, ref) => {
     const { orientation, scrollPrev, canScrollPrev } = useCarousel();
     return /* @__PURE__ */ jsxs(
       Button,
@@ -140,6 +140,7 @@ const CarouselPrevious = React.forwardRef(
         ref,
         variant,
         size,
+        shape,
         className: cn(
           "absolute z-10 flex h-8 w-8 items-center justify-center rounded-full",
           orientation === "horizontal" ? "left-2 top-1/2 -translate-y-1/2" : "-top-12 left-1/2 -translate-x-1/2 rotate-90",
@@ -158,7 +159,7 @@ const CarouselPrevious = React.forwardRef(
 );
 CarouselPrevious.displayName = "CarouselPrevious";
 const CarouselNext = React.forwardRef(
-  ({ className, variant = "link", size = "icon", ...props }, ref) => {
+  ({ className, variant = "link", size = "large", shape = "icon", ...props }, ref) => {
     const { orientation, scrollNext, canScrollNext } = useCarousel();
     return /* @__PURE__ */ jsxs(
       Button,
@@ -166,6 +167,7 @@ const CarouselNext = React.forwardRef(
         ref,
         variant,
         size,
+        shape,
         className: cn(
           "absolute z-10 flex h-8 w-8 items-center justify-center rounded-full",
           orientation === "horizontal" ? "right-2 top-1/2 -translate-y-1/2" : "-bottom-12 left-1/2 -translate-x-1/2 rotate-90",

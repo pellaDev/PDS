@@ -175,7 +175,7 @@ const CarouselItem = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLD
 CarouselItem.displayName = 'CarouselItem';
 
 const CarouselPrevious = React.forwardRef<HTMLButtonElement, React.ComponentProps<typeof Button>>(
-  ({ className, variant = 'link', size = 'icon', ...props }, ref) => {
+  ({ className, variant = 'link', size = 'large', shape = 'icon', ...props }, ref) => {
     const { orientation, scrollPrev, canScrollPrev } = useCarousel();
 
     return (
@@ -183,6 +183,7 @@ const CarouselPrevious = React.forwardRef<HTMLButtonElement, React.ComponentProp
         ref={ref}
         variant={variant}
         size={size}
+        shape={shape}
         className={cn(
           'absolute z-10 flex h-8 w-8 items-center justify-center rounded-full',
           orientation === 'horizontal'
@@ -203,7 +204,7 @@ const CarouselPrevious = React.forwardRef<HTMLButtonElement, React.ComponentProp
 CarouselPrevious.displayName = 'CarouselPrevious';
 
 const CarouselNext = React.forwardRef<HTMLButtonElement, React.ComponentProps<typeof Button>>(
-  ({ className, variant = 'link', size = 'icon', ...props }, ref) => {
+  ({ className, variant = 'link', size = 'large', shape = 'icon', ...props }, ref) => {
     const { orientation, scrollNext, canScrollNext } = useCarousel();
 
     return (
@@ -211,6 +212,7 @@ const CarouselNext = React.forwardRef<HTMLButtonElement, React.ComponentProps<ty
         ref={ref}
         variant={variant}
         size={size}
+        shape={shape}
         className={cn(
           'absolute z-10 flex h-8 w-8 items-center justify-center rounded-full',
           orientation === 'horizontal'

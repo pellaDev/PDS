@@ -218,6 +218,7 @@ export const tokens = {
   },
   "dimensions": {
     "negative": "-0.25rem",
+    "negativeSsss": "-0.1rem",
     "zero": "0rem",
     "sssss": "0.125rem",
     "ssss": "0.1rem",
@@ -261,6 +262,7 @@ export const tokens = {
     "menuLeft": "-0.25rem 0rem 0.5rem rgba(0, 0, 0, 0.08)",
     "menuRight": "0.25rem 0rem 0.5rem rgba(0, 0, 0, 0.08)",
     "dropDown": "0rem 0.1rem 0.1rem rgba(0, 0, 0, 0.32)",
+    "dropUp": "0rem -0.1rem 0.1rem rgba(0, 0, 0, 0.32)",
     "trigger": "0rem 0rem 0rem 0.5rem rgba(0, 0, 0, 0.08)",
     "dots": "inset 0rem 0rem 0.25rem rgba(0, 0, 0, 0.32)"
   },
@@ -273,6 +275,9 @@ export const tokens = {
     "sidebarSide": "left",
     "breakpointMobile": "48rem",
     "touchMin": "2.75rem",
+    "sheetWidth": "75%",
+    "sheetWidthLarge": "50%",
+    "sheetWidthMax": "24rem",
     "deviceWidth": "24.375rem",
     "deviceHeight": "46.5rem",
     "deviceRadius": "2.5rem",
@@ -290,7 +295,8 @@ export const tokens = {
       "base": "150ms",
       "slow": "200ms",
       "sheet-closed": "300ms",
-      "sheet-open": "500ms"
+      "sheet-open": "500ms",
+      "breath": "1200ms"
     },
     "easing": {
       "standard": "cubic-bezier(0.4, 0, 0.2, 1)",
