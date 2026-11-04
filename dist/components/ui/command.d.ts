@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { type DialogProps } from '@radix-ui/react-dialog';
+import './command.css';
 import './menu-list.css';
 import './scrollbar.css';
 declare const Command: React.ForwardRefExoticComponent<Omit<{

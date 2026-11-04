@@ -5,6 +5,7 @@ import { cn } from "../../lib/utils";
 import { usePdsConfig } from "../../config";
 import "./field.css";
 import "./scrollbar.css";
+import { growToContent } from "./field";
 const textareaVariants = cva("pds-field pds-scrollbar font-light", {
   variants: {
     size: { sm: "[--field-h:var(--dim-lll)]", lg: "[--field-h:var(--dim-l)]" },
@@ -12,10 +13,6 @@ const textareaVariants = cva("pds-field pds-scrollbar font-light", {
   },
   defaultVariants: { size: "sm" }
 });
-function growToContent(el) {
-  el.style.height = "auto";
-  el.style.height = `${el.scrollHeight}px`;
-}
 const Textarea = React.forwardRef(
   ({ className, size, tone, autoGrow = true, onInput, value, defaultValue, rows, ...props }, ref) => {
     const { fieldStyle } = usePdsConfig();
@@ -32,6 +29,7 @@ const Textarea = React.forwardRef(
       "textarea",
       {
         ref: setRef,
+        "data-auto-grow": autoGrow,
         ...props,
         value,
         defaultValue,

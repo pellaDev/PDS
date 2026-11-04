@@ -2,7 +2,7 @@
   "$description": "Baseline snapshot for scripts/check-surface.mjs. A container background inside src/components/ui/ must read a surface ROLE (bg-surface, bg-surface-card, bg-surface-canvas, bg-surface-field, text-surface-fg), never a static palette step, because base and alternative are places, not colors. Every hit here is recorded so the gate fails on NEW static fills. token-faithful = the token export itself declares a fixed palette step for that component, so the line is correct. pending-role = the line should read a role and is recorded as debt: fixing it changes dark-mode rendering, so it is a design decision, not a mechanical rewrite. The baseline may only shrink.",
   "generatedBy": "scripts/check-surface.mjs baseline mode",
   "scannedAt": "2026-10-29",
-  "total": 31,
+  "total": 30,
   "files": {
     "alert-dialog.tsx": {
       "kind": "pending-role",
@@ -55,7 +55,7 @@
       "note": "disabled fill state declared by fields.json",
       "count": 1,
       "lines": [
-        115
+        160
       ],
       "marked": 0
     },
@@ -142,16 +142,15 @@
       "note": "overlay container should read the card/popover role",
       "count": 1,
       "lines": [
-        35
+        40
       ],
       "marked": 0
     },
     "sidebar.tsx": {
       "kind": "pending-role",
       "note": "chrome containers read the base step",
-      "count": 2,
+      "count": 1,
       "lines": [
-        323,
         546
       ],
       "marked": 0

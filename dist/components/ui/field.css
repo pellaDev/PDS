@@ -222,3 +222,21 @@ textarea.pds-field::placeholder {
       var(--pds-field-label-gap)
   );
 }
+
+.pds-field--multiline {
+  height: auto;
+  min-height: calc(var(--field-h) * 2);
+}
+.pds-field--multiline .pds-field__input {
+  height: auto;
+  min-height: 0;
+  resize: vertical;
+  overflow: hidden;
+}
+.pds-field--multiline[data-auto-grow='false'] .pds-field__input {
+  overflow-y: auto;
+}
+.pds-field--multiline .pds-field__label {
+  top: var(--pds-field-label-top, var(--dim-ssss));
+  transform: none;
+}

@@ -1,0 +1,6 @@
+{
+  "usage/button.md": 60,
+  "usage/sidebar.md": 121,
+  "usage/template.md": 75,
+  "$note": "Recorded exceedances of the 40-line component-doc cap. Values may only shrink; an entry is deleted when the doc is pruned back to the cap."
+}
