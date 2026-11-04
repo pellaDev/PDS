@@ -169,6 +169,9 @@ textarea.pds-field {
   height: auto;
   min-height: calc(var(--field-h) * 2);
   resize: vertical;
+  overflow: hidden;
+}
+textarea.pds-field[data-auto-grow='false'] {
   overflow-y: auto;
 }
 
