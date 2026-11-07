@@ -14,4 +14,11 @@ export interface TagToggleProps {
     children?: React.ReactNode;
 }
 declare function TagToggle({ className, variant, defaultOn, children }: TagToggleProps): React.JSX.Element;
-export { Tag, TagToggle, tagVariants };
+export interface TagInputProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'children'> {
+    tags: string[];
+    onAdd: (tag: string) => void;
+    onRemove: (tag: string) => void;
+    placeholder?: string;
+}
+declare function TagInput({ tags, onAdd, onRemove, placeholder, className, ...props }: TagInputProps): React.JSX.Element;
+export { Tag, TagToggle, tagVariants, TagInput };

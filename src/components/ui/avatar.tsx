@@ -7,37 +7,34 @@ import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '../../lib/utils';
 import './avatar.css';
 
-const avatarVariants = cva(
-  'pds-avatar relative flex shrink-0 overflow-hidden bg-surface-canvas [width:var(--avatar-size)] [height:var(--avatar-size)]',
-  {
-    variants: {
-      size: {
-        xs: '[--avatar-size:var(--dim-mmm)] [font-size:var(--type-caption-size)]',
+const avatarVariants = cva('pds-avatar relative flex shrink-0 overflow-hidden bg-surface-canvas', {
+  variants: {
+    size: {
+      xs: '[--avatar-size:var(--dim-mmm)] [font-size:var(--type-caption-size)]',
 
-        default: '[--avatar-size:var(--dim-lll)] [font-size:var(--type-body2-size)]',
-      },
-      shape: {
-        circle: 'rounded-full',
-
-        roundedSquare: 'rounded-[var(--radius-md)]',
-      },
-      interactive: {
-        static: '',
-
-        interactive:
-          'cursor-pointer hover-elevate active-elevate-2 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-[var(--opacity-disabled)]',
-      },
-      state: {
-        default: '',
-
-        error: '[color:var(--color-destructive-foreground)]',
-
-        loading: '',
-      },
+      default: '[--avatar-size:var(--dim-lll)] [font-size:var(--type-body2-size)]',
     },
-    defaultVariants: { size: 'default', shape: 'circle', interactive: 'static' },
+    shape: {
+      circle: 'rounded-full',
+
+      roundedSquare: 'rounded-[var(--radius-md)]',
+    },
+    interactive: {
+      static: '',
+
+      interactive:
+        'cursor-pointer hover-elevate active-elevate-2 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-[var(--opacity-disabled)]',
+    },
+    state: {
+      default: '',
+
+      error: '[color:var(--color-destructive-foreground)]',
+
+      loading: '',
+    },
   },
-);
+  defaultVariants: { size: 'default', shape: 'circle', interactive: 'static' },
+});
 
 const Avatar = React.forwardRef<
   React.ElementRef<typeof AvatarPrimitive.Root>,

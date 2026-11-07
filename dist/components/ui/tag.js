@@ -3,6 +3,9 @@ import * as React from "react";
 import { cva } from "class-variance-authority";
 import { X } from "lucide-react";
 import { cn } from "../../lib/utils";
+import { usePdsConfig } from "../../config";
+import { useIsMobile } from "../../hooks/use-mobile";
+import { fieldVariants } from "./field";
 const tagVariants = cva(
   "inline-flex items-center whitespace-nowrap border-transparent font-light font-sans [border-radius:var(--radius-sm)] [padding-inline:var(--dim-sss)] [font-size:var(--type-caption-size)] [line-height:var(--type-caption-lh)] [letter-spacing:0.25px]",
   {
@@ -75,8 +78,55 @@ function TagToggle({ className, variant, defaultOn = true, children }) {
     )
   ] });
 }
+function TagInput({
+  tags,
+  onAdd,
+  onRemove,
+  placeholder = "Add a tag",
+  className,
+  ...props
+}) {
+  const { fieldStyle } = usePdsConfig();
+  const size = useIsMobile() ? "lg" : "sm";
+  const [draft, setDraft] = React.useState("");
+  const commit = () => {
+    const value = draft.trim().replace(/,$/, "");
+    if (value && !tags.includes(value)) onAdd(value);
+    setDraft("");
+  };
+  return /* @__PURE__ */ jsxs(
+    "div",
+    {
+      "data-composition": "tag-input",
+      className: cn(fieldVariants({ size, tone: fieldStyle }), className),
+      ...props,
+      children: [
+        tags.map((tag) => /* @__PURE__ */ jsx(Tag, { variant: "default", onDismiss: () => onRemove(tag), children: tag }, tag)),
+        /* @__PURE__ */ jsx(
+          "input",
+          {
+            className: "pds-field__input",
+            value: draft,
+            onChange: (event) => setDraft(event.target.value),
+            onKeyDown: (event) => {
+              if (event.key === "Enter" || event.key === ",") {
+                event.preventDefault();
+                commit();
+              } else if (event.key === "Backspace" && draft === "" && tags.length) {
+                onRemove(tags[tags.length - 1]);
+              }
+            },
+            placeholder: tags.length ? "" : placeholder,
+            "aria-label": placeholder
+          }
+        )
+      ]
+    }
+  );
+}
 export {
   Tag,
+  TagInput,
   TagToggle,
   tagVariants
 };

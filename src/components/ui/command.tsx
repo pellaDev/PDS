@@ -7,6 +7,7 @@ import { Search } from 'lucide-react';
 
 import { cn } from '../../lib/utils';
 import { usePdsConfig } from '../../config';
+import { useIsMobile } from '../../hooks/use-mobile';
 
 import { fieldVariants } from './field';
 import './command.css';
@@ -41,15 +42,21 @@ const CommandDialog = ({ children, ...props }: DialogProps) => {
   );
 };
 
+interface CommandInputProps extends React.ComponentPropsWithoutRef<typeof CommandPrimitive.Input> {
+  fieldSize?: 'sm' | 'lg';
+}
+
 const CommandInput = React.forwardRef<
   React.ElementRef<typeof CommandPrimitive.Input>,
-  React.ComponentPropsWithoutRef<typeof CommandPrimitive.Input>
->(({ className, ...props }, ref) => {
+  CommandInputProps
+>(({ className, fieldSize, ...props }, ref) => {
   const { fieldStyle } = usePdsConfig();
+
+  const size = fieldSize ?? (useIsMobile() ? 'lg' : 'sm');
 
   return (
     <div
-      className={cn(fieldVariants({ size: 'sm', tone: fieldStyle }), 'pds-command__row', className)}
+      className={cn(fieldVariants({ size, tone: fieldStyle }), 'pds-command__row', className)}
       cmdk-input-wrapper=""
     >
       <Search className="pds-command__icon" aria-hidden />

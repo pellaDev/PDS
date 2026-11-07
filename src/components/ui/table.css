@@ -1,19 +1,32 @@
+.pds-table-row,
+.pds-table-foot {
+  position: relative;
+  background-repeat: no-repeat;
+  background-size: 100% var(--dim-ssss);
+
+  background-image: linear-gradient(var(--pds-separator-solid), var(--pds-separator-solid)),
+    var(--pds-separator-image-h);
+}
+
+.pds-table-row {
+  background-position: bottom;
+}
+.pds-table-foot {
+  background-position: top;
+}
+
+[data-slot='table-body'] .pds-table-row:last-child {
+  background-image: none;
+}
+
 .pds-table-actionbar {
-  --tbl-action-fade-width: 48px;
-  --tbl-action-fill: hsl(var(--secondary));
-  isolation: isolate;
-  padding-left: var(--tbl-action-fade-width);
+  text-align: right;
+  opacity: var(--pds-actionbar-reveal);
+  pointer-events: var(--pds-actionbar-events);
   transition: opacity var(--duration-base) var(--ease-standard);
 }
 
-.pds-table-actionbar::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  border-radius: inherit;
-  background-color: var(--tbl-action-fill);
-
-  -webkit-mask-image: linear-gradient(to right, transparent 0, #000 var(--tbl-action-fade-width));
-  mask-image: linear-gradient(to right, transparent 0, #000 var(--tbl-action-fade-width));
+.pds-table-row:hover .pds-table-actionbar {
+  opacity: 1;
+  pointer-events: auto;
 }

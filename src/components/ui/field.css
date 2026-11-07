@@ -227,14 +227,24 @@ textarea.pds-field::placeholder {
 }
 
 .pds-field--multiline {
+  display: flex;
+  flex-direction: column;
   height: auto;
   min-height: calc(var(--field-h) * 2);
 }
 .pds-field--multiline .pds-field__input {
   height: auto;
+  flex-grow: 1;
   min-height: 0;
   resize: vertical;
   overflow: hidden;
+}
+
+.pds-field--multiline.pds-field--fill {
+  padding-inline: var(--dim-zero);
+}
+.pds-field--multiline.pds-field--fill .pds-field__input {
+  padding-inline: var(--pds-field-icon-inset);
 }
 .pds-field--multiline[data-auto-grow='false'] .pds-field__input {
   overflow-y: auto;
@@ -242,4 +252,23 @@ textarea.pds-field::placeholder {
 .pds-field--multiline .pds-field__label {
   top: var(--pds-field-label-top, var(--dim-ssss));
   transform: none;
+}
+
+.pds-field[data-composition='tag-input'] {
+  display: flex;
+  align-items: center;
+  flex-wrap: var(--pds-row-wrap);
+  gap: var(--pds-field-label-gap);
+  padding-inline: var(--pds-field-icon-inset);
+  height: auto;
+  min-height: var(--field-h);
+}
+
+.pds-field[data-composition='tag-input'] .pds-field__input {
+  flex: 1 0 auto;
+  padding-inline: 0;
+}
+
+.pds-field[data-composition='tag-input'] .pds-field__input::placeholder {
+  color: inherit;
 }

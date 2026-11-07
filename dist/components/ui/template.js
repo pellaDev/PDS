@@ -7,13 +7,19 @@ import { ResizablePanelGroup, ResizablePanel, ResizableHandle } from "./resizabl
 import "./template.css";
 import "./scrollbar.css";
 const Template = React.forwardRef(
-  ({ className, ...props }, ref) => /* @__PURE__ */ jsx(
+  ({ className, header, subHeader, footer, children, ...props }, ref) => /* @__PURE__ */ jsxs(
     "div",
     {
       ref,
       "data-slot": "template",
       className: cn("flex h-full min-h-0 flex-col", className),
-      ...props
+      ...props,
+      children: [
+        header ? /* @__PURE__ */ jsx(TemplateHeader, { children: header }) : null,
+        subHeader ? /* @__PURE__ */ jsx(TemplateSubHeader, { children: subHeader }) : null,
+        children,
+        footer ? /* @__PURE__ */ jsx(TemplateFooter, { children: footer }) : null
+      ]
     }
   )
 );
@@ -50,7 +56,6 @@ const TemplateSubHeader = React.forwardRef(
 TemplateSubHeader.displayName = "TemplateSubHeader";
 const TemplateBody = React.forwardRef(
   ({
-    subHeader,
     sidebar,
     rightSidebar,
     defaultSidebarSize = 30,
@@ -73,7 +78,6 @@ const TemplateBody = React.forwardRef(
           "data-mobile": "true",
           className: cn("flex min-h-0 flex-1 flex-col", className),
           children: [
-            subHeader,
             hasLeft ? /* @__PURE__ */ jsx("div", { "data-slot": "template-offcanvas", className: "contents", children: sidebar }) : null,
             /* @__PURE__ */ jsx("div", { "data-slot": "template-content", className: "min-h-0 flex-1", children }),
             hasRight ? /* @__PURE__ */ jsx("div", { "data-slot": "template-offcanvas", className: "contents", children: rightSidebar }) : null
@@ -81,34 +85,31 @@ const TemplateBody = React.forwardRef(
         }
       );
     }
-    return /* @__PURE__ */ jsxs(
+    return /* @__PURE__ */ jsx(
       "div",
       {
         ref,
         "data-slot": "template-body",
         className: cn("flex min-h-0 flex-1 flex-col", className),
-        children: [
-          subHeader,
-          /* @__PURE__ */ jsxs(
-            ResizablePanelGroup,
-            {
-              direction: "horizontal",
-              className: "min-h-0 flex-1 w-full",
-              children: [
-                hasLeft && /* @__PURE__ */ jsxs(Fragment, { children: [
-                  /* @__PURE__ */ jsx(ResizablePanel, { defaultSize: defaultSidebarSize, minSize: minSidebarSize, children: sidebar }),
-                  /* @__PURE__ */ jsx(ResizableHandle, {})
-                ] }),
-                /* @__PURE__ */ jsx(ResizablePanel, { defaultSize: canvasSize, minSize: 40, children }),
-                hasRight && /* @__PURE__ */ jsxs(Fragment, { children: [
-                  /* @__PURE__ */ jsx(ResizableHandle, {}),
-                  /* @__PURE__ */ jsx(ResizablePanel, { defaultSize: defaultRightSidebarSize, minSize: minRightSidebarSize, children: rightSidebar })
-                ] })
-              ]
-            },
-            `${hasLeft}|${hasRight}`
-          )
-        ]
+        children: /* @__PURE__ */ jsxs(
+          ResizablePanelGroup,
+          {
+            direction: "horizontal",
+            className: "min-h-0 flex-1 w-full",
+            children: [
+              hasLeft && /* @__PURE__ */ jsxs(Fragment, { children: [
+                /* @__PURE__ */ jsx(ResizablePanel, { defaultSize: defaultSidebarSize, minSize: minSidebarSize, children: sidebar }),
+                /* @__PURE__ */ jsx(ResizableHandle, {})
+              ] }),
+              /* @__PURE__ */ jsx(ResizablePanel, { defaultSize: canvasSize, minSize: 40, children }),
+              hasRight && /* @__PURE__ */ jsxs(Fragment, { children: [
+                /* @__PURE__ */ jsx(ResizableHandle, {}),
+                /* @__PURE__ */ jsx(ResizablePanel, { defaultSize: defaultRightSidebarSize, minSize: minRightSidebarSize, children: rightSidebar })
+              ] })
+            ]
+          },
+          `${hasLeft}|${hasRight}`
+        )
       }
     );
   }

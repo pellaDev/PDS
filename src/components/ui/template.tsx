@@ -8,14 +8,26 @@ import { ResizablePanelGroup, ResizablePanel, ResizableHandle } from './resizabl
 import './template.css';
 import './scrollbar.css';
 
-const Template = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
-  ({ className, ...props }, ref) => (
+type TemplateProps = React.HTMLAttributes<HTMLDivElement> & {
+  header?: React.ReactNode;
+  subHeader?: React.ReactNode;
+  footer?: React.ReactNode;
+  children: React.ReactNode;
+};
+
+const Template = React.forwardRef<HTMLDivElement, TemplateProps>(
+  ({ className, header, subHeader, footer, children, ...props }, ref) => (
     <div
       ref={ref}
       data-slot="template"
       className={cn('flex h-full min-h-0 flex-col', className)}
       {...props}
-    />
+    >
+      {header ? <TemplateHeader>{header}</TemplateHeader> : null}
+      {subHeader ? <TemplateSubHeader>{subHeader}</TemplateSubHeader> : null}
+      {children}
+      {footer ? <TemplateFooter>{footer}</TemplateFooter> : null}
+    </div>
   ),
 );
 Template.displayName = 'Template';
@@ -54,8 +66,6 @@ const TemplateSubHeader = React.forwardRef<HTMLDivElement, React.HTMLAttributes<
 TemplateSubHeader.displayName = 'TemplateSubHeader';
 
 type TemplateBodyProps = {
-  subHeader?: React.ReactNode;
-
   sidebar?: React.ReactNode;
 
   rightSidebar?: React.ReactNode;
@@ -70,7 +80,6 @@ type TemplateBodyProps = {
 const TemplateBody = React.forwardRef<HTMLDivElement, TemplateBodyProps>(
   (
     {
-      subHeader,
       sidebar,
       rightSidebar,
       defaultSidebarSize = 30,
@@ -97,7 +106,6 @@ const TemplateBody = React.forwardRef<HTMLDivElement, TemplateBodyProps>(
           data-mobile="true"
           className={cn('flex min-h-0 flex-1 flex-col', className)}
         >
-          {subHeader}
           {hasLeft ? (
             <div data-slot="template-offcanvas" className="contents">
               {sidebar}
@@ -121,7 +129,6 @@ const TemplateBody = React.forwardRef<HTMLDivElement, TemplateBodyProps>(
         data-slot="template-body"
         className={cn('flex min-h-0 flex-1 flex-col', className)}
       >
-        {subHeader}
         {}
         <ResizablePanelGroup
           key={`${hasLeft}|${hasRight}`}

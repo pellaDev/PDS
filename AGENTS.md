@@ -383,7 +383,7 @@ for content, and a footer. This is the outer shell of a PDS app screen.
 
 | Component | Prop | Values / default | Notes |
 | --- | --- | --- | --- |
-| `TemplateBody` | `subHeader` | ReactNode | Sub-header row between header and body |
+| `Template` | `header` / `subHeader` / `footer` | ReactNode | Chrome slot; printed only when its content prop is provided |
 | `TemplateBody` | `sidebar` | ReactNode | Left panel (a `Sidebar` composition, see above) |
 | `TemplateBody` | `rightSidebar` | ReactNode | Right panel (same shape) |
 | `TemplateBody` | `defaultSidebarSize` | number · default 30 | Initial left panel width (%) |
@@ -392,45 +392,25 @@ for content, and a footer. This is the outer shell of a PDS app screen.
 | `TemplateCanvas` | `layout` | `center` (default) · `full` · `grid` · `columns` | Content layout inside the canvas |
 
 ```tsx
-import { Tag } from "@workspace/pds/components/ui/tag"
 import {
   Template,
   TemplateBody,
   TemplateCanvas,
-  TemplateFooter,
-  TemplateHeader,
-  TemplateSubHeader,
 } from "@workspace/pds/components/ui/template"
 
 export function AppFrame() {
   return (
     <div className="h-screen">
-      <Template>
-        <TemplateHeader>
-          <span className="text-sm font-semibold tracking-tight">My app</span>
-          <div className="ml-auto flex items-center gap-2">
-            {/* header controls */}
-          </div>
-        </TemplateHeader>
-
-        <TemplateBody
-          defaultSidebarSize={28}
-          subHeader={
-            <TemplateSubHeader>
-              <span>Workspace</span>
-              <Tag>Demo</Tag>
-            </TemplateSubHeader>
-          }
-          sidebar={<LeftNav />} {/* the desktop Sidebar composition above */}
-        >
+      <Template
+        header={<span className="text-sm font-semibold tracking-tight">My app</span>}
+        subHeader={<span>Workspace</span>}
+        footer={<span>Status line</span>}
+      >
+        <TemplateBody defaultSidebarSize={28} sidebar={<LeftNav />}>
           <TemplateCanvas layout="center">
             {/* your content */}
           </TemplateCanvas>
         </TemplateBody>
-
-        <TemplateFooter>
-          <span>Status line</span>
-        </TemplateFooter>
       </Template>
     </div>
   )
@@ -441,6 +421,7 @@ export function AppFrame() {
 - Sidebars are optional: omit the prop to drop a panel; pass `undefined` (not `null`) when toggling at runtime.
 - Chrome padding (header / sub-header / footer / canvas) is provided by the component itself — do not add extra padding at these levels. Canvas inner content is your responsibility.
 - With `layout="grid"` or `"columns"`, direct children of `TemplateCanvas` become grid cells; `"center"` centers a single column; `"full"` runs edge to edge.
+- An item that must span every column (prose that belongs to the page, not to one column) carries `data-span="all"`: `grid-column: 1 / -1` in the grid, `column-span: all` in the flow — Chromium-only, Firefox keeps it inside its column.
 - The gaps between panels are resizable drag handles; initial widths come from the size props above.
 
 ## Composition notes (other non-trivial components)

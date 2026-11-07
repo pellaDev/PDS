@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { type DialogProps } from '@radix-ui/react-dialog';
+import { Command as CommandPrimitive } from 'cmdk';
 import './command.css';
 import './menu-list.css';
 import './scrollbar.css';
@@ -21,14 +22,10 @@ declare const Command: React.ForwardRefExoticComponent<Omit<{
     vimBindings?: boolean;
 } & React.RefAttributes<HTMLDivElement>, "ref"> & React.RefAttributes<HTMLDivElement>>;
 declare const CommandDialog: ({ children, ...props }: DialogProps) => React.JSX.Element;
-declare const CommandInput: React.ForwardRefExoticComponent<Omit<Omit<Pick<Pick<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>, "key" | keyof React.InputHTMLAttributes<HTMLInputElement>> & {
-    ref?: React.Ref<HTMLInputElement>;
-} & {
-    asChild?: boolean;
-}, "key" | "asChild" | keyof React.InputHTMLAttributes<HTMLInputElement>>, "onChange" | "value" | "type"> & {
-    value?: string;
-    onValueChange?: (search: string) => void;
-} & React.RefAttributes<HTMLInputElement>, "ref"> & React.RefAttributes<HTMLInputElement>>;
+interface CommandInputProps extends React.ComponentPropsWithoutRef<typeof CommandPrimitive.Input> {
+    fieldSize?: 'sm' | 'lg';
+}
+declare const CommandInput: React.ForwardRefExoticComponent<CommandInputProps & React.RefAttributes<HTMLInputElement>>;
 declare const CommandList: React.ForwardRefExoticComponent<Omit<{
     children?: React.ReactNode;
 } & Pick<Pick<React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>, "key" | keyof React.HTMLAttributes<HTMLDivElement>> & {

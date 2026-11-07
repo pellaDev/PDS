@@ -586,6 +586,12 @@
   --pds-item-grow: 0;
   --pds-block-width: auto;
   --pds-cell-size: var(--dim-lll);
+  --pds-actionbar-reveal: 0;
+  --pds-actionbar-events: none;
+  --pds-hero-media-share: 33%;
+  --pds-hero-avatar-scale: 4;
+  --pds-hero-media-align: flex-end;
+  --pds-overlay-inset: 0;
 }
 @media (max-width: 48rem) {
   :root {
@@ -594,6 +600,12 @@
     --pds-item-grow: 1;
     --pds-block-width: 100%;
     --pds-cell-size: var(--touch-min);
+    --pds-actionbar-reveal: 1;
+    --pds-actionbar-events: auto;
+    --pds-hero-media-share: var(--pds-block-width);
+    --pds-hero-avatar-scale: 6.5;
+    --pds-hero-media-align: flex-start;
+    --pds-overlay-inset: var(--device-padding);
   }
 }
 [data-slot="device-content"] {
@@ -602,5 +614,11 @@
   --pds-item-grow: 1;
   --pds-block-width: 100%;
   --pds-cell-size: var(--touch-min);
+  --pds-actionbar-reveal: 1;
+  --pds-actionbar-events: auto;
+  --pds-hero-media-share: var(--pds-block-width);
+  --pds-hero-avatar-scale: 6.5;
+  --pds-hero-media-align: flex-start;
+  --pds-overlay-inset: var(--device-padding);
 }
 

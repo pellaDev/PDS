@@ -1,8 +1,12 @@
 .pds-field.pds-command__row {
   display: flex;
   align-items: center;
-  gap: var(--dim-sss);
-  padding-inline: var(--dim-sss);
+  gap: var(--pds-field-label-gap);
+  padding-inline: var(--pds-field-icon-inset);
+}
+
+.pds-command__row .pds-field__input {
+  padding-inline: 0;
 }
 
 .pds-command__icon {

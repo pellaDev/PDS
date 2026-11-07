@@ -1,0 +1,19 @@
+.pds-card {
+  --pds-card-media-ratio: 16 / 9;
+  overflow: hidden;
+}
+
+.pds-card[data-variant='fadeHeader'] [data-slot='card-header'],
+.pds-card[data-variant='mediaTopFadeHeader'] [data-slot='card-header'] {
+  background-color: var(--pds-separator-solid);
+  background-image: var(--pds-separator-image-h);
+}
+
+.pds-card[data-variant='mediaTop'] [data-slot='card-media'],
+.pds-card[data-variant='mediaTopFadeHeader'] [data-slot='card-media'] {
+  aspect-ratio: var(--pds-card-media-ratio);
+  background-position: center;
+  background-size: cover;
+  border-top-left-radius: inherit;
+  border-top-right-radius: inherit;
+}

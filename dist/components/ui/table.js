@@ -6,39 +6,22 @@ const Table = React.forwardRef(
   ({ className, ...props }, ref) => /* @__PURE__ */ jsx("div", { className: "relative w-full overflow-auto", children: /* @__PURE__ */ jsx("table", { ref, className: cn("w-full caption-bottom text-sm", className), ...props }) })
 );
 Table.displayName = "Table";
-const TableHeader = React.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ jsx("thead", { ref, className: cn("[&_tr]:border-b", className), ...props }));
+const TableHeader = React.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ jsx("thead", { ref, "data-slot": "table-header", className: cn(className), ...props }));
 TableHeader.displayName = "TableHeader";
-const TableBody = React.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ jsx(
-  "tbody",
-  {
-    ref,
-    "data-slot": "table-body",
-    className: cn("[&_tr:last-child]:border-0", className),
-    ...props
-  }
-));
+const TableBody = React.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ jsx("tbody", { ref, "data-slot": "table-body", className: cn(className), ...props }));
 TableBody.displayName = "TableBody";
 const TableFooter = React.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ jsx(
   "tfoot",
   {
     ref,
-    className: cn("border-t bg-muted font-medium [&>tr]:last:border-b-0", className),
+    "data-slot": "table-footer",
+    className: cn("pds-table-foot bg-muted font-medium", className),
     ...props
   }
 ));
 TableFooter.displayName = "TableFooter";
 const TableRow = React.forwardRef(
-  ({ className, ...props }, ref) => /* @__PURE__ */ jsx(
-    "tr",
-    {
-      ref,
-      className: cn(
-        "border-b transition-colors hover:bg-muted data-[state=selected]:bg-muted",
-        className
-      ),
-      ...props
-    }
-  )
+  ({ className, ...props }, ref) => /* @__PURE__ */ jsx("tr", { ref, "data-slot": "table-row", className: cn("pds-table-row", className), ...props })
 );
 TableRow.displayName = "TableRow";
 const TableHead = React.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ jsx(

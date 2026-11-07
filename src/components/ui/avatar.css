@@ -30,3 +30,17 @@
     opacity: 1;
   }
 }
+
+.pds-avatar {
+  isolation: isolate;
+}
+.pds-avatar [data-slot='avatar-image'] {
+  position: relative;
+  z-index: -2;
+}
+
+.pds-avatar {
+  --pds-avatar-scale: 1;
+  width: calc(var(--avatar-size) * var(--pds-avatar-scale));
+  height: calc(var(--avatar-size) * var(--pds-avatar-scale));
+}
