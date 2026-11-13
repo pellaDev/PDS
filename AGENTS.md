@@ -30,12 +30,12 @@ package**. This repository IS the published package (flat layout): `src/` is the
 5. Theming stays zero-rerender: static CSS + CSS custom properties. Runtime theming goes
    through `configurePds()` / `setPdsConfig()` (src/config.tsx), which only sets inline
    variables on `<html>`. Never introduce runtime style computation.
-7. A component fills a container with a **surface role**, never a static palette step — see
+6. A component fills a container with a **surface role**, never a static palette step — see
    "Surface roles (base vs alternative)". The guard is `scripts/check-surface.mjs` (runs in
    prebuild and pretypecheck); recorded exceptions live in `scripts/surface-baseline.json` and the
    baseline may only shrink.
 
-6. Version bumps and releases are managed by the maintainers.
+7. Version bumps and releases are managed by the maintainers.
    Do not commit ad-hoc changes to `package.json` version or to `dist/`.
 
 ## Commands
@@ -62,12 +62,14 @@ package**. This repository IS the published package (flat layout): `src/` is the
 Every component lives in its own file; import form is `@workspace/pds/components/ui/<file>`.
 Files that need custom styles pull them in automatically — no per-component CSS imports are ever required.
 
+Each row states the contract a consumer writes against: what you pass and what the component guarantees, including what you must not do yourself. How a guarantee is implemented and what was measured is not in the row — it is in the composition bullet for that component.
+
 ### Actions
 
 | Component | File | What it does |
 | --- | --- | --- |
 | Button | `button` | Primary action control — sizes, destructive/link states, tooltips on compact sizes |
-| Tag | `tag` | Pill status markers; label weight `pds.sys.fontWeights.roboto-1` (400), ink on the error red is `pds.sys.color.black`; text truncates with an ellipsis at the line the pill is given, so the host never adds a truncate class of its own |
+| Tag | `tag` | Pill status markers, five states; the label carries the documented component weight exception, so never set a font weight on a pill yourself; text truncates with an ellipsis at the line the pill is given, so the host never adds a truncate class of its own |
 | Toggle | `toggle` | Pressable on/off control with icon or label |
 | ToggleGroup | `toggle` | Single- or multi-select set of toggles — same file as `Toggle` |
 
@@ -83,7 +85,7 @@ Files that need custom styles pull them in automatically — no per-component CS
 | Slider | `slider` | Single-value and range slider |
 | Switch | `switch` | On/off switch, optional inline label |
 | Calendar | `calendar` | Single-date calendar picker |
-| Field | `field` | Floating-label input (fill/outline × small/large); the label truncates with an ellipsis when the row cannot hold it, the trailing-icon slot has priority and keeps 2px of air before the glyph |
+| Field | `field` | Floating-label input (fill/outline × small/large); an explicit `tone` wins over the installed field style; a label that cannot fit its row truncates with an ellipsis and never displaces the trailing-icon slot, which keeps priority |
 | Form | `form` | Validated form composition — labels, messages, field wiring |
 | Label | `label` | Accessible label for form controls |
 | ColorPicker | `color-picker` | Flat swatch + native color input; optional WCAG contrast check (V indicator) against a list of backgrounds |
@@ -118,7 +120,7 @@ Files that need custom styles pull them in automatically — no per-component CS
 
 | Component | File | What it does |
 | --- | --- | --- |
-| Avatar | `avatar` | Profile image with fallback; `shape` circle or rounded square (`--radius-md`); static or interactive (the Button state set) |
+| Avatar | `avatar` | Profile image with fallback; two scales only, `default` (profile) and `xs` (row) — a host names the scale, never a pixel; `shape` circle or rounded square; static, or interactive with the Button state set |
 | Badge | `badge` | Simple markers and numbered pills |
 | Card | `card` | Grouped content block (header/body/footer) |
 | Hero | `hero` | The large card for one entity: swappable slots — head (title, tags, media) and foot (subheadline, cards, actions); the card composition as its box, an optional image as the element background layer under a fade; unfilled slots render nothing |
@@ -426,7 +428,7 @@ export function AppFrame() {
 
 ## Composition notes (other non-trivial components)
 
-- **Field** — self-contained floating-label input: `label` prop is required; `size="sm"|"lg"`; `tone="fill"|"outline"` (an explicit tone wins over the installed field style, see Settings below); `state="error"`; optional `trailingIcon`.
+- **Field** — self-contained floating-label input: `label` prop is required; `size="sm"|"lg"`; `tone="fill"|"outline"` (an explicit tone wins over the installed field style, see Settings below); `state="error"`; optional `trailingIcon`. A label that cannot fit its row truncates with an ellipsis instead of pushing the row open, and the trailing-icon slot is never displaced by it — the slot keeps priority over the label.
 - **Form** — react-hook-form composition: `Form`, `FormField`, `FormItem`, `FormLabel`, `FormControl`, `FormDescription`, `FormMessage`, `useFormField`. react-hook-form ships with PDS — no extra install.
 - **Menu** — one component for both dropdown and context menus: `<Menu mode="dropdown">` (trigger click) or `<Menu mode="context">` (right-click inside the trigger). Subcomponents: `Trigger`, `Content`, `Item`, `CheckboxItem`, `RadioGroup`, `RadioItem`, `Label`, `Separator`, `Shortcut`, `Sub`, `SubTrigger`, `SubContent`.
 - **Command** — keyboard-first palette: `Command` + `CommandInput`, `CommandList`, `CommandGroup`, `CommandItem`, `CommandEmpty`, `CommandShortcut`, `CommandSeparator`; `CommandDialog` for the dialog form. Peer: cmdk.
@@ -438,15 +440,14 @@ export function AppFrame() {
   `pds.sys.fontWeights.roboto-1` (400), emitted as `--font-weight-regular` and read by the base classes —
   never `font-normal`. The error state fills `semantic.error` (the red) and takes `pds.sys.color.black` as ink,
   the same leaf the Button destructive state uses, so the label and its background are both tokens, not a
-  foreground role. Measured 2026-11-11: that pair is 3.99:1 at the caption size — under AA, so a Tag is a
-  marker, not body text; white ink on the same red measures 4.32:1, also under AA. The pair cannot be fixed
-  by colour alone: it needs a larger size or a darker red, which is a token decision, not a component one. A Tag inside a tag input composes the Field: the run wraps
+  foreground role. At the caption size that pair is under the WCAG AA text threshold, so a Tag is a marker,
+  not body text. The pair cannot be fixed by colour alone: it needs a larger size or a darker red, which is a
+  token decision, not a component one. A Tag inside a tag input composes the Field: the run wraps
   inside the box and the box grows with it, so a long list makes the field taller rather than pushing pills
   outside. Text stops at the line it is given — the pill label truncates with an ellipsis before its X
   (`min-width: 0` is what lets a pill shrink below its own text) and the typed text past its own slot width, so
   nothing crosses the edge of the box on either surface; inside a Device the box reads the Field large density
-  through the layer, never from a size prop. Measured 2026-11-12: an 82-character label reads 441px of text
-  inside a 316px line on the phone, and the typing slot 547px inside the 277px it is given.
+  through the layer, never from a size prop.
 - **Toast / Toaster** — mount `<Toaster />` once at the app root; fire notifications with `toast({ title, description, action? })` from `/hooks/use-toast` (also exported as `useToast`). The raw primitives (`ToastProvider`, `ToastViewport`, `Toast`, …) are available for custom setups.
 
 ## Mobile behavior
