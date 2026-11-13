@@ -18,10 +18,6 @@
   background-color: var(--color-secondary);
 }
 .pds-toggle-btn--ghost[data-state='on']:not(:disabled) {
-  background-color: var(--color-secondary);
+  background-color: var(--pds-field-fill-bg);
   color: var(--color-primary);
-}
-
-[data-pds-surface='alternative'] .pds-toggle-btn--ghost[data-state='on']:not(:disabled) {
-  background-color: var(--color-background);
 }

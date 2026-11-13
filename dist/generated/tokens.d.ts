@@ -99,6 +99,10 @@ export declare const tokens: {
         readonly inter: readonly ["Inter", "Roboto", "Arial", "sans-serif"];
         readonly spaceGrotesk: readonly ["Space Grotesk", "Roboto", "Arial", "sans-serif"];
     };
+    readonly fontWeights: {
+        readonly base: 300;
+        readonly regular: 400;
+    };
     readonly radius: "0.75rem";
     readonly radiusSm: "0.25rem";
     readonly radiusMd: "0.5rem";
@@ -260,6 +264,7 @@ export declare const tokens: {
         readonly deviceHomeIndicatorWidth: "5rem";
         readonly gridColumns: 3;
         readonly canvasColumns: 2;
+        readonly canvasCenterMinWidth: "28rem";
     };
     readonly motion: {
         readonly duration: {

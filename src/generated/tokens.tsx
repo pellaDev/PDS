@@ -127,6 +127,10 @@ export const tokens = {
       "sans-serif"
     ]
   },
+  "fontWeights": {
+    "base": 300,
+    "regular": 400
+  },
   "radius": "0.75rem",
   "radiusSm": "0.25rem",
   "radiusMd": "0.5rem",
@@ -287,7 +291,8 @@ export const tokens = {
     "deviceHomeIndicator": "0.25rem",
     "deviceHomeIndicatorWidth": "5rem",
     "gridColumns": 3,
-    "canvasColumns": 2
+    "canvasColumns": 2,
+    "canvasCenterMinWidth": "28rem"
   },
   "motion": {
     "duration": {

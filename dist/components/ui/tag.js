@@ -7,12 +7,12 @@ import { usePdsConfig } from "../../config";
 import { useIsMobile } from "../../hooks/use-mobile";
 import { fieldVariants } from "./field";
 const tagVariants = cva(
-  "inline-flex items-center whitespace-nowrap border-transparent font-light font-sans [border-radius:var(--radius-sm)] [padding-inline:var(--dim-sss)] [font-size:var(--type-caption-size)] [line-height:var(--type-caption-lh)] [letter-spacing:0.25px]",
+  "inline-flex items-center whitespace-nowrap border-transparent [font-weight:var(--font-weight-regular)] font-sans [border-radius:var(--radius-sm)] [padding-inline:var(--dim-sss)] [font-size:var(--type-caption-size)] [line-height:var(--type-caption-lh)] [letter-spacing:0.25px] max-w-full min-w-0",
   {
     variants: {
       variant: {
         default: "bg-primary text-primary-foreground",
-        error: "bg-destructive text-destructive-foreground",
+        error: "bg-destructive text-black",
         alert: "bg-accent text-accent-foreground",
         ready: "bg-success text-success-foreground",
         disabled: "bg-primary text-primary-foreground [opacity:var(--opacity-disabled)]"
@@ -23,6 +23,12 @@ const tagVariants = cva(
     }
   }
 );
+function truncateLabel(children) {
+  return React.Children.map(
+    children,
+    (child) => typeof child === "string" || typeof child === "number" ? /* @__PURE__ */ jsx("span", { className: "min-w-0 max-w-full truncate", children: child }) : child
+  );
+}
 function Tag({ className, variant, onDismiss, children, ...props }) {
   return /* @__PURE__ */ jsxs(
     "span",
@@ -31,14 +37,14 @@ function Tag({ className, variant, onDismiss, children, ...props }) {
       className: cn(tagVariants({ variant }), onDismiss && "hover-elevate", className),
       ...props,
       children: [
-        children,
+        truncateLabel(children),
         onDismiss ? /* @__PURE__ */ jsx(
           "button",
           {
             type: "button",
             "aria-label": "Remove tag",
             onClick: onDismiss,
-            className: "ml-1 inline-flex items-center justify-center rounded-full opacity-60 transition-opacity hover:opacity-100",
+            className: "ml-1 inline-flex shrink-0 items-center justify-center rounded-full opacity-60 transition-opacity hover:opacity-100",
             children: /* @__PURE__ */ jsx(X, { size: 12, strokeWidth: 2.5 })
           }
         ) : null
@@ -60,19 +66,19 @@ function TagToggle({ className, variant, defaultOn = true, children }) {
           "cursor-pointer hover-elevate",
           className
         ),
-        children
+        children: truncateLabel(children)
       }
     );
   }
   return /* @__PURE__ */ jsxs("span", { className: cn(tagVariants({ variant }), "hover-elevate cursor-pointer", className), children: [
-    children,
+    truncateLabel(children),
     /* @__PURE__ */ jsx(
       "button",
       {
         type: "button",
         "aria-label": "Disable tag",
         onClick: () => setOn(false),
-        className: "ml-1 inline-flex items-center justify-center rounded-full opacity-60 transition-opacity hover:opacity-100",
+        className: "ml-1 inline-flex shrink-0 items-center justify-center rounded-full opacity-60 transition-opacity hover:opacity-100",
         children: /* @__PURE__ */ jsx(X, { size: 12, strokeWidth: 2.5 })
       }
     )

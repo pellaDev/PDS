@@ -37,8 +37,20 @@ function buildCoreTokens(tokens) {
   L.push('/* CORE SCALE -- generated from tokens.json, theme-independent.          */');
   L.push('/* Edit tokens.json to change these values; never this file directly.    */');
   L.push(':root {');
-  L.push('  /* Typography: the original system is Roboto Light (300) only, tracked +0.25px */');
-  L.push('  --font-weight-base: ' + resolveValueLocal(ty.fontWeight.base, tokens) + ';');
+  L.push(
+    '  /* Typography: base weight Roboto Light (300); every fontWeight leaf is emitted, tracked +0.25px */',
+  );
+  for (const [name, node] of groupEntries(ty.fontWeight)) {
+    L.push(
+      '  --font-weight-' +
+        name +
+        ': ' +
+        resolveValueLocal(node, tokens) +
+        '; /* ' +
+        (node.$description || '') +
+        ' */',
+    );
+  }
   L.push('  --letter-spacing-base: ' + resolveValueLocal(ty.letterSpacing.base, tokens) + ';');
   for (const [name, node] of groupEntries(ty.styles)) {
     const v = node.$value;

@@ -67,7 +67,7 @@ Files that need custom styles pull them in automatically — no per-component CS
 | Component | File | What it does |
 | --- | --- | --- |
 | Button | `button` | Primary action control — sizes, destructive/link states, tooltips on compact sizes |
-| Tag | `tag` | Pill status markers |
+| Tag | `tag` | Pill status markers; label weight `pds.sys.fontWeights.roboto-1` (400), ink on the error red is `pds.sys.color.black`; text truncates with an ellipsis at the line the pill is given, so the host never adds a truncate class of its own |
 | Toggle | `toggle` | Pressable on/off control with icon or label |
 | ToggleGroup | `toggle` | Single- or multi-select set of toggles — same file as `Toggle` |
 
@@ -112,7 +112,7 @@ Files that need custom styles pull them in automatically — no per-component CS
 | Pagination | `pagination` | Numbered pagination cells |
 | Tabs | `tabs` | Switch between related content views |
 | Sidebar | `sidebar` | Desktop side panel (groups can collapse) |
-| MobileNavigationMenu | `mobile-navigation-menu` | Mobile off-canvas drawer with expandable tree groups |
+| MobileNavigationMenu | `mobile-navigation-menu` | Mobile off-canvas sheet with expandable tree groups |
 
 ### Data display
 
@@ -260,7 +260,7 @@ export function Example() {
 ### Sidebar & mobile navigation
 
 Two shapes from one family: a bounded **desktop panel** (groups can collapse) and a
-**mobile off-canvas drawer** with expandable tree groups. The desktop shape is what you
+**mobile off-canvas sheet** with expandable tree groups. The desktop shape is what you
 pass to `TemplateBody` as `sidebar`.
 
 Desktop panel:
@@ -315,7 +315,7 @@ function LeftNav() {
 }
 ```
 
-Mobile drawer:
+Mobile sheet:
 
 ```tsx
 import { Folder, Home, Settings } from "lucide-react"
@@ -343,7 +343,7 @@ export function MobileNav() {
       </div>
 
       <MobileNavigationMenuPanel side="left">
-        <MobileNavigationMenuDescription className="sr-only">Primary navigation drawer.</MobileNavigationMenuDescription>
+        <MobileNavigationMenuDescription className="sr-only">Primary navigation sheet.</MobileNavigationMenuDescription>
         <MobileNavigationMenuHeader>
           <MobileNavigationMenuTitle>Pella</MobileNavigationMenuTitle>
           <MobileNavigationMenuClose />
@@ -374,7 +374,7 @@ export function MobileNav() {
 - `collapsible="none"` + `className="!w-full"` = the panel fills its slot — the standard shape inside Template.
 - Do not add your own padding to `SidebarContent`, `SidebarGroup`, or menu rows: inner padding is provided by the chain itself.
 - Active state is `isActive` on `SidebarMenuButton`; keep selection in React state and wire `onClick` yourself.
-- Mobile drawer items are usually real links via `asChild`; `MobileNavigationMenuTree` groups expand accordion-style.
+- Mobile sheet items are usually real links via `asChild`; `MobileNavigationMenuTree` groups expand accordion-style.
 
 ### Template
 
@@ -431,9 +431,22 @@ export function AppFrame() {
 - **Menu** — one component for both dropdown and context menus: `<Menu mode="dropdown">` (trigger click) or `<Menu mode="context">` (right-click inside the trigger). Subcomponents: `Trigger`, `Content`, `Item`, `CheckboxItem`, `RadioGroup`, `RadioItem`, `Label`, `Separator`, `Shortcut`, `Sub`, `SubTrigger`, `SubContent`.
 - **Command** — keyboard-first palette: `Command` + `CommandInput`, `CommandList`, `CommandGroup`, `CommandItem`, `CommandEmpty`, `CommandShortcut`, `CommandSeparator`; `CommandDialog` for the dialog form. Peer: cmdk.
 - **Chart** — `ChartContainer` takes a `config` object mapping series keys to `{ label?, icon?, color | theme }` and wraps recharts elements; `ChartTooltip`/`ChartTooltipContent`, `ChartLegend`/`ChartLegendContent`, `ChartStyle`. Peer: recharts.
-- **Drawer** — bottom sheet on vaul (peer: vaul): `Drawer > DrawerTrigger + DrawerContent(DrawerHeader(DrawerTitle, DrawerDescription), …, DrawerFooter)`; `DrawerClose` closes from anywhere inside.
+- **Drawer** — bottom overlay panel on vaul (peer: vaul): `Drawer > DrawerTrigger + DrawerContent(DrawerHeader(DrawerTitle, DrawerDescription), …, DrawerFooter)`; `DrawerClose` closes from anywhere inside.
 - **Avatar** — two scales only: `default` (profile, `--dim-lll` = 40px) and `xs` (row scale, `--dim-mmm` = 20px) for a table row, a dropdown row, or a sidebar menu item. The component owns its own `--avatar-size` variable, so a host that needs the row scale names the scale, never the pixel. `shape` is `circle` (default) or `roundedSquare` (`--radius-md`); `interactive` avatars get the Button state set (hover, pressed, disabled, dragged) and carry `role="button"`, static ones are plain figures — see `tokens/components/avatar.json`.
 - **Item** — list row: `Item > ItemMedia + ItemContent(ItemHeader(ItemTitle, ItemDescription), ItemActions) + ItemFooter?`; group rows in `ItemGroup`, divide with `ItemSeparator`.
+- **Tag** — pill status markers, five states on one cva. The label is the documented weight exception:
+  `pds.sys.fontWeights.roboto-1` (400), emitted as `--font-weight-regular` and read by the base classes —
+  never `font-normal`. The error state fills `semantic.error` (the red) and takes `pds.sys.color.black` as ink,
+  the same leaf the Button destructive state uses, so the label and its background are both tokens, not a
+  foreground role. Measured 2026-11-11: that pair is 3.99:1 at the caption size — under AA, so a Tag is a
+  marker, not body text; white ink on the same red measures 4.32:1, also under AA. The pair cannot be fixed
+  by colour alone: it needs a larger size or a darker red, which is a token decision, not a component one. A Tag inside a tag input composes the Field: the run wraps
+  inside the box and the box grows with it, so a long list makes the field taller rather than pushing pills
+  outside. Text stops at the line it is given — the pill label truncates with an ellipsis before its X
+  (`min-width: 0` is what lets a pill shrink below its own text) and the typed text past its own slot width, so
+  nothing crosses the edge of the box on either surface; inside a Device the box reads the Field large density
+  through the layer, never from a size prop. Measured 2026-11-12: an 82-character label reads 441px of text
+  inside a 316px line on the phone, and the typing slot 547px inside the 277px it is given.
 - **Toast / Toaster** — mount `<Toaster />` once at the app root; fire notifications with `toast({ title, description, action? })` from `/hooks/use-toast` (also exported as `useToast`). The raw primitives (`ToastProvider`, `ToastViewport`, `Toast`, …) are available for custom setups.
 
 ## Mobile behavior

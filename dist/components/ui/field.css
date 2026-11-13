@@ -255,18 +255,28 @@ textarea.pds-field::placeholder {
 }
 
 .pds-field[data-composition='tag-input'] {
+  --pds-field-run-air: var(--dim-sss);
+
+  --pds-field-typing-min: calc(var(--type-body2-size) * 3);
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
-  flex-wrap: var(--pds-row-wrap);
-  gap: var(--pds-field-label-gap);
+  align-content: center;
+  gap: var(--pds-field-run-air);
+  padding-block: var(--pds-field-run-air);
   padding-inline: var(--pds-field-icon-inset);
   height: auto;
   min-height: var(--field-h);
 }
 
 .pds-field[data-composition='tag-input'] .pds-field__input {
-  flex: 1 0 auto;
-  padding-inline: 0;
+  flex: 1 1 var(--pds-field-typing-min);
+  height: auto;
+  min-width: var(--pds-field-typing-min);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding-block: var(--dim-zero);
+  padding-inline: var(--dim-zero);
 }
 
 .pds-field[data-composition='tag-input'] .pds-field__input::placeholder {

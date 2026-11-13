@@ -180,8 +180,9 @@
 /* CORE SCALE -- generated from tokens.json, theme-independent.          */
 /* Edit tokens.json to change these values; never this file directly.    */
 :root {
-  /* Typography: the original system is Roboto Light (300) only, tracked +0.25px */
-  --font-weight-base: 300;
+  /* Typography: base weight Roboto Light (300); every fontWeight leaf is emitted, tracked +0.25px */
+  --font-weight-base: 300; /* The original system weight -- Roboto Light (fontWeights.roboto-0). */
+  --font-weight-regular: 400; /* Roboto Regular (fontWeights.roboto-1). Component-level exception: the Tag label, the selected pagination item. */
   --letter-spacing-base: 0.25px;
   --type-h1-size: 6rem; /* 96/112 -- display heading. */
   --type-h1-lh: 7rem;
@@ -242,11 +243,11 @@
   --shadow-trigger: 0rem 0rem 0rem 0.5rem rgba(0, 0, 0, 0.08); /* Soft 8% halo ring (toggle/trigger focus). */
   --shadow-dots: inset 0rem 0rem 0.25rem rgba(0, 0, 0, 0.32); /* Inset 32% blur for dot/indicator surfaces. */
   --sidebar-width: 16rem; /* Sidebar expanded width (256px) -- default for the --sidebar-width custom property. */
-  --sidebar-width-mobile: 18rem; /* Sidebar offcanvas width on mobile (288px) -- shared by the sidebar offcanvas and the mobile navigation drawer panel. */
+  --sidebar-width-mobile: 18rem; /* Sidebar offcanvas width on mobile (288px) -- shared by the sidebar offcanvas and the mobile navigation sheet panel. */
   --sidebar-width-icon: 3rem; /* Collapsed icon-rail width (48px) -- equals coreDimensions.ll. */
-  --mobile-nav-header-height: 3rem; /* Mobile navigation drawer header height (48px) -- equals coreDimensions.ll (touch-row minimum); holds the 40px icon button with one dim-sss step of air per side. */
-  --mobile-nav-header-button: 2.5rem; /* Mobile navigation drawer trigger/close size (40x40) -- equals coreDimensions.lll; Button size 'icon', the square label-less composition. */
-  --sidebar-side: left; /* Side the mobile navigation drawer opens on (left or right). Emitted as --sidebar-side and as tokens.layout.sidebarSide; MobileNavigationMenuPanel's side prop defaults to it. cva cannot branch on a keyword, so the component reads the generated value as its default. */
+  --mobile-nav-header-height: 3rem; /* Mobile navigation sheet header height (48px) -- equals coreDimensions.ll (touch-row minimum); holds the 40px icon button with one dim-sss step of air per side. */
+  --mobile-nav-header-button: 2.5rem; /* Mobile navigation sheet trigger/close size (40x40) -- equals coreDimensions.lll; Button size 'icon', the square label-less composition. */
+  --sidebar-side: left; /* Side the mobile navigation sheet opens on (left or right). Emitted as --sidebar-side and as tokens.layout.sidebarSide; MobileNavigationMenuPanel's side prop defaults to it. cva cannot branch on a keyword, so the component reads the generated value as its default. */
   --breakpoint-mobile: 48rem; /* THE shared mobile breakpoint (768px). Single source for every desktop/mobile switch: use-mobile.tsx reads it through the generated tokens, and component CSS media queries must state the same value (scripts/check-breakpoint.mjs fails the build on any other literal). Retires the old 640px/768px split. */
   --touch-min: 2.75rem; /* Minimum touch target (44px) -- the mobile floor for every interactive control (WCAG 2.5.5). The mobile layer applies it through --pds-touch-min, so no size can opt out; on desktop the same role resolves to behaviour.floorOff, so the layer only adds. */
   --sheet-width: 75%; /* Default Sheet panel width as a share of the viewport -- tokenizes the fraction the component already used (w-3/4). */
@@ -262,6 +263,7 @@
   --device-home-indicator-width: 5rem; /* Device home indicator width (80px) -- equals coreDimensions.xl. */
   --grid-columns: 3; /* Default column count of a Grid (layout.css). Consumed as --grid-columns; the mobile layer collapses it to 1. Derived from the current implementation, not from the original export. */
   --canvas-columns: 2; /* Default column count of a Template canvas in grid and columns layouts (template.css). Consumed as --canvas-columns; the mobile layer collapses it to 1. Derived from the current implementation, not from the original export. */
+  --canvas-center-min-width: 28rem; /* 448px, off the core scale (literal). Minimum content width of the center layout single column in template.css: at least this wide when the window can give it, never wider than the space available, so inside the phone it fills the screen. Consumed as --canvas-center-min-width. */
   --duration-fast: 120ms; /* Component state transitions: checkbox, radio, switch, field label, tooltip reveal. */
   --duration-base: 150ms; /* Standard hover/interaction fade -- sidebar action-row contract; equals Tailwind default transition duration. */
   --duration-slow: 200ms; /* Sidebar collapse width/left transitions (Tailwind duration-200 in sidebar.tsx). */

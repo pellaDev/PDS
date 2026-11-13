@@ -116,16 +116,20 @@ const TemplateBody = React.forwardRef(
 );
 TemplateBody.displayName = "TemplateBody";
 const TemplateCanvas = React.forwardRef(
-  ({ className, layout = "center", ...props }, ref) => /* @__PURE__ */ jsx(
+  ({ className, layout = "center", topBar, bottomBar, children, ...props }, ref) => /* @__PURE__ */ jsxs(
     "div",
     {
       ref,
       "data-slot": "template-canvas",
       "data-pds-surface": "alternative",
       "data-pds-region": true,
-      "data-layout": layout,
-      className: cn("h-full min-h-0 w-full pds-scrollbar overflow-auto", className),
-      ...props
+      className: cn("h-full min-h-0 w-full flex flex-col", className),
+      ...props,
+      children: [
+        topBar ? /* @__PURE__ */ jsx("div", { "data-slot": "template-bar", "data-bar": "top", children: topBar }) : null,
+        /* @__PURE__ */ jsx("div", { "data-slot": "template-canvas-content", "data-layout": layout, className: "pds-scrollbar", children }),
+        bottomBar ? /* @__PURE__ */ jsx("div", { "data-slot": "template-bar", "data-bar": "bottom", children: bottomBar }) : null
+      ]
     }
   )
 );

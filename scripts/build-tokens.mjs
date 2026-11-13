@@ -143,6 +143,12 @@ function buildTs(tokens) {
         resolveValue(node, tokens),
       ]),
     ),
+    fontWeights: Object.fromEntries(
+      groupEntries(tokens.typography.fontWeight).map(([name, node]) => [
+        name,
+        resolveValue(node, tokens),
+      ]),
+    ),
     radius: resolveValue(tokens.radius.base, tokens),
     radiusSm: resolveValue(tokens.radius.sm, tokens),
     radiusMd: resolveValue(tokens.radius.md, tokens),

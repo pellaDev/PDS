@@ -165,19 +165,38 @@ type TemplateCanvasLayout = 'center' | 'full' | 'grid' | 'columns';
 
 type TemplateCanvasProps = React.HTMLAttributes<HTMLDivElement> & {
   layout?: TemplateCanvasLayout;
+
+  topBar?: React.ReactNode;
+  bottomBar?: React.ReactNode;
 };
 
 const TemplateCanvas = React.forwardRef<HTMLDivElement, TemplateCanvasProps>(
-  ({ className, layout = 'center', ...props }, ref) => (
+  ({ className, layout = 'center', topBar, bottomBar, children, ...props }, ref) => (
     <div
       ref={ref}
       data-slot="template-canvas"
       data-pds-surface="alternative"
       data-pds-region
-      data-layout={layout}
-      className={cn('h-full min-h-0 w-full pds-scrollbar overflow-auto', className)}
+      className={cn('h-full min-h-0 w-full flex flex-col', className)}
       {...props}
-    />
+    >
+      {topBar ? (
+        <div data-slot="template-bar" data-bar="top">
+          {topBar}
+        </div>
+      ) : null}
+
+      {}
+      <div data-slot="template-canvas-content" data-layout={layout} className="pds-scrollbar">
+        {children}
+      </div>
+
+      {bottomBar ? (
+        <div data-slot="template-bar" data-bar="bottom">
+          {bottomBar}
+        </div>
+      ) : null}
+    </div>
   ),
 );
 TemplateCanvas.displayName = 'TemplateCanvas';

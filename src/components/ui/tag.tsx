@@ -8,13 +8,13 @@ import { useIsMobile } from '../../hooks/use-mobile';
 import { fieldVariants } from './field';
 
 const tagVariants = cva(
-  'inline-flex items-center whitespace-nowrap border-transparent font-light font-sans [border-radius:var(--radius-sm)] [padding-inline:var(--dim-sss)] [font-size:var(--type-caption-size)] [line-height:var(--type-caption-lh)] [letter-spacing:0.25px]',
+  'inline-flex items-center whitespace-nowrap border-transparent [font-weight:var(--font-weight-regular)] font-sans [border-radius:var(--radius-sm)] [padding-inline:var(--dim-sss)] [font-size:var(--type-caption-size)] [line-height:var(--type-caption-lh)] [letter-spacing:0.25px] max-w-full min-w-0',
   {
     variants: {
       variant: {
         default: 'bg-primary text-primary-foreground',
 
-        error: 'bg-destructive text-destructive-foreground',
+        error: 'bg-destructive text-black',
 
         alert: 'bg-accent text-accent-foreground',
 
@@ -29,6 +29,16 @@ const tagVariants = cva(
   },
 );
 
+function truncateLabel(children: React.ReactNode) {
+  return React.Children.map(children, (child) =>
+    typeof child === 'string' || typeof child === 'number' ? (
+      <span className="min-w-0 max-w-full truncate">{child}</span>
+    ) : (
+      child
+    ),
+  );
+}
+
 export interface TagProps
   extends React.HTMLAttributes<HTMLSpanElement>,
     VariantProps<typeof tagVariants> {
@@ -42,13 +52,13 @@ function Tag({ className, variant, onDismiss, children, ...props }: TagProps) {
       className={cn(tagVariants({ variant }), onDismiss && 'hover-elevate', className)}
       {...props}
     >
-      {children}
+      {truncateLabel(children)}
       {onDismiss ? (
         <button
           type="button"
           aria-label="Remove tag"
           onClick={onDismiss}
-          className="ml-1 inline-flex items-center justify-center rounded-full opacity-60 transition-opacity hover:opacity-100"
+          className="ml-1 inline-flex shrink-0 items-center justify-center rounded-full opacity-60 transition-opacity hover:opacity-100"
         >
           <X size={12} strokeWidth={2.5} />
         </button>
@@ -79,18 +89,18 @@ function TagToggle({ className, variant, defaultOn = true, children }: TagToggle
           className,
         )}
       >
-        {children}
+        {truncateLabel(children)}
       </button>
     );
   }
   return (
     <span className={cn(tagVariants({ variant }), 'hover-elevate cursor-pointer', className)}>
-      {children}
+      {truncateLabel(children)}
       <button
         type="button"
         aria-label="Disable tag"
         onClick={() => setOn(false)}
-        className="ml-1 inline-flex items-center justify-center rounded-full opacity-60 transition-opacity hover:opacity-100"
+        className="ml-1 inline-flex shrink-0 items-center justify-center rounded-full opacity-60 transition-opacity hover:opacity-100"
       >
         <X size={12} strokeWidth={2.5} />
       </button>

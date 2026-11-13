@@ -24,5 +24,7 @@ declare const TemplateBody: React.ForwardRefExoticComponent<TemplateBodyProps & 
 type TemplateCanvasLayout = 'center' | 'full' | 'grid' | 'columns';
 declare const TemplateCanvas: React.ForwardRefExoticComponent<React.HTMLAttributes<HTMLDivElement> & {
     layout?: TemplateCanvasLayout;
+    topBar?: React.ReactNode;
+    bottomBar?: React.ReactNode;
 } & React.RefAttributes<HTMLDivElement>>;
 export { Template, TemplateHeader, TemplateSubHeader, TemplateFooter, TemplateBody, TemplateCanvas, };
