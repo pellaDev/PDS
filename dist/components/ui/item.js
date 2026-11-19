@@ -56,6 +56,7 @@ function Item({
   return /* @__PURE__ */ jsx(
     Comp,
     {
+      role: "listitem",
       "data-slot": "item",
       "data-variant": variant,
       "data-size": size,
@@ -70,7 +71,7 @@ const itemMediaVariants = cva(
     variants: {
       variant: {
         default: "bg-transparent",
-        icon: "size-8 [&_svg:not([class*='size-'])]:size-4",
+        icon: "size-[var(--dim-llll)] [&_svg:not([class*='size-'])]:size-[var(--dim-mmmm)]",
         image: "size-10 overflow-hidden rounded-sm [&_img]:size-full [&_img]:object-cover"
       }
     },

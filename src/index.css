@@ -562,7 +562,7 @@
 :root { --pds-field-fill-bg: var(--color-secondary); --pds-field-outline-bg: var(--color-background); }
 [data-pds-surface='base']      { --pds-field-fill-bg: var(--color-secondary); --pds-field-outline-bg: var(--color-background); }
 [data-pds-surface='alternative'] { --pds-field-fill-bg: var(--color-background); --pds-field-outline-bg: var(--color-secondary); }
-[data-slot='card'] {
+[data-slot='card'], [data-pds-card-tone] {
   --pds-field-fill-bg: color-mix(in srgb, var(--pds-card-bg) 92%, var(--color-foreground));
   --pds-field-outline-bg: var(--pds-card-bg);
 }

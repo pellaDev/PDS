@@ -68,7 +68,7 @@ const BreadcrumbEllipsis = ({ className, ...props }) => /* @__PURE__ */ jsxs(
     className: cn("flex h-9 w-9 items-center justify-center", className),
     ...props,
     children: [
-      /* @__PURE__ */ jsx(MoreHorizontal, { className: "h-4 w-4" }),
+      /* @__PURE__ */ jsx(MoreHorizontal, { className: "size-[var(--dim-mmmm)]" }),
       /* @__PURE__ */ jsx("span", { className: "sr-only", children: "More" })
     ]
   }

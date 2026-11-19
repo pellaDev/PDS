@@ -50,14 +50,14 @@ const MenubarSubTrigger = React.forwardRef(({ className, inset, children, ...pro
   {
     ref,
     className: cn(
-      "pds-menu-item pds-sub flex cursor-default select-none items-center gap-2 px-3 py-1.5 [&_svg]:pointer-events-none [&_svg]:size-4",
+      "pds-menu-item pds-sub flex cursor-default select-none items-center gap-2 px-3 py-1.5 [&_svg]:pointer-events-none [&_svg]:size-[var(--dim-mmmm)]",
       inset && "pl-8",
       className
     ),
     ...props,
     children: [
       children,
-      /* @__PURE__ */ jsx(ChevronRight, { className: "ml-auto h-4 w-4" })
+      /* @__PURE__ */ jsx(ChevronRight, { className: "ml-auto size-[var(--dim-mmmm)]" })
     ]
   }
 ));
@@ -95,7 +95,7 @@ const MenubarItem = React.forwardRef(({ className, inset, format, ...props }, re
     ref,
     "data-format": format,
     className: cn(
-      "pds-menu-item relative flex cursor-default select-none items-center gap-2 px-3 py-1.5 data-[disabled]:pointer-events-none [&>svg]:size-4 [&>svg]:shrink-0",
+      "pds-menu-item relative flex cursor-default select-none items-center gap-2 px-3 py-1.5 data-[disabled]:pointer-events-none [&>svg]:size-[var(--dim-mmmm)] [&>svg]:shrink-0",
       inset && "pl-8",
       className
     ),
@@ -114,7 +114,7 @@ const MenubarCheckboxItem = React.forwardRef(({ className, children, checked, ..
     checked,
     ...props,
     children: [
-      /* @__PURE__ */ jsx("span", { className: "absolute left-2 flex h-3.5 w-3.5 items-center justify-center", children: /* @__PURE__ */ jsx(MenubarPrimitive.ItemIndicator, { children: /* @__PURE__ */ jsx(Check, { className: "h-4 w-4" }) }) }),
+      /* @__PURE__ */ jsx("span", { className: "absolute left-2 flex h-3.5 w-3.5 items-center justify-center", children: /* @__PURE__ */ jsx(MenubarPrimitive.ItemIndicator, { children: /* @__PURE__ */ jsx(Check, { className: "size-[var(--dim-mmmm)]" }) }) }),
       children
     ]
   }
@@ -130,7 +130,7 @@ const MenubarRadioItem = React.forwardRef(({ className, children, ...props }, re
     ),
     ...props,
     children: [
-      /* @__PURE__ */ jsx("span", { className: "absolute left-2 flex h-3.5 w-3.5 items-center justify-center", children: /* @__PURE__ */ jsx(MenubarPrimitive.ItemIndicator, { children: /* @__PURE__ */ jsx(Circle, { className: "h-4 w-4 fill-current" }) }) }),
+      /* @__PURE__ */ jsx("span", { className: "absolute left-2 flex h-3.5 w-3.5 items-center justify-center", children: /* @__PURE__ */ jsx(MenubarPrimitive.ItemIndicator, { children: /* @__PURE__ */ jsx(Circle, { className: "size-[var(--dim-mmmm)] fill-current" }) }) }),
       children
     ]
   }

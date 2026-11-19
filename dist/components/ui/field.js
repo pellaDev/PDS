@@ -62,6 +62,7 @@ const Field = React.forwardRef(function Field2({
               if (autoGrow) growToContent(event.currentTarget);
               onInput?.(event);
             },
+            ...props,
             className: "pds-field__input"
           }
         ) : /* @__PURE__ */ jsx(

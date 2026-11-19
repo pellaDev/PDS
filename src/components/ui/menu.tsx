@@ -132,7 +132,7 @@ function MenuContent({
 }
 
 const ITEM_BASE =
-  'pds-menu-item relative flex cursor-default select-none items-center gap-2 px-3 py-1.5 data-[disabled]:pointer-events-none [&>svg]:size-4 [&>svg]:shrink-0';
+  'pds-menu-item relative flex cursor-default select-none items-center gap-2 px-3 py-1.5 data-[disabled]:pointer-events-none [&>svg]:size-[var(--dim-mmmm)] [&>svg]:shrink-0';
 
 export type MenuItemFormat = 'label' | 'avatar-label-tags';
 
@@ -196,7 +196,7 @@ function MenuCheckboxItem({
       >
         <span className="absolute left-2 flex h-3.5 w-3.5 items-center justify-center">
           <DropdownMenuPrimitive.ItemIndicator>
-            <Check className="size-4" />
+            <Check className="size-[var(--dim-mmmm)]" />
           </DropdownMenuPrimitive.ItemIndicator>
         </span>
         {children}
@@ -210,7 +210,7 @@ function MenuCheckboxItem({
     >
       <span className="absolute left-2 flex h-3.5 w-3.5 items-center justify-center">
         <ContextMenuPrimitive.ItemIndicator>
-          <Check className="size-4" />
+          <Check className="size-[var(--dim-mmmm)]" />
         </ContextMenuPrimitive.ItemIndicator>
       </span>
       {children}
@@ -356,7 +356,7 @@ function MenuSubTrigger({
 }: { className?: string; inset?: boolean; children?: React.ReactNode } & PassProps) {
   const mode = React.useContext(MenuContext);
   const classes = cn(
-    'pds-menu-item pds-sub flex cursor-default select-none items-center gap-2 px-3 py-1.5 [&_svg]:pointer-events-none [&_svg]:size-4',
+    'pds-menu-item pds-sub flex cursor-default select-none items-center gap-2 px-3 py-1.5 [&_svg]:pointer-events-none [&_svg]:size-[var(--dim-mmmm)]',
     inset && 'pl-8',
     className,
   );
@@ -369,7 +369,7 @@ function MenuSubTrigger({
         )}
       >
         {children}
-        <ChevronRight className="ml-auto size-4" />
+        <ChevronRight className="ml-auto size-[var(--dim-mmmm)]" />
       </DropdownMenuPrimitive.SubTrigger>
     );
   }
@@ -379,7 +379,7 @@ function MenuSubTrigger({
       {...toContext<React.ComponentPropsWithoutRef<typeof ContextMenuPrimitive.SubTrigger>>(rest)}
     >
       {children}
-      <ChevronRight className="ml-auto size-4" />
+      <ChevronRight className="ml-auto size-[var(--dim-mmmm)]" />
     </ContextMenuPrimitive.SubTrigger>
   );
 }

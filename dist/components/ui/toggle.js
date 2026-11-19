@@ -6,7 +6,7 @@ import { cva } from "class-variance-authority";
 import { cn } from "../../lib/utils";
 import "./toggle.css";
 const toggleVariants = cva(
-  "pds-toggle-btn inline-flex items-center justify-center gap-2 rounded-md [min-height:var(--pds-touch-min)] transition-colors hover-elevate active-elevate-2 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
+  "pds-toggle-btn inline-flex items-center justify-center gap-2 rounded-md [min-height:var(--pds-touch-min)] transition-colors hover-elevate active-elevate-2 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none [&_svg]:pointer-events-none [&_svg]:size-[var(--dim-mmmm)] [&_svg]:shrink-0",
   {
     variants: {
       variant: {

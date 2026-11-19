@@ -85,6 +85,7 @@ const Field = React.forwardRef<HTMLInputElement | HTMLTextAreaElement, FieldProp
             if (autoGrow) growToContent(event.currentTarget);
             onInput?.(event);
           }}
+          {...(props as unknown as React.TextareaHTMLAttributes<HTMLTextAreaElement>)}
           className="pds-field__input"
         />
       ) : (

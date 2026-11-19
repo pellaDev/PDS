@@ -16,7 +16,7 @@ const buttonVariants = cva(
         mini: "size-[var(--dim-mm)] p-[var(--space-regularMini)] [--pds-control-min:auto] [&_svg]:size-[var(--dim-mmmm)]",
         small: "[height:var(--dim-llll)] [padding-inline:var(--dim-s)] [&_svg]:size-[var(--dim-mmmm)]",
         large: "[height:var(--dim-lll)] [padding-inline:var(--dim-mm)] [&_svg]:size-[var(--dim-mmmm)]",
-        special: "flex-col size-[4.5rem] min-h-[4.5rem] min-w-[4.5rem] gap-1.5 overflow-hidden p-3 [&_svg]:size-5"
+        special: "flex-col size-[var(--dim-xxl)] min-h-[var(--dim-xxl)] min-w-[var(--dim-xxl)] gap-1.5 overflow-hidden p-3 [&_svg]:size-[var(--dim-mmm)]"
       },
       shape: {
         label: "",
@@ -42,6 +42,7 @@ function Button({
   variant,
   size,
   shape,
+  wide = false,
   asChild = false,
   tooltip,
   children,
@@ -59,7 +60,7 @@ function Button({
       "data-slot": "button",
       "data-size": size,
       "data-shape": shape,
-      className: cn(buttonVariants({ variant, size, shape, className })),
+      className: cn(buttonVariants({ variant, size, shape, className }), wide && "[width:100%]"),
       ...props,
       ...iconOnly && name ? { "aria-label": String(name) } : {},
       children: size === "special" && !asChild ? truncateLabel(children) : children

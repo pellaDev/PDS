@@ -38,6 +38,12 @@ package**. This repository IS the published package (flat layout): `src/` is the
 7. Version bumps and releases are managed by the maintainers.
    Do not commit ad-hoc changes to `package.json` version or to `dist/`.
 
+8. Serve fresh before any visual check by a human: the showcase dev server reads
+   `src/` live, but after rapid successive edits Vite can keep serving a stale
+   transform (see the 2026-11-14 dev-server note in IMPROVEMENTS.md). Reload and
+   re-measure before trusting a screenshot. Anything verified against `dist/` or an
+   installed copy requires `pnpm run build` first.
+
 ## Commands
 
 | Command | Effect |
@@ -113,6 +119,7 @@ Each row states the contract a consumer writes against: what you pass and what t
 | Breadcrumb | `breadcrumb` | Hierarchical location links |
 | Pagination | `pagination` | Numbered pagination cells |
 | Tabs | `tabs` | Switch between related content views |
+| TabsCard | `tabs` | Same file, second card-style design: one rounded card, inline strip with hairline dividers, active label on a chip; when many tabs the strip scrolls (never wraps, a chip at an edge dissolves over the last --dim-s via a per-side measured mask fade) and chevron affordances pin at its edges, PICKING the next/previous tab (measured bring-into-view + provider selection; arrows follow the selection; finger swipe AND mouse/pen drag pan the row (pointer-drag wired by the pass, native touch pan never doubled); the panel keeps uniform --dim-s padding on all four sides; one surface tone from the place it stands on — the card paints chip + panel with --pds-surface-canvas-bg, so in the light Base column it reads recessed gray while the Alternative column stays page-white and dark keeps its own mapping, and the textarea inside publishes its own field-family tones via tabs.css (2026-11-20 settled contract, style-by-style: the FILL field takes the tone OPPOSITE the panel the card paints — 249/227 light, 56/27 dark; the OUTLINE field sits flush on the card's own painted panel tone + hairline border, the label chip cuts it again — transparent was errata 2026-11-19, it left the border crossing the label) — promoted 2026-11-20 as a PDS design of its own: the whole original token set lives at Dev/tokens/components/tabsCard.json (pds.comp.tabsCard, compositions of pure aliases over existing surface/role/scale tokens — zero new raw values)) |
 | Sidebar | `sidebar` | Desktop side panel (groups can collapse) |
 | MobileNavigationMenu | `mobile-navigation-menu` | Mobile off-canvas sheet with expandable tree groups |
 
@@ -152,7 +159,7 @@ Each row states the contract a consumer writes against: what you pass and what t
 | Separator | `separator` | Horizontal/vertical divider |
 | ScrollArea | `scroll-area` | Bounded scrolling region with styled scrollbar |
 | StickyActionBar | `sticky-action-bar` | Row of actions pinned to the edge of its region (`data-pds-region`): the window root, the Template canvas or the Device screen, at full width; `tone` fill or outline, `side` bottom or top |
-| Template | `template` | Application frame — header, sub-header, sidebars, canvas, footer |
+| Template | `template` | Application frame — header, sub-header, sidebars, canvas, footer; a chrome slot is either its content prop or its slot component as a child, never both, and props render before children in header → subHeader order |
 | Resizable | `resizable` | Resizable panel group (used by `TemplateBody`) |
 | Layout | `layout` | Composition primitives — `Stack`, `Row`, `Grid`, `Panel`; gap and radius are token-driven |
 | Device | `device` | Tokenized phone frame — `Device`, `DeviceContent`, `DeviceStatusBar` |
@@ -185,6 +192,7 @@ One brand style; size and state are props, not separate components.
 | `size` | `mini` (the 24px icon-only tile, the only size that opts out of the touch floor) · `small` (default, the desktop labelled row) · `large` (what `small` becomes past the breakpoint) · `special` (mobile side, icon stacked above the label) | Prefer no `size` at all: `small` is the default and the mobile layer only raises the touch floor. The small ⇄ large mapping is documented in `tokens/components/buttons.json` → `pds.comp.button.sizeSwap` (documentation-only: DTCG has no mapping type, and the CSS layer does not swap padding) |
 | `shape` | `label` (default) · `icon` | `icon` is not a size: it is the icon-only form of the size you pass, so `small shape="icon"` is the small button drawn as a square, on the side that size stands on |
 | `variant` | `default` · `destructive` · `link` | States of the same button, not separate types |
+| `wide` | boolean · default false | Fill the horizontal width of whatever container holds the button — a layout behaviour, not a size: it takes over only the width, keeping the applied composition's height and side padding (so `small wide` keeps the 12px side padding). The fill is a layout value (`width: 100%`), not a design token. Give it a line of its own: in a shared row it would take over the siblings' space |
 | `asChild` | boolean | Render a child element (e.g. `<a>`) with button styling — Radix Slot |
 | `tooltip` | string | Tooltip text; wins over `title`/`aria-label` when deriving the auto-tooltip |
 
@@ -206,6 +214,9 @@ export function Example() {
       <Button>Label</Button>
       <Button><Mail />Label</Button>
       <Button>Label<ArrowRight /></Button>
+
+      {/* Wide: fills the width of its container — in a wrapping row that means its own line, full width */}
+      <Button wide>Continue</Button>
 
       {/* Mobile side only: icon stacked above the label */}
       <Button size="special"><Sparkles />Save</Button>
@@ -425,6 +436,43 @@ export function AppFrame() {
 - With `layout="grid"` or `"columns"`, direct children of `TemplateCanvas` become grid cells; `"center"` centers a single column; `"full"` runs edge to edge.
 - An item that must span every column (prose that belongs to the page, not to one column) carries `data-span="all"`: `grid-column: 1 / -1` in the grid, `column-span: all` in the flow — Chromium-only, Firefox keeps it inside its column.
 - The gaps between panels are resizable drag handles; initial widths come from the size props above.
+
+### TabsCard (the card design — same module as Tabs, never replacing it)
+
+One rounded card: the label strip rides its own band and the tab content a panel directly below; the ACTIVE label is COLLECTED into the panel (chip + panel painted as one fold). The API is the TabsCard quartet — Tabs (segmented bar) stays exactly as documented above.
+
+```tsx
+import { Field } from "@workspace/pds/components/ui/field"
+import {
+  TabsCard,
+  TabsCardContent,
+  TabsCardList,
+  TabsCardTrigger,
+} from "@workspace/pds/components/ui/tabs"
+
+export function Example() {
+  return (
+    <TabsCard defaultValue="overview">
+      <TabsCardList>
+        <TabsCardTrigger value="overview">Overview</TabsCardTrigger>
+        <TabsCardTrigger value="activity">Activity</TabsCardTrigger>
+        <TabsCardTrigger value="members" disabled>Members</TabsCardTrigger>
+      </TabsCardList>
+      <TabsCardContent value="overview">
+        <Field control="multiline" label="Note">The website redesign is on track for the June release.</Field>
+      </TabsCardContent>
+      <TabsCardContent value="activity">Latest changes from your team.</TabsCardContent>
+    </TabsCard>
+  )
+}
+```
+
+- Same Radix state machine as Tabs: `value`/`defaultValue` wiring, focus and keyboard are the Tabs contract; `disabled` stays on a trigger.
+- The strip **never wraps**: when many tabs the row SCROLLS (silent — the card owns no printed rail) and the two chevrons pinned at the strip edges PICK the previous/next tab (click or arrow; an arrow paints only while such a tab exists). Never wire your own scroller, scrollbar, or keyboard handler, and never bridge the chip to the panel yourself — the measured seam opens the fold.
+- **No tone axis and no surface prop**: the card paints chip + panel from the surface it stands on (Base column: recessed gray; Alternative: page-white; dark keeps its own mapping). Its design set at `Dev/tokens/components/tabsCard.json` is pure aliases — never hardcode any of these values.
+- The panel keeps uniform `--dim-s` padding on all four sides — never add padding inside `TabsCardContent`.
+- Same markup both sides: the mobile layer raises the 44px touch floor (triggers AND chevrons) and turns a finger swipe into the strip's own overflow-x pan; mouse/pen drag is wired by the component and never doubled.
+- The FILL textarea inside reads the tone OPPOSITE its painted panel and the OUTLINE field reads flush with it — both automatic via tabs.css; never set a field tone yourself.
 
 ## Composition notes (other non-trivial components)
 

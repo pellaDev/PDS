@@ -3,6 +3,7 @@ import * as MobileNavigationMenuPrimitive from '@radix-ui/react-dialog';
 import { type VariantProps } from 'class-variance-authority';
 import { Collapsible } from './collapsible';
 import { Separator } from './separator';
+import './scrollbar.css';
 declare const MobileNavigationMenu: React.FC<MobileNavigationMenuPrimitive.DialogProps>;
 declare const MobileNavigationMenuTrigger: React.ForwardRefExoticComponent<Omit<MobileNavigationMenuPrimitive.DialogTriggerProps & React.RefAttributes<HTMLButtonElement>, "ref"> & React.RefAttributes<HTMLButtonElement>>;
 declare const MobileNavigationMenuClose: React.ForwardRefExoticComponent<Omit<MobileNavigationMenuPrimitive.DialogCloseProps & React.RefAttributes<HTMLButtonElement>, "ref"> & React.RefAttributes<HTMLButtonElement>>;

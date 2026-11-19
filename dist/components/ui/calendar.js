@@ -65,7 +65,7 @@ function Calendar({
         dropdown: cn("bg-popover absolute inset-0 opacity-0", defaultClassNames.dropdown),
         caption_label: cn(
           "select-none font-medium",
-          captionLayout === "label" ? "text-sm" : "[&>svg]:text-muted-foreground flex h-8 items-center gap-1 rounded-md pl-2 pr-1 text-sm [&>svg]:size-3.5",
+          captionLayout === "label" ? "text-sm" : "[&>svg]:text-muted-foreground flex h-8 items-center gap-1 rounded-md pl-2 pr-1 text-sm [&>svg]:size-[var(--text-sm)] /* caption scale: the nav row runs text-sm, the glyph matches it (2026-11-18-icon-text-row-audit) */",
           defaultClassNames.caption_label
         ),
         table: "w-full border-collapse",
@@ -105,12 +105,33 @@ function Calendar({
         },
         Chevron: ({ className: className2, orientation, ...props2 }) => {
           if (orientation === "left") {
-            return /* @__PURE__ */ jsx(Icon, { name: "chevron-left", className: cn("size-4", className2), ...props2 });
+            return /* @__PURE__ */ jsx(
+              Icon,
+              {
+                name: "chevron-left",
+                className: cn("size-[var(--dim-mmmm)]", className2),
+                ...props2
+              }
+            );
           }
           if (orientation === "right") {
-            return /* @__PURE__ */ jsx(Icon, { name: "chevron-right", className: cn("size-4", className2), ...props2 });
+            return /* @__PURE__ */ jsx(
+              Icon,
+              {
+                name: "chevron-right",
+                className: cn("size-[var(--dim-mmmm)]", className2),
+                ...props2
+              }
+            );
           }
-          return /* @__PURE__ */ jsx(Icon, { name: "chevron-down", className: cn("size-4", className2), ...props2 });
+          return /* @__PURE__ */ jsx(
+            Icon,
+            {
+              name: "chevron-down",
+              className: cn("size-[var(--dim-mmmm)]", className2),
+              ...props2
+            }
+          );
         },
         DayButton: CalendarDayButton,
         WeekNumber: ({ children, ...props2 }) => {

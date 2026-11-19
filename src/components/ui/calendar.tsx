@@ -71,7 +71,7 @@ function Calendar({
           'select-none font-medium',
           captionLayout === 'label'
             ? 'text-sm'
-            : '[&>svg]:text-muted-foreground flex h-8 items-center gap-1 rounded-md pl-2 pr-1 text-sm [&>svg]:size-3.5',
+            : '[&>svg]:text-muted-foreground flex h-8 items-center gap-1 rounded-md pl-2 pr-1 text-sm [&>svg]:size-[var(--text-sm)] /* caption scale: the nav row runs text-sm, the glyph matches it (2026-11-18-icon-text-row-audit) */',
           defaultClassNames.caption_label,
         ),
         table: 'w-full border-collapse',
@@ -111,14 +111,32 @@ function Calendar({
         },
         Chevron: ({ className, orientation, ...props }) => {
           if (orientation === 'left') {
-            return <Icon name="chevron-left" className={cn('size-4', className)} {...props} />;
+            return (
+              <Icon
+                name="chevron-left"
+                className={cn('size-[var(--dim-mmmm)]', className)}
+                {...props}
+              />
+            );
           }
 
           if (orientation === 'right') {
-            return <Icon name="chevron-right" className={cn('size-4', className)} {...props} />;
+            return (
+              <Icon
+                name="chevron-right"
+                className={cn('size-[var(--dim-mmmm)]', className)}
+                {...props}
+              />
+            );
           }
 
-          return <Icon name="chevron-down" className={cn('size-4', className)} {...props} />;
+          return (
+            <Icon
+              name="chevron-down"
+              className={cn('size-[var(--dim-mmmm)]', className)}
+              {...props}
+            />
+          );
         },
         DayButton: CalendarDayButton,
         WeekNumber: ({ children, ...props }) => {

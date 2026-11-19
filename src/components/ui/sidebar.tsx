@@ -383,7 +383,7 @@ function SidebarGroup({
             {label}
             <ChevronDownIcon
               className={cn(
-                'text-(--state-sidebar-label) size-4 shrink-0 transition-transform duration-200 ease-linear',
+                'text-(--state-sidebar-label) size-[var(--dim-mmmm)] shrink-0 transition-transform duration-200 ease-linear',
                 !open && '-rotate-90',
               )}
             />
@@ -447,7 +447,7 @@ function SidebarGroupAction({
       data-slot="sidebar-group-action"
       data-sidebar="group-action"
       className={cn(
-        'text-sidebar-foreground ring-sidebar-ring hover-elevate absolute top-3.5 right-3 flex aspect-square w-5 items-center justify-center rounded-md p-0 outline-hidden transition-transform focus-visible:ring-2 [&>svg]:size-4 [&>svg]:shrink-0',
+        'text-sidebar-foreground ring-sidebar-ring hover-elevate absolute top-3.5 right-3 flex size-[var(--dim-mm)] items-center justify-center rounded-md p-0 outline-hidden transition-transform focus-visible:ring-2 [&>svg]:size-[var(--dim-mmmm)] [&>svg]:shrink-0',
 
         'after:absolute after:-inset-2 md:after:hidden',
         'group-data-[collapsible=icon]:hidden',
@@ -501,7 +501,7 @@ function SidebarMenuItem({ className, ...props }: React.ComponentProps<'li'>) {
 }
 
 const sidebarMenuButtonVariants = cva(
-  'peer/menu-button flex w-full items-center gap-2 overflow-hidden rounded-md p-2 text-left text-sm outline-hidden ring-sidebar-ring transition-[width,height,padding] hover-elevate focus-visible:ring-2 active:bg-[color-mix(in_srgb,currentColor_8%,transparent)] disabled:pointer-events-none disabled:opacity-50 group-has-data-[sidebar=menu-action]/menu-item:pr-8 aria-disabled:pointer-events-none aria-disabled:opacity-50 data-[active=true]:font-medium data-[active=true]:bg-[color-mix(in_srgb,currentColor_10%,transparent)] data-[active=true]:shadow-[inset_2px_0_0_var(--color-primary)] group-data-[collapsible=icon]:w-8! group-data-[collapsible=icon]:h-8! group-data-[collapsible=icon]:p-2! [&>span:last-child]:truncate [&>svg]:size-4 [&>svg]:shrink-0',
+  'peer/menu-button flex w-full items-center gap-2 overflow-hidden rounded-md p-2 text-left text-sm outline-hidden ring-sidebar-ring transition-[width,height,padding] hover-elevate focus-visible:ring-2 active:bg-[color-mix(in_srgb,currentColor_8%,transparent)] disabled:pointer-events-none disabled:opacity-50 group-has-data-[sidebar=menu-action]/menu-item:pr-8 aria-disabled:pointer-events-none aria-disabled:opacity-50 data-[active=true]:font-medium data-[active=true]:bg-[color-mix(in_srgb,currentColor_10%,transparent)] data-[active=true]:shadow-[inset_2px_0_0_var(--color-primary)] group-data-[collapsible=icon]:w-8! group-data-[collapsible=icon]:h-8! group-data-[collapsible=icon]:p-2! [&>span:last-child]:truncate [&>svg]:size-[var(--dim-mmmm)] [&>svg]:shrink-0',
   {
     variants: {
       variant: {
@@ -575,7 +575,7 @@ function SidebarMenuAction({
       data-slot="sidebar-menu-action"
       data-sidebar="menu-action"
       className={cn(
-        'text-sidebar-foreground ring-sidebar-ring hover-elevate absolute top-1.5 right-1 flex aspect-square w-5 items-center justify-center rounded-md p-0 outline-hidden transition-transform focus-visible:ring-2 [&>svg]:size-4 [&>svg]:shrink-0',
+        'text-sidebar-foreground ring-sidebar-ring hover-elevate absolute top-1.5 right-1 flex size-[var(--dim-mm)] items-center justify-center rounded-md p-0 outline-hidden transition-transform focus-visible:ring-2 [&>svg]:size-[var(--dim-mmmm)] [&>svg]:shrink-0',
 
         'after:absolute after:-inset-2 md:after:hidden',
         'peer-data-[size=sm]/menu-button:top-1',
@@ -627,7 +627,9 @@ function SidebarMenuSkeleton({
       className={cn('flex h-8 items-center gap-2 rounded-md px-2', className)}
       {...props}
     >
-      {showIcon && <Skeleton className="size-4 rounded-md" data-sidebar="menu-skeleton-icon" />}
+      {showIcon && (
+        <Skeleton className="size-[var(--dim-mmmm)] rounded-md" data-sidebar="menu-skeleton-icon" />
+      )}
       <Skeleton
         className="h-4 max-w-[var(--skeleton-width)] flex-1"
         data-sidebar="menu-skeleton-text"
@@ -687,7 +689,7 @@ function SidebarMenuSubButton({
       data-size={size}
       data-active={isActive}
       className={cn(
-        'text-sidebar-foreground ring-sidebar-ring hover-elevate active:bg-[color-mix(in_srgb,currentColor_8%,transparent)] flex h-7 min-w-0 -translate-x-px items-center gap-2 overflow-hidden rounded-md px-2 outline outline-2 outline-transparent outline-offset-2 focus-visible:ring-2 disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50 [&>span:last-child]:truncate [&>svg]:size-4 [&>svg]:shrink-0',
+        'text-sidebar-foreground ring-sidebar-ring hover-elevate active:bg-[color-mix(in_srgb,currentColor_8%,transparent)] flex h-7 min-w-0 -translate-x-px items-center gap-2 overflow-hidden rounded-md px-2 outline outline-2 outline-transparent outline-offset-2 focus-visible:ring-2 disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50 [&>span:last-child]:truncate [&>svg]:size-[var(--dim-mmmm)] [&>svg]:shrink-0',
         'data-[active=true]:bg-[color-mix(in_srgb,currentColor_10%,transparent)] data-[active=true]:shadow-[inset_2px_0_0_var(--color-primary)]',
         size === 'sm' && 'text-xs',
         size === 'md' && 'text-sm',

@@ -6,9 +6,10 @@ declare const buttonVariants: (props?: ({
     shape?: "label" | "icon" | null | undefined;
     variant?: "link" | "default" | "destructive" | null | undefined;
 } & import("class-variance-authority/types").ClassProp) | undefined) => string;
-declare function Button({ className, variant, size, shape, asChild, tooltip, children, ...props }: React.ComponentProps<'button'> & VariantProps<typeof buttonVariants> & {
+declare function Button({ className, variant, size, shape, wide, asChild, tooltip, children, ...props }: React.ComponentProps<'button'> & VariantProps<typeof buttonVariants> & {
     asChild?: boolean;
     shape?: 'label' | 'icon';
+    wide?: boolean;
     tooltip?: string;
 }): React.JSX.Element;
 export { Button, buttonVariants };

@@ -7,7 +7,7 @@ function Spinner({ className, ...props }) {
     {
       role: "status",
       "aria-label": "Loading",
-      className: cn("size-4 animate-spin", className),
+      className: cn("size-[var(--dim-mmmm)] animate-spin", className),
       ...props
     }
   );

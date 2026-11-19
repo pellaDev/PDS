@@ -7,21 +7,45 @@ import { ResizablePanelGroup, ResizablePanel, ResizableHandle } from "./resizabl
 import "./template.css";
 import "./scrollbar.css";
 const Template = React.forwardRef(
-  ({ className, header, subHeader, footer, children, ...props }, ref) => /* @__PURE__ */ jsxs(
-    "div",
-    {
-      ref,
-      "data-slot": "template",
-      className: cn("flex h-full min-h-0 flex-col", className),
-      ...props,
-      children: [
-        header ? /* @__PURE__ */ jsx(TemplateHeader, { children: header }) : null,
-        subHeader ? /* @__PURE__ */ jsx(TemplateSubHeader, { children: subHeader }) : null,
-        children,
-        footer ? /* @__PURE__ */ jsx(TemplateFooter, { children: footer }) : null
-      ]
-    }
-  )
+  ({ className, header, subHeader, footer, children, ...props }, ref) => {
+    const frameRef = React.useRef(null);
+    const setRef = (node) => {
+      frameRef.current = node;
+      if (typeof ref === "function") ref(node);
+      else if (ref) ref.current = node;
+    };
+    React.useEffect(() => {
+      const frame = frameRef.current;
+      if (!frame) return;
+      const slots = {
+        "template-header": header,
+        "template-subheader": subHeader,
+        "template-footer": footer
+      };
+      for (const [slot, content] of Object.entries(slots)) {
+        const drawn = frame.querySelectorAll(`:scope > [data-slot="${slot}"]`).length;
+        if (drawn > (content ? 1 : 0))
+          console.warn(
+            `[pds-template] ${slot} row appears both as prop and as child: props render before children, in header \u2192 subHeader order \u2014 keep one of the two (see 2026-11-17-template-prop-child-order).`
+          );
+      }
+    }, [header, subHeader, footer]);
+    return /* @__PURE__ */ jsxs(
+      "div",
+      {
+        ref: setRef,
+        "data-slot": "template",
+        className: cn("flex h-full min-h-0 flex-col", className),
+        ...props,
+        children: [
+          header ? /* @__PURE__ */ jsx(TemplateHeader, { children: header }) : null,
+          subHeader ? /* @__PURE__ */ jsx(TemplateSubHeader, { children: subHeader }) : null,
+          children,
+          footer ? /* @__PURE__ */ jsx(TemplateFooter, { children: footer }) : null
+        ]
+      }
+    );
+  }
 );
 Template.displayName = "Template";
 const TemplateHeader = React.forwardRef(

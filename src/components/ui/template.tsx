@@ -16,19 +16,43 @@ type TemplateProps = React.HTMLAttributes<HTMLDivElement> & {
 };
 
 const Template = React.forwardRef<HTMLDivElement, TemplateProps>(
-  ({ className, header, subHeader, footer, children, ...props }, ref) => (
-    <div
-      ref={ref}
-      data-slot="template"
-      className={cn('flex h-full min-h-0 flex-col', className)}
-      {...props}
-    >
-      {header ? <TemplateHeader>{header}</TemplateHeader> : null}
-      {subHeader ? <TemplateSubHeader>{subHeader}</TemplateSubHeader> : null}
-      {children}
-      {footer ? <TemplateFooter>{footer}</TemplateFooter> : null}
-    </div>
-  ),
+  ({ className, header, subHeader, footer, children, ...props }, ref) => {
+    const frameRef = React.useRef<HTMLDivElement | null>(null);
+    const setRef = (node: HTMLDivElement | null) => {
+      frameRef.current = node;
+      if (typeof ref === 'function') ref(node);
+      else if (ref) ref.current = node;
+    };
+    React.useEffect(() => {
+      const frame = frameRef.current;
+      if (!frame) return;
+      const slots: Record<string, React.ReactNode> = {
+        'template-header': header,
+        'template-subheader': subHeader,
+        'template-footer': footer,
+      };
+      for (const [slot, content] of Object.entries(slots)) {
+        const drawn = frame.querySelectorAll(`:scope > [data-slot="${slot}"]`).length;
+        if (drawn > (content ? 1 : 0))
+          console.warn(
+            `[pds-template] ${slot} row appears both as prop and as child: props render before children, in header → subHeader order — keep one of the two (see 2026-11-17-template-prop-child-order).`,
+          );
+      }
+    }, [header, subHeader, footer]);
+    return (
+      <div
+        ref={setRef}
+        data-slot="template"
+        className={cn('flex h-full min-h-0 flex-col', className)}
+        {...props}
+      >
+        {header ? <TemplateHeader>{header}</TemplateHeader> : null}
+        {subHeader ? <TemplateSubHeader>{subHeader}</TemplateSubHeader> : null}
+        {children}
+        {footer ? <TemplateFooter>{footer}</TemplateFooter> : null}
+      </div>
+    );
+  },
 );
 Template.displayName = 'Template';
 

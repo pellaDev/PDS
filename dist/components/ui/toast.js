@@ -69,7 +69,7 @@ const ToastClose = React.forwardRef(({ className, ...props }, ref) => /* @__PURE
     ),
     "toast-close": "",
     ...props,
-    children: /* @__PURE__ */ jsx(X, { className: "h-4 w-4" })
+    children: /* @__PURE__ */ jsx(X, { className: "size-[var(--dim-mmmm)]" })
   }
 ));
 ToastClose.displayName = ToastPrimitives.Close.displayName;

@@ -60,6 +60,7 @@ const AvatarImage = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <AvatarPrimitive.Image
     ref={ref}
+    data-slot="avatar-image"
     className={cn('aspect-square h-full w-full [border-radius:inherit]', className)}
     {...props}
   />

@@ -150,7 +150,7 @@ const CarouselPrevious = React.forwardRef(
         onClick: scrollPrev,
         ...props,
         children: [
-          /* @__PURE__ */ jsx(ArrowLeft, { className: "h-4 w-4" }),
+          /* @__PURE__ */ jsx(ArrowLeft, { className: "size-[var(--dim-mmmm)]" }),
           /* @__PURE__ */ jsx("span", { className: "sr-only", children: "Previous slide" })
         ]
       }
@@ -177,7 +177,7 @@ const CarouselNext = React.forwardRef(
         onClick: scrollNext,
         ...props,
         children: [
-          /* @__PURE__ */ jsx(ArrowRight, { className: "h-4 w-4" }),
+          /* @__PURE__ */ jsx(ArrowRight, { className: "size-[var(--dim-mmmm)]" }),
           /* @__PURE__ */ jsx("span", { className: "sr-only", children: "Next slide" })
         ]
       }

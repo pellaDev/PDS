@@ -102,7 +102,7 @@ function MenuContent({
     }
   ) });
 }
-const ITEM_BASE = "pds-menu-item relative flex cursor-default select-none items-center gap-2 px-3 py-1.5 data-[disabled]:pointer-events-none [&>svg]:size-4 [&>svg]:shrink-0";
+const ITEM_BASE = "pds-menu-item relative flex cursor-default select-none items-center gap-2 px-3 py-1.5 data-[disabled]:pointer-events-none [&>svg]:size-[var(--dim-mmmm)] [&>svg]:shrink-0";
 function MenuItem({
   className,
   inset,
@@ -149,7 +149,7 @@ function MenuCheckboxItem({
           rest
         ),
         children: [
-          /* @__PURE__ */ jsx("span", { className: "absolute left-2 flex h-3.5 w-3.5 items-center justify-center", children: /* @__PURE__ */ jsx(DropdownMenuPrimitive.ItemIndicator, { children: /* @__PURE__ */ jsx(Check, { className: "size-4" }) }) }),
+          /* @__PURE__ */ jsx("span", { className: "absolute left-2 flex h-3.5 w-3.5 items-center justify-center", children: /* @__PURE__ */ jsx(DropdownMenuPrimitive.ItemIndicator, { children: /* @__PURE__ */ jsx(Check, { className: "size-[var(--dim-mmmm)]" }) }) }),
           children
         ]
       }
@@ -161,7 +161,7 @@ function MenuCheckboxItem({
       className: cn(CHECK_ITEM_BASE, className),
       ...toContext(rest),
       children: [
-        /* @__PURE__ */ jsx("span", { className: "absolute left-2 flex h-3.5 w-3.5 items-center justify-center", children: /* @__PURE__ */ jsx(ContextMenuPrimitive.ItemIndicator, { children: /* @__PURE__ */ jsx(Check, { className: "size-4" }) }) }),
+        /* @__PURE__ */ jsx("span", { className: "absolute left-2 flex h-3.5 w-3.5 items-center justify-center", children: /* @__PURE__ */ jsx(ContextMenuPrimitive.ItemIndicator, { children: /* @__PURE__ */ jsx(Check, { className: "size-[var(--dim-mmmm)]" }) }) }),
         children
       ]
     }
@@ -295,7 +295,7 @@ function MenuSubTrigger({
 }) {
   const mode = React.useContext(MenuContext);
   const classes = cn(
-    "pds-menu-item pds-sub flex cursor-default select-none items-center gap-2 px-3 py-1.5 [&_svg]:pointer-events-none [&_svg]:size-4",
+    "pds-menu-item pds-sub flex cursor-default select-none items-center gap-2 px-3 py-1.5 [&_svg]:pointer-events-none [&_svg]:size-[var(--dim-mmmm)]",
     inset && "pl-8",
     className
   );
@@ -309,7 +309,7 @@ function MenuSubTrigger({
         ),
         children: [
           children,
-          /* @__PURE__ */ jsx(ChevronRight, { className: "ml-auto size-4" })
+          /* @__PURE__ */ jsx(ChevronRight, { className: "ml-auto size-[var(--dim-mmmm)]" })
         ]
       }
     );
@@ -321,7 +321,7 @@ function MenuSubTrigger({
       ...toContext(rest),
       children: [
         children,
-        /* @__PURE__ */ jsx(ChevronRight, { className: "ml-auto size-4" })
+        /* @__PURE__ */ jsx(ChevronRight, { className: "ml-auto size-[var(--dim-mmmm)]" })
       ]
     }
   );

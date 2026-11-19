@@ -1,0 +1,15 @@
+[data-slot='tabs-card'][data-pds-card-tone] {
+  --pds-field-fill-bg: var(--color-card);
+  --pds-field-outline-bg: var(--pds-card-content-bg);
+}
+
+[data-pds-surface='alternative'] [data-slot='tabs-card'][data-pds-card-tone] {
+  --pds-field-fill-bg: var(--color-secondary);
+}
+[data-pds-surface='base'] [data-slot='tabs-card'][data-pds-card-tone] {
+  --pds-field-fill-bg: var(--color-card);
+}
+
+.dark [data-pds-surface='base'] [data-slot='tabs-card'][data-pds-card-tone] {
+  --pds-field-fill-bg: var(--pds-surface-bg);
+}

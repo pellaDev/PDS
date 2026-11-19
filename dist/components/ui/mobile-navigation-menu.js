@@ -12,6 +12,7 @@ import { useDevicePortal } from "../../hooks/use-mobile";
 import { Button } from "./button";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "./collapsible";
 import { Separator } from "./separator";
+import "./scrollbar.css";
 const MobileNavigationMenu = MobileNavigationMenuPrimitive.Root;
 const MobileNavigationMenuTrigger = React.forwardRef(({ className, children, ...props }, ref) => /* @__PURE__ */ jsx(MobileNavigationMenuPrimitive.Trigger, { asChild: true, children: /* @__PURE__ */ jsx(
   Button,
@@ -132,7 +133,7 @@ function MobileNavigationMenuContent({ className, ...props }) {
     {
       "data-slot": "mobile-navigation-menu-content",
       className: cn(
-        "flex min-h-0 flex-1 flex-col gap-[var(--dim-sss)] overflow-y-auto px-[var(--dim-mmm)] py-[var(--dim-s)]",
+        "flex min-h-0 flex-1 flex-col gap-[var(--dim-sss)] overflow-y-auto pds-scrollbar px-[var(--dim-mmm)] py-[var(--dim-s)]",
         className
       ),
       ...props

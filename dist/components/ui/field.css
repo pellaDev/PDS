@@ -13,7 +13,7 @@
   );
   min-height: var(--pds-touch-min);
 
-  --pds-field-icon-slot: 0;
+  --pds-field-icon-slot: var(--dim-zero);
 
   --pds-field-label-gap: var(--dim-sssss);
 

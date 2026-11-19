@@ -20,6 +20,7 @@ declare const CarouselPrevious: React.ForwardRefExoticComponent<Omit<React.Class
 } & import("class-variance-authority/types").ClassProp) | undefined) => string> & {
     asChild?: boolean;
     shape?: "label" | "icon";
+    wide?: boolean;
     tooltip?: string;
 }, "ref"> & React.RefAttributes<HTMLButtonElement>>;
 declare const CarouselNext: React.ForwardRefExoticComponent<Omit<React.ClassAttributes<HTMLButtonElement> & React.ButtonHTMLAttributes<HTMLButtonElement> & import("class-variance-authority").VariantProps<(props?: ({
@@ -29,6 +30,7 @@ declare const CarouselNext: React.ForwardRefExoticComponent<Omit<React.ClassAttr
 } & import("class-variance-authority/types").ClassProp) | undefined) => string> & {
     asChild?: boolean;
     shape?: "label" | "icon";
+    wide?: boolean;
     tooltip?: string;
 }, "ref"> & React.RefAttributes<HTMLButtonElement>>;
 export { type CarouselApi, Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext, };

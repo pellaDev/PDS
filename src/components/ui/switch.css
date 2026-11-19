@@ -41,7 +41,7 @@
   justify-content: flex-start;
   box-sizing: border-box;
   width: var(--dim-llll);
-  height: var(--dim-mmmm);
+  height: var(--dim-mm);
   border-radius: var(--dim-llll);
   border: var(--dim-ssss) solid var(--color-muted-foreground);
   background-color: transparent;
